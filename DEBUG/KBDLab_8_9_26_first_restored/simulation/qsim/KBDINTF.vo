@@ -1,0 +1,439 @@
+// Copyright (C) 2017  Intel Corporation. All rights reserved.
+// Your use of Intel Corporation's design tools, logic functions 
+// and other software and tools, and its AMPP partner logic 
+// functions, and any output files from any of the foregoing 
+// (including device programming or simulation files), and any 
+// associated documentation or information are expressly subject 
+// to the terms and conditions of the Intel Program License 
+// Subscription Agreement, the Intel Quartus Prime License Agreement,
+// the Intel MegaCore Function License Agreement, or other 
+// applicable license agreement, including, without limitation, 
+// that your use is for the sole purpose of programming logic 
+// devices manufactured by Intel and sold by Intel or its 
+// authorized distributors.  Please refer to the applicable 
+// agreement for further details.
+
+// VENDOR "Altera"
+// PROGRAM "Quartus Prime"
+// VERSION "Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition"
+
+// DATE "09/08/2026 16:16:31"
+
+// 
+// Device: Altera 5CSXFC6D6F31C6 Package FBGA896
+// 
+
+// 
+// This Verilog file should be used for ModelSim-Altera (Verilog) only
+// 
+
+`timescale 1 ps/ 1 ps
+
+module singleKeyDecoder (
+	clk,
+	resetN,
+	keyCode,
+	make,
+	brakee,
+	keyLatch,
+	keyRisingEdgePulse,
+	keyIsPressed);
+input 	clk;
+input 	resetN;
+input 	[8:0] keyCode;
+input 	make;
+input 	brakee;
+output 	keyLatch;
+output 	keyRisingEdgePulse;
+output 	keyIsPressed;
+
+wire gnd;
+wire vcc;
+wire unknown;
+
+assign gnd = 1'b0;
+assign vcc = 1'b1;
+assign unknown = 1'bx;
+
+tri1 devclrn;
+tri1 devpor;
+tri1 devoe;
+wire \keyLatch~output_o ;
+wire \keyRisingEdgePulse~output_o ;
+wire \keyIsPressed~output_o ;
+wire \clk~input_o ;
+wire \make~input_o ;
+wire \keyCode[5]~input_o ;
+wire \keyCode[0]~input_o ;
+wire \keyCode[1]~input_o ;
+wire \keyCode[2]~input_o ;
+wire \keyCode[3]~input_o ;
+wire \keyCode[4]~input_o ;
+wire \keyIsPressed~0_combout ;
+wire \keyCode[6]~input_o ;
+wire \keyCode[7]~input_o ;
+wire \keyCode[8]~input_o ;
+wire \keyIsPressed~1_combout ;
+wire \brakee~input_o ;
+wire \keyIsPressed~2_combout ;
+wire \resetN~input_o ;
+wire \keyIsPressed~reg0_q ;
+wire \keyIsPressed_d~q ;
+wire \keyLatch~0_combout ;
+wire \keyLatch~reg0_q ;
+wire \keyRisingEdgePulse~0_combout ;
+
+
+cyclonev_io_obuf \keyLatch~output (
+	.i(\keyLatch~reg0_q ),
+	.oe(vcc),
+	.dynamicterminationcontrol(gnd),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.parallelterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\keyLatch~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \keyLatch~output .bus_hold = "false";
+defparam \keyLatch~output .open_drain_output = "false";
+defparam \keyLatch~output .shift_series_termination_control = "false";
+// synopsys translate_on
+
+cyclonev_io_obuf \keyRisingEdgePulse~output (
+	.i(\keyRisingEdgePulse~0_combout ),
+	.oe(vcc),
+	.dynamicterminationcontrol(gnd),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.parallelterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\keyRisingEdgePulse~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \keyRisingEdgePulse~output .bus_hold = "false";
+defparam \keyRisingEdgePulse~output .open_drain_output = "false";
+defparam \keyRisingEdgePulse~output .shift_series_termination_control = "false";
+// synopsys translate_on
+
+cyclonev_io_obuf \keyIsPressed~output (
+	.i(\keyIsPressed~reg0_q ),
+	.oe(vcc),
+	.dynamicterminationcontrol(gnd),
+	.seriesterminationcontrol(16'b0000000000000000),
+	.parallelterminationcontrol(16'b0000000000000000),
+	.devoe(devoe),
+	.o(\keyIsPressed~output_o ),
+	.obar());
+// synopsys translate_off
+defparam \keyIsPressed~output .bus_hold = "false";
+defparam \keyIsPressed~output .open_drain_output = "false";
+defparam \keyIsPressed~output .shift_series_termination_control = "false";
+// synopsys translate_on
+
+cyclonev_io_ibuf \clk~input (
+	.i(clk),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\clk~input_o ));
+// synopsys translate_off
+defparam \clk~input .bus_hold = "false";
+defparam \clk~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \make~input (
+	.i(make),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\make~input_o ));
+// synopsys translate_off
+defparam \make~input .bus_hold = "false";
+defparam \make~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[5]~input (
+	.i(keyCode[5]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[5]~input_o ));
+// synopsys translate_off
+defparam \keyCode[5]~input .bus_hold = "false";
+defparam \keyCode[5]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[0]~input (
+	.i(keyCode[0]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[0]~input_o ));
+// synopsys translate_off
+defparam \keyCode[0]~input .bus_hold = "false";
+defparam \keyCode[0]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[1]~input (
+	.i(keyCode[1]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[1]~input_o ));
+// synopsys translate_off
+defparam \keyCode[1]~input .bus_hold = "false";
+defparam \keyCode[1]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[2]~input (
+	.i(keyCode[2]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[2]~input_o ));
+// synopsys translate_off
+defparam \keyCode[2]~input .bus_hold = "false";
+defparam \keyCode[2]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[3]~input (
+	.i(keyCode[3]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[3]~input_o ));
+// synopsys translate_off
+defparam \keyCode[3]~input .bus_hold = "false";
+defparam \keyCode[3]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[4]~input (
+	.i(keyCode[4]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[4]~input_o ));
+// synopsys translate_off
+defparam \keyCode[4]~input .bus_hold = "false";
+defparam \keyCode[4]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_lcell_comb \keyIsPressed~0 (
+// Equation(s):
+// \keyIsPressed~0_combout  = ( \keyCode[4]~input_o  & ( (!\keyCode[0]~input_o  & (!\keyCode[1]~input_o  & (!\keyCode[2]~input_o  & !\keyCode[3]~input_o ))) ) )
+
+	.dataa(!\keyCode[0]~input_o ),
+	.datab(!\keyCode[1]~input_o ),
+	.datac(!\keyCode[2]~input_o ),
+	.datad(!\keyCode[3]~input_o ),
+	.datae(!\keyCode[4]~input_o ),
+	.dataf(gnd),
+	.datag(gnd),
+	.cin(gnd),
+	.sharein(gnd),
+	.combout(\keyIsPressed~0_combout ),
+	.sumout(),
+	.cout(),
+	.shareout());
+// synopsys translate_off
+defparam \keyIsPressed~0 .extended_lut = "off";
+defparam \keyIsPressed~0 .lut_mask = 64'h0000800000008000;
+defparam \keyIsPressed~0 .shared_arith = "off";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[6]~input (
+	.i(keyCode[6]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[6]~input_o ));
+// synopsys translate_off
+defparam \keyCode[6]~input .bus_hold = "false";
+defparam \keyCode[6]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[7]~input (
+	.i(keyCode[7]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[7]~input_o ));
+// synopsys translate_off
+defparam \keyCode[7]~input .bus_hold = "false";
+defparam \keyCode[7]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_io_ibuf \keyCode[8]~input (
+	.i(keyCode[8]),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\keyCode[8]~input_o ));
+// synopsys translate_off
+defparam \keyCode[8]~input .bus_hold = "false";
+defparam \keyCode[8]~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_lcell_comb \keyIsPressed~1 (
+// Equation(s):
+// \keyIsPressed~1_combout  = (\keyCode[6]~input_o  & (!\keyCode[7]~input_o  & !\keyCode[8]~input_o ))
+
+	.dataa(!\keyCode[6]~input_o ),
+	.datab(!\keyCode[7]~input_o ),
+	.datac(!\keyCode[8]~input_o ),
+	.datad(gnd),
+	.datae(gnd),
+	.dataf(gnd),
+	.datag(gnd),
+	.cin(gnd),
+	.sharein(gnd),
+	.combout(\keyIsPressed~1_combout ),
+	.sumout(),
+	.cout(),
+	.shareout());
+// synopsys translate_off
+defparam \keyIsPressed~1 .extended_lut = "off";
+defparam \keyIsPressed~1 .lut_mask = 64'h4040404040404040;
+defparam \keyIsPressed~1 .shared_arith = "off";
+// synopsys translate_on
+
+cyclonev_io_ibuf \brakee~input (
+	.i(brakee),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\brakee~input_o ));
+// synopsys translate_off
+defparam \brakee~input .bus_hold = "false";
+defparam \brakee~input .simulate_z_as = "z";
+// synopsys translate_on
+
+cyclonev_lcell_comb \keyIsPressed~2 (
+// Equation(s):
+// \keyIsPressed~2_combout  = ( \keyIsPressed~1_combout  & ( \brakee~input_o  & ( (!\keyCode[5]~input_o  & (\keyIsPressed~reg0_q )) # (\keyCode[5]~input_o  & ((!\keyIsPressed~0_combout  & (\keyIsPressed~reg0_q )) # (\keyIsPressed~0_combout  & ((\make~input_o 
+// ))))) ) ) ) # ( !\keyIsPressed~1_combout  & ( \brakee~input_o  & ( \keyIsPressed~reg0_q  ) ) ) # ( \keyIsPressed~1_combout  & ( !\brakee~input_o  & ( ((\make~input_o  & (\keyCode[5]~input_o  & \keyIsPressed~0_combout ))) # (\keyIsPressed~reg0_q ) ) ) ) # 
+// ( !\keyIsPressed~1_combout  & ( !\brakee~input_o  & ( \keyIsPressed~reg0_q  ) ) )
+
+	.dataa(!\keyIsPressed~reg0_q ),
+	.datab(!\make~input_o ),
+	.datac(!\keyCode[5]~input_o ),
+	.datad(!\keyIsPressed~0_combout ),
+	.datae(!\keyIsPressed~1_combout ),
+	.dataf(!\brakee~input_o ),
+	.datag(gnd),
+	.cin(gnd),
+	.sharein(gnd),
+	.combout(\keyIsPressed~2_combout ),
+	.sumout(),
+	.cout(),
+	.shareout());
+// synopsys translate_off
+defparam \keyIsPressed~2 .extended_lut = "off";
+defparam \keyIsPressed~2 .lut_mask = 64'h5555555755555553;
+defparam \keyIsPressed~2 .shared_arith = "off";
+// synopsys translate_on
+
+cyclonev_io_ibuf \resetN~input (
+	.i(resetN),
+	.ibar(gnd),
+	.dynamicterminationcontrol(gnd),
+	.o(\resetN~input_o ));
+// synopsys translate_off
+defparam \resetN~input .bus_hold = "false";
+defparam \resetN~input .simulate_z_as = "z";
+// synopsys translate_on
+
+dffeas \keyIsPressed~reg0 (
+	.clk(\clk~input_o ),
+	.d(\keyIsPressed~2_combout ),
+	.asdata(vcc),
+	.clrn(\resetN~input_o ),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\keyIsPressed~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \keyIsPressed~reg0 .is_wysiwyg = "true";
+defparam \keyIsPressed~reg0 .power_up = "low";
+// synopsys translate_on
+
+dffeas keyIsPressed_d(
+	.clk(\clk~input_o ),
+	.d(\keyIsPressed~reg0_q ),
+	.asdata(vcc),
+	.clrn(\resetN~input_o ),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\keyIsPressed_d~q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam keyIsPressed_d.is_wysiwyg = "true";
+defparam keyIsPressed_d.power_up = "low";
+// synopsys translate_on
+
+cyclonev_lcell_comb \keyLatch~0 (
+// Equation(s):
+// \keyLatch~0_combout  = !\keyLatch~reg0_q  $ (((!\keyIsPressed~reg0_q ) # (\keyIsPressed_d~q )))
+
+	.dataa(!\keyLatch~reg0_q ),
+	.datab(!\keyIsPressed_d~q ),
+	.datac(!\keyIsPressed~reg0_q ),
+	.datad(gnd),
+	.datae(gnd),
+	.dataf(gnd),
+	.datag(gnd),
+	.cin(gnd),
+	.sharein(gnd),
+	.combout(\keyLatch~0_combout ),
+	.sumout(),
+	.cout(),
+	.shareout());
+// synopsys translate_off
+defparam \keyLatch~0 .extended_lut = "off";
+defparam \keyLatch~0 .lut_mask = 64'h5959595959595959;
+defparam \keyLatch~0 .shared_arith = "off";
+// synopsys translate_on
+
+dffeas \keyLatch~reg0 (
+	.clk(\clk~input_o ),
+	.d(\keyLatch~0_combout ),
+	.asdata(vcc),
+	.clrn(\resetN~input_o ),
+	.aload(gnd),
+	.sclr(gnd),
+	.sload(gnd),
+	.ena(vcc),
+	.devclrn(devclrn),
+	.devpor(devpor),
+	.q(\keyLatch~reg0_q ),
+	.prn(vcc));
+// synopsys translate_off
+defparam \keyLatch~reg0 .is_wysiwyg = "true";
+defparam \keyLatch~reg0 .power_up = "low";
+// synopsys translate_on
+
+cyclonev_lcell_comb \keyRisingEdgePulse~0 (
+// Equation(s):
+// \keyRisingEdgePulse~0_combout  = (!\keyIsPressed_d~q  & \keyIsPressed~reg0_q )
+
+	.dataa(!\keyIsPressed_d~q ),
+	.datab(!\keyIsPressed~reg0_q ),
+	.datac(gnd),
+	.datad(gnd),
+	.datae(gnd),
+	.dataf(gnd),
+	.datag(gnd),
+	.cin(gnd),
+	.sharein(gnd),
+	.combout(\keyRisingEdgePulse~0_combout ),
+	.sumout(),
+	.cout(),
+	.shareout());
+// synopsys translate_off
+defparam \keyRisingEdgePulse~0 .extended_lut = "off";
+defparam \keyRisingEdgePulse~0 .lut_mask = 64'h2222222222222222;
+defparam \keyRisingEdgePulse~0 .shared_arith = "off";
+// synopsys translate_on
+
+assign keyLatch = \keyLatch~output_o ;
+
+assign keyRisingEdgePulse = \keyRisingEdgePulse~output_o ;
+
+assign keyIsPressed = \keyIsPressed~output_o ;
+
+endmodule

@@ -1,0 +1,90 @@
+Archive Project report for SV2
+Sun Sep 06 23:52:14 2026
+Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Archive Project Summary
+  3. Archive Project Messages
+  4. Files Archived
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++----------------------------------------------------------------+
+; Archive Project Summary                                        ;
++------------------------+---------------------------------------+
+; Archive Project Status ; Successful - Sun Sep 06 23:52:14 2026 ;
+; Revision Name          ; SV2                                   ;
+; Top-level Entity Name  ; uWave                                 ;
+; Family                 ; Cyclone V                             ;
++------------------------+---------------------------------------+
+
+
++--------------------------+
+; Archive Project Messages ;
++--------------------------+
+Info: File Set 'Source control' contains:
+    Info: Project source and settings files
+    Info: Automatically detected source files
+Info: Archive will store files relative to the closest common parent directory
+Info (13213): Using common directory C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated archive 'C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/SV2_6_9_26_first.qar'
+Info: ----------------------------------------------------------
+Info: ----------------------------------------------------------
+Info: Generated report 'SV2.archive.rpt'
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/17.0/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4825 megabytes
+    Info: Processing ended: Sun Sep 06 23:52:14 2026
+    Info: Elapsed time: 00:00:02
+    Info: Total CPU time (on all processors): 00:00:02
+
+
++----------------------------+
+; Files Archived             ;
++----------------------------+
+; File Name                  ;
++----------------------------+
+; assignment_defaults.qdf    ;
+; constraints/pinsSV2all.tcl ;
+; constraints/SV2Lab_uW.sdc  ;
+; RTL/bcddn.sv               ;
+; RTL/down_counter.sv        ;
+; RTL/one_sec_counter.sv     ;
+; RTL/ramzor.sv              ;
+; RTL/uWave.sv               ;
+; RTL/uWaveTop.bdf           ;
+; SV2.qpf                    ;
+; SV2.qsf                    ;
+; WaveformDoubleDigit.vwf    ;
+; WaveformMicroWave.vwf      ;
+; WaveformRamzor.vwf         ;
+; WaveformSingleDigit.vwf    ;
++----------------------------+
+
+

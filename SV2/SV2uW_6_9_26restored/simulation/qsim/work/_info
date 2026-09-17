@@ -1,0 +1,180 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/simulation/qsim
+vbcddn
+Z1 !s110 1788722188
+!i10b 1
+!s100 Ci^QC3aUM;:0<00;c=KHc2
+I3?SCZd9JE@JZ_07TXC>eO0
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1788722186
+Z3 8SV2.vo
+Z4 FSV2.vo
+Z5 L0 32
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1788722188.000000
+Z8 !s107 SV2.vo|
+Z9 !s90 -work|work|SV2.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vbcddn_vlg_vec_tst
+R1
+!i10b 1
+!s100 59gzSJ_6[`F@eJliFG13@1
+I;7Q@:JVg:gn^@M^^gRGmj3
+R2
+R0
+w1788722185
+Z12 8WaveformRamzor.vwf.vt
+Z13 FWaveformRamzor.vwf.vt
+Z14 L0 30
+R6
+r1
+!s85 0
+31
+R7
+Z15 !s107 WaveformRamzor.vwf.vt|
+Z16 !s90 -work|work|WaveformRamzor.vwf.vt|
+!i113 1
+R10
+R11
+vdown_counter
+Z17 !s110 1788717327
+!i10b 1
+!s100 9XjBBb34aa2VNI;g`cGZW1
+IJ@e@oEmP[f81nFhZfB6jh1
+R2
+R0
+w1788717325
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z18 !s108 1788717327.000000
+R8
+R9
+!i113 1
+R10
+R11
+vdown_counter_vlg_vec_tst
+R17
+!i10b 1
+!s100 3aPA6Y@^X@ccEKMlEJRzP1
+IZODSS`=gneQ7JKiH9:eK;0
+R2
+R0
+w1788717324
+8WaveformSingleDigit.vwf.vt
+FWaveformSingleDigit.vwf.vt
+R14
+R6
+r1
+!s85 0
+31
+R18
+!s107 WaveformSingleDigit.vwf.vt|
+!s90 -work|work|WaveformSingleDigit.vwf.vt|
+!i113 1
+R10
+R11
+vramzor
+Z19 !s110 1788722667
+!i10b 1
+!s100 QM[a>oB4:;0F85]S^m>9Y3
+IUMZdD^Z3N258adf_m>@N?0
+R2
+R0
+w1788722666
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z20 !s108 1788722667.000000
+R8
+R9
+!i113 1
+R10
+R11
+vramzor_vlg_vec_tst
+R19
+!i10b 1
+!s100 =GY:9OP4]0K:BTJo];YcY1
+IKkfQfz;G9B6=@O6De9B=O0
+R2
+R0
+w1788722664
+R12
+R13
+R14
+R6
+r1
+!s85 0
+31
+R20
+R15
+R16
+!i113 1
+R10
+R11
+vuWave
+Z21 !s110 1788727797
+!i10b 1
+!s100 5aHNhS^TLD3Ci[6:h_3a02
+IZFc?dc[@90Ez:N]=]1Ti]3
+R2
+R0
+w1788727795
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+!s108 1788727796.000000
+R8
+R9
+!i113 1
+R10
+R11
+nu@wave
+vuWave_vlg_vec_tst
+R21
+!i10b 1
+!s100 CkNHBBml?MOFgJl4FZaB?2
+IGLL[9C>>jg2XMfJ?5^BjA1
+R2
+R0
+w1788727794
+8WaveformMicroWave.vwf.vt
+FWaveformMicroWave.vwf.vt
+R14
+R6
+r1
+!s85 0
+31
+!s108 1788727797.000000
+!s107 WaveformMicroWave.vwf.vt|
+!s90 -work|work|WaveformMicroWave.vwf.vt|
+!i113 1
+R10
+R11
+nu@wave_vlg_vec_tst

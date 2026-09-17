@@ -1,0 +1,100 @@
+Restore Archived Project report for KBDINTF
+Tue Sep 08 14:47:23 2026
+Quartus Prime Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Restore Archived Project Summary
+  3. Restore Archived Project Messages
+  4. Files Restored
+  5. Files Not Restored
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+
+
+
++-------------------------------------------------------------------------+
+; Restore Archived Project Summary                                        ;
++---------------------------------+---------------------------------------+
+; Restore Archived Project Status ; Successful - Tue Sep 08 14:47:23 2026 ;
+; Revision Name                   ; KBDINTF                               ;
+; Top-level Entity Name           ; TOP_RANDOM                            ;
+; Family                          ; Cyclone V                             ;
++---------------------------------+---------------------------------------+
+
+
++-----------------------------------+
+; Restore Archived Project Messages ;
++-----------------------------------+
+Info: Successfully restored 'C:/TechnionModelSim/ECELab1/DEBUG/KBDLab.qar' into the 'C:/TechnionModelSim/ECELab1/DEBUG/KBDLab_8_9_26_first_restored/' directory
+Info: Generated report 'KBDINTF.restore.rpt'
+Info (23030): Evaluation of Tcl script c:/intelfpga_lite/17.0/quartus/common/tcl/apps/qpm/qar.tcl was successful
+Info: Quartus Prime Shell was successful. 0 errors, 0 warnings
+    Info: Peak virtual memory: 4826 megabytes
+    Info: Processing ended: Tue Sep 08 14:47:23 2026
+    Info: Elapsed time: 00:00:03
+    Info: Total CPU time (on all processors): 00:00:01
+
+
++------------------------------------+
+; Files Restored                     ;
++------------------------------------+
+; File Name                          ;
++------------------------------------+
+; qar_info.json                      ;
+; KBD.qpf                            ;
+; KBDINTF.qsf                        ;
+; assignment_defaults.qdf            ;
+; clock_5MHz.cmp                     ;
+; clock_5MHz.qip                     ;
+; clock_5MHz.sip                     ;
+; clock_5MHz.spd                     ;
+; clock_5MHz.v                       ;
+; clock_5MHz/clock_5MHz_0002.qip     ;
+; clock_5MHz/clock_5MHz_0002.v       ;
+; clock_5MHz_sim/clock_5MHz.vo       ;
+; constraints/KBDLab_students.sdc    ;
+; constraints/pin.tcl                ;
+; rtl/HexSS.sv                       ;
+; rtl/TOP_KBDINTF.bdf                ;
+; rtl/TOP_KEYBOARD_DECODER.bdf       ;
+; rtl/TOP_RANDOM.bdf                 ;
+; rtl/bitrec.sv                      ;
+; rtl/byterec.sv                     ;
+; rtl/lpf.sv                         ;
+; rtl/make_brake_extended_decoder.sv ;
+; rtl/oneshot.sv                     ;
+; rtl/random.sv                      ;
+; rtl/simple_up_counter.sv           ;
+; rtl/singleKeyDecoder.sv            ;
++------------------------------------+
+
+
++--------------------+
+; Files Not Restored ;
++--------------------+
+; File Name          ;
++--------------------+
+
+

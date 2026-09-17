@@ -1,0 +1,136 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dC:/TechnionModelSim/ECELab1/SV1/SV1Lab_restored/simulation/qsim
+vhexss
+Z1 !s110 1788282439
+!i10b 1
+!s100 IN??E8gV4JV`gYZTVHXj<0
+I0m5ff;GSVGo23LCOMJ4@@2
+Z2 VDg1SIo80bB@j0V0VzS_@n1
+R0
+w1788282437
+Z3 8SV1Exs.vo
+Z4 FSV1Exs.vo
+Z5 L0 32
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1788282439.000000
+Z8 !s107 SV1Exs.vo|
+Z9 !s90 -work|work|SV1Exs.vo|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+vhexss_vlg_vec_tst
+R1
+!i10b 1
+!s100 S5Ym<CCYGSEPR1VOD0SAJ1
+IAc63cMlc4mP@P`>c<6Jlk3
+R2
+R0
+w1788282435
+8WaveformSevenSeg.vwf.vt
+FWaveformSevenSeg.vwf.vt
+Z12 L0 30
+R6
+r1
+!s85 0
+31
+R7
+!s107 WaveformSevenSeg.vwf.vt|
+!s90 -work|work|WaveformSevenSeg.vwf.vt|
+!i113 1
+R10
+R11
+vjmp_counter
+Z13 !s110 1788280691
+!i10b 1
+!s100 ;6Mhh9Kk<]XOlP]GPm?o^3
+I[]hYnWBC6?d8K[:UOmJ1g2
+R2
+R0
+w1788280690
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z14 !s108 1788280691.000000
+R8
+R9
+!i113 1
+R10
+R11
+vjmp_counter_vlg_vec_tst
+R13
+!i10b 1
+!s100 EMj^fZ<bl;McGkJ]EQBDA1
+Ic_<XDb?Gh[X<4ehKLVm?O2
+R2
+R0
+w1788280688
+8WaveformJmpCounter.vwf.vt
+FWaveformJmpCounter.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R14
+!s107 WaveformJmpCounter.vwf.vt|
+!s90 -work|work|WaveformJmpCounter.vwf.vt|
+!i113 1
+R10
+R11
+vsimple_up_counter
+Z15 !s110 1788279911
+!i10b 1
+!s100 5BzFVC3?E0aZmzElc2AdT0
+IASSKjd]Z3Y?oiOoGTT9;Z3
+R2
+R0
+w1788279900
+R3
+R4
+R5
+R6
+r1
+!s85 0
+31
+Z16 !s108 1788279911.000000
+R8
+R9
+!i113 1
+R10
+R11
+vsimple_up_counter_vlg_vec_tst
+R15
+!i10b 1
+!s100 VE`gbXa9G5Pj`6`7T9B:H2
+Il;:QE[0Kdc5zZ1k0<VYe`3
+R2
+R0
+w1788279898
+8WaveformSimpleCounter.vwf.vt
+FWaveformSimpleCounter.vwf.vt
+R12
+R6
+r1
+!s85 0
+31
+R16
+!s107 WaveformSimpleCounter.vwf.vt|
+!s90 -work|work|WaveformSimpleCounter.vwf.vt|
+!i113 1
+R10
+R11

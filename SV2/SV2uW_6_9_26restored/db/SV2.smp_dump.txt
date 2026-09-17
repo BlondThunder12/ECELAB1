@@ -1,0 +1,9 @@
+
+State Machine - |uWave|SMuWave
+Name SMuWave.s_lampOn SMuWave.s_lampOff SMuWave.s_pause SMuWave.s_run SMuWave.s_arm SMuWave.s_idle 
+SMuWave.s_idle 0 0 0 0 0 0 
+SMuWave.s_arm 0 0 0 0 1 1 
+SMuWave.s_run 0 0 0 1 0 1 
+SMuWave.s_pause 0 0 1 0 0 1 
+SMuWave.s_lampOff 0 1 0 0 0 1 
+SMuWave.s_lampOn 1 0 0 0 0 1 

@@ -1,0 +1,32 @@
+// (c) Technion IIT, Department of Electrical Engineering 2018 
+
+// Implements a simple up-counter 
+
+module simple_up_counter 
+	(
+   // Input, Output Ports
+   input logic clk, 
+   input logic resetN,
+   output logic [3:0] count 
+   );
+	
+   always_ff @( posedge clk or negedge resetN )
+   begin
+	
+//------------------------------------------------------------------------------------
+// &&&&&&&&&&&&&&  fill your code and paste into the report
+//------------------------------------------------------------------------------------
+     
+		if ( !resetN ) begin // Asynchronic reset
+
+		// fill your code here 
+ 
+		end 
+		
+//-------------------------------------------------------------------------------------
+// &&&&&&&&&&&&&&  end of paste into the report 
+//-------------------------------------------------------------------------------------
+
+	end // always
+endmodule
+

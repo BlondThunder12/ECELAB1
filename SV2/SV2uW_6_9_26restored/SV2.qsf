@@ -1,0 +1,148 @@
+# -------------------------------------------------------------------------- #
+#
+# Copyright (C) 2017  Intel Corporation. All rights reserved.
+# Your use of Intel Corporation's design tools, logic functions 
+# and other software and tools, and its AMPP partner logic 
+# functions, and any output files from any of the foregoing 
+# (including device programming or simulation files), and any 
+# associated documentation or information are expressly subject 
+# to the terms and conditions of the Intel Program License 
+# Subscription Agreement, the Intel Quartus Prime License Agreement,
+# the Intel MegaCore Function License Agreement, or other 
+# applicable license agreement, including, without limitation, 
+# that your use is for the sole purpose of programming logic 
+# devices manufactured by Intel and sold by Intel or its 
+# authorized distributors.  Please refer to the applicable 
+# agreement for further details.
+#
+# -------------------------------------------------------------------------- #
+#
+# Quartus Prime
+# Version 17.0.0 Build 595 04/25/2017 SJ Lite Edition
+# Date created = 12:47:41  September 27, 2020
+#
+# -------------------------------------------------------------------------- #
+#
+# Notes:
+#
+# 1) The default values for assignments are stored in the file:
+#		SV2_assignment_defaults.qdf
+#    If this file doesn't exist, see file:
+#		assignment_defaults.qdf
+#
+# 2) Altera recommends that you do not modify this file. This
+#    file is updated automatically by the Quartus Prime software
+#    and any changes you make may be lost or overwritten.
+#
+# -------------------------------------------------------------------------- #
+
+
+set_global_assignment -name FAMILY "Cyclone V"
+set_global_assignment -name DEVICE 5CSXFC6D6F31C6
+set_global_assignment -name TOP_LEVEL_ENTITY uWave
+set_global_assignment -name ORIGINAL_QUARTUS_VERSION 17.0.0
+set_global_assignment -name PROJECT_CREATION_TIME_DATE "12:47:40  SEPTEMBER 27, 2020"
+set_global_assignment -name LAST_QUARTUS_VERSION "17.0.0 Lite Edition"
+set_global_assignment -name PROJECT_OUTPUT_DIRECTORY output_files
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name MESSAGE_DISABLE 292013
+set_global_assignment -name MESSAGE_DISABLE 15714
+set_global_assignment -name MESSAGE_DISABLE 332068
+set_global_assignment -name MESSAGE_DISABLE 15705
+set_global_assignment -name MESSAGE_DISABLE 171167
+set_global_assignment -name MESSAGE_DISABLE 332148
+set_location_assignment PIN_AF14 -to clk
+set_location_assignment PIN_AJ4 -to resetN
+set_location_assignment PIN_AK4 -to switchN
+set_location_assignment PIN_AA14 -to startN
+set_location_assignment PIN_AA15 -to waitN
+set_location_assignment PIN_AB30 -to turbo
+set_location_assignment PIN_AA24 -to countL[0]
+set_location_assignment PIN_AB23 -to countL[1]
+set_location_assignment PIN_AC23 -to countL[2]
+set_location_assignment PIN_AD24 -to countL[3]
+set_location_assignment PIN_AG25 -to countH[0]
+set_location_assignment PIN_AF25 -to countH[1]
+set_location_assignment PIN_AE24 -to countH[2]
+set_location_assignment PIN_AF24 -to countH[3]
+set_location_assignment PIN_W17 -to HEX0[0]
+set_location_assignment PIN_V18 -to HEX0[1]
+set_location_assignment PIN_AG17 -to HEX0[2]
+set_location_assignment PIN_AG16 -to HEX0[3]
+set_location_assignment PIN_AH17 -to HEX0[4]
+set_location_assignment PIN_AG18 -to HEX0[5]
+set_location_assignment PIN_AH18 -to HEX0[6]
+set_location_assignment PIN_AF16 -to HEX1[0]
+set_location_assignment PIN_V16 -to HEX1[1]
+set_location_assignment PIN_AE16 -to HEX1[2]
+set_location_assignment PIN_AD17 -to HEX1[3]
+set_location_assignment PIN_AE18 -to HEX1[4]
+set_location_assignment PIN_AE17 -to HEX1[5]
+set_location_assignment PIN_V17 -to HEX1[6]
+set_location_assignment PIN_AF9 -to redLight
+set_location_assignment PIN_AE7 -to yellowLight
+set_location_assignment PIN_AE11 -to greenLight
+set_location_assignment PIN_W15 -to oneSec
+set_location_assignment PIN_AK2 -to countLoadN
+set_location_assignment PIN_Y16 -to countEnable
+set_location_assignment PIN_AK3 -to lampEnable
+set_location_assignment PIN_AA21 -to redLightN
+set_location_assignment PIN_Y17 -to greenLightN
+set_location_assignment PIN_W16 -to yellowLightN
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/down_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/bcddn.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/ramzor.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/one_sec_counter.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/uWave.sv
+set_global_assignment -name TCL_SCRIPT_FILE constraints/pinsSV2all.tcl
+set_global_assignment -name BDF_FILE RTL/uWaveTop.bdf
+set_global_assignment -name SDC_FILE constraints/SV2Lab_uW.sdc
+set_global_assignment -name VECTOR_WAVEFORM_FILE WaveformSingleDigit.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE WaveformDoubleDigit.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE WaveformRamzor.vwf
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to clk
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to count[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to count[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to count[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to count[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to datain[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to datain[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to datain[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to datain[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to enable1
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to enable2
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to enable3
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to loadN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to resetN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to tc
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countEnable
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countH[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countH[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countH[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countH[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countL[0]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countL[1]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countL[2]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countL[3]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to countLoadN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to lampEnable
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to oneSec
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to startN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to turbo
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to waitN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to greenLight
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to greenLightN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to redLight
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to redLightN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to switchN
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to yellowLight
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to yellowLightN
+set_global_assignment -name VECTOR_WAVEFORM_FILE WaveformMicroWave.vwf
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top

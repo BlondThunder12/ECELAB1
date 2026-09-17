@@ -1,0 +1,45 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "countLoadN",
+					"strict" : false
+				},
+				{
+					"name" : "countEnable",
+					"strict" : false
+				},
+				{
+					"name" : "lampEnable",
+					"strict" : false
+				},
+				{
+					"name" : "clk",
+					"strict" : false
+				},
+				{
+					"name" : "resetN",
+					"strict" : false
+				},
+				{
+					"name" : "startN",
+					"strict" : false
+				},
+				{
+					"name" : "waitN",
+					"strict" : false
+				},
+				{
+					"name" : "OneSecPulse",
+					"strict" : false
+				},
+				{
+					"name" : "timerEnd",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

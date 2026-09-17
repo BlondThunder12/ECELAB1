@@ -1,0 +1,530 @@
+/*<simulation_settings>
+<ftestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SV2 -c SV2 --vector_source="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/WaveformMicroWave.vwf" --testbench_file="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/simulation/qsim/WaveformMicroWave.vwf.vt"</ftestbench_cmd>
+<ttestbench_cmd>quartus_eda --gen_testbench --tool=modelsim_oem --format=verilog --write_settings_files=off SV2 -c SV2 --vector_source="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/WaveformMicroWave.vwf" --testbench_file="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/simulation/qsim/WaveformMicroWave.vwf.vt"</ttestbench_cmd>
+<fnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=on --flatten_buses=off --tool=modelsim_oem --format=verilog --output_directory="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/simulation/qsim/" SV2 -c SV2</fnetlist_cmd>
+<tnetlist_cmd>quartus_eda --write_settings_files=off --simulation --functional=off --flatten_buses=off --timescale=1ps --tool=modelsim_oem --format=verilog --output_directory="C:/TechnionModelSim/ECELab1/SV2/SV2uW_6_9_26restored/simulation/qsim/" SV2 -c SV2</tnetlist_cmd>
+<modelsim_script>onerror {exit -code 1}
+vlib work
+vlog -work work SV2.vo
+vlog -work work WaveformMicroWave.vwf.vt
+vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.uWave_vlg_vec_tst
+vcd file -direction SV2.msim.vcd
+vcd add -internal uWave_vlg_vec_tst/*
+vcd add -internal uWave_vlg_vec_tst/i1/*
+proc simTimestamp {} {
+    echo "Simulation time: $::now ps"
+    if { [string equal running [runStatus]] } {
+        after 2500 simTimestamp
+    }
+}
+after 2500 simTimestamp
+run -all
+quit -f
+</modelsim_script>
+<modelsim_script_timing>onerror {exit -code 1}
+vlib work
+vlog -work work SV2.vo
+vlog -work work WaveformMicroWave.vwf.vt
+vsim -novopt -c -t 1ps -L cyclonev_ver -L altera_ver -L altera_mf_ver -L 220model_ver -L sgate_ver -L altera_lnsim_ver work.uWave_vlg_vec_tst
+vcd file -direction SV2.msim.vcd
+vcd add -internal uWave_vlg_vec_tst/*
+vcd add -internal uWave_vlg_vec_tst/i1/*
+proc simTimestamp {} {
+    echo "Simulation time: $::now ps"
+    if { [string equal running [runStatus]] } {
+        after 2500 simTimestamp
+    }
+}
+after 2500 simTimestamp
+run -all
+quit -f
+</modelsim_script_timing>
+<hdl_lang>verilog</hdl_lang>
+</simulation_settings>*/
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
+
+HEADER
+{
+	VERSION = 1;
+	TIME_UNIT = ns;
+	DATA_OFFSET = 0.0;
+	DATA_DURATION = 1000.0;
+	SIMULATION_TIME = 0.0;
+	GRID_PHASE = 0.0;
+	GRID_PERIOD = 10.0;
+	GRID_DUTY_CYCLE = 50;
+}
+
+SIGNAL("OneSecPulse")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("clk")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("countEnable")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("countLoadN")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("lampEnable")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = OUTPUT;
+	PARENT = "";
+}
+
+SIGNAL("resetN")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("startN")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("timerEnd")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("waitN")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = INPUT;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_arm")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_idle")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_lampOff")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_lampOn")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_pause")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+SIGNAL("SMuWave.s_run")
+{
+	VALUE_TYPE = NINE_LEVEL_BIT;
+	SIGNAL_TYPE = SINGLE_BIT;
+	WIDTH = 1;
+	LSB_INDEX = -1;
+	DIRECTION = REGISTERED;
+	PARENT = "";
+}
+
+TRANSITION_LIST("OneSecPulse")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 210.0;
+		LEVEL 1 FOR 220.0;
+		LEVEL 0 FOR 230.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 320.0;
+	}
+}
+
+TRANSITION_LIST("clk")
+{
+	NODE
+	{
+		REPEAT = 1;
+		NODE
+		{
+			REPEAT = 100;
+			LEVEL 0 FOR 5.0;
+			LEVEL 1 FOR 5.0;
+		}
+	}
+}
+
+TRANSITION_LIST("countEnable")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("countLoadN")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("lampEnable")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL X FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("resetN")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 370.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 610.0;
+	}
+}
+
+TRANSITION_LIST("startN")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 1 FOR 30.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 340.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 10.0;
+		LEVEL 1 FOR 580.0;
+	}
+}
+
+TRANSITION_LIST("timerEnd")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 0 FOR 270.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 80.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 270.0;
+		LEVEL 1 FOR 20.0;
+		LEVEL 0 FOR 320.0;
+	}
+}
+
+TRANSITION_LIST("waitN")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL 1 FOR 140.0;
+		LEVEL 0 FOR 40.0;
+		LEVEL 1 FOR 820.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_arm")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_idle")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_lampOff")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_lampOn")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_pause")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+TRANSITION_LIST("SMuWave.s_run")
+{
+	NODE
+	{
+		REPEAT = 1;
+		LEVEL U FOR 1000.0;
+	}
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "clk";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 0;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "resetN";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 1;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "startN";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 2;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "OneSecPulse";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 3;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "timerEnd";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 4;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "waitN";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 5;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "countEnable";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 6;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "countLoadN";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 7;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "lampEnable";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 8;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_arm";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 9;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_idle";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 10;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_lampOff";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 11;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_lampOn";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 12;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_pause";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 13;
+	TREE_LEVEL = 0;
+}
+
+DISPLAY_LINE
+{
+	CHANNEL = "SMuWave.s_run";
+	EXPAND_STATUS = COLLAPSED;
+	RADIX = Binary;
+	TREE_INDEX = 14;
+	TREE_LEVEL = 0;
+}
+
+TIME_BAR
+{
+	TIME = 0;
+	MASTER = TRUE;
+}
+;
