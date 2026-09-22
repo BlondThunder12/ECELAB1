@@ -26,10 +26,10 @@ module	smiley_move	(
 
 // a module used to generate the  ball trajectory.  
 
-parameter int INITIAL_X = 160;
+parameter int INITIAL_X = 280;
 parameter int INITIAL_Y = 185;
 parameter int INITIAL_X_SPEED = 40;
-parameter int INITIAL_Y_SPEED = 0;
+parameter int INITIAL_Y_SPEED = 20;
 parameter int Y_ACCEL = -10;
 
 const int MAX_Y_SPEED = 500;
@@ -124,9 +124,11 @@ begin : fsm_sync_proc
 		//------------
 		// keys direction change 
 				if (Y_direction_key && (Yspeed > 0 ) )//  while moving down
-					Yspeed <= -MAX_Y_SPEED / 2 ; //Change jump amount when pressing 8; 
+					Yspeed <= -Yspeed+1; 
 					
-
+				if (toggle_x_key & !toggle_x_key_D) //rizing edge 
+					Xspeed <= -Xspeed ; // toggle direction 
+	
        // collcting collisions 	
 				if (collision) begin
 					hit_reg[HitEdgeCode]<=1'b1;
@@ -152,9 +154,9 @@ begin : fsm_sync_proc
 //							Xspeed <= 0-Yspeed ;
        if ( Yspeed > 0)
               Yspeed <= 1-Yspeed ;
-			else if (Yspeed == 0) Yspeed <= Yspeed;
-			else Yspeed <= -(1+Yspeed );	
-				  Xspeed <= Xspeed;
+			else 	 
+		         Yspeed <= -(1+Yspeed );	
+				  Xspeed <= 0-Xspeed ;
 					end
 			else begin 
 				case (hit_reg[3:0] )  // test sides 
@@ -164,8 +166,20 @@ begin : fsm_sync_proc
 							 //Yspeed <= 0-Yspeed ;
 		 if ( Yspeed > 0)
               Yspeed <= 1-Yspeed ;
-			else if (Yspeed == 0) Yspeed <= Yspeed;
-			else Yspeed <= -(1+Yspeed );	
+			else 	 
+		         Yspeed <= -(1+Yspeed );	
+				          Xspeed <= 0-Xspeed ;
+					end
+					LEFT, TOP+RIGHT+BOTTOM : // left side or cavity  
+					begin
+						if (Xspeed < 0) // left 
+							  Xspeed <= 0-Xspeed ;
+					end
+	
+					RIGHT, LEFT+BOTTOM +TOP :   // right side or cavity  
+					begin
+						if (Xspeed > 0) // right 
+							  Xspeed <= 0-Xspeed ;
 					end
 					
 					TOP, RIGHT+LEFT+BOTTOM :  // top side or cavity  

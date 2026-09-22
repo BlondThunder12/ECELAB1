@@ -1452,18 +1452,13 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"initial_y_speed"
-		"0"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"MAX_Y_SPEED"
-		"500"
+		"20"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 232 176))
 	)
-	(annotation_block (parameter)(rect 576 16 770 130))
+	(annotation_block (parameter)(rect 576 16 770 111))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
