@@ -1442,7 +1442,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"initial_y"
-		"32"
+		"240"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter

@@ -475,7 +475,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"Y_ACCEL"
-		"-2"
+		"-10"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing

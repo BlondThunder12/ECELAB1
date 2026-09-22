@@ -77,6 +77,7 @@ int Xposition ; //position
 int Yposition ;  
 
 logic toggle_x_key_D ;
+logic Y_direction_key_D; // added an edge detector for the Y press
  
 
   logic [4:0] hit_reg = 5'b00000;
@@ -89,11 +90,10 @@ begin : fsm_sync_proc
 		SM_Motion <= IDLE_ST ; 
 		Xspeed <= 0   ; 
 		Yspeed <= 0  ; 
-//		Xposition <= 0  ; 
-//		Yposition <= 0   ; 
 	Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER  ; 
 	Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
 		toggle_x_key_D <= 0 ;
+		Y_direction_key_D <= 0 ;
 		hit_reg <= 5'b0 ;	
 	
 	end 	
@@ -101,7 +101,7 @@ begin : fsm_sync_proc
 	else begin
 	
 		toggle_x_key_D <= toggle_x_key ;  //shift register to detect edge 
-
+		Y_direction_key_D <= Y_direction_key;
 	
 		case(SM_Motion)
 		
@@ -109,26 +109,27 @@ begin : fsm_sync_proc
 			IDLE_ST: begin
 		//------------
 		
-				Xspeed  <= INITIAL_X_SPEED ; 
-				Yspeed  <= INITIAL_Y_SPEED  ; 
+				Xspeed  <= INITIAL_X_SPEED ;  
 				Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER; 
 				Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER; 
 
-				if (startOfFrame) 
-					SM_Motion <= MOVE_ST ;
- 	
+				//implement frozen state before first jump
+				if (Y_direction_key && !Y_direction_key_D) begin
+					Yspeed <= - MAX_Y_SPEED / 2;
+					SM_Motion <= MOVE_ST;
+				end else begin
+					Yspeed <= 0;
+				end
+
 			end
 	
 		//------------
 			MOVE_ST:  begin     // moving collecting colisions 
 		//------------
 		// keys direction change 
-				if (Y_direction_key && (Yspeed > 0 ) )//  while moving down
-					Yspeed <= -Yspeed+1; 
+				if (Y_direction_key && !Y_direction_key_D )//  if the button is pressed now and wasnt pressed last cycle
+					Yspeed <= -MAX_Y_SPEED / 2; //fixed jump height
 					
-				if (toggle_x_key & !toggle_x_key_D) //rizing edge 
-					Xspeed <= -Xspeed ; // toggle direction 
-	
        // collcting collisions 	
 				if (collision) begin
 					hit_reg[HitEdgeCode]<=1'b1;
@@ -136,7 +137,7 @@ begin : fsm_sync_proc
 				end
 				
 
-				if (startOfFrame )
+				if (startOfFrame)
 					SM_Motion <= START_OF_FRAME_ST ; 
 					
 					
@@ -146,7 +147,7 @@ begin : fsm_sync_proc
 		//------------
 			START_OF_FRAME_ST:  begin      //check if any colisin was detected 
 		//------------
-
+/*
 	
 			if (hit_reg == CORNER)   // pure corner 
 					begin
@@ -198,7 +199,14 @@ begin : fsm_sync_proc
 	
 			  endcase
 			end // else 
-	
+*/	
+
+		if(hit_reg[0] == 1'b1 && Yspeed > 0) begin //if we hit bottom when falling
+			Yspeed <= 0;
+		end
+		else if(hit_reg[3] == 1'b1 && Yspeed < 0) begin // if we hit top and going up
+			Yspeed <= 0;
+		end
 			hit_reg <= 5'b00000;						
 			SM_Motion <= POSITION_CHANGE_ST ; 
 		end 
@@ -207,7 +215,6 @@ begin : fsm_sync_proc
 			POSITION_CHANGE_ST : begin  // position interpolate 
 		//------------------------
 	
-				Xposition <= Xposition + Xspeed ; 
 				Yposition <= Yposition + Yspeed ;
 			 
 				// accelerate 
@@ -226,11 +233,14 @@ begin : fsm_sync_proc
 						Xposition <= x_FRAME_LEFT ; 
 		if (Xposition > x_FRAME_RIGHT)
 						Xposition <= x_FRAME_RIGHT ; 
-		if (Yposition < y_FRAME_TOP) 
-						Yposition <= y_FRAME_TOP ; 
-		if (Yposition > y_FRAME_BOTTOM) 
+		if (Yposition <= y_FRAME_TOP) begin
+						Yposition <= y_FRAME_TOP ;
+						if (Yspeed < 0) Yspeed <= 0; //kill the upwards momentum
+			end
+		if (Yposition >= y_FRAME_BOTTOM) begin 
 						Yposition <= y_FRAME_BOTTOM ; 
-
+						Yspeed <= 0;
+		end
 				SM_Motion <= MOVE_ST ; 
 			
 			end
