@@ -28,18 +28,18 @@ localparam  logic	[10:0] OBJECT_WIDTH_X = 11'b1 <<  OBJECT_NUMBER_OF_X_BITS;
  logic	[10:0] HitCodeY ; 
 assign HitCodeX = offsetX >> ( OBJECT_NUMBER_OF_X_BITS - 4 );	//hitedge code MSB of the offset
 assign HitCodeY = offsetY >> ( OBJECT_NUMBER_OF_Y_BITS - 4 );	 	 
-assign address = ((OBJECT_HEIGHT_Y-offsetY - 1)*OBJECT_WIDTH_X + offsetX);
-//assign address = ((offsetY)*OBJECT_WIDTH_X + offsetX);
+//assign address = ((OBJECT_HEIGHT_Y-offsetY - 1)*OBJECT_WIDTH_X + offsetX);
+assign address = ((offsetY)*OBJECT_WIDTH_X + offsetX);
 
 // generating a smiley bitmap from a MIF file
 
 logic	[7:0] color;
-localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// RGB value in the bitmap representing a transparent pixel 
+localparam logic [7:0] TRANSPARENT_ENCODING = 8'h1F ;// RGB value in the bitmap representing a transparent pixel 
 lpm_rom #(
     .LPM_WIDTH(8),
     .LPM_WIDTHAD(11),
 	 .LPM_NUMWORDS(2048),
-    .LPM_FILE("RTL/smiely.mif"),
+    .LPM_FILE("RTL/birdPic.mif"),
 	   .LPM_TYPE               ("LPM_ROM"),
       .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
 		.LPM_OUTDATA            ("UNREGISTERED"), 
