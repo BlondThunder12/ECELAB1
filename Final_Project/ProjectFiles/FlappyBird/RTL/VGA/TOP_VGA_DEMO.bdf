@@ -386,7 +386,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 880 344 1088 488)
+	(rect 880 336 1088 480)
 	(text "VGA_Controller" (rect 5 0 80 12)(font "Arial" ))
 	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
@@ -1460,6 +1460,23 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 576 16 770 111))
 )
+(symbol
+	(rect 328 472 360 504)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst10" (rect 3 21 31 38)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
 	(pt -144 192)
@@ -1649,51 +1666,6 @@ agreement for further details.
 (connector
 	(pt 56 48)
 	(pt -32 48)
-)
-(connector
-	(text "clk" (rect 842 376 856 393)(font "Intel Clear" ))
-	(pt 832 392)
-	(pt 880 392)
-)
-(connector
-	(text "resetN" (rect 840 392 873 404)(font "Arial" ))
-	(pt 832 408)
-	(pt 880 408)
-)
-(connector
-	(text "pixelX[10..0]" (rect 1138 360 1198 372)(font "Arial" ))
-	(pt 1088 376)
-	(pt 1208 376)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 1138 376 1200 388)(font "Arial" ))
-	(pt 1088 392)
-	(pt 1208 392)
-	(bus)
-)
-(connector
-	(text "startOfFrame" (rect 1136 392 1199 409)(font "Intel Clear" ))
-	(pt 1088 408)
-	(pt 1208 408)
-)
-(connector
-	(text "address[18..0]" (rect 1090 424 1156 441)(font "Intel Clear" ))
-	(pt 1088 440)
-	(pt 1208 440)
-	(bus)
-)
-(connector
-	(text "RGB[7..0]" (rect 772 360 816 377)(font "Intel Clear" ))
-	(pt 760 376)
-	(pt 880 376)
-	(bus)
-)
-(connector
-	(text "OVGA[28..0]" (rect 1098 408 1157 425)(font "Intel Clear" ))
-	(pt 1088 424)
-	(pt 1192 424)
-	(bus)
 )
 (connector
 	(text "SQR_topLeftX[10..0]" (rect -406 1096 -309 1113)(font "Intel Clear" ))
@@ -2109,11 +2081,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "HartDrawingRequest" (rect 402 456 499 473)(font "Intel Clear" ))
-	(pt 512 472)
-	(pt 392 472)
-)
-(connector
 	(text "boxRGB[7..0]" (rect -53 1328 8 1345)(font "Intel Clear" ))
 	(pt -72 1344)
 	(pt -8 1344)
@@ -2151,6 +2118,75 @@ agreement for further details.
 	(text "SingleHit" (rect -896 1352 -854 1369)(font "Intel Clear" ))
 	(pt -840 1368)
 	(pt -880 1368)
+)
+(connector
+	(text "clk" (rect 842 368 856 385)(font "Intel Clear" ))
+	(pt 832 384)
+	(pt 880 384)
+)
+(connector
+	(text "resetN" (rect 840 384 873 396)(font "Arial" ))
+	(pt 832 400)
+	(pt 880 400)
+)
+(connector
+	(text "pixelX[10..0]" (rect 1138 352 1198 364)(font "Arial" ))
+	(pt 1088 368)
+	(pt 1208 368)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 1138 368 1200 380)(font "Arial" ))
+	(pt 1088 384)
+	(pt 1208 384)
+	(bus)
+)
+(connector
+	(text "startOfFrame" (rect 1136 384 1199 401)(font "Intel Clear" ))
+	(pt 1088 400)
+	(pt 1208 400)
+)
+(connector
+	(text "address[18..0]" (rect 1090 416 1156 433)(font "Intel Clear" ))
+	(pt 1088 432)
+	(pt 1208 432)
+	(bus)
+)
+(connector
+	(pt 768 376)
+	(pt 768 368)
+	(bus)
+)
+(connector
+	(pt 760 376)
+	(pt 768 376)
+	(bus)
+)
+(connector
+	(text "RGB[7..0]" (rect 772 352 816 369)(font "Intel Clear" ))
+	(pt 768 368)
+	(pt 880 368)
+	(bus)
+)
+(connector
+	(pt 1184 424)
+	(pt 1184 416)
+	(bus)
+)
+(connector
+	(pt 1192 424)
+	(pt 1184 424)
+	(bus)
+)
+(connector
+	(text "OVGA[28..0]" (rect 1098 400 1157 417)(font "Intel Clear" ))
+	(pt 1184 416)
+	(pt 1088 416)
+	(bus)
+)
+(connector
+	(pt 512 472)
+	(pt 344 472)
 )
 (junction (pt 552 968))
 (junction (pt 1776 960))
