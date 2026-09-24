@@ -81,7 +81,7 @@ begin
 		blueBits <= 2'b11;//LIGHT_COLOR;
 		boardersDrawReq <= 	1'b0 ; 
 		
-		if (   
+		/*if (   
 		// 1. draw the yellow borders
 						((pixelX <= bracketOffset) && (pixelX >=(bracketOffset- bracketOffset/4))) ||
 						((pixelY <= bracketOffset) && (pixelY >= (bracketOffset- bracketOffset/4))) ||
@@ -113,7 +113,7 @@ begin
 				
 		 end 
 		
-		
+		*/
 	BG_RGB <=  { blueBits, redBits, greenBits } ; //collect color nibbles to an 8 bit word		
 
 
