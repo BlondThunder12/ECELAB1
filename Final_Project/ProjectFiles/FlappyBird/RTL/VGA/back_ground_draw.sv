@@ -43,7 +43,7 @@ parameter  logic [10:0] COLOR_MATRIX_LEFT_X = 100 ;
     .LPM_WIDTH(8),
     .LPM_WIDTHAD(19),
 	 .LPM_NUMWORDS(307200),
-    .LPM_FILE("RTL/VGA_BG.mif"),
+    .LPM_FILE("RTL/background_flippy_bird.mif"),
 	   .LPM_TYPE               ("LPM_ROM"),
       .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
 		.LPM_OUTDATA            ("UNREGISTERED"), 
