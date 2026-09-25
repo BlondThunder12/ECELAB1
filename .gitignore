@@ -2,6 +2,7 @@
 *.bak
 *.orig
 Thumbs.db
+.qarlog
 
 # Quartus Build Directories
 db/
