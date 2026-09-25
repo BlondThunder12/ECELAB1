@@ -1,1 +1,0 @@
-Warning (10268): Verilog HDL information at jmp_counter.sv(25): always construct contains both blocking and non-blocking assignments File: C:/TechnionModelSim/ECELab1/SV1/SV1Lab_restored/rtl/jmp_counter.sv Line: 25

@@ -1,1 +1,0 @@
-Warning (10268): Verilog HDL information at bitrec.sv(34): always construct contains both blocking and non-blocking assignments File: C:/TechnionModelSim/ECELab1/DEBUG/KBDLab_8_9_26_first_restored/rtl/bitrec.sv Line: 34
