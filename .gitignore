@@ -2,7 +2,7 @@
 *.bak
 *.orig
 Thumbs.db
-.qarlog
+*.qarlog
 
 # Quartus Build Directories
 db/
