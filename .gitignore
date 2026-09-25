@@ -1,0 +1,28 @@
+.DS_Store
+*.bak
+*.orig
+Thumbs.db
+
+# Quartus Build Directories
+db/
+incremental_db/
+output_files/
+simulation/
+greybox_tmp/
+hc_output/
+
+# Quartus Workspace and Lock Files
+*.qws
+*.flock
+
+# Quartus Report and Log Files
+*.rpt
+*.done
+*.smsg
+*.summary
+*.jdi
+*.pin
+*.sld
+*.sof
+*.pof
+*.jic
