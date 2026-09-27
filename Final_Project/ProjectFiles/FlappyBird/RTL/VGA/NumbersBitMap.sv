@@ -26,8 +26,8 @@ localparam logic[12:0] digit_location_MIF = OBJECT_WIDTH_X*OBJECT_WIDTH_Y;
 logic [12:0] address  ;
 logic  color  ;
  
-assign address = ((digit_location_MIF*digit)+((offsetY>>1)*OBJECT_WIDTH_X + (offsetX>>1))); //***Double size
-//assign address = ((digit_location_MIF*digit)+((offsetY)*OBJECT_WIDTH_X + (offsetX))); //Origimal size of digit
+//assign address = ((digit_location_MIF*digit)+((offsetY>>1)*OBJECT_WIDTH_X + (offsetX>>1))); //***Double size
+assign address = ((digit_location_MIF*digit)+((offsetY)*OBJECT_WIDTH_X + (offsetX))); //Origimal size of digit
 	//***comment the previous line and adjust the square object to double size as the size of a double bitmap
 
 parameter  logic	[7:0] digit_color = 8'hff ; //set the color of the digit 
