@@ -25,7 +25,10 @@ module	objects_mux	(
 					input		logic	[7:0] hartRGB,   
 					input		logic	[7:0] backGroundRGB, 
 					input		logic	BGDrawingRequest, 
-					input		logic	[7:0] RGB_MIF, 
+					input		logic	[7:0] RGB_MIF,
+			// Pipes Inputs
+					input		logic pipesDrawingRequest,
+					input 	logic [7:0] pipesRGB,
 			  
 				   output	logic	[7:0] RGBOut
 );
@@ -44,7 +47,7 @@ begin
 
 		else if (boxDrawingRequest == 1'b1) RGBOut <= boxRGB;
 
-				
+		else if (pipesDrawingRequest == 1'b1) RGBOut <= pipesRGB;
 //---------------------------------------------------------------------------------		
  		else if (HartDrawingRequest == 1'b1)
 				RGBOut <= hartRGB;
