@@ -102,7 +102,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1336 120 1512 136)
+	(rect 1408 120 1584 136)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "pipeDR" (rect 90 0 126 12)(font "Arial" ))
 	(pt 0 8)
@@ -118,7 +118,7 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1336 216 1512 232)
+	(rect 1352 280 1528 296)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "pipeRGB[7..0]" (rect 90 0 154 17)(font "Intel Clear" ))
 	(pt 0 8)
@@ -347,59 +347,6 @@ agreement for further details.
 	(annotation_block (parameter)(rect -360 192 -178 249))
 )
 (symbol
-	(rect 1272 88 1336 168)
-	(text "BOR4" (rect 1 0 25 10)(font "Arial" (font_size 6)))
-	(text "inst" (rect 3 69 20 81)(font "Arial" ))
-	(port
-		(pt 0 16)
-		(input)
-		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
-		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
-		(line (pt 0 16)(pt 5 16))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "IN3" (rect 2 39 19 51)(font "Courier New" (bold))(invisible))
-		(text "IN3" (rect 2 39 19 51)(font "Courier New" (bold))(invisible))
-		(line (pt 0 48)(pt 6 48))
-	)
-	(port
-		(pt 0 32)
-		(input)
-		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
-		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
-		(line (pt 0 32)(pt 6 32))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "IN4" (rect 2 55 19 67)(font "Courier New" (bold))(invisible))
-		(text "IN4" (rect 2 55 19 67)(font "Courier New" (bold))(invisible))
-		(line (pt 0 64)(pt 5 64))
-	)
-	(port
-		(pt 64 40)
-		(output)
-		(text "OUT" (rect 48 31 65 43)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 48 31 65 43)(font "Courier New" (bold))(invisible))
-		(line (pt 48 40)(pt 64 40))
-	)
-	(drawing
-		(line (pt 14 29)(pt 25 29))
-		(line (pt 14 52)(pt 25 52))
-		(line (pt 13 67)(pt 13 51))
-		(line (pt 13 29)(pt 13 13))
-		(arc (pt 7 45)(pt 7 35)(rect -14 24 19 57))
-		(arc (pt 49 40)(pt 25 29)(rect -6 29 57 92))
-		(arc (pt 25 51)(pt 49 40)(rect -6 -11 57 52))
-		(circle (rect 5 60 13 68))
-		(circle (rect 5 12 13 20))
-		(circle (rect 6 28 14 36))
-		(circle (rect 6 44 14 52))
-	)
-)
-(symbol
 	(rect 488 728 712 872)
 	(text "square_object" (rect 5 0 73 12)(font "Arial" ))
 	(text "inst8" (rect 8 128 30 145)(font "Intel Clear" ))
@@ -494,49 +441,6 @@ agreement for further details.
 	(annotation_block (parameter)(rect 712 648 967 724))
 )
 (symbol
-	(rect -368 480 -208 560)
-	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
-	(text "inst4" (rect 8 64 30 81)(font "Intel Clear" ))
-	(port
-		(pt 160 32)
-		(output)
-		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 3))
-	)
-	(parameter
-		"size"
-		"11"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(parameter
-		"MyValue"
-		"160-16"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 144 64))
-	)
-	(annotation_block (parameter)(rect -352 408 -160 465))
-)
-(symbol
-	(rect 432 256 464 288)
-	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
-	(text "inst10" (rect 3 21 31 38)(font "Intel Clear" )(invisible))
-	(port
-		(pt 16 0)
-		(output)
-		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
-		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
-		(line (pt 16 8)(pt 16 0))
-	)
-	(drawing
-		(line (pt 8 8)(pt 16 16))
-		(line (pt 16 16)(pt 24 8))
-		(line (pt 8 8)(pt 24 8))
-	)
-)
-(symbol
 	(rect -368 696 -208 776)
 	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
 	(text "inst3" (rect 8 64 30 81)(font "Intel Clear" ))
@@ -587,32 +491,6 @@ agreement for further details.
 		(rectangle (rect 16 16 144 64))
 	)
 	(annotation_block (parameter)(rect -352 816 -153 873))
-)
-(symbol
-	(rect -360 1104 -200 1184)
-	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
-	(text "inst11" (rect 8 64 36 81)(font "Intel Clear" ))
-	(port
-		(pt 160 32)
-		(output)
-		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
-		(line (pt 160 32)(pt 144 32)(line_width 3))
-	)
-	(parameter
-		"size"
-		"11"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(parameter
-		"MyValue"
-		"480"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 144 64))
-	)
-	(annotation_block (parameter)(rect -344 1040 -162 1097))
 )
 (symbol
 	(rect 504 1048 728 1192)
@@ -708,6 +586,159 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 736 968 991 1044))
 )
+(symbol
+	(rect 1136 256 1296 336)
+	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
+	(text "inst10" (rect 8 64 36 81)(font "Intel Clear" ))
+	(port
+		(pt 160 32)
+		(output)
+		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
+	)
+	(parameter
+		"size"
+		"8"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"MyValue"
+		"00011100"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(drawing
+		(rectangle (rect 16 16 144 64))
+	)
+	(annotation_block (parameter)(rect 1136 192 1345 249))
+)
+(symbol
+	(rect -368 24 -208 104)
+	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
+	(text "inst12" (rect 8 64 36 81)(font "Intel Clear" ))
+	(port
+		(pt 160 32)
+		(output)
+		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
+	)
+	(parameter
+		"size"
+		"11"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"MyValue"
+		"0"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 144 64))
+	)
+	(annotation_block (parameter)(rect -368 -40 -186 17))
+)
+(symbol
+	(rect 1256 88 1320 168)
+	(text "OR4" (rect 1 0 19 10)(font "Arial" (font_size 6)))
+	(text "inst13" (rect 3 69 31 86)(font "Intel Clear" ))
+	(port
+		(pt 0 16)
+		(input)
+		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
+		(text "IN1" (rect 2 7 19 19)(font "Courier New" (bold))(invisible))
+		(line (pt 0 16)(pt 13 16))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "IN3" (rect 2 39 19 51)(font "Courier New" (bold))(invisible))
+		(text "IN3" (rect 2 39 19 51)(font "Courier New" (bold))(invisible))
+		(line (pt 0 48)(pt 15 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "IN4" (rect 2 55 19 67)(font "Courier New" (bold))(invisible))
+		(text "IN4" (rect 2 55 19 67)(font "Courier New" (bold))(invisible))
+		(line (pt 0 64)(pt 13 64))
+	)
+	(port
+		(pt 0 32)
+		(input)
+		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
+		(text "IN2" (rect 2 23 19 35)(font "Courier New" (bold))(invisible))
+		(line (pt 0 32)(pt 15 32))
+	)
+	(port
+		(pt 64 40)
+		(output)
+		(text "OUT" (rect 48 31 65 43)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 48 31 65 43)(font "Courier New" (bold))(invisible))
+		(line (pt 48 40)(pt 64 40))
+	)
+	(drawing
+		(line (pt 13 67)(pt 13 51))
+		(line (pt 25 52)(pt 13 52))
+		(line (pt 13 12)(pt 13 29))
+		(line (pt 13 29)(pt 25 29))
+		(arc (pt 7 45)(pt 7 35)(rect -14 24 19 57))
+		(arc (pt 49 40)(pt 25 29)(rect -6 29 57 92))
+		(arc (pt 25 51)(pt 49 40)(rect -6 -11 57 52))
+	)
+)
+(symbol
+	(rect -360 1104 -200 1184)
+	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
+	(text "inst11" (rect 8 64 36 81)(font "Intel Clear" ))
+	(port
+		(pt 160 32)
+		(output)
+		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
+	)
+	(parameter
+		"size"
+		"11"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"MyValue"
+		"480-160"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 144 64))
+	)
+	(annotation_block (parameter)(rect -344 1040 -145 1097))
+)
+(symbol
+	(rect -368 480 -208 560)
+	(text "MyConstant" (rect 5 0 65 12)(font "Arial" ))
+	(text "inst4" (rect 8 64 30 81)(font "Intel Clear" ))
+	(port
+		(pt 160 32)
+		(output)
+		(text "value[size-1..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "value[size-1..0]" (rect 76 27 151 39)(font "Arial" ))
+		(line (pt 160 32)(pt 144 32)(line_width 3))
+	)
+	(parameter
+		"size"
+		"11"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"MyValue"
+		"640-160-8"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 144 64))
+	)
+	(annotation_block (parameter)(rect -352 408 -142 465))
+)
 (connector
 	(pt 416 488)
 	(pt 416 480)
@@ -761,17 +792,6 @@ agreement for further details.
 	(text "EdgePipeUP_DRequest" (rect 736 504 846 521)(font "Intel Clear" ))
 	(pt 728 520)
 	(pt 816 520)
-)
-(connector
-	(pt 1240 224)
-	(pt 1240 216)
-	(bus)
-)
-(connector
-	(text "LongPipeRGB[7..0]" (rect 1247 200 1336 217)(font "Intel Clear" ))
-	(pt 1336 224)
-	(pt 1240 224)
-	(bus)
 )
 (connector
 	(pt 416 160)
@@ -831,16 +851,6 @@ agreement for further details.
 	(pt 712 216)
 	(pt 792 216)
 	(bus)
-)
-(connector
-	(text "EdgePipeUP_DRequest" (rect 1152 104 1262 121)(font "Intel Clear" ))
-	(pt 1272 120)
-	(pt 1144 120)
-)
-(connector
-	(text "LongPipeUP_DRequest" (rect 1144 88 1254 105)(font "Intel Clear" ))
-	(pt 1272 104)
-	(pt 1128 104)
 )
 (connector
 	(pt 416 1080)
@@ -1015,16 +1025,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 488 248)
-	(pt 448 248)
-	(bus)
-)
-(connector
-	(pt 448 248)
-	(pt 448 256)
-	(bus)
-)
-(connector
 	(text "EdgePipeUP_topLeftY[10..0]" (rect -182 712 -47 729)(font "Intel Clear" ))
 	(pt -208 728)
 	(pt -88 728)
@@ -1065,12 +1065,6 @@ agreement for further details.
 	(pt 800 792)
 )
 (connector
-	(text "LongPipe_topLeftX[10..0]" (rect 376 536 497 553)(font "Intel Clear" ))
-	(pt 504 552)
-	(pt 352 552)
-	(bus)
-)
-(connector
 	(pt 712 808)
 	(pt 728 808)
 	(bus)
@@ -1081,20 +1075,57 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "EdgePipeDown_DRequest" (rect 1160 120 1283 137)(font "Intel Clear" ))
-	(pt 1272 136)
-	(pt 1152 136)
-)
-(connector
-	(text "LongPipeDown_DRequest" (rect 1146 136 1269 153)(font "Intel Clear" ))
-	(pt 1152 152)
-	(pt 1272 152)
-)
-(connector
 	(text "EdgePipe_topLeftX[10..0]" (rect 344 808 465 825)(font "Intel Clear" ))
 	(pt 488 824)
 	(pt 344 824)
 	(bus)
+)
+(connector
+	(text "EdgePipeUP_DRequest" (rect 1136 104 1246 121)(font "Intel Clear" ))
+	(pt 1256 120)
+	(pt 1128 120)
+)
+(connector
+	(text "EdgePipeDown_DRequest" (rect 1144 120 1267 137)(font "Intel Clear" ))
+	(pt 1256 136)
+	(pt 1136 136)
+)
+(connector
+	(text "LongPipeDown_DRequest" (rect 1130 136 1253 153)(font "Intel Clear" ))
+	(pt 1136 152)
+	(pt 1256 152)
+)
+(connector
+	(pt 1296 288)
+	(pt 1352 288)
+	(bus)
+)
+(connector
+	(text "LongPipeUP_topLeftY[10..0]" (rect -198 40 -63 57)(font "Intel Clear" ))
+	(pt -208 56)
+	(pt -88 56)
+	(bus)
+)
+(connector
+	(text "LongPipeUP_topLeftY[10..0]" (rect 333 232 468 249)(font "Intel Clear" ))
+	(pt 488 248)
+	(pt 336 248)
+	(bus)
+)
+(connector
+	(text "EdgePipe_topLeftX[10..0]" (rect 376 536 497 553)(font "Intel Clear" ))
+	(pt 504 552)
+	(pt 352 552)
+	(bus)
+)
+(connector
+	(text "LongPipeUP_DRequest" (rect 1122 88 1232 105)(font "Intel Clear" ))
+	(pt 1256 104)
+	(pt 1080 104)
+)
+(connector
+	(pt 1320 128)
+	(pt 1408 128)
 )
 (junction (pt 184 200))
 (junction (pt 184 328))
@@ -1112,6 +1143,7 @@ agreement for further details.
 (text "Y coordinate of top Edge" (rect -360 600 -214 619)(font "Intel Clear" (font_size 8)))
 (text "Y coordinate of bottom Edge" (rect -360 784 -191 803)(font "Intel Clear" (font_size 8)))
 (text "Y coordinate of bottom Long Pipe" (rect -352 1008 -153 1027)(font "Intel Clear" (font_size 8)))
+(text "Y coordinate of long pipe Up" (rect -360 -56 -191 -37)(font "Intel Clear" (font_size 8)))
 (rectangle (rect 344 48 1032 624))
 (rectangle (rect -8 136 296 464))
 (rectangle (rect 1120 72 1592 480))

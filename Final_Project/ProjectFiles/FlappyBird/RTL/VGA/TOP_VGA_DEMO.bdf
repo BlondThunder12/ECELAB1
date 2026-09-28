@@ -1367,7 +1367,7 @@ agreement for further details.
 		(pt 48 16)
 		(output)
 		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
-		(text "OUT" (rect 32 7 46 19)(font "Courier New" (bold))(invisible))
+		(text "OUT" (rect 32 7 49 19)(font "Courier New" (bold))(invisible))
 		(line (pt 39 16)(pt 48 16))
 	)
 	(drawing
@@ -1510,7 +1510,7 @@ agreement for further details.
 		(pt 248 32)
 		(output)
 		(text "RGBOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
-		(text "RGBOut[7..0]" (rect 171 27 227 39)(font "Arial" ))
+		(text "RGBOut[7..0]" (rect 171 27 238 39)(font "Arial" ))
 		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
 	(drawing
@@ -2308,11 +2308,6 @@ agreement for further details.
 	(pt 880 648)
 )
 (connector
-	(text "pipeDR" (rect 474 536 508 553)(font "Intel Clear" ))
-	(pt 512 552)
-	(pt 424 552)
-)
-(connector
 	(text "pipeRGB[7..0]" (rect 424 552 488 569)(font "Intel Clear" ))
 	(pt 512 568)
 	(pt 416 568)
@@ -2356,20 +2351,29 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "pipeDR" (rect 1295 1144 1329 1161)(font "Intel Clear" ))
-	(pt 1288 1160)
-	(pt 1312 1160)
-)
-(connector
 	(pt 1384 1192)
 	(pt 1384 1176)
 	(bus)
 )
 (connector
-	(text "PipeRGB[7..0]" (rect 1296 1160 1362 1177)(font "Intel Clear" ))
+	(text "pipeRGB[7..0]" (rect 1296 1160 1360 1177)(font "Intel Clear" ))
 	(pt 1384 1176)
 	(pt 1288 1176)
 	(bus)
+)
+(connector
+	(pt 328 552)
+	(pt 328 568)
+)
+(connector
+	(text "pipeDR" (rect 368 536 402 553)(font "Intel Clear" ))
+	(pt 512 552)
+	(pt 328 552)
+)
+(connector
+	(text "pipeDR" (rect 1311 1144 1345 1161)(font "Intel Clear" ))
+	(pt 1288 1160)
+	(pt 1344 1160)
 )
 (junction (pt 552 968))
 (junction (pt 1776 960))
