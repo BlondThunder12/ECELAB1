@@ -55,8 +55,8 @@ agreement for further details.
 	(port
 		(pt 0 96)
 		(input)
-		(text "startOfFrame" (rect 0 0 79 19)(font "Intel Clear" (font_size 8)))
-		(text "startOfFrame" (rect 21 91 100 110)(font "Intel Clear" (font_size 8)))
+		(text "newPipeGen" (rect 0 0 74 19)(font "Intel Clear" (font_size 8)))
+		(text "newPipeGen" (rect 21 91 95 110)(font "Intel Clear" (font_size 8)))
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port

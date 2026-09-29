@@ -1324,7 +1324,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 144 64))
 	)
-	(annotation_block (parameter)(rect -800 1080 -618 1137))
+	(annotation_block (parameter)(rect -808 1080 -626 1137))
 )
 (symbol
 	(rect -608 1472 -448 1552)
@@ -1518,6 +1518,23 @@ agreement for further details.
 	)
 )
 (symbol
+	(rect 488 288 520 320)
+	(text "GND" (rect 8 16 29 26)(font "Arial" (font_size 6)))
+	(text "inst19" (rect 3 21 31 38)(font "Intel Clear" )(invisible))
+	(port
+		(pt 16 0)
+		(output)
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(text "1" (rect 18 0 23 12)(font "Courier New" (bold))(invisible))
+		(line (pt 16 8)(pt 16 0))
+	)
+	(drawing
+		(line (pt 8 8)(pt 16 16))
+		(line (pt 16 16)(pt 24 8))
+		(line (pt 8 8)(pt 24 8))
+	)
+)
+(symbol
 	(rect 1072 1128 1288 1256)
 	(text "Pipes_Block_T" (rect 5 0 92 19)(font "Intel Clear" (font_size 8)))
 	(text "inst22" (rect 8 107 36 124)(font "Intel Clear" ))
@@ -1552,8 +1569,8 @@ agreement for further details.
 	(port
 		(pt 0 96)
 		(input)
-		(text "startOfFrame" (rect 0 0 79 19)(font "Intel Clear" (font_size 8)))
-		(text "startOfFrame" (rect 21 91 100 110)(font "Intel Clear" (font_size 8)))
+		(text "newPipeGen" (rect 0 0 74 19)(font "Intel Clear" (font_size 8)))
+		(text "newPipeGen" (rect 21 91 95 110)(font "Intel Clear" (font_size 8)))
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
@@ -1680,10 +1697,6 @@ agreement for further details.
 (connector
 	(pt -24 96)
 	(pt -32 96)
-)
-(connector
-	(pt 120 256)
-	(pt 560 256)
 )
 (connector
 	(pt -488 688)
@@ -2334,11 +2347,6 @@ agreement for further details.
 	(pt 1024 1208)
 )
 (connector
-	(text "startOfFrame" (rect 976 1208 1039 1225)(font "Intel Clear" ))
-	(pt 1072 1224)
-	(pt 1024 1224)
-)
-(connector
 	(text "pixelX[10..0]" (rect 992 1144 1051 1161)(font "Intel Clear" ))
 	(pt 1072 1160)
 	(pt 984 1160)
@@ -2374,6 +2382,32 @@ agreement for further details.
 	(text "pipeDR" (rect 1311 1144 1345 1161)(font "Intel Clear" ))
 	(pt 1288 1160)
 	(pt 1344 1160)
+)
+(connector
+	(pt 560 256)
+	(pt 504 256)
+)
+(connector
+	(pt 504 256)
+	(pt 504 288)
+)
+(connector
+	(pt 160 256)
+	(pt 160 264)
+)
+(connector
+	(text "enterKey" (rect 128 240 171 257)(font "Intel Clear" ))
+	(pt 120 256)
+	(pt 160 256)
+)
+(connector
+	(pt 992 1304)
+	(pt 992 1224)
+)
+(connector
+	(text "enterKey" (rect 1000 1208 1043 1225)(font "Intel Clear" ))
+	(pt 992 1224)
+	(pt 1072 1224)
 )
 (junction (pt 552 968))
 (junction (pt 1776 960))
