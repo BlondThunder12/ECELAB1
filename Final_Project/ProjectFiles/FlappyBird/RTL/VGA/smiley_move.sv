@@ -68,7 +68,8 @@ enum  logic [2:0] {IDLE_ST,         	// initial state
 						 MOVE_ST, 				// moving no colision 
 						 START_OF_FRAME_ST, 	          // startOfFrame activity-after all data collected 
 						 POSITION_CHANGE_ST, // position interpolate 
-						 POSITION_LIMITS_ST  // check if inside the frame  
+						 POSITION_LIMITS_ST, // check if inside the frame 
+						 DEAD_ST
 						}  SM_Motion ;
 
 int Xspeed  ; // speed    
@@ -98,6 +99,10 @@ begin : fsm_sync_proc
 	
 	end 	
 	
+	else if (collision && (SM_Motion != IDLE_ST)) begin
+		Yspeed    <= 0;
+		SM_Motion <= DEAD_ST;
+	end
 	else begin
 	
 		toggle_x_key_D <= toggle_x_key ;  //shift register to detect edge 
@@ -229,20 +234,25 @@ begin : fsm_sync_proc
 		//------------------------
 			POSITION_LIMITS_ST : begin  //check if still inside the frame 
 		//------------------------
-		if (Xposition < x_FRAME_LEFT) 
-						Xposition <= x_FRAME_LEFT ; 
-		if (Xposition > x_FRAME_RIGHT)
-						Xposition <= x_FRAME_RIGHT ; 
-		if (Yposition <= y_FRAME_TOP) begin
-						Yposition <= y_FRAME_TOP ;
-						if (Yspeed < 0) Yspeed <= 0; //kill the upwards momentum
+			if (Xposition < x_FRAME_LEFT) 
+							Xposition <= x_FRAME_LEFT ; 
+			if (Xposition > x_FRAME_RIGHT)
+							Xposition <= x_FRAME_RIGHT ; 
+			if (Yposition <= y_FRAME_TOP) begin
+							Yposition <= y_FRAME_TOP ;
+							if (Yspeed < 0) Yspeed <= 0; //kill the upwards momentum
 			end
-		if (Yposition >= y_FRAME_BOTTOM) begin 
-						Yposition <= y_FRAME_BOTTOM ; 
-						Yspeed <= 0;
-		end
-				SM_Motion <= MOVE_ST ; 
+			if (Yposition >= y_FRAME_BOTTOM) begin 
+							Yposition <= y_FRAME_BOTTOM ; 
+							Yspeed <= 0;
+			end
+			SM_Motion <= MOVE_ST ; 
 			
+			end
+		//------------------------
+			DEAD_ST: begin
+		//------------------------
+			Yspeed <= 0;
 			end
 		
 		endcase  // case 
