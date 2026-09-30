@@ -1546,30 +1546,82 @@ agreement for further details.
 		(pt 224 32)
 		(output)
 		(text "pipeDR" (rect 0 0 36 12)(font "Arial" ))
-		(text "pipeDR" (rect 173 27 209 39)(font "Arial" ))
+		(text "pipeDR" (rect 173 27 203 39)(font "Arial" ))
 		(line (pt 224 32)(pt 208 32))
 	)
 	(port
 		(pt 224 48)
 		(output)
 		(text "pipeRGB[7..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "pipeRGB[7..0]" (rect 145 43 214 55)(font "Arial" ))
+		(text "pipeRGB[7..0]" (rect 145 43 203 55)(font "Arial" ))
 		(line (pt 224 48)(pt 208 48)(line_width 3))
 	)
 	(parameter
 		"NUM_PIPES"
-		"4"
+		"3"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"PIPE_SPACING"
-		"720 / 4"
+		"240"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 208 160))
 	)
-	(annotation_block (parameter)(rect 1240 1136 1443 1193))
+	(annotation_block (parameter)(rect 1240 1128 1440 1192))
+)
+(symbol
+	(rect -840 1296 -624 1408)
+	(text "random" (rect 5 0 41 12)(font "Arial" ))
+	(text "inst14" (rect 8 96 37 108)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "enable" (rect 0 0 31 12)(font "Arial" ))
+		(text "enable" (rect 21 59 52 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 216 32)
+		(output)
+		(text "dout[SIZE_BITS-1..0]" (rect 0 0 105 12)(font "Arial" ))
+		(text "dout[SIZE_BITS-1..0]" (rect 107 27 195 39)(font "Arial" ))
+		(line (pt 216 32)(pt 200 32)(line_width 3))
+	)
+	(parameter
+		"SIZE_BITS"
+		"11"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"MIN_VAL"
+		"0"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"MAX_VAL"
+		"379"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 200 96))
+	)
+	(annotation_block (parameter)(rect -840 1216 -657 1292))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
@@ -1966,6 +2018,10 @@ agreement for further details.
 	(pt -392 1312)
 )
 (connector
+	(pt -880 1392)
+	(pt -880 1368)
+)
+(connector
 	(text "pixelX[10..0]" (rect -368 1312 -309 1329)(font "Intel Clear" ))
 	(pt -296 1328)
 	(pt -376 1328)
@@ -2055,6 +2111,11 @@ agreement for further details.
 	(pt 512 1208)
 	(pt 352 1208)
 	(bus)
+)
+(connector
+	(text "SingleHit" (rect -896 1352 -854 1369)(font "Intel Clear" ))
+	(pt -840 1368)
+	(pt -880 1368)
 )
 (connector
 	(text "clk" (rect 842 368 856 385)(font "Intel Clear" ))
@@ -2353,6 +2414,34 @@ agreement for further details.
 	(text "pipeDR" (rect 1263 1216 1297 1233)(font "Intel Clear" ))
 	(pt 1240 1232)
 	(pt 1296 1232)
+)
+(connector
+	(pt -888 1336)
+	(pt -888 1328)
+)
+(connector
+	(text "clk" (rect -888 1312 -874 1329)(font "Intel Clear" ))
+	(pt -888 1328)
+	(pt -840 1328)
+)
+(connector
+	(text "resetN" (rect -864 1328 -834 1345)(font "Intel Clear" ))
+	(pt -840 1344)
+	(pt -872 1344)
+)
+(connector
+	(pt -840 1368)
+	(pt -840 1360)
+)
+(connector
+	(pt -576 1376)
+	(pt -576 1328)
+	(bus)
+)
+(connector
+	(pt -624 1328)
+	(pt -576 1328)
+	(bus)
 )
 (junction (pt 552 968))
 (junction (pt 1776 960))

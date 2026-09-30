@@ -951,17 +951,9 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 200 224)
-	(pt 208 224)
-)
-(connector
 	(text "clk" (rect 238 208 252 225)(font "Intel Clear" ))
 	(pt 208 224)
 	(pt 256 224)
-)
-(connector
-	(pt 200 256)
-	(pt 208 256)
 )
 (connector
 	(text "resetN" (rect 256 240 286 257)(font "Intel Clear" ))
@@ -969,19 +961,9 @@ agreement for further details.
 	(pt 288 256)
 )
 (connector
-	(pt 200 296)
-	(pt 208 296)
-	(bus)
-)
-(connector
 	(text "pixelX[10..0]" (rect 210 280 269 297)(font "Intel Clear" ))
 	(pt 208 296)
 	(pt 296 296)
-	(bus)
-)
-(connector
-	(pt 200 328)
-	(pt 208 328)
 	(bus)
 )
 (connector
@@ -1229,10 +1211,6 @@ agreement for further details.
 	(pt 232 400)
 	(bus)
 )
-(junction (pt 208 224))
-(junction (pt 208 256))
-(junction (pt 208 296))
-(junction (pt 208 328))
 (text "Edge Part of  Up PIPE" (rect 976 336 1104 355)(font "Intel Clear" (font_size 8)))
 (text "Long Part of Up PIPE" (rect 984 24 1107 43)(font "Intel Clear" (font_size 8)))
 (text "Edge Part of bottom PIPE" (rect 984 616 1135 635)(font "Intel Clear" (font_size 8)))
