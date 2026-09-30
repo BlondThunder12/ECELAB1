@@ -12,8 +12,8 @@ module	objects_mux	(
 					input		logic	clk,
 					input		logic	resetN,
 		   // smiley 
-					input		logic	smileyDrawingRequest, // two set of inputs per unit
-					input		logic	[7:0] smileyRGB, 
+					input		logic	birdDrawingRequest, // two set of inputs per unit
+					input		logic	[7:0] birdRGB, 
 					     
 		  // add the box here 
 					input		logic boxDrawingRequest,
@@ -21,8 +21,8 @@ module	objects_mux	(
 			  
 		  ////////////////////////
 		  // background 
-					input    logic HartDrawingRequest, // box of numbers
-					input		logic	[7:0] hartRGB,   
+					input    logic heartDrawingRequest, // box of numbers
+					input		logic	[7:0] heartRGB,   
 					input		logic	[7:0] backGroundRGB, 
 					input		logic	BGDrawingRequest, 
 					input		logic	[7:0] RGB_MIF,
@@ -40,8 +40,8 @@ begin
 	end
 	
 	else begin
-		if (smileyDrawingRequest == 1'b1 )   
-			RGBOut <= smileyRGB;  //first priority 
+		if (birdDrawingRequest == 1'b1 )   
+			RGBOut <= birdRGB;  //first priority 
 		 
 //--- add logic for box here ------------------------------------------------------		
 
@@ -49,8 +49,8 @@ begin
 
 		else if (pipesDrawingRequest == 1'b1) RGBOut <= pipesRGB;
 //---------------------------------------------------------------------------------		
- 		else if (HartDrawingRequest == 1'b1)
-				RGBOut <= hartRGB;
+ 		else if (heartDrawingRequest == 1'b1)
+				RGBOut <= heartRGB;
 		else if (BGDrawingRequest == 1'b1)
 				RGBOut <= backGroundRGB ;
 		else RGBOut <= RGB_MIF ;// last priority 

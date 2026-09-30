@@ -8,7 +8,7 @@
 // update the hit and collision algoritm - Eyal MAR 2024   
 // good practice code - Dudy MAR 2025  ert
 
-module	smiley_move	(	
+module	bird_move	(	
  
 					input	 logic clk,
 					input	 logic resetN,
