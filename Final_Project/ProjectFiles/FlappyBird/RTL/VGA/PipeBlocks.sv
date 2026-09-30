@@ -2,7 +2,8 @@ module PipeBlocks #(
 	parameter int NUM_PIPES = 3,       
 	parameter int PIPE_SPACING = 240,  // Distance between pipes (720 total / Num_Pipes = 240)
 	parameter int Max_Random_Number = 6'd35,
-	parameter int Min_Random_Number = 6'd2
+	parameter int Min_Random_Number = 6'd2,
+	parameter int Bird_Threshold_X_Coor = 150
 )(
 	input  logic               clk,
 	input  logic               resetN,
@@ -13,7 +14,9 @@ module PipeBlocks #(
 	input  logic signed [10:0] pixelY,
 
 	output logic               pipeDR,
-	output logic         [7:0] pipeRGB
+	output logic         [7:0] pipeRGB,
+	output logic					updateScorePulse,
+	output logic					debug_led
 );
 
 //-----------------------------------------------------------------------------
@@ -26,6 +29,7 @@ logic               dr_array       [NUM_PIPES];
 logic        [7:0]  rgb_array      [NUM_PIPES];
 logic        [5:0]  pipe_chunks    [NUM_PIPES]; // Stores the height for each pipe
 logic               pipe_active_D  [NUM_PIPES]; // Edge detectors for the latched triggers
+logic	signed [10:0] topLeftX_prev  [NUM_PIPES]; // remembers where each pipe was 
 
 
 //-----------------------------------------------------------------------------
@@ -134,6 +138,35 @@ generate
 endgenerate
 
 //-----------------------------------------------------------------------------
+// Score Update Detector
+//-----------------------------------------------------------------------------
+always_ff @(posedge clk or negedge resetN) begin
+		if (!resetN) begin
+			updateScorePulse <= 1'b0;
+			for (int j = 0; j < NUM_PIPES; j++) begin
+				topLeftX_prev[j] <= 11'd0;
+			end
+		end 
+		else begin
+			updateScorePulse <= 1'b0; // Default to 0, ensuring it only pulses for 1 clock cycle
+
+			for (int j = 0; j < NUM_PIPES; j++) begin
+            // Store the current position for the next clock cycle to compare against
+				topLeftX_prev[j] <= topLeftX[j]; 
+
+            // Check for the crossing transition
+				if (pipe_active[j] && 
+					(topLeftX_prev[j] >  Bird_Threshold_X_Coor) && 
+					(topLeftX[j]      <= Bird_Threshold_X_Coor)) begin
+                
+					updateScorePulse <= 1'b1; // Trigger the score counter
+                
+            end
+        end
+    end
+end
+
+//-----------------------------------------------------------------------------
 // Output handling using a mux and an OR gate for the Draw requests
 //-----------------------------------------------------------------------------
 always_comb begin
@@ -147,6 +180,16 @@ always_comb begin
             pipeRGB = rgb_array[j];
         end
     end
+end
+//-----------------------------------------------------------------------------
+// Debug Toggle for Red LED
+//-----------------------------------------------------------------------------
+
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) 
+        debug_led <= 1'b0;
+    else if (updateScorePulse) 
+        debug_led <= ~debug_led; // Flip state when a pipe passes
 end
 
 endmodule

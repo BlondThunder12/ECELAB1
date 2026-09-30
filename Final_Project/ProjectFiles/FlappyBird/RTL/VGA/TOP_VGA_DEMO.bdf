@@ -247,22 +247,6 @@ agreement for further details.
 )
 (pin
 	(output)
-	(rect 1808 952 1984 968)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "redLight" (rect 90 0 128 12)(font "Arial" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-)
-(pin
-	(output)
 	(rect 1808 968 1984 984)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "yellowLight" (rect 90 0 144 12)(font "Arial" ))
@@ -314,6 +298,22 @@ agreement for further details.
 	(rect 80 560 257 576)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "bordersDrawReq" (rect 90 0 171 12)(font "Arial" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect -704 56 -528 72)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "redLight" (rect 90 0 128 12)(font "Arial" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -840,77 +840,6 @@ agreement for further details.
 	)
 	(drawing
 		(rectangle (rect 16 16 200 144))
-	)
-)
-(symbol
-	(rect 1224 840 1416 1000)
-	(text "ALL_HEXSS" (rect 5 0 75 19)(font "Intel Clear" (font_size 8)))
-	(text "inst5" (rect 8 139 30 156)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 16 19)(font "Intel Clear" (font_size 8)))
-		(text "clk" (rect 21 27 37 46)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "resetN" (rect 0 0 38 19)(font "Intel Clear" (font_size 8)))
-		(text "resetN" (rect 21 43 59 62)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "keyPad[3..0]" (rect 0 0 75 19)(font "Intel Clear" (font_size 8)))
-		(text "keyPad[3..0]" (rect 21 59 96 78)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 64)(pt 16 64)(line_width 3))
-	)
-	(port
-		(pt 192 32)
-		(output)
-		(text "HEX0[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX0[6..0]" (rect 108 27 171 46)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 32)(pt 176 32)(line_width 3))
-	)
-	(port
-		(pt 192 48)
-		(output)
-		(text "HEX1[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX1[6..0]" (rect 108 43 171 62)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 48)(pt 176 48)(line_width 3))
-	)
-	(port
-		(pt 192 64)
-		(output)
-		(text "HEX2[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX2[6..0]" (rect 108 59 171 78)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 64)(pt 176 64)(line_width 3))
-	)
-	(port
-		(pt 192 80)
-		(output)
-		(text "HEX3[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX3[6..0]" (rect 108 75 171 94)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 80)(pt 176 80)(line_width 3))
-	)
-	(port
-		(pt 192 96)
-		(output)
-		(text "HEX4[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX4[6..0]" (rect 108 91 171 110)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 96)(pt 176 96)(line_width 3))
-	)
-	(port
-		(pt 192 112)
-		(output)
-		(text "HEX5[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
-		(text "HEX5[6..0]" (rect 108 107 171 126)(font "Intel Clear" (font_size 8)))
-		(line (pt 192 112)(pt 176 112)(line_width 3))
-	)
-	(drawing
-		(rectangle (rect 16 16 176 144))
 	)
 )
 (symbol
@@ -1542,7 +1471,78 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 1016 1192 1240 1368)
+	(rect 1224 840 1416 1000)
+	(text "ALL_HEXSS" (rect 5 0 75 19)(font "Intel Clear" (font_size 8)))
+	(text "inst5" (rect 8 139 30 156)(font "Intel Clear" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 16 19)(font "Intel Clear" (font_size 8)))
+		(text "clk" (rect 21 27 37 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "resetN" (rect 0 0 38 19)(font "Intel Clear" (font_size 8)))
+		(text "resetN" (rect 21 43 59 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "keyPad[3..0]" (rect 0 0 75 19)(font "Intel Clear" (font_size 8)))
+		(text "keyPad[3..0]" (rect 21 59 96 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 192 32)
+		(output)
+		(text "HEX0[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX0[6..0]" (rect 108 27 171 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 32)(pt 176 32)(line_width 3))
+	)
+	(port
+		(pt 192 48)
+		(output)
+		(text "HEX1[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX1[6..0]" (rect 108 43 171 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 48)(pt 176 48)(line_width 3))
+	)
+	(port
+		(pt 192 64)
+		(output)
+		(text "HEX2[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX2[6..0]" (rect 108 59 171 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 64)(pt 176 64)(line_width 3))
+	)
+	(port
+		(pt 192 80)
+		(output)
+		(text "HEX3[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX3[6..0]" (rect 108 75 171 94)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 80)(pt 176 80)(line_width 3))
+	)
+	(port
+		(pt 192 96)
+		(output)
+		(text "HEX4[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX4[6..0]" (rect 108 91 171 110)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 96)(pt 176 96)(line_width 3))
+	)
+	(port
+		(pt 192 112)
+		(output)
+		(text "HEX5[6..0]" (rect 0 0 63 19)(font "Intel Clear" (font_size 8)))
+		(text "HEX5[6..0]" (rect 108 107 171 126)(font "Intel Clear" (font_size 8)))
+		(line (pt 192 112)(pt 176 112)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 176 144))
+	)
+)
+(symbol
+	(rect 1016 1192 1256 1368)
 	(text "PipeBlocks" (rect 5 0 59 12)(font "Arial" ))
 	(text "inst24" (rect 8 160 37 172)(font "Arial" ))
 	(port
@@ -1595,18 +1595,32 @@ agreement for further details.
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
-		(pt 224 32)
+		(pt 240 32)
 		(output)
 		(text "pipeDR" (rect 0 0 36 12)(font "Arial" ))
-		(text "pipeDR" (rect 173 27 209 39)(font "Arial" ))
-		(line (pt 224 32)(pt 208 32))
+		(text "pipeDR" (rect 189 27 219 39)(font "Arial" ))
+		(line (pt 240 32)(pt 224 32))
 	)
 	(port
-		(pt 224 48)
+		(pt 240 48)
 		(output)
 		(text "pipeRGB[7..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "pipeRGB[7..0]" (rect 145 43 214 55)(font "Arial" ))
-		(line (pt 224 48)(pt 208 48)(line_width 3))
+		(text "pipeRGB[7..0]" (rect 161 43 219 55)(font "Arial" ))
+		(line (pt 240 48)(pt 224 48)(line_width 3))
+	)
+	(port
+		(pt 240 64)
+		(output)
+		(text "updateScorePulse" (rect 0 0 88 12)(font "Arial" ))
+		(text "updateScorePulse" (rect 145 59 219 71)(font "Arial" ))
+		(line (pt 240 64)(pt 224 64))
+	)
+	(port
+		(pt 240 80)
+		(output)
+		(text "debug_led" (rect 0 0 49 12)(font "Arial" ))
+		(text "debug_led" (rect 178 75 219 87)(font "Arial" ))
+		(line (pt 240 80)(pt 224 80))
 	)
 	(parameter
 		"NUM_PIPES"
@@ -1618,10 +1632,25 @@ agreement for further details.
 		"180"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Max_Random_Number"
+		"35"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Min_Random_Number"
+		"2"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"Bird_Threshold_X_Coor"
+		"180"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 208 160))
+		(rectangle (rect 16 16 224 160))
 	)
-	(annotation_block (parameter)(rect 1240 1104 1433 1161))
+	(annotation_block (parameter)(rect 1144 1048 1384 1162))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
@@ -2433,15 +2462,38 @@ agreement for further details.
 	(pt 936 1288)
 )
 (connector
-	(text "pipeDR" (rect 1263 1208 1297 1225)(font "Intel Clear" ))
-	(pt 1240 1224)
-	(pt 1296 1224)
+	(pt 1296 1256)
+	(pt 1296 1272)
 )
 (connector
-	(text "pipeRGB[7..0]" (rect 1248 1224 1312 1241)(font "Intel Clear" ))
-	(pt 1240 1240)
-	(pt 1416 1240)
+	(text "pipeDR" (rect 1295 1208 1329 1225)(font "Intel Clear" ))
+	(pt 1256 1224)
+	(pt 1368 1224)
+)
+(connector
+	(text "pipeRGB[7..0]" (rect 1296 1224 1360 1241)(font "Intel Clear" ))
+	(pt 1256 1240)
+	(pt 1376 1240)
 	(bus)
+)
+(connector
+	(text "updateScorePulse" (rect 1274 1240 1360 1257)(font "Intel Clear" ))
+	(pt 1256 1256)
+	(pt 1296 1256)
+)
+(connector
+	(pt 1280 1272)
+	(pt 1280 1296)
+)
+(connector
+	(text "trigger" (rect 1264 1256 1294 1273)(font "Intel Clear" ))
+	(pt 1256 1272)
+	(pt 1280 1272)
+)
+(connector
+	(text "trigger" (rect -797 48 -767 65)(font "Intel Clear" ))
+	(pt -704 64)
+	(pt -800 64)
 )
 (junction (pt 552 968))
 (junction (pt 1776 960))
@@ -2460,9 +2512,11 @@ agreement for further details.
 (text "Pipes Handling" (rect 952 1048 1059 1068)(font "Intel Clear" (font_size 10)(bold)))
 (text "game_controller" (rect 848 504 966 524)(font "Intel Clear" (font_size 10)(bold)))
 (text "Bird moving and drawing" (rect 464 -8 618 11)(font "Intel Clear" (font_size 8)(bold)))
+(text "SevenSeg" (rect -808 -16 -749 3)(font "Intel Clear" (font_size 8)))
 (rectangle (rect 384 752 1728 1008)(color 0 0 0)(line_width 3))
 (rectangle (rect 448 -16 984 328)(color 0 0 0)(line_width 3))
 (rectangle (rect -376 136 280 376)(color 0 0 0)(line_width 3))
 (rectangle (rect -888 400 288 928)(color 0 0 0)(line_width 3))
 (rectangle (rect -904 1024 888 1576)(color 0 0 0)(line_width 3))
 (rectangle (rect 912 1032 1456 1584)(color 0 0 0)(line_width 3))
+(rectangle (rect -832 -32 -512 224))
