@@ -33,30 +33,6 @@ agreement for further details.
 	)
 )
 (global
-	(rect 128 640 416 680)
-	(parameter)
-	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
-	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
-	(text "WIDTH_OF_PIPE" (rect 3 16 95 30)(font "Arial" (font_size 8)))
-	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"64\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
-	(drawing
-		(line (pt 138 40)(pt 138 0))
-	)
-)
-(global
-	(rect 128 680 416 720)
-	(parameter)
-	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
-	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
-	(text "WIDTH_OF_EDGE" (rect 3 16 103 30)(font "Arial" (font_size 8)))
-	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"80\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
-	(drawing
-		(line (pt 138 40)(pt 138 0))
-	)
-)
-(global
 	(rect 128 720 416 760)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
@@ -88,6 +64,30 @@ agreement for further details.
 	(text "HEIGHT_OF_PIPE" (rect 3 16 99 30)(font "Arial" (font_size 8)))
 	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
 	(text "UD\"8\"" (rect 141 16 148 30)(font "Arial" (font_size 8)))
+	(drawing
+		(line (pt 138 40)(pt 138 0))
+	)
+)
+(global
+	(rect 128 640 416 680)
+	(parameter)
+	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
+	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
+	(text "WIDTH_OF_PIPE" (rect 3 16 95 30)(font "Arial" (font_size 8)))
+	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
+	(text "UD\"40\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
+	(drawing
+		(line (pt 138 40)(pt 138 0))
+	)
+)
+(global
+	(rect 128 680 416 720)
+	(parameter)
+	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
+	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
+	(text "WIDTH_OF_EDGE" (rect 3 16 103 30)(font "Arial" (font_size 8)))
+	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
+	(text "UD\"56\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
 	(drawing
 		(line (pt 138 40)(pt 138 0))
 	)
@@ -160,7 +160,7 @@ agreement for further details.
 	(input)
 	(rect 32 392 232 408)
 	(text "INPUT" (rect 157 0 185 10)(font "Arial" (font_size 6)))
-	(text "wantedXCoord[10..0]" (rect 5 0 106 17)(font "Intel Clear" ))
+	(text "wantedXCoord[10..0]" (rect 5 0 105 17)(font "Intel Clear" ))
 	(pt 200 8)
 	(drawing
 		(line (pt 116 12)(pt 141 12))
@@ -174,9 +174,9 @@ agreement for further details.
 )
 (pin
 	(input)
-	(rect 40 432 232 448)
+	(rect 32 432 224 448)
 	(text "INPUT" (rect 149 0 177 10)(font "Arial" (font_size 6)))
-	(text "newPipeGenerator" (rect 5 0 94 17)(font "Intel Clear" ))
+	(text "SizeOfUpPipe[5..0]" (rect 5 0 93 17)(font "Intel Clear" ))
 	(pt 192 8)
 	(drawing
 		(line (pt 108 12)(pt 133 12))
@@ -510,58 +510,6 @@ agreement for further details.
 	(annotation_block (parameter)(rect 40 0 222 57))
 )
 (symbol
-	(rect 496 112 712 224)
-	(text "random" (rect 5 0 41 12)(font "Arial" ))
-	(text "inst14" (rect 8 96 36 113)(font "Intel Clear" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "rise" (rect 0 0 17 12)(font "Arial" ))
-		(text "rise" (rect 21 59 38 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 216 32)
-		(output)
-		(text "dout[SIZE_BITS-1..0]" (rect 0 0 105 12)(font "Arial" ))
-		(text "dout[SIZE_BITS-1..0]" (rect 107 27 212 39)(font "Arial" ))
-		(line (pt 216 32)(pt 200 32)(line_width 3))
-	)
-	(parameter
-		"SIZE_BITS"
-		"6"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"MIN_VAL"
-		"2"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(parameter
-		"MAX_VAL"
-		"30"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 200 96))
-	)
-	(annotation_block (parameter)(rect 504 16 687 92))
-)
-(symbol
 	(rect 480 400 808 544)
 	(text "pipe_coordinate_calc" (rect 5 0 107 12)(font "Arial" ))
 	(text "inst4" (rect 8 128 31 140)(font "Arial" ))
@@ -597,42 +545,42 @@ agreement for further details.
 		(pt 328 32)
 		(output)
 		(text "topLeftX_Pipe[10..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "topLeftX_Pipe[10..0]" (rect 223 27 307 39)(font "Arial" ))
+		(text "topLeftX_Pipe[10..0]" (rect 223 27 323 39)(font "Arial" ))
 		(line (pt 328 32)(pt 312 32)(line_width 3))
 	)
 	(port
 		(pt 328 48)
 		(output)
 		(text "topLeftX_Edge[10..0]" (rect 0 0 103 12)(font "Arial" ))
-		(text "topLeftX_Edge[10..0]" (rect 220 43 307 55)(font "Arial" ))
+		(text "topLeftX_Edge[10..0]" (rect 220 43 323 55)(font "Arial" ))
 		(line (pt 328 48)(pt 312 48)(line_width 3))
 	)
 	(port
 		(pt 328 64)
 		(output)
 		(text "topLeftY_TopEdge[10..0]" (rect 0 0 123 12)(font "Arial" ))
-		(text "topLeftY_TopEdge[10..0]" (rect 203 59 307 71)(font "Arial" ))
+		(text "topLeftY_TopEdge[10..0]" (rect 203 59 326 71)(font "Arial" ))
 		(line (pt 328 64)(pt 312 64)(line_width 3))
 	)
 	(port
 		(pt 328 80)
 		(output)
 		(text "topLeftY_BottomEdge[10..0]" (rect 0 0 141 12)(font "Arial" ))
-		(text "topLeftY_BottomEdge[10..0]" (rect 188 75 307 87)(font "Arial" ))
+		(text "topLeftY_BottomEdge[10..0]" (rect 188 75 329 87)(font "Arial" ))
 		(line (pt 328 80)(pt 312 80)(line_width 3))
 	)
 	(port
 		(pt 328 96)
 		(output)
 		(text "topLeftY_BottomPipe[10..0]" (rect 0 0 138 12)(font "Arial" ))
-		(text "topLeftY_BottomPipe[10..0]" (rect 191 91 307 103)(font "Arial" ))
+		(text "topLeftY_BottomPipe[10..0]" (rect 191 91 329 103)(font "Arial" ))
 		(line (pt 328 96)(pt 312 96)(line_width 3))
 	)
 	(port
 		(pt 328 112)
 		(output)
 		(text "bottomPipeNumOfChunks[5..0]" (rect 0 0 155 12)(font "Arial" ))
-		(text "bottomPipeNumOfChunks[5..0]" (rect 176 107 307 119)(font "Arial" ))
+		(text "bottomPipeNumOfChunks[5..0]" (rect 176 107 331 119)(font "Arial" ))
 		(line (pt 328 112)(pt 312 112)(line_width 3))
 	)
 	(parameter
@@ -727,28 +675,28 @@ agreement for further details.
 		(pt 256 32)
 		(output)
 		(text "offsetX[10..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "offsetX[10..0]" (rect 178 27 235 39)(font "Arial" ))
+		(text "offsetX[10..0]" (rect 178 27 246 39)(font "Arial" ))
 		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(port
 		(pt 256 48)
 		(output)
 		(text "offsetY[10..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "offsetY[10..0]" (rect 176 43 235 55)(font "Arial" ))
+		(text "offsetY[10..0]" (rect 176 43 246 55)(font "Arial" ))
 		(line (pt 256 48)(pt 240 48)(line_width 3))
 	)
 	(port
 		(pt 256 64)
 		(output)
 		(text "drawingRequest" (rect 0 0 77 12)(font "Arial" ))
-		(text "drawingRequest" (rect 170 59 235 71)(font "Arial" ))
+		(text "drawingRequest" (rect 170 59 247 71)(font "Arial" ))
 		(line (pt 256 64)(pt 240 64))
 	)
 	(port
 		(pt 256 80)
 		(output)
 		(text "RGBout[7..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "RGBout[7..0]" (rect 181 75 235 87)(font "Arial" ))
+		(text "RGBout[7..0]" (rect 181 75 245 87)(font "Arial" ))
 		(line (pt 256 80)(pt 240 80)(line_width 3))
 	)
 	(parameter
@@ -828,28 +776,28 @@ agreement for further details.
 		(pt 256 32)
 		(output)
 		(text "offsetX[10..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "offsetX[10..0]" (rect 178 27 235 39)(font "Arial" ))
+		(text "offsetX[10..0]" (rect 178 27 246 39)(font "Arial" ))
 		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(port
 		(pt 256 48)
 		(output)
 		(text "offsetY[10..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "offsetY[10..0]" (rect 176 43 235 55)(font "Arial" ))
+		(text "offsetY[10..0]" (rect 176 43 246 55)(font "Arial" ))
 		(line (pt 256 48)(pt 240 48)(line_width 3))
 	)
 	(port
 		(pt 256 64)
 		(output)
 		(text "drawingRequest" (rect 0 0 77 12)(font "Arial" ))
-		(text "drawingRequest" (rect 170 59 235 71)(font "Arial" ))
+		(text "drawingRequest" (rect 170 59 247 71)(font "Arial" ))
 		(line (pt 256 64)(pt 240 64))
 	)
 	(port
 		(pt 256 80)
 		(output)
 		(text "RGBout[7..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "RGBout[7..0]" (rect 181 75 235 87)(font "Arial" ))
+		(text "RGBout[7..0]" (rect 181 75 245 87)(font "Arial" ))
 		(line (pt 256 80)(pt 240 80)(line_width 3))
 	)
 	(parameter
@@ -1043,10 +991,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 456 224)
-	(pt 456 200)
-)
-(connector
 	(text "clk" (rect 1024 120 1038 137)(font "Intel Clear" ))
 	(pt 1032 136)
 	(pt 1104 136)
@@ -1097,16 +1041,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "rise" (rect 233 424 249 441)(font "Intel Clear" ))
-	(pt 232 440)
-	(pt 272 440)
-)
-(connector
-	(text "rise" (rect 472 184 488 201)(font "Intel Clear" ))
-	(pt 496 200)
-	(pt 456 200)
-)
-(connector
 	(text "clk" (rect 456 416 470 433)(font "Intel Clear" ))
 	(pt 480 432)
 	(pt 448 432)
@@ -1145,24 +1079,6 @@ agreement for further details.
 	(pt 808 496)
 	(pt 896 496)
 	(bus)
-)
-(connector
-	(pt 448 168)
-	(pt 448 144)
-)
-(connector
-	(text "clk" (rect 448 128 462 145)(font "Intel Clear" ))
-	(pt 448 144)
-	(pt 496 144)
-)
-(connector
-	(text "resetN" (rect 472 144 502 161)(font "Intel Clear" ))
-	(pt 496 160)
-	(pt 464 160)
-)
-(connector
-	(pt 496 200)
-	(pt 496 176)
 )
 (connector
 	(text "EdgePipeUP_DRequest" (rect 80 984 190 1001)(font "Intel Clear" ))
@@ -1260,12 +1176,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "wantedXCoord[10..0]" (rect 240 384 340 401)(font "Intel Clear" ))
-	(pt 232 400)
-	(pt 288 400)
-	(bus)
-)
-(connector
 	(text "wantedXCoord[10..0]" (rect 390 448 490 465)(font "Intel Clear" ))
 	(pt 480 464)
 	(pt 440 464)
@@ -1281,12 +1191,6 @@ agreement for further details.
 	(text "bottomPipeChunks[5..0]" (rect 816 496 930 513)(font "Intel Clear" ))
 	(pt 808 512)
 	(pt 880 512)
-	(bus)
-)
-(connector
-	(text "SizeOfUpPipe[5..0]" (rect 760 128 848 145)(font "Intel Clear" ))
-	(pt 808 144)
-	(pt 712 144)
 	(bus)
 )
 (connector
@@ -1311,6 +1215,18 @@ agreement for further details.
 	(text "offsetY[10..0]" (rect 1424 1016 1487 1033)(font "Intel Clear" ))
 	(pt 1368 1032)
 	(pt 1488 1032)
+	(bus)
+)
+(connector
+	(text "SizeOfUpPipe[5..0]" (rect 232 424 320 441)(font "Intel Clear" ))
+	(pt 224 440)
+	(pt 296 440)
+	(bus)
+)
+(connector
+	(text "wantedXCoord[10..0]" (rect 240 384 340 401)(font "Intel Clear" ))
+	(pt 312 400)
+	(pt 232 400)
 	(bus)
 )
 (junction (pt 208 224))

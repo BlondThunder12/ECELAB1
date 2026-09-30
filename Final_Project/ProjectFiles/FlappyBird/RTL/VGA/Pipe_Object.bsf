@@ -62,9 +62,9 @@ agreement for further details.
 	(port
 		(pt 0 112)
 		(input)
-		(text "newPipeGenerator" (rect 0 0 109 19)(font "Intel Clear" (font_size 8)))
-		(text "newPipeGenerator" (rect 21 107 130 126)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 112)(pt 16 112))
+		(text "SizeOfUpPipe[5..0]" (rect 0 0 114 19)(font "Intel Clear" (font_size 8)))
+		(text "SizeOfUpPipe[5..0]" (rect 21 107 135 126)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
 		(pt 264 32)
@@ -81,35 +81,35 @@ agreement for further details.
 		(line (pt 264 48)(pt 248 48)(line_width 3))
 	)
 	(parameter
-		"height_of_edge"
-		"20"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(parameter
-		"gap_size"
+		"GAP_SIZE"
 		"88"
 		""
-		(type "PARAMETER_SIGNED_DEC")	)
+		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
-		"width_of_pipe"
+		"WIDTH_OF_PIPE"
 		"64"
 		""
-		(type "PARAMETER_SIGNED_DEC")	)
+		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
-		"width_of_edge"
+		"WIDTH_OF_EDGE"
 		"80"
 		""
-		(type "PARAMETER_SIGNED_DEC")	)
+		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
-		"ground_pixel_bottom_pipe"
+		"HEIGHT_OF_EDGE"
+		"20"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"GROUND_PIXEL_BOTTOM"
 		"480-32"
 		""
-		(type "PARAMETER_SIGNED_DEC")	)
+		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
-		"height_of_pipe"
-		"10"
+		"HEIGHT_OF_PIPE"
+		"8"
 		""
-		(type "PARAMETER_SIGNED_DEC")	)
+		(type "PARAMETER_UNSIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 248 144))
 	)
