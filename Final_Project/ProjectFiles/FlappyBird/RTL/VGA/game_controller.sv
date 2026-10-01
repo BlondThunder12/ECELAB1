@@ -15,7 +15,8 @@ module	game_controller	(
 			
 			output logic collision, // active in case of collision between two objects
 			
-			output logic SingleHitPulse // critical code, generating A single pulse in a frame 
+			output logic SingleHitPulse, // critical code, generating A single pulse in a frame 
+			output logic led_collision_trigger
 			
 			
 
@@ -25,6 +26,7 @@ module	game_controller	(
 logic flag ; // a semaphore to set the output only once per frame regardless of number of collisions 
 logic collision_bird_number; // collision between bird and number - is not output
 logic collision_bird_pipe; 
+logic collision_bird_borders;
 
 assign collision_bird_borders = (drawing_request_bird && drawing_request_border);
 assign collision_bird_number = (drawing_request_bird && drawing_request_number);
@@ -40,6 +42,7 @@ begin
 	begin 
 		flag	<= 1'b0;
 		SingleHitPulse <= 1'b0 ; 
+		led_collision_trigger <= 1'b0;
 		
 	end 
 	else begin 
@@ -55,6 +58,7 @@ if ( collision_bird_number  && (flag == 1'b0)) begin
 		end
 else if ( collision && (flag == 1'b0)) begin
 		flag <= 1'b1;
+		led_collision_trigger <= 1'b1;
 		end 
 	end ;
 end

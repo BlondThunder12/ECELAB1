@@ -387,7 +387,7 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 552 440 784 616)
+	(rect 552 424 784 600)
 	(text "bird_move" (rect 5 0 56 12)(font "Arial" ))
 	(text "inst3" (rect 8 160 30 177)(font "Intel Clear" ))
 	(port
@@ -481,7 +481,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 216 160))
 	)
-	(annotation_block (parameter)(rect 560 312 817 426))
+	(annotation_block (parameter)(rect 560 296 817 410))
 )
 (connector
 	(text "clk" (rect 880 392 894 409)(font "Intel Clear" ))
@@ -497,12 +497,6 @@ agreement for further details.
 	(text "pixelX[10..0]" (rect 874 424 934 436)(font "Arial" ))
 	(pt 840 440)
 	(pt 936 440)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 874 440 936 452)(font "Arial" ))
-	(pt 840 456)
-	(pt 936 456)
 	(bus)
 )
 (connector
@@ -524,44 +518,6 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 392 488)
-	(pt 552 488)
-)
-(connector
-	(pt 392 472)
-	(pt 552 472)
-)
-(connector
-	(pt 504 568)
-	(pt 552 568)
-	(bus)
-)
-(connector
-	(pt 504 656)
-	(pt 504 568)
-	(bus)
-)
-(connector
-	(text "startOfFrame" (rect 472 488 535 505)(font "Intel Clear" ))
-	(pt 392 504)
-	(pt 552 504)
-)
-(connector
-	(text "Y_direction_key" (rect 461 504 537 521)(font "Intel Clear" ))
-	(pt 400 520)
-	(pt 552 520)
-)
-(connector
-	(text "toggle_x_key" (rect 472 520 536 537)(font "Intel Clear" ))
-	(pt 392 536)
-	(pt 552 536)
-)
-(connector
-	(text "collision " (rect 481 536 522 553)(font "Intel Clear" ))
-	(pt 392 552)
-	(pt 552 552)
-)
-(connector
 	(text "clk" (rect 1208 360 1222 377)(font "Intel Clear" ))
 	(pt 1256 376)
 	(pt 1192 376)
@@ -579,18 +535,6 @@ agreement for further details.
 (connector
 	(pt 1496 408)
 	(pt 1576 408)
-	(bus)
-)
-(connector
-	(text "BirdTLX[10..0]" (rect 796 456 863 473)(font "Intel Clear" ))
-	(pt 784 472)
-	(pt 936 472)
-	(bus)
-)
-(connector
-	(text "BirdTLY[10..0]" (rect 794 472 861 489)(font "Intel Clear" ))
-	(pt 784 488)
-	(pt 936 488)
 	(bus)
 )
 (connector
@@ -621,6 +565,130 @@ agreement for further details.
 	(pt 1160 440)
 	(pt 1256 440)
 )
+(connector
+	(pt 392 472)
+	(pt 400 472)
+)
+(connector
+	(pt 936 472)
+	(pt 928 472)
+	(bus)
+)
+(connector
+	(pt 392 488)
+	(pt 408 488)
+)
+(connector
+	(pt 936 488)
+	(pt 920 488)
+	(bus)
+)
+(connector
+	(pt 392 504)
+	(pt 416 504)
+)
+(connector
+	(pt 400 520)
+	(pt 424 520)
+)
+(connector
+	(pt 392 536)
+	(pt 432 536)
+)
+(connector
+	(pt 392 552)
+	(pt 440 552)
+)
+(connector
+	(pt 400 472)
+	(pt 400 456)
+)
+(connector
+	(pt 400 456)
+	(pt 552 456)
+)
+(connector
+	(pt 928 472)
+	(pt 928 456)
+	(bus)
+)
+(connector
+	(pt 408 488)
+	(pt 408 472)
+)
+(connector
+	(pt 408 472)
+	(pt 552 472)
+)
+(connector
+	(pt 504 552)
+	(pt 552 552)
+	(bus)
+)
+(connector
+	(pt 504 656)
+	(pt 504 552)
+	(bus)
+)
+(connector
+	(pt 920 488)
+	(pt 920 472)
+	(bus)
+)
+(connector
+	(text "BirdTLY[10..0]" (rect 794 456 861 473)(font "Intel Clear" ))
+	(pt 920 472)
+	(pt 784 472)
+	(bus)
+)
+(connector
+	(pt 416 504)
+	(pt 416 488)
+)
+(connector
+	(text "startOfFrame" (rect 472 472 535 489)(font "Intel Clear" ))
+	(pt 416 488)
+	(pt 552 488)
+)
+(connector
+	(pt 424 520)
+	(pt 424 504)
+)
+(connector
+	(text "Y_direction_key" (rect 461 488 537 505)(font "Intel Clear" ))
+	(pt 424 504)
+	(pt 552 504)
+)
+(connector
+	(pt 432 536)
+	(pt 432 520)
+)
+(connector
+	(text "toggle_x_key" (rect 472 504 536 521)(font "Intel Clear" ))
+	(pt 432 520)
+	(pt 552 520)
+)
+(connector
+	(pt 440 552)
+	(pt 440 536)
+)
+(connector
+	(text "collision " (rect 481 520 522 537)(font "Intel Clear" ))
+	(pt 440 536)
+	(pt 552 536)
+)
+(connector
+	(text "BirdTLX[10..0],pixelY[10..0]" (rect 796 440 924 457)(font "Intel Clear" ))
+	(pt 784 456)
+	(pt 928 456)
+	(bus)
+)
+(connector
+	(pt 928 456)
+	(pt 936 456)
+	(bus)
+)
+(junction (pt 928 456))
 (text "  " (rect 24 624 31 643)(font "Intel Clear" (font_size 8)))
 (text "   " (rect 144 664 154 683)(font "Intel Clear" (font_size 8)))
 (text "            " (rect 504 608 546 627)(font "Intel Clear" (font_size 8)))
