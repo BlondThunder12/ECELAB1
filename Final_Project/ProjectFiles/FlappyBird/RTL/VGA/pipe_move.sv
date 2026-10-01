@@ -6,6 +6,7 @@ module pipe_move (
     input   logic startOfFrame,          // Short pulse every frame
     input   logic collision,             // Freezes pipe on hit / game over
 	 input	logic trigger_move,		  // to trigger when the pipe first starts to move
+	 input	logic [1:0] game_state,
     
     output  logic signed [10:0] topLeftX,// Output target X coordinate
     output  logic               generateNewChunks // Pulses when pipe wraps around to pick a new height
@@ -26,6 +27,11 @@ const int PIPE_WIDTH    = 80;            // Maximum collar width
 const int X_FRAME_LEFT  = -PIPE_WIDTH * FIXED_POINT_MULTIPLIER; // Fully hidden on the left
 const int X_FRAME_RIGHT = (INITIAL_X + ((WIDTH_OF_EDGE - WIDTH_OF_PIPE) / 2) ) * FIXED_POINT_MULTIPLIER ;         // Spawn point on the right
 
+// State definitions for the diff states of the game
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam logic [1:0] PLAYING      = 2'b01;
+localparam logic [1:0] GAME_OVER    = 2'b10;
+
 enum logic [2:0] {
     IDLE_ST,            // Initial reset state
     MOVE_ST,            // Waiting for frame sync while monitoring collision
@@ -45,6 +51,17 @@ always_ff @(posedge clk or negedge resetN) begin : fsm_sync_proc
 			Xposition         <= X_FRAME_RIGHT;
 			generateNewChunks <= 1'b0;
     end
+	 else if( game_state == START_SCREEN) begin
+			SM_Motion         <= IDLE_ST;
+			Xspeed            <= 0;
+			Xposition         <= X_FRAME_RIGHT;
+			generateNewChunks <= 1'b0;
+	 end
+	 
+	 else if( game_state == GAME_OVER) begin
+			SM_Motion         <= DEAD_ST;
+			Xspeed            <= 0;
+	 end
     else begin
 			generateNewChunks <= 1'b0; // Default pulse low
 			

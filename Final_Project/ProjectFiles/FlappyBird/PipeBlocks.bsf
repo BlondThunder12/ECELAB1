@@ -55,9 +55,9 @@ agreement for further details.
 	(port
 		(pt 0 96)
 		(input)
-		(text "Y_direction_key" (rect 0 0 66 12)(font "Arial" ))
-		(text "Y_direction_key" (rect 21 91 87 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
+		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 91 87 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
 		(pt 0 112)

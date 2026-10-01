@@ -1,12 +1,4 @@
 // (c) Technion IIT, Department of Electrical Engineering 2025 
-//-- Alex Grinshpun Apr 2017
-//-- Dudy Nov 13 2017
-// SystemVerilog version Alex Grinshpun May 2018
-// coding convention dudy December 2018
-// updated Eyal Lev April 2023
-// updated to state machine Dudy March 2023 
-// update the hit and collision algoritm - Eyal MAR 2024   
-// good practice code - Dudy MAR 2025  ert
 
 module	bird_move	(	
  
@@ -14,11 +6,12 @@ module	bird_move	(
 					input	 logic resetN,
 					input	 logic startOfFrame,      //short pulse every start of frame 30Hz 
 					input	 logic Y_direction_key,   //move Y Up   
-					input	 logic toggle_x_key,      //toggle X   
 					input  logic collision,         //collision if smiley hits an object
-					input  logic [2:0] HitEdgeCode, 
+					input	 logic [1:0] game_state,
+					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
-					output logic signed	[10:0] topLeftY  // can be negative , if the object is partliy outside 
+					output logic signed	[10:0] topLeftY,  // can be negative , if the object is partliy outside
+					output logic 					 bird_hit_borders
 					
 );
  int 	 topLeftX_tmp; // output the top left corner 
@@ -33,7 +26,6 @@ parameter int INITIAL_Y_SPEED = 20;
 parameter int Y_ACCEL = -10;
 
 const int MAX_Y_SPEED = 500;
-//const int	FIXED_POINT_MULTIPLIER = 64; // note it must be 2^n 
 const logic signed 	[10:0]	FIXED_POINT_MULTIPLIER = 64; // note it must be 2^n 
 // FIXED_POINT_MULTIPLIER is used to enable working with integers in high resolution so that 
 // we do all calculations with topLeftX_FixedPoint to get a resolution of 1/64 pixel in calcuatuions,
@@ -50,19 +42,11 @@ const int	x_FRAME_RIGHT	=	(639 - SafetyMargin - OBJECT_WIDTH_X)* FIXED_POINT_MUL
 const int	y_FRAME_TOP		=	(SafetyMargin) * FIXED_POINT_MULTIPLIER;
 const int	y_FRAME_BOTTOM	=	(479 -SafetyMargin - OBJECT_HIGHT_Y ) * FIXED_POINT_MULTIPLIER; //- OBJECT_HIGHT_Y
 
-//edges 
-	//------------
-	//			 434
-	//			 1x2
-	//			 404
-	//
 
-const logic [4:0] CORNER =	5'b10000; 
-const logic [3:0] TOP =		 4'b1000; 
-const logic [3:0] RIGHT =   4'b0100; 
-const logic [3:0] LEFT =	 4'b0010; 
-const logic [3:0] BOTTOM =  4'b0001; 
-
+// Global game states needed to update the bird movement
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam logic [1:0] PLAYING      = 2'b01;
+localparam logic [1:0] GAME_OVER    = 2'b10;
 
 enum  logic [2:0] {IDLE_ST,         	// initial state
 						 MOVE_ST, 				// moving no colision 
@@ -77,7 +61,6 @@ int Yspeed  ;
 int Xposition ; //position   
 int Yposition ;  
 
-logic toggle_x_key_D ;
 logic Y_direction_key_D; // added an edge detector for the Y press
  
 
@@ -91,21 +74,28 @@ begin : fsm_sync_proc
 		SM_Motion <= IDLE_ST ; 
 		Xspeed <= 0   ; 
 		Yspeed <= 0  ; 
-	Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER  ; 
-	Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
-		toggle_x_key_D <= 0 ;
+		Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER  ; 
+		Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
 		Y_direction_key_D <= 0 ;
-		hit_reg <= 5'b0 ;	
+		bird_hit_borders <= 0;
 	
 	end 	
+	else if(game_state == START_SCREEN) begin
+		SM_Motion <= IDLE_ST ; 
+		Xspeed <= 0   ; 
+		Yspeed <= 0  ; 
+		Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER  ; 
+		Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
+		Y_direction_key_D <= 0 ;
+		bird_hit_borders <= 0;
+	end
 	
-	else if (collision && (SM_Motion != IDLE_ST)) begin
+	else if (game_state == GAME_OVER) begin
 		Yspeed    <= 0;
 		SM_Motion <= DEAD_ST;
 	end
 	else begin
-	
-		toggle_x_key_D <= toggle_x_key ;  //shift register to detect edge 
+
 		Y_direction_key_D <= Y_direction_key;
 	
 		case(SM_Motion)
@@ -117,14 +107,8 @@ begin : fsm_sync_proc
 				Xspeed  <= INITIAL_X_SPEED ;  
 				Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER; 
 				Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER; 
-
-				//implement frozen state before first jump
-				if (Y_direction_key && !Y_direction_key_D) begin
-					Yspeed <= - MAX_Y_SPEED / 2;
-					SM_Motion <= MOVE_ST;
-				end else begin
-					Yspeed <= 0;
-				end
+				Yspeed <= - MAX_Y_SPEED / 2;
+				SM_Motion <= MOVE_ST;
 
 			end
 	
@@ -135,86 +119,26 @@ begin : fsm_sync_proc
 				if (Y_direction_key && !Y_direction_key_D )//  if the button is pressed now and wasnt pressed last cycle
 					Yspeed <= -MAX_Y_SPEED / 2; //fixed jump height
 					
-       // collcting collisions 	
-				if (collision) begin
-					hit_reg[HitEdgeCode]<=1'b1;
-
-				end
-				
-
 				if (startOfFrame)
 					SM_Motion <= START_OF_FRAME_ST ; 
 					
-					
-				
+									
 		end 
 		
 		//------------
 			START_OF_FRAME_ST:  begin      //check if any colisin was detected 
 		//------------
-/*
 	
-			if (hit_reg == CORNER)   // pure corner 
-					begin
-//							Yspeed <= 0-Xspeed ;
-//							Xspeed <= 0-Yspeed ;
-       if ( Yspeed > 0)
-              Yspeed <= 1-Yspeed ;
-			else 	 
-		         Yspeed <= -(1+Yspeed );	
-				  Xspeed <= 0-Xspeed ;
-					end
-			else begin 
-				case (hit_reg[3:0] )  // test sides 
-	
-					TOP+RIGHT, LEFT+BOTTOM, TOP+LEFT, BOTTOM+RIGHT :  // two sides - corner 
-					begin
-							 //Yspeed <= 0-Yspeed ;
-		 if ( Yspeed > 0)
-              Yspeed <= 1-Yspeed ;
-			else 	 
-		         Yspeed <= -(1+Yspeed );	
-				          Xspeed <= 0-Xspeed ;
-					end
-					LEFT, TOP+RIGHT+BOTTOM : // left side or cavity  
-					begin
-						if (Xspeed < 0) // left 
-							  Xspeed <= 0-Xspeed ;
-					end
-	
-					RIGHT, LEFT+BOTTOM +TOP :   // right side or cavity  
-					begin
-						if (Xspeed > 0) // right 
-							  Xspeed <= 0-Xspeed ;
-					end
-					
-					TOP, RIGHT+LEFT+BOTTOM :  // top side or cavity  
-					begin
-						if (Yspeed < 0) // up 
-							  Yspeed <= -1-Yspeed ;
-					end
-				
-				BOTTOM, TOP+LEFT+RIGHT :  // bottom side or cavity  
-					begin
-						if (Yspeed > 0) // doun 
-							  Yspeed <= 1-Yspeed ;
-					end
-					
-					default: ; 
-	
-			  endcase
-			end // else 
-*/	
-
-		if(hit_reg[0] == 1'b1 && Yspeed > 0) begin //if we hit bottom when falling
-			Yspeed <= 0;
+			// Check if the bird hit the border
+			if (Yposition <= y_FRAME_TOP || Yposition >= y_FRAME_BOTTOM) begin
+				bird_hit_borders <= 1'b1;
+				Yspeed <= 0;
+			end
+			
+			else if(Yspeed > MAX_Y_SPEED) Yspeed <= MAX_Y_SPEED;
+			
+			SM_Motion <= POSITION_CHANGE_ST;
 		end
-		else if(hit_reg[3] == 1'b1 && Yspeed < 0) begin // if we hit top and going up
-			Yspeed <= 0;
-		end
-			hit_reg <= 5'b00000;						
-			SM_Motion <= POSITION_CHANGE_ST ; 
-		end 
 
 		//------------------------
 			POSITION_CHANGE_ST : begin  // position interpolate 
@@ -234,18 +158,19 @@ begin : fsm_sync_proc
 		//------------------------
 			POSITION_LIMITS_ST : begin  //check if still inside the frame 
 		//------------------------
+			
+			// make sure bird X coordinates are in screen
 			if (Xposition < x_FRAME_LEFT) 
 							Xposition <= x_FRAME_LEFT ; 
 			if (Xposition > x_FRAME_RIGHT)
 							Xposition <= x_FRAME_RIGHT ; 
-			if (Yposition <= y_FRAME_TOP) begin
+			
+			// make sure bird Y coordinates are in screen
+			if (Yposition <= y_FRAME_TOP) 
 							Yposition <= y_FRAME_TOP ;
-							if (Yspeed < 0) Yspeed <= 0; //kill the upwards momentum
-			end
-			if (Yposition >= y_FRAME_BOTTOM) begin 
+			
+			if (Yposition >= y_FRAME_BOTTOM) 
 							Yposition <= y_FRAME_BOTTOM ; 
-							Yspeed <= 0;
-			end
 			SM_Motion <= MOVE_ST ; 
 			
 			end

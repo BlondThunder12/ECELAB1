@@ -21,7 +21,7 @@ agreement for further details.
 */
 (header "symbol" (version "1.2"))
 (symbol
-	(rect 16 16 248 208)
+	(rect 16 16 272 208)
 	(text "Bird_Block_T" (rect 5 0 84 19)(font "Intel Clear" (font_size 8)))
 	(text "inst" (rect 8 171 24 188)(font "Intel Clear" ))
 	(port
@@ -69,30 +69,37 @@ agreement for further details.
 	(port
 		(pt 0 128)
 		(input)
-		(text "toggle_x_key" (rect 0 0 77 19)(font "Intel Clear" (font_size 8)))
-		(text "toggle_x_key" (rect 21 123 98 142)(font "Intel Clear" (font_size 8)))
+		(text "collision " (rect 0 0 50 19)(font "Intel Clear" (font_size 8)))
+		(text "collision " (rect 21 123 71 142)(font "Intel Clear" (font_size 8)))
 		(line (pt 0 128)(pt 16 128))
 	)
 	(port
 		(pt 0 144)
 		(input)
-		(text "collision " (rect 0 0 50 19)(font "Intel Clear" (font_size 8)))
-		(text "collision " (rect 21 139 71 158)(font "Intel Clear" (font_size 8)))
-		(line (pt 0 144)(pt 16 144))
+		(text "game_state[1..0]" (rect 0 0 100 19)(font "Intel Clear" (font_size 8)))
+		(text "game_state[1..0]" (rect 21 139 121 158)(font "Intel Clear" (font_size 8)))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
 	)
 	(port
-		(pt 232 32)
+		(pt 256 32)
 		(output)
 		(text "birdDR" (rect 0 0 42 19)(font "Intel Clear" (font_size 8)))
-		(text "birdDR" (rect 169 27 211 46)(font "Intel Clear" (font_size 8)))
-		(line (pt 232 32)(pt 216 32))
+		(text "birdDR" (rect 193 27 235 46)(font "Intel Clear" (font_size 8)))
+		(line (pt 256 32)(pt 240 32))
 	)
 	(port
-		(pt 232 48)
+		(pt 256 48)
 		(output)
 		(text "birdRGB[7..0]" (rect 0 0 81 19)(font "Intel Clear" (font_size 8)))
-		(text "birdRGB[7..0]" (rect 130 43 211 62)(font "Intel Clear" (font_size 8)))
-		(line (pt 232 48)(pt 216 48)(line_width 3))
+		(text "birdRGB[7..0]" (rect 154 43 235 62)(font "Intel Clear" (font_size 8)))
+		(line (pt 256 48)(pt 240 48)(line_width 3))
+	)
+	(port
+		(pt 256 64)
+		(output)
+		(text "bird_hit_borders" (rect 0 0 100 19)(font "Intel Clear" (font_size 8)))
+		(text "bird_hit_borders" (rect 135 59 235 78)(font "Intel Clear" (font_size 8)))
+		(line (pt 256 64)(pt 240 64))
 	)
 	(parameter
 		"initial_x"
@@ -115,7 +122,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 216 176))
+		(rectangle (rect 16 16 240 176))
 	)
-	(annotation_block (parameter)(rect 248 -64 348 16))
+	(annotation_block (parameter)(rect 272 -64 372 16))
 )

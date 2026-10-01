@@ -9,6 +9,7 @@ module scoreModule #(
 	input logic   trigger,
 	input logic [10:0] pixelX,
 	input logic [10:0] pixelY,
+	input logic [1:0]  game_state,
 
 	output logic [7:0] RGBNum,
 	output logic       DrawingRequest
@@ -16,6 +17,12 @@ module scoreModule #(
 
 logic trigger_d;
 wire trigger_pulse = trigger && !trigger_d;
+
+// game state definition:
+
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam logic [1:0] PLAYING      = 2'b01;
+localparam logic [1:0] GAME_OVER    = 2'b10;
 
 always_ff @(posedge clk or negedge resetN) begin
         if (!resetN)
@@ -31,8 +38,11 @@ logic [3:0] tens;
         if (!resetN) begin
             units <= 4'd0;
             tens  <= 4'd0;
-				
-end else if (trigger_pulse) begin
+	end else if (game_state == START_SCREEN) begin
+            units <= 4'd0;
+            tens  <= 4'd0;				
+			end		
+else if (trigger_pulse) begin
             if (units == 4'd9) begin
                 units <= 4'd0;
                 if (tens == 4'd9)

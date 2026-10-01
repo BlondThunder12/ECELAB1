@@ -7,9 +7,9 @@ module PipeBlocks #(
 )(
 	input  logic               clk,
 	input  logic               resetN,
-    input  logic               startOfFrame,
+   input  logic               startOfFrame,
 	input  logic               collision,
-	input  logic               Y_direction_key, // Jump key to start the game
+	input  logic        [1:0]  game_state, // Current game state to know how to handle pipes
 	input  logic signed [10:0] pixelX,
 	input  logic signed [10:0] pixelY,
 
@@ -19,6 +19,12 @@ module PipeBlocks #(
 	output logic					debug_led
 );
 
+//-----------------------------------------------------------------------------
+// Game state declarations
+//-----------------------------------------------------------------------------
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam logic [1:0] PLAYING 		= 2'b01;
+localparam logic [1:0] GAME_OVER 	= 2'b10;
 //-----------------------------------------------------------------------------
 // Internal Arrays
 //-----------------------------------------------------------------------------
@@ -50,32 +56,33 @@ random #(
 );
 
 //-----------------------------------------------------------------------------
-// Game Start to trigger the first pipe
+// Freeze pipes on Game Over
 //-----------------------------------------------------------------------------
-logic game_started;
-always_ff @(posedge clk or negedge resetN) begin
-    if (!resetN) 
-        game_started <= 1'b0;
-    else if (Y_direction_key) 
-        game_started <= 1'b1;
-end
+logic active_frame;
+assign active_frame = (game_state == PLAYING) ? startOfFrame : 1'b0;
 
 //-----------------------------------------------------------------------------
 // Cascade Triggers for all of the pipes (Latched)
 //-----------------------------------------------------------------------------
 always_ff @(posedge clk or negedge resetN) begin
-    if (!resetN) begin
-        for (int j = 0; j < NUM_PIPES; j++) begin
-            pipe_active[j] <= 1'b0;
-        end
-    end else begin
-        // Pipe 0 starts immediately on first jump
-        if (game_started) 
+	if (!resetN) begin
+			for (int j = 0; j < NUM_PIPES; j++) begin
+				pipe_active[j] <= 1'b0;
+			end
+	end
+	else  if (game_state == START_SCREEN) begin
+				for (int j = 0; j < NUM_PIPES; j++) begin
+					pipe_active[j] <= 1'b0;
+				end
+			end
+	
+	else begin
+        if (game_state == PLAYING) 
             pipe_active[0] <= 1'b1;
         
-        // Pipes 1 and 2 start when the pipe ahead of them reaches X <= 400
+        // Rest of the pipes come in one by one after the first one comes in in cascading order
         for (int j = 1; j < NUM_PIPES; j++) begin
-            if (game_started && (topLeftX[j-1] <= (11'd640 - PIPE_SPACING))) begin
+            if (game_state == PLAYING && (topLeftX[j-1] <= (11'd640 - PIPE_SPACING))) begin
                 pipe_active[j] <= 1'b1;
             end
         end
@@ -114,9 +121,10 @@ generate
         pipe_move move_inst (
             .clk                (clk),
             .resetN             (resetN),
-            .startOfFrame       (startOfFrame),
+            .startOfFrame       (active_frame),
             .collision          (collision),
             .trigger_move       (pipe_active[i]), // Feed the latched trigger here
+				.game_state			  (game_state),
             
             .topLeftX           (topLeftX[i]),
             .generateNewChunks  (newPipeGen[i])
