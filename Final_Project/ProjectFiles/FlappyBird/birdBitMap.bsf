@@ -21,7 +21,7 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 160)
+	(rect 16 16 296 160)
 	(text "birdBitMap" (rect 5 0 46 12)(font "Arial" ))
 	(text "inst" (rect 8 128 20 140)(font "Arial" ))
 	(port
@@ -60,27 +60,34 @@ agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 1))
 	)
 	(port
-		(pt 240 32)
+		(pt 0 112)
+		(input)
+		(text "reverse_gravity_switchN" (rect 0 0 102 12)(font "Arial" ))
+		(text "reverse_gravity_switchN" (rect 21 107 123 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 280 32)
 		(output)
 		(text "drawingRequest" (rect 0 0 63 12)(font "Arial" ))
-		(text "drawingRequest" (rect 156 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 1))
+		(text "drawingRequest" (rect 196 27 259 39)(font "Arial" ))
+		(line (pt 280 32)(pt 264 32)(line_width 1))
 	)
 	(port
-		(pt 240 48)
+		(pt 280 48)
 		(output)
 		(text "RGBout[7..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "RGBout[7..0]" (rect 166 43 219 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48)(line_width 3))
+		(text "RGBout[7..0]" (rect 206 43 259 55)(font "Arial" ))
+		(line (pt 280 48)(pt 264 48)(line_width 3))
 	)
 	(port
-		(pt 240 64)
+		(pt 280 64)
 		(output)
 		(text "HitEdgeCode[2..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "HitEdgeCode[2..0]" (rect 146 59 219 71)(font "Arial" ))
-		(line (pt 240 64)(pt 224 64)(line_width 3))
+		(text "HitEdgeCode[2..0]" (rect 186 59 259 71)(font "Arial" ))
+		(line (pt 280 64)(pt 264 64)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 224 128)(line_width 1))
+		(rectangle (rect 16 16 264 128)(line_width 1))
 	)
 )

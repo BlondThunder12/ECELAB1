@@ -10,6 +10,7 @@ module	birdBitMap	(
 					input logic	[10:0] offsetX,// offset from top left  position 
 					input logic	[10:0] offsetY,
 					input	logic	InsideRectangle, //input that the pixel is within a bracket 
+					input logic reverse_gravity_switchN,
 
 					output	logic	drawingRequest, //output that the pixel should be dispalyed 
 					output	logic	[7:0] RGBout,  //rgb value from the bitmap 
@@ -28,8 +29,9 @@ localparam  logic	[10:0] OBJECT_WIDTH_X = 11'b1 <<  OBJECT_NUMBER_OF_X_BITS;
  logic	[10:0] HitCodeY ; 
 assign HitCodeX = offsetX >> ( OBJECT_NUMBER_OF_X_BITS - 4 );	//hitedge code MSB of the offset
 assign HitCodeY = offsetY >> ( OBJECT_NUMBER_OF_Y_BITS - 4 );	 	 
-//assign address = ((OBJECT_HEIGHT_Y-offsetY - 1)*OBJECT_WIDTH_X + offsetX);
-assign address = ((offsetY)*OBJECT_WIDTH_X + offsetX);
+
+
+assign address = (reverse_gravity_switchN) ? ((OBJECT_HEIGHT_Y-offsetY - 1)*OBJECT_WIDTH_X + offsetX) : ((offsetY)*OBJECT_WIDTH_X + offsetX);
 
 // generating a smiley bitmap from a MIF file
 

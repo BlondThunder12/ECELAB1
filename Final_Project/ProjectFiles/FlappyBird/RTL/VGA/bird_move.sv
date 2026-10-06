@@ -4,9 +4,9 @@ module	bird_move	(
  
 					input	 logic clk,
 					input	 logic resetN,
-					input	 logic startOfFrame,      //short pulse every start of frame 30Hz 
-					input	 logic Y_direction_key,   //move Y Up   
-					input  logic collision,         //collision if smiley hits an object
+					input	 logic startOfFrame,      			//short pulse every start of frame 30Hz 
+					input	 logic Y_direction_key,   			//move Y Up   
+					input  logic reverse_gravity_switchN, 	//to check if we need to reverse the gravity of ther bird
 					input	 logic [1:0] game_state,
 					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
@@ -107,7 +107,10 @@ begin : fsm_sync_proc
 				Xspeed  <= INITIAL_X_SPEED ;  
 				Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER; 
 				Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER; 
-				Yspeed <= - MAX_Y_SPEED / 2;
+				
+				if(!reverse_gravity_switchN) 	Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
+				else 									Yspeed <= MAX_Y_SPEED / 2;
+				
 				SM_Motion <= MOVE_ST;
 
 			end
@@ -116,9 +119,10 @@ begin : fsm_sync_proc
 			MOVE_ST:  begin     // moving collecting colisions 
 		//------------
 		// keys direction change 
-				if (Y_direction_key && !Y_direction_key_D )//  if the button is pressed now and wasnt pressed last cycle
-					Yspeed <= -MAX_Y_SPEED / 2; //fixed jump height
-					
+				if (Y_direction_key && !Y_direction_key_D ) begin//  if the button is pressed now and wasnt pressed last cycle
+					if(!reverse_gravity_switchN) Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
+					else Yspeed <= MAX_Y_SPEED / 2; 									// if the switch is flipped up, reverse gravity
+				end
 				if (startOfFrame)
 					SM_Motion <= START_OF_FRAME_ST ; 
 					
@@ -132,10 +136,14 @@ begin : fsm_sync_proc
 			// Check if the bird hit the border
 			if (Yposition <= y_FRAME_TOP || Yposition >= y_FRAME_BOTTOM) begin
 				bird_hit_borders <= 1'b1;
-				Yspeed <= 0;
 			end
 			
-			else if(Yspeed > MAX_Y_SPEED) Yspeed <= MAX_Y_SPEED;
+			else if(!reverse_gravity_switchN && Yspeed > MAX_Y_SPEED) begin
+				Yspeed <= MAX_Y_SPEED;
+			end
+			else if(reverse_gravity_switchN && Yspeed < -MAX_Y_SPEED) begin
+				Yspeed <= -MAX_Y_SPEED;
+			end
 			
 			SM_Motion <= POSITION_CHANGE_ST;
 		end
@@ -147,10 +155,14 @@ begin : fsm_sync_proc
 				Yposition <= Yposition + Yspeed ;
 			 
 				// accelerate 
-			
+			if(!reverse_gravity_switchN) begin
 				if (Yspeed < MAX_Y_SPEED ) //  limit the speed while going down 
    				Yspeed <= Yspeed - Y_ACCEL ; // deAccelerate : slow the speed down every clock tick 
-	
+			end 
+			else begin
+				if (Yspeed > -MAX_Y_SPEED ) //  limit the speed while going up
+   				Yspeed <= Yspeed + Y_ACCEL ; // deAccelerate : slow the speed up every clock tick
+			end	
 				
 				SM_Motion <= POSITION_LIMITS_ST ; 
 			end
