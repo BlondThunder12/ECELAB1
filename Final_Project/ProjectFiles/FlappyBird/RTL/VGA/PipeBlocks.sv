@@ -25,6 +25,7 @@ module PipeBlocks #(
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING 		= 2'b01;
 localparam logic [1:0] GAME_OVER 	= 2'b10;
+localparam logic [1:0] PAUSED 		= 2'b11;
 //-----------------------------------------------------------------------------
 // Internal Arrays
 //-----------------------------------------------------------------------------

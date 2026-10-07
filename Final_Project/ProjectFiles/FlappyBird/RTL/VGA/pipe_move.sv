@@ -31,6 +31,7 @@ const int X_FRAME_RIGHT = (INITIAL_X + ((WIDTH_OF_EDGE - WIDTH_OF_PIPE) / 2) ) *
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;
 localparam logic [1:0] GAME_OVER    = 2'b10;
+localparam logic [1:0] PAUSED			= 2'b11;
 
 enum logic [2:0] {
     IDLE_ST,            // Initial reset state
@@ -61,6 +62,9 @@ always_ff @(posedge clk or negedge resetN) begin : fsm_sync_proc
 	 else if( game_state == GAME_OVER) begin
 			SM_Motion         <= DEAD_ST;
 			Xspeed            <= 0;
+	 end
+	 else if( game_state == PAUSED) begin
+		// do nothing :)
 	 end
     else begin
 			generateNewChunks <= 1'b0; // Default pulse low

@@ -47,6 +47,7 @@ const int	y_FRAME_BOTTOM	=	(479 -SafetyMargin - OBJECT_HIGHT_Y ) * FIXED_POINT_M
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;
 localparam logic [1:0] GAME_OVER    = 2'b10;
+localparam logic [1:0] PAUSED    	= 2'b11;
 
 enum  logic [2:0] {IDLE_ST,         	// initial state
 						 MOVE_ST, 				// moving no colision 
@@ -93,6 +94,9 @@ begin : fsm_sync_proc
 	else if (game_state == GAME_OVER) begin
 		Yspeed    <= 0;
 		SM_Motion <= DEAD_ST;
+	end
+	else if (game_state == PAUSED) begin
+		//do nothing :)
 	end
 	else begin
 
