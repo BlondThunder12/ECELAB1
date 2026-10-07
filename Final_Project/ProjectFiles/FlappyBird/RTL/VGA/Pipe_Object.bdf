@@ -21,18 +21,6 @@ agreement for further details.
 */
 (header "graphic" (version "1.4"))
 (global
-	(rect 128 608 416 648)
-	(parameter)
-	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
-	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
-	(text "GAP_SIZE" (rect 3 16 62 30)(font "Arial" (font_size 8)))
-	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"88\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
-	(drawing
-		(line (pt 138 40)(pt 138 0))
-	)
-)
-(global
 	(rect 128 720 416 760)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
@@ -88,6 +76,18 @@ agreement for further details.
 	(text "WIDTH_OF_EDGE" (rect 3 16 103 30)(font "Arial" (font_size 8)))
 	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
 	(text "UD\"56\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
+	(drawing
+		(line (pt 138 40)(pt 138 0))
+	)
+)
+(global
+	(rect 128 608 416 648)
+	(parameter)
+	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
+	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
+	(text "GAP_SIZE" (rect 3 16 62 30)(font "Arial" (font_size 8)))
+	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
+	(text "UD\"128\"" (rect 141 16 162 30)(font "Arial" (font_size 8)))
 	(drawing
 		(line (pt 138 40)(pt 138 0))
 	)

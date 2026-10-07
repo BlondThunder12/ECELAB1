@@ -23,8 +23,8 @@ always_ff @(posedge clk or negedge resetN) begin
 		end
 		
 		else if (enable) begin
-				random_state <= {random_state[14:0], random_state[15] ^ random_state[13] ^ random_state[1] ^ random_state [10]};
-				dout <= MIN_VAL + (random_state % RANGE);
+				random_state <= {random_state[14:0], random_state[15] ^ random_state[13] ^ random_state[12] ^ random_state [10]};
+				dout <= MIN_VAL + ((random_state * RANGE) >> 16 );
 		end
 	
 	end
