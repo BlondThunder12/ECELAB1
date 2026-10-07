@@ -86,13 +86,18 @@ agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
+		"HUNDREDS_X"
+		"01000110000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
 		"TENS_X"
-		"00100101100"
+		"01001000100"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"UNITS_X"
-		"00101000000"
+		"01001011000"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter

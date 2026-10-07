@@ -1094,91 +1094,6 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 344 1208 576 1352)
-	(text "scoreModule" (rect 5 0 66 12)(font "Arial" ))
-	(text "inst26" (rect 8 128 37 140)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "trigger" (rect 0 0 30 12)(font "Arial" ))
-		(text "trigger" (rect 21 59 51 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "pixelX[10..0]" (rect 21 75 81 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "pixelY[10..0]" (rect 21 91 83 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 3))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 107 104 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
-	)
-	(port
-		(pt 232 32)
-		(output)
-		(text "RGBNum[7..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "RGBNum[7..0]" (rect 150 27 223 39)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32)(line_width 3))
-	)
-	(port
-		(pt 232 48)
-		(output)
-		(text "DrawingRequest" (rect 0 0 80 12)(font "Arial" ))
-		(text "DrawingRequest" (rect 144 43 224 55)(font "Arial" ))
-		(line (pt 232 48)(pt 216 48))
-	)
-	(parameter
-		"NUMBERS_COLOR"
-		"11100000"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(parameter
-		"TENS_X"
-		"300"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(parameter
-		"UNITS_X"
-		"320"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(parameter
-		"SCORE_Y"
-		"20"
-		""
-		(type "PARAMETER_UNSIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 216 128))
-	)
-	(annotation_block (parameter)(rect 352 1056 603 1151))
-)
-(symbol
 	(rect 1504 488 1768 664)
 	(text "game_controller" (rect 5 0 82 12)(font "Arial" ))
 	(text "inst11" (rect 8 160 37 172)(font "Arial" ))
@@ -1536,6 +1451,96 @@ agreement for further details.
 		(rectangle (rect 16 16 224 160))
 	)
 	(annotation_block (parameter)(rect 1144 1032 1384 1146))
+)
+(symbol
+	(rect 344 1208 576 1352)
+	(text "scoreModule" (rect 5 0 66 12)(font "Arial" ))
+	(text "inst26" (rect 8 128 37 140)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "trigger" (rect 0 0 30 12)(font "Arial" ))
+		(text "trigger" (rect 21 59 51 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 21 75 81 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 21 91 83 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 107 104 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 232 32)
+		(output)
+		(text "RGBNum[7..0]" (rect 0 0 73 12)(font "Arial" ))
+		(text "RGBNum[7..0]" (rect 150 27 223 39)(font "Arial" ))
+		(line (pt 232 32)(pt 216 32)(line_width 3))
+	)
+	(port
+		(pt 232 48)
+		(output)
+		(text "DrawingRequest" (rect 0 0 80 12)(font "Arial" ))
+		(text "DrawingRequest" (rect 144 43 224 55)(font "Arial" ))
+		(line (pt 232 48)(pt 216 48))
+	)
+	(parameter
+		"NUMBERS_COLOR"
+		"11100000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"HUNDREDS_X"
+		"560"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"TENS_X"
+		"580"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"UNITS_X"
+		"600"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(parameter
+		"SCORE_Y"
+		"20"
+		""
+		(type "PARAMETER_UNSIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 216 128))
+	)
+	(annotation_block (parameter)(rect 352 1056 603 1170))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
@@ -1990,19 +1995,10 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(pt 560 1240)
-	(pt 576 1240)
-	(bus)
-)
-(connector
 	(text "RGBNum[7..0]" (rect 568 1224 635 1241)(font "Intel Clear" ))
 	(pt 576 1240)
 	(pt 664 1240)
 	(bus)
-)
-(connector
-	(pt 560 1256)
-	(pt 576 1256)
 )
 (connector
 	(text "numberDrawingRequest" (rect 568 1240 682 1257)(font "Intel Clear" ))
@@ -2010,7 +2006,7 @@ agreement for further details.
 	(pt 664 1256)
 )
 (connector
-	(text "game_state[1..0]" (rect 248 1312 328 1329)(font "Intel Clear" ))
+	(text "game_state[1..0]" (rect 264 1304 344 1321)(font "Intel Clear" ))
 	(pt 264 1320)
 	(pt 344 1320)
 	(bus)
@@ -2269,8 +2265,6 @@ agreement for further details.
 )
 (junction (pt 552 968))
 (junction (pt 752 896))
-(junction (pt 576 1240))
-(junction (pt 576 1256))
 (text "Output to 7Seg" (rect 1136 928 1226 947)(font "Intel Clear" (font_size 8)))
 (text "KEY \"8\"  is Y_direction" (rect 304 216 457 236)(font "Intel Clear" (font_size 10)))
 (text "Update the objects_mux" (rect 360 456 534 476)(font "Intel Clear" (font_size 10)(bold)))
