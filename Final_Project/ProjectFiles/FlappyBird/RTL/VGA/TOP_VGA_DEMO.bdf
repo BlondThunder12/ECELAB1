@@ -1334,7 +1334,7 @@ agreement for further details.
 		(pt 232 32)
 		(output)
 		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 141 27 211 39)(font "Arial" ))
+		(text "game_state[1..0]" (rect 141 27 224 39)(font "Arial" ))
 		(line (pt 232 32)(pt 216 32)(line_width 3))
 	)
 	(drawing
@@ -1453,7 +1453,7 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1144 1032 1384 1146))
 )
 (symbol
-	(rect 344 1208 576 1352)
+	(rect 336 1208 568 1352)
 	(text "scoreModule" (rect 5 0 66 12)(font "Arial" ))
 	(text "inst26" (rect 8 128 37 140)(font "Arial" ))
 	(port
@@ -1540,7 +1540,7 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 216 128))
 	)
-	(annotation_block (parameter)(rect 352 1056 603 1170))
+	(annotation_block (parameter)(rect 344 1056 595 1170))
 )
 (connector
 	(text "resetN" (rect -134 176 -104 193)(font "Intel Clear" ))
@@ -1896,33 +1896,6 @@ agreement for further details.
 	(pt -728 96)
 )
 (connector
-	(text "pixelX[10..0]" (rect 272 1272 331 1289)(font "Intel Clear" ))
-	(pt 344 1288)
-	(pt 264 1288)
-	(bus)
-)
-(connector
-	(text "pixelY[10..0]" (rect 264 1288 323 1305)(font "Intel Clear" ))
-	(pt 344 1304)
-	(pt 256 1304)
-	(bus)
-)
-(connector
-	(text "resetN" (rect 264 1240 294 1257)(font "Intel Clear" ))
-	(pt 344 1256)
-	(pt 256 1256)
-)
-(connector
-	(text "clk" (rect 272 1224 286 1241)(font "Intel Clear" ))
-	(pt 344 1240)
-	(pt 264 1240)
-)
-(connector
-	(text "updateScorePulse" (rect 266 1256 352 1273)(font "Intel Clear" ))
-	(pt 344 1272)
-	(pt 264 1272)
-)
-(connector
 	(text "led_collision" (rect -765 48 -705 65)(font "Intel Clear" ))
 	(pt -704 64)
 	(pt -800 64)
@@ -1992,23 +1965,6 @@ agreement for further details.
 	(text "game_state[1..0]" (rect 955 1256 1035 1273)(font "Intel Clear" ))
 	(pt 1016 1272)
 	(pt 944 1272)
-	(bus)
-)
-(connector
-	(text "RGBNum[7..0]" (rect 568 1224 635 1241)(font "Intel Clear" ))
-	(pt 576 1240)
-	(pt 664 1240)
-	(bus)
-)
-(connector
-	(text "numberDrawingRequest" (rect 568 1240 682 1257)(font "Intel Clear" ))
-	(pt 576 1256)
-	(pt 664 1256)
-)
-(connector
-	(text "game_state[1..0]" (rect 264 1304 344 1321)(font "Intel Clear" ))
-	(pt 264 1320)
-	(pt 344 1320)
 	(bus)
 )
 (connector
@@ -2262,6 +2218,50 @@ agreement for further details.
 	(text "slashKey" (rect 128 208 171 225)(font "Intel Clear" ))
 	(pt 120 224)
 	(pt 160 224)
+)
+(connector
+	(text "pixelX[10..0]" (rect 264 1272 323 1289)(font "Intel Clear" ))
+	(pt 336 1288)
+	(pt 256 1288)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 256 1288 315 1305)(font "Intel Clear" ))
+	(pt 336 1304)
+	(pt 248 1304)
+	(bus)
+)
+(connector
+	(text "resetN" (rect 256 1240 286 1257)(font "Intel Clear" ))
+	(pt 336 1256)
+	(pt 248 1256)
+)
+(connector
+	(text "clk" (rect 264 1224 278 1241)(font "Intel Clear" ))
+	(pt 336 1240)
+	(pt 256 1240)
+)
+(connector
+	(text "updateScorePulse" (rect 258 1256 344 1273)(font "Intel Clear" ))
+	(pt 336 1272)
+	(pt 256 1272)
+)
+(connector
+	(text "game_state[1..0]" (rect 256 1304 336 1321)(font "Intel Clear" ))
+	(pt 256 1320)
+	(pt 336 1320)
+	(bus)
+)
+(connector
+	(text "RGBNum[7..0]" (rect 560 1224 627 1241)(font "Intel Clear" ))
+	(pt 568 1240)
+	(pt 656 1240)
+	(bus)
+)
+(connector
+	(text "numberDrawingRequest" (rect 560 1240 674 1257)(font "Intel Clear" ))
+	(pt 568 1256)
+	(pt 656 1256)
 )
 (junction (pt 552 968))
 (junction (pt 752 896))
