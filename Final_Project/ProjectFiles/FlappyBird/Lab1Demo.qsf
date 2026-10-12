@@ -39,7 +39,7 @@
 
 set_global_assignment -name FAMILY "Cyclone V"
 set_global_assignment -name DEVICE 5CSXFC6D6F31C6
-set_global_assignment -name TOP_LEVEL_ENTITY TOP_VGA_DEMO
+set_global_assignment -name TOP_LEVEL_ENTITY Top_Flappy_Bird_Game
 set_global_assignment -name ORIGINAL_QUARTUS_VERSION 17.0.0
 set_global_assignment -name PROJECT_CREATION_TIME_DATE "15:51:54  JULY 08, 2018"
 set_global_assignment -name LAST_QUARTUS_VERSION "17.0.0 Lite Edition"
@@ -173,6 +173,13 @@ set_location_assignment PIN_Y23 -to AUDOUT[7]
 set_location_assignment PIN_AH29 -to AUDIN[1]
 set_location_assignment PIN_AF30 -to AUDIN[2]
 set_location_assignment PIN_AG30 -to AUDIN[3]
+set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
+set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
+set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
+set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
+set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
+set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUDOUT[4]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUDOUT[5]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to AUDOUT[6]
@@ -271,17 +278,11 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tck
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tdi
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tdo
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tms
-set_global_assignment -name PARTITION_NETLIST_TYPE SOURCE -section_id Top
-set_global_assignment -name PARTITION_FITTER_PRESERVATION_LEVEL PLACEMENT_AND_ROUTING -section_id Top
-set_global_assignment -name PARTITION_COLOR 16764057 -section_id Top
-set_global_assignment -name MIN_CORE_JUNCTION_TEMP 0
-set_global_assignment -name MAX_CORE_JUNCTION_TEMP 85
-set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
-set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
+set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
+set_global_assignment -name BDF_FILE RTL/VGA/Top_Flappy_Bird_Game.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/scoreModule.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/bird_move.sv
 set_global_assignment -name BDF_FILE RTL/VGA/Bird_Block_T.bdf
-set_global_assignment -name BDF_FILE RTL/VGA/Pipes_Block_T.bdf
 set_global_assignment -name QXP_FILE audio_codec_controller.QXP
 set_global_assignment -name BDF_FILE RTL/AUDIO/AUDIO.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/ToneDecoder.sv
@@ -314,7 +315,6 @@ set_global_assignment -name SIP_FILE CLK_31P5.sip
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/MyConstant.sv
 set_global_assignment -name CDF_FILE output_files/Chain2.cdf
 set_global_assignment -name BDF_FILE ALL_HEXSS.bdf
-set_global_assignment -name BDF_FILE RTL/VGA/TOP_VGA_DEMO.bdf
 set_global_assignment -name SIGNALTAP_FILE output_files/stp1.stp
 set_global_assignment -name BDF_FILE RTL/VGA/Pipe_Object.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pipe_square_object.sv
@@ -323,4 +323,3 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pipe_move.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/PipeBlocks.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/birdBitMap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/game_manager.sv
-set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
