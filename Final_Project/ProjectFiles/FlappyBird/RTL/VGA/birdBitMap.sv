@@ -10,7 +10,7 @@ module	birdBitMap	(
 					input logic	[10:0] offsetX,// offset from top left  position 
 					input logic	[10:0] offsetY,
 					input	logic	InsideRectangle, //input that the pixel is within a bracket 
-					input logic reverse_gravity_switchN,
+					input logic reverse_gravity_switch,
 
 					output	logic	drawingRequest, //output that the pixel should be dispalyed 
 					output	logic	[7:0] RGBout,  //rgb value from the bitmap 
@@ -19,19 +19,20 @@ module	birdBitMap	(
 
 // this is the devider used to acess the right pixel 
 localparam  int OBJECT_NUMBER_OF_Y_BITS = 5;  // 2^5 = 32 
-localparam  int OBJECT_NUMBER_OF_X_BITS = 6;  // 2^6 = 64 
-logic	[10:0] address;
+localparam  int OBJECT_NUMBER_OF_X_BITS = 5;  // 2^6 = 64 
+logic	[9:0] address;
 
 localparam  logic	[10:0] OBJECT_HEIGHT_Y = 11'b1 <<  OBJECT_NUMBER_OF_Y_BITS ;
 localparam  logic	[10:0] OBJECT_WIDTH_X = 11'b1 <<  OBJECT_NUMBER_OF_X_BITS;
 
  logic	[10:0] HitCodeX ;// offset of Hitcode 
  logic	[10:0] HitCodeY ; 
+
 assign HitCodeX = offsetX >> ( OBJECT_NUMBER_OF_X_BITS - 4 );	//hitedge code MSB of the offset
 assign HitCodeY = offsetY >> ( OBJECT_NUMBER_OF_Y_BITS - 4 );	 	 
 
 
-assign address = (reverse_gravity_switchN) ? ((OBJECT_HEIGHT_Y-offsetY - 1)*OBJECT_WIDTH_X + offsetX) : ((offsetY)*OBJECT_WIDTH_X + offsetX);
+assign address = (reverse_gravity_switch) ? ((OBJECT_HEIGHT_Y - (offsetY >> 1) - 1)*OBJECT_WIDTH_X + (offsetX >> 1) ): ((offsetY >> 1)*OBJECT_WIDTH_X + (offsetX >> 1));
 
 // generating a smiley bitmap from a MIF file
 
@@ -39,8 +40,8 @@ logic	[7:0] color;
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'h1F ;// RGB value in the bitmap representing a transparent pixel 
 lpm_rom #(
     .LPM_WIDTH(8),
-    .LPM_WIDTHAD(11),
-	 .LPM_NUMWORDS(2048),
+    .LPM_WIDTHAD(10),
+	 .LPM_NUMWORDS(1024),
     .LPM_FILE("RTL/birdPic.mif"),
 	   .LPM_TYPE               ("LPM_ROM"),
       .LPM_ADDRESS_CONTROL    ("REGISTERED"), 

@@ -325,7 +325,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"OBJECT_HEIGHT_Y"
-		"32"
+		"64"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -336,10 +336,10 @@ agreement for further details.
 	(drawing
 		(rectangle (rect 16 16 208 128))
 	)
-	(annotation_block (parameter)(rect 936 528 1164 604))
+	(annotation_block (parameter)(rect 928 520 1156 596))
 )
 (symbol
-	(rect 480 424 752 568)
+	(rect 480 424 744 568)
 	(text "bird_move" (rect 5 0 56 12)(font "Arial" ))
 	(text "inst" (rect 8 128 25 140)(font "Arial" ))
 	(port
@@ -373,8 +373,8 @@ agreement for further details.
 	(port
 		(pt 0 96)
 		(input)
-		(text "reverse_gravity_switchN" (rect 0 0 123 12)(font "Arial" ))
-		(text "reverse_gravity_switchN" (rect 21 91 144 103)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 0 0 115 12)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 21 91 136 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96))
 	)
 	(port
@@ -385,25 +385,25 @@ agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
-		(pt 272 32)
+		(pt 264 32)
 		(output)
 		(text "topLeftX[10..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "topLeftX[10..0]" (rect 190 27 263 39)(font "Arial" ))
-		(line (pt 272 32)(pt 256 32)(line_width 3))
+		(text "topLeftX[10..0]" (rect 182 27 243 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32)(line_width 3))
 	)
 	(port
-		(pt 272 48)
+		(pt 264 48)
 		(output)
 		(text "topLeftY[10..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "topLeftY[10..0]" (rect 188 43 263 55)(font "Arial" ))
-		(line (pt 272 48)(pt 256 48)(line_width 3))
+		(text "topLeftY[10..0]" (rect 180 43 243 55)(font "Arial" ))
+		(line (pt 264 48)(pt 248 48)(line_width 3))
 	)
 	(port
-		(pt 272 64)
+		(pt 264 64)
 		(output)
 		(text "bird_hit_borders" (rect 0 0 77 12)(font "Arial" ))
-		(text "bird_hit_borders" (rect 186 59 263 71)(font "Arial" ))
-		(line (pt 272 64)(pt 256 64))
+		(text "bird_hit_borders" (rect 178 59 243 71)(font "Arial" ))
+		(line (pt 264 64)(pt 248 64))
 	)
 	(parameter
 		"INITIAL_X"
@@ -431,12 +431,12 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 256 128))
+		(rectangle (rect 16 16 248 128))
 	)
 	(annotation_block (parameter)(rect 624 280 881 394))
 )
 (symbol
-	(rect 1256 344 1536 488)
+	(rect 1256 344 1528 488)
 	(text "birdBitMap" (rect 5 0 55 12)(font "Arial" ))
 	(text "inst2" (rect 8 128 31 140)(font "Arial" ))
 	(port
@@ -477,33 +477,33 @@ agreement for further details.
 	(port
 		(pt 0 112)
 		(input)
-		(text "reverse_gravity_switchN" (rect 0 0 123 12)(font "Arial" ))
-		(text "reverse_gravity_switchN" (rect 21 107 144 119)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 0 0 115 12)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 21 107 136 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112))
 	)
 	(port
-		(pt 280 32)
+		(pt 272 32)
 		(output)
 		(text "drawingRequest" (rect 0 0 77 12)(font "Arial" ))
-		(text "drawingRequest" (rect 194 27 271 39)(font "Arial" ))
-		(line (pt 280 32)(pt 264 32))
+		(text "drawingRequest" (rect 186 27 251 39)(font "Arial" ))
+		(line (pt 272 32)(pt 256 32))
 	)
 	(port
-		(pt 280 48)
+		(pt 272 48)
 		(output)
 		(text "RGBout[7..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "RGBout[7..0]" (rect 205 43 269 55)(font "Arial" ))
-		(line (pt 280 48)(pt 264 48)(line_width 3))
+		(text "RGBout[7..0]" (rect 197 43 251 55)(font "Arial" ))
+		(line (pt 272 48)(pt 256 48)(line_width 3))
 	)
 	(port
-		(pt 280 64)
+		(pt 272 64)
 		(output)
 		(text "HitEdgeCode[2..0]" (rect 0 0 90 12)(font "Arial" ))
-		(text "HitEdgeCode[2..0]" (rect 183 59 273 71)(font "Arial" ))
-		(line (pt 280 64)(pt 264 64)(line_width 3))
+		(text "HitEdgeCode[2..0]" (rect 175 59 251 71)(font "Arial" ))
+		(line (pt 272 64)(pt 256 64)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 264 128))
+		(rectangle (rect 16 16 256 128))
 	)
 )
 (connector
@@ -672,39 +672,12 @@ agreement for further details.
 	(pt 432 536)
 )
 (connector
-	(text "BirdTLY[10..0]" (rect 762 472 829 489)(font "Intel Clear" ))
-	(pt 752 472)
-	(pt 760 472)
-	(bus)
-)
-(connector
-	(text "BirdTLX[10..0]" (rect 788 456 855 473)(font "Intel Clear" ))
-	(pt 752 456)
-	(pt 784 456)
-	(bus)
-)
-(connector
 	(pt 752 488)
 	(pt 752 528)
 )
 (connector
 	(pt 752 528)
 	(pt 760 528)
-)
-(connector
-	(pt 1536 408)
-	(pt 1576 408)
-	(bus)
-)
-(connector
-	(pt 1536 376)
-	(pt 1648 376)
-)
-(connector
-	(text "birdRGB[7..0]" (rect 1569 376 1631 393)(font "Intel Clear" ))
-	(pt 1536 392)
-	(pt 1640 392)
-	(bus)
 )
 (connector
 	(text "reverse_gravity_switch" (rect 444 504 553 521)(font "Intel Clear" ))
@@ -719,6 +692,37 @@ agreement for further details.
 	(text "reverse_gravity_switch" (rect 1220 440 1329 457)(font "Intel Clear" ))
 	(pt 1256 456)
 	(pt 1200 456)
+)
+(connector
+	(pt 752 488)
+	(pt 744 488)
+)
+(connector
+	(pt 1528 376)
+	(pt 1648 376)
+)
+(connector
+	(text "birdRGB[7..0]" (rect 1569 376 1631 393)(font "Intel Clear" ))
+	(pt 1528 392)
+	(pt 1640 392)
+	(bus)
+)
+(connector
+	(pt 1528 408)
+	(pt 1576 408)
+	(bus)
+)
+(connector
+	(text "BirdTLX[10..0]" (rect 788 456 855 473)(font "Intel Clear" ))
+	(pt 744 456)
+	(pt 784 456)
+	(bus)
+)
+(connector
+	(text "BirdTLY[10..0]" (rect 762 472 829 489)(font "Intel Clear" ))
+	(pt 744 472)
+	(pt 760 472)
+	(bus)
 )
 (text "  " (rect 24 624 31 643)(font "Intel Clear" (font_size 8)))
 (text "   " (rect 144 664 154 683)(font "Intel Clear" (font_size 8)))

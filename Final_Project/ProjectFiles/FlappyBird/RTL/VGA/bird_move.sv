@@ -6,7 +6,7 @@ module	bird_move	(
 					input	 logic resetN,
 					input	 logic startOfFrame,      			//short pulse every start of frame 30Hz 
 					input	 logic Y_direction_key,   			//move Y Up   
-					input  logic reverse_gravity_switchN, 	//to check if we need to reverse the gravity of ther bird
+					input  logic reverse_gravity_switch, 	//to check if we need to reverse the gravity of ther bird
 					input	 logic [1:0] game_state,
 					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
@@ -112,7 +112,7 @@ begin : fsm_sync_proc
 				Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER; 
 				Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER; 
 				
-				if(!reverse_gravity_switchN) 	Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
+				if(!reverse_gravity_switch) 	Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
 				else 									Yspeed <= MAX_Y_SPEED / 2;
 				
 				SM_Motion <= MOVE_ST;
@@ -124,7 +124,7 @@ begin : fsm_sync_proc
 		//------------
 		// keys direction change 
 				if (Y_direction_key && !Y_direction_key_D ) begin//  if the button is pressed now and wasnt pressed last cycle
-					if(!reverse_gravity_switchN) Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
+					if(!reverse_gravity_switch) Yspeed <= -MAX_Y_SPEED / 2; // if the switch isnt flipped up, normal gravity
 					else Yspeed <= MAX_Y_SPEED / 2; 									// if the switch is flipped up, reverse gravity
 				end
 				if (startOfFrame)
@@ -142,10 +142,10 @@ begin : fsm_sync_proc
 				bird_hit_borders <= 1'b1;
 			end
 			
-			else if(!reverse_gravity_switchN && Yspeed > MAX_Y_SPEED) begin
+			else if(!reverse_gravity_switch && Yspeed > MAX_Y_SPEED) begin
 				Yspeed <= MAX_Y_SPEED;
 			end
-			else if(reverse_gravity_switchN && Yspeed < -MAX_Y_SPEED) begin
+			else if(reverse_gravity_switch && Yspeed < -MAX_Y_SPEED) begin
 				Yspeed <= -MAX_Y_SPEED;
 			end
 			
@@ -159,7 +159,7 @@ begin : fsm_sync_proc
 				Yposition <= Yposition + Yspeed ;
 			 
 				// accelerate 
-			if(!reverse_gravity_switchN) begin
+			if(!reverse_gravity_switch) begin
 				if (Yspeed < MAX_Y_SPEED ) //  limit the speed while going down 
    				Yspeed <= Yspeed - Y_ACCEL ; // deAccelerate : slow the speed down every clock tick 
 			end 

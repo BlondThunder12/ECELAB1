@@ -1,7 +1,7 @@
 module PipeBlocks #(
 	parameter int NUM_PIPES = 3,       
 	parameter int PIPE_SPACING = 240,  // Distance between pipes (720 total / Num_Pipes = 240)
-	parameter int Max_Random_Number = 6'd35,
+	parameter int Max_Random_Number = 6'd32,
 	parameter int Min_Random_Number = 6'd2,
 	parameter int Bird_Threshold_X_Coor = 150
 )(

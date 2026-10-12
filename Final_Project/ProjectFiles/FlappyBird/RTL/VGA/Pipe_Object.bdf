@@ -21,18 +21,6 @@ agreement for further details.
 */
 (header "graphic" (version "1.4"))
 (global
-	(rect 128 720 416 760)
-	(parameter)
-	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
-	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
-	(text "HEIGHT_OF_EDGE" (rect 3 16 108 30)(font "Arial" (font_size 8)))
-	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"20\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
-	(drawing
-		(line (pt 138 40)(pt 138 0))
-	)
-)
-(global
 	(rect 128 760 416 800)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
@@ -57,13 +45,25 @@ agreement for further details.
 	)
 )
 (global
+	(rect 128 608 416 648)
+	(parameter)
+	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
+	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
+	(text "GAP_SIZE" (rect 3 16 62 30)(font "Arial" (font_size 8)))
+	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
+	(text "UD\"128\"" (rect 141 16 162 30)(font "Arial" (font_size 8)))
+	(drawing
+		(line (pt 138 40)(pt 138 0))
+	)
+)
+(global
 	(rect 128 640 416 680)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
 	(text "WIDTH_OF_PIPE" (rect 3 16 95 30)(font "Arial" (font_size 8)))
 	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"40\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
+	(text "UD\"50\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
 	(drawing
 		(line (pt 138 40)(pt 138 0))
 	)
@@ -75,19 +75,19 @@ agreement for further details.
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
 	(text "WIDTH_OF_EDGE" (rect 3 16 103 30)(font "Arial" (font_size 8)))
 	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"56\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
+	(text "UD\"64\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
 	(drawing
 		(line (pt 138 40)(pt 138 0))
 	)
 )
 (global
-	(rect 128 608 416 648)
+	(rect 128 720 416 760)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
-	(text "GAP_SIZE" (rect 3 16 62 30)(font "Arial" (font_size 8)))
+	(text "HEIGHT_OF_EDGE" (rect 3 16 108 30)(font "Arial" (font_size 8)))
 	(text " NAME" (rect 108 0 142 12)(font "Arial" ))
-	(text "UD\"128\"" (rect 141 16 162 30)(font "Arial" (font_size 8)))
+	(text "UD\"16\"" (rect 141 16 155 30)(font "Arial" (font_size 8)))
 	(drawing
 		(line (pt 138 40)(pt 138 0))
 	)
