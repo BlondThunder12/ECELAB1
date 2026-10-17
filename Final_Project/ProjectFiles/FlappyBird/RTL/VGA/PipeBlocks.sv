@@ -1,6 +1,6 @@
 module PipeBlocks #(
 	parameter int NUM_PIPES = 3,       
-	parameter int PIPE_SPACING = 240,  // Distance between pipes (720 total / Num_Pipes = 240)
+	parameter int PIPE_SPACING = 240,  // Position-to-position spacing; wrap cycle = NUM_PIPES * this
 	parameter int Max_Random_Number = 6'd32,
 	parameter int Min_Random_Number = 6'd2,
 	parameter int Bird_Threshold_X_Coor = 150
@@ -8,8 +8,9 @@ module PipeBlocks #(
 	input  logic               clk,
 	input  logic               resetN,
    input  logic               startOfFrame,
-	input  logic               collision,
 	input  logic        [1:0]  game_state, // Current game state to know how to handle pipes
+	input  logic        [3:0]  speed_level,
+	input  logic               turbo,     // Active-high board switch
 	input  logic signed [10:0] pixelX,
 	input  logic signed [10:0] pixelY,
 
@@ -29,7 +30,7 @@ localparam logic [1:0] PAUSED 		= 2'b11;
 //-----------------------------------------------------------------------------
 // Internal Arrays
 //-----------------------------------------------------------------------------
-logic               pipe_active    [NUM_PIPES]; // Latched triggers (replaces trigger_move)
+logic               pipe_active    [NUM_PIPES]; // Latched height/scoring enable as pipes approach the screen
 logic signed [10:0] topLeftX       [NUM_PIPES];
 logic               newPipeGen     [NUM_PIPES];
 logic               dr_array       [NUM_PIPES];
@@ -37,6 +38,7 @@ logic        [7:0]  rgb_array      [NUM_PIPES];
 logic        [5:0]  pipe_chunks    [NUM_PIPES]; // Stores the height for each pipe
 logic               pipe_active_D  [NUM_PIPES]; // Edge detectors for the latched triggers
 logic	signed [10:0] topLeftX_prev  [NUM_PIPES]; // remembers where each pipe was 
+localparam int PIPE_ACTIVATE_X = 640 + 80; // Sample height before entering the visible area
 
 
 //-----------------------------------------------------------------------------
@@ -63,7 +65,7 @@ logic active_frame;
 assign active_frame = (game_state == PLAYING) ? startOfFrame : 1'b0;
 
 //-----------------------------------------------------------------------------
-// Cascade Triggers for all of the pipes (Latched)
+// Enable height sampling/scoring as each offset pipe approaches the screen
 //-----------------------------------------------------------------------------
 always_ff @(posedge clk or negedge resetN) begin
 	if (!resetN) begin
@@ -78,12 +80,9 @@ always_ff @(posedge clk or negedge resetN) begin
 			end
 	
 	else begin
-        if (game_state == PLAYING) 
-            pipe_active[0] <= 1'b1;
-        
-        // Rest of the pipes come in one by one after the first one comes in in cascading order
-        for (int j = 1; j < NUM_PIPES; j++) begin
-            if (game_state == PLAYING && (topLeftX[j-1] <= (11'd640 - PIPE_SPACING))) begin
+        // Motion starts together offscreen; activation no longer sets the spacing.
+        for (int j = 0; j < NUM_PIPES; j++) begin
+            if (game_state == PLAYING && (topLeftX[j] <= PIPE_ACTIVATE_X)) begin
                 pipe_active[j] <= 1'b1;
             end
         end
@@ -119,12 +118,16 @@ genvar i;
 generate
     for (i = 0; i < NUM_PIPES; i++) begin : gen_pipes
     
-        pipe_move move_inst (
+        pipe_move #(
+            .INITIAL_X_OFFSET   (i * PIPE_SPACING),
+            .WRAP_DISTANCE      (NUM_PIPES * PIPE_SPACING)
+        ) move_inst (
             .clk                (clk),
             .resetN             (resetN),
             .startOfFrame       (active_frame),
-            .collision          (collision),
-            .trigger_move       (pipe_active[i]), // Feed the latched trigger here
+            .speed_level        (speed_level),
+            .turbo              (turbo),
+            .trigger_move       (1'b1), // All pipes share frame timing; initial offsets provide spacing
 				.game_state			  (game_state),
             
             .topLeftX           (topLeftX[i]),

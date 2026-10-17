@@ -13,7 +13,8 @@ module scoreModule #(
 	input logic [1:0]  game_state,
 
 	output logic [7:0] RGBNum,
-	output logic       DrawingRequest
+	output logic       DrawingRequest,
+	output logic [9:0] score             // Binary view of the same BCD score (0..999)
 );
 
 logic trigger_d;
@@ -35,6 +36,9 @@ always_ff @(posedge clk or negedge resetN) begin
 logic [3:0] units;
 logic [3:0] tens;
 logic [3:0] hundreds;
+
+// Export the existing score; do not introduce a second score counter.
+assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin

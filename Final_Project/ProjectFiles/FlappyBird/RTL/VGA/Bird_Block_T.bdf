@@ -244,6 +244,22 @@ agreement for further details.
 		(line (pt 78 12)(pt 82 8))
 	)
 )
+(pin
+	(input)
+	(rect 224 568 392 584)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "godmode" (rect 5 0 53 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
 (symbol
 	(rect 936 376 1160 520)
 	(text "square_object" (rect 5 0 73 12)(font "Arial" ))
@@ -339,9 +355,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect 928 520 1156 596))
 )
 (symbol
-	(rect 480 424 744 568)
+	(rect 480 424 744 584)
 	(text "bird_move" (rect 5 0 56 12)(font "Arial" ))
-	(text "inst" (rect 8 128 25 140)(font "Arial" ))
+	(text "inst" (rect 8 144 25 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -405,6 +421,13 @@ agreement for further details.
 		(text "bird_hit_borders" (rect 178 59 243 71)(font "Arial" ))
 		(line (pt 264 64)(pt 248 64))
 	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "godmode" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode" (rect 21 123 121 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
 	(parameter
 		"INITIAL_X"
 		"initial_x"
@@ -431,7 +454,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 248 128))
+		(rectangle (rect 16 16 248 144))
 	)
 	(annotation_block (parameter)(rect 624 280 881 394))
 )
@@ -728,3 +751,14 @@ agreement for further details.
 (text "   " (rect 144 664 154 683)(font "Intel Clear" (font_size 8)))
 (text "            " (rect 504 608 546 627)(font "Intel Clear" (font_size 8)))
 (text "// (c) Technion IIT, Department of Electrical Engineering 2025" (rect 168 16 527 35)(font "Intel Clear" (font_size 8)))
+
+(connector
+	(text "godmode" (rect 400 560 444 577)(font "Intel Clear" ))
+	(pt 392 576)
+	(pt 432 576)
+)
+(connector
+	(text "godmode" (rect 432 536 476 553)(font "Intel Clear" ))
+	(pt 432 552)
+	(pt 480 552)
+)

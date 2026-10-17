@@ -8,6 +8,7 @@ module	bird_move	(
 					input	 logic Y_direction_key,   			//move Y Up   
 					input  logic reverse_gravity_switch, 	//to check if we need to reverse the gravity of ther bird
 					input	 logic [1:0] game_state,
+					input  logic godmode, // Synchronized mode; suppress latched boundary hits
 					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
 					output logic signed	[10:0] topLeftY,  // can be negative , if the object is partliy outside
@@ -78,8 +79,7 @@ begin : fsm_sync_proc
 		Xposition <= INITIAL_X*FIXED_POINT_MULTIPLIER  ; 
 		Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
 		Y_direction_key_D <= 0 ;
-		bird_hit_borders <= 0;
-	
+		bird_hit_borders <= 0;	
 	end 	
 	else if(game_state == START_SCREEN) begin
 		SM_Motion <= IDLE_ST ; 
@@ -99,7 +99,9 @@ begin : fsm_sync_proc
 		//do nothing :)
 	end
 	else begin
-
+		// Discard hits during Godmode, including while paused, so they cannot stay latched.
+	if (godmode) bird_hit_borders <= 1'b0;
+	
 		Y_direction_key_D <= Y_direction_key;
 	
 		case(SM_Motion)
@@ -138,7 +140,7 @@ begin : fsm_sync_proc
 		//------------
 	
 			// Check if the bird hit the border
-			if (Yposition <= y_FRAME_TOP || Yposition >= y_FRAME_BOTTOM) begin
+			if (!godmode && (Yposition <= y_FRAME_TOP || Yposition >= y_FRAME_BOTTOM)) begin
 				bird_hit_borders <= 1'b1;
 			end
 			

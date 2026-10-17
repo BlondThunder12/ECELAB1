@@ -6,8 +6,12 @@ module game_manager(
 	input		logic			pause_key, 		// Key to pause the game and can be continued with the same key
 	input		logic       collision,     // to know to move to the end screen
 	input		logic 		bird_hit_borders,
+	input       logic [9:0] score,       // Binary value of the existing displayed score
+	input       logic godmode_switch,   // Active-high SW[8], asynchronous to clk
 
-    output logic [1:0] game_state     // Broadcasts current state to all modules
+    output logic [1:0] game_state,    // Broadcasts current state to all modules
+    output logic [3:0] speed_level,   // Custom score ranges, capped at level 10
+    output logic godmode_active      // Synchronized mode shared by collision/motion logic
 );
 
 // -----------------------------------------
@@ -20,6 +24,18 @@ localparam	logic [1:0] PAUSED		 = 2'b11;
 
 logic [1:0] current_state, next_state;
 logic			pause_key_D; 				 	// Edge detector
+logic godmode_meta;
+
+// Synchronize the physical switch once, then distribute the same mode to all users.
+always_ff @(posedge clk or negedge resetN) begin
+	if (!resetN) begin
+		godmode_meta <= 1'b0;
+		godmode_active <= 1'b0;
+	end else begin
+		godmode_meta <= godmode_switch;
+		godmode_active <= godmode_meta;
+	end
+end
 // -----------------------------------------
 // State memory
 // -----------------------------------------
@@ -47,7 +63,7 @@ always_comb begin
 		end
         
       PLAYING: begin
-			if (collision || bird_hit_borders) next_state = GAME_OVER;
+			if (!godmode_active && (collision || bird_hit_borders)) next_state = GAME_OVER;
 			else if(pause_key && !pause_key_D) next_state = PAUSED;
       end
         
@@ -64,6 +80,22 @@ always_comb begin
 end
 	
 assign game_state = current_state;
+
+// Combinational score-to-level table; preserve reset/start-screen behavior.
+always_comb begin
+    if (!resetN || current_state == START_SCREEN) speed_level = 4'd0;
+    else if (score <= 10'd5)   speed_level = 4'd0;
+    else if (score <= 10'd15)  speed_level = 4'd1;
+    else if (score <= 10'd30)  speed_level = 4'd2;
+    else if (score <= 10'd40)  speed_level = 4'd3;
+    else if (score <= 10'd50)  speed_level = 4'd4;
+    else if (score <= 10'd60)  speed_level = 4'd5;
+    else if (score <= 10'd80)  speed_level = 4'd6;
+    else if (score <= 10'd120) speed_level = 4'd7;
+    else if (score <= 10'd180) speed_level = 4'd8;
+    else if (score <= 10'd255) speed_level = 4'd9;
+    else                     speed_level = 4'd10;
+end
 
 
 endmodule

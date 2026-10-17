@@ -21,9 +21,9 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 280 160)
+	(rect 16 16 280 176)
 	(text "bird_move" (rect 5 0 48 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 144 20 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -87,6 +87,13 @@ agreement for further details.
 		(text "bird_hit_borders" (rect 179 59 243 71)(font "Arial" ))
 		(line (pt 264 64)(pt 248 64)(line_width 1))
 	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "godmode" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode" (rect 21 123 121 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
 	(parameter
 		"INITIAL_X"
 		"280"
@@ -113,7 +120,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 248 128)(line_width 1))
+		(rectangle (rect 16 16 248 144)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 280 -64 380 16))
 )

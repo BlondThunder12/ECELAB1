@@ -134,6 +134,22 @@ agreement for further details.
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (pin
+	(input)
+	(rect 768 1360 936 1376)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "SW[2]" (rect 5 0 35 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
 	(output)
 	(rect 1496 864 1672 880)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
@@ -340,6 +356,22 @@ agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
+)
+(pin
+	(input)
+	(rect 1040 352 1208 368)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "SW[8]" (rect 5 0 35 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (symbol
 	(rect 64 -16 224 128)
@@ -1167,14 +1199,21 @@ agreement for further details.
 		(text "led_collision_trigger" (rect 163 59 258 71)(font "Arial" ))
 		(line (pt 264 64)(pt 248 64))
 	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "godmode" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode" (rect 21 139 121 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 1))
+	)
 	(drawing
 		(rectangle (rect 16 16 248 160))
 	)
 )
 (symbol
-	(rect 592 120 880 312)
+	(rect 592 120 880 328)
 	(text "Bird_Block_T" (rect 5 0 84 19)(font "Intel Clear" (font_size 8)))
-	(text "inst31" (rect 8 171 36 188)(font "Intel Clear" ))
+	(text "inst31" (rect 8 187 36 204)(font "Intel Clear" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1252,6 +1291,13 @@ agreement for further details.
 		(text "bird_hit_borders" (rect 167 59 267 78)(font "Intel Clear" (font_size 8)))
 		(line (pt 288 64)(pt 272 64))
 	)
+	(port
+		(pt 0 176)
+		(input)
+		(text "godmode" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode" (rect 21 171 121 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176)(line_width 1))
+	)
 	(parameter
 		"initial_x"
 		"160"
@@ -1273,14 +1319,14 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 272 176))
+		(rectangle (rect 16 16 272 192))
 	)
 	(annotation_block (parameter)(rect 648 0 842 95))
 )
 (symbol
-	(rect 1376 200 1608 376)
+	(rect 1376 200 1608 392)
 	(text "game_manager" (rect 5 0 80 12)(font "Arial" ))
-	(text "inst30" (rect 8 160 37 172)(font "Arial" ))
+	(text "inst30" (rect 8 176 37 188)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1331,14 +1377,42 @@ agreement for further details.
 		(line (pt 0 128)(pt 16 128))
 	)
 	(port
+		(pt 0 144)
+		(input)
+		(text "score[9..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "score[9..0]" (rect 21 139 74 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
 		(pt 232 32)
 		(output)
 		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
 		(text "game_state[1..0]" (rect 141 27 224 39)(font "Arial" ))
 		(line (pt 232 32)(pt 216 32)(line_width 3))
 	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "speed_level[3..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "speed_level[3..0]" (rect 116 59 200 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "godmode_switch" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode_switch" (rect 21 155 121 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 1))
+	)
+	(port
+		(pt 232 96)
+		(output)
+		(text "godmode_active" (rect 0 0 100 12)(font "Arial" ))
+		(text "godmode_active" (rect 116 91 216 103)(font "Arial" ))
+		(line (pt 232 96)(pt 216 96)(line_width 1))
+	)
 	(drawing
-		(rectangle (rect 16 16 216 160))
+		(rectangle (rect 16 16 216 176))
 	)
 )
 (symbol
@@ -1401,6 +1475,13 @@ agreement for further details.
 		(text "DrawingRequest" (rect 144 43 224 55)(font "Arial" ))
 		(line (pt 232 48)(pt 216 48))
 	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "score[9..0]" (rect 0 0 53 12)(font "Arial" ))
+		(text "score[9..0]" (rect 116 59 169 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 3))
+	)
 	(parameter
 		"NUMBERS_COLOR"
 		"11100000"
@@ -1432,9 +1513,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect 344 1056 595 1170))
 )
 (symbol
-	(rect 1016 1176 1256 1352)
+	(rect 1016 1176 1256 1368)
 	(text "PipeBlocks" (rect 5 0 59 12)(font "Arial" ))
-	(text "inst24" (rect 8 160 37 172)(font "Arial" ))
+	(text "inst24" (rect 8 176 37 188)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1457,13 +1538,6 @@ agreement for further details.
 		(line (pt 0 64)(pt 16 64))
 	)
 	(port
-		(pt 0 80)
-		(input)
-		(text "collision" (rect 0 0 38 12)(font "Arial" ))
-		(text "collision" (rect 21 75 59 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
 		(pt 0 96)
 		(input)
 		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
@@ -1483,6 +1557,20 @@ agreement for further details.
 		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
 		(text "pixelY[10..0]" (rect 21 123 83 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
+		(pt 0 144)
+		(input)
+		(text "speed_level[3..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "speed_level[3..0]" (rect 21 139 105 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "turbo" (rect 0 0 24 12)(font "Arial" ))
+		(text "turbo" (rect 21 155 45 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
 	)
 	(port
 		(pt 240 32)
@@ -1538,7 +1626,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 224 160))
+		(rectangle (rect 16 16 224 176))
 	)
 	(annotation_block (parameter)(rect 1144 1048 1384 1162))
 )
@@ -1928,11 +2016,6 @@ agreement for further details.
 	(pt 944 1240)
 )
 (connector
-	(text "collision" (rect 952 1240 990 1257)(font "Intel Clear" ))
-	(pt 1016 1256)
-	(pt 944 1256)
-)
-(connector
 	(text "pipeDR" (rect 1295 1192 1329 1209)(font "Intel Clear" ))
 	(pt 1256 1208)
 	(pt 1368 1208)
@@ -2255,6 +2338,40 @@ agreement for further details.
 	(pt 1904 552)
 	(pt 1768 552)
 )
+(connector
+	(text "score[9..0]" (rect 576 1256 624 1273)(font "Intel Clear" ))
+	(pt 568 1272)
+	(pt 656 1272)
+	(bus)
+)
+(connector
+	(text "score[9..0]" (rect 1304 328 1352 345)(font "Intel Clear" ))
+	(pt 1376 344)
+	(pt 1296 344)
+	(bus)
+)
+(connector
+	(text "speed_level[3..0]" (rect 1616 248 1698 265)(font "Intel Clear" ))
+	(pt 1608 264)
+	(pt 1728 264)
+	(bus)
+)
+(connector
+	(text "speed_level[3..0]" (rect 904 1304 986 1321)(font "Intel Clear" ))
+	(pt 1016 1320)
+	(pt 896 1320)
+	(bus)
+)
+(connector
+	(text "turbo" (rect 944 1352 968 1369)(font "Intel Clear" ))
+	(pt 936 1368)
+	(pt 984 1368)
+)
+(connector
+	(text "turbo" (rect 944 1320 968 1337)(font "Intel Clear" ))
+	(pt 1016 1336)
+	(pt 944 1336)
+)
 (junction (pt 552 968))
 (junction (pt 752 896))
 (text "Output to 7Seg" (rect 1136 928 1226 947)(font "Intel Clear" (font_size 8)))
@@ -2276,7 +2393,28 @@ agreement for further details.
 (rectangle (rect -376 136 280 376)(color 0 0 0)(line_width 3))
 (rectangle (rect -888 400 288 928)(color 0 0 0)(line_width 3))
 (rectangle (rect 184 1048 752 1408)(color 0 0 0)(line_width 3))
-(rectangle (rect 912 1032 1456 1360)(color 0 0 0)(line_width 3))
+(rectangle (rect 888 1040 1456 1416)(color 0 0 0)(line_width 3))
 (rectangle (rect -832 -32 -512 224))
 (rectangle (rect 1280 120 1752 392))
 (rectangle (rect 1376 472 1936 672))
+
+(connector
+	(text "godmode_switch" (rect 1232 344 1312 361)(font "Intel Clear" ))
+	(pt 1208 360)
+	(pt 1376 360)
+)
+(connector
+	(text "godmode_active" (rect 1616 280 1700 297)(font "Intel Clear" ))
+	(pt 1608 296)
+	(pt 1728 296)
+)
+(connector
+	(text "godmode_active" (rect 1400 616 1484 633)(font "Intel Clear" ))
+	(pt 1384 632)
+	(pt 1504 632)
+)
+(connector
+	(text "godmode_active" (rect 504 280 588 297)(font "Intel Clear" ))
+	(pt 496 296)
+	(pt 592 296)
+)

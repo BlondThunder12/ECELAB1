@@ -80,6 +80,13 @@ agreement for further details.
 		(text "DrawingRequest" (rect 145 43 211 55)(font "Arial" ))
 		(line (pt 232 48)(pt 216 48)(line_width 1))
 	)
+	(port
+		(pt 232 64)
+		(output)
+		(text "score[9..0]" (rect 0 0 100 12)(font "Arial" ))
+		(text "score[9..0]" (rect 116 59 216 71)(font "Arial" ))
+		(line (pt 232 64)(pt 216 64)(line_width 3))
+	)
 	(parameter
 		"NUMBERS_COLOR"
 		"11100000"

@@ -11,6 +11,7 @@ module	game_controller	(
 			input	logic	bird_OOB_collision,
 			input logic drawing_request_pipe,
 			input logic [1:0] game_state,
+			input logic godmode, // Synchronized game_manager.godmode_active
 			
 			output logic collision, // active in case of collision between two objects
 			
@@ -26,7 +27,7 @@ logic flag ; // a semaphore to set the output only once per frame regardless of 
 logic collision_bird_pipe; 
 
 assign collision_bird_pipe = (drawing_request_bird && drawing_request_pipe); 
-assign collision = bird_OOB_collision || collision_bird_pipe;
+assign collision = !godmode && (bird_OOB_collision || collision_bird_pipe);
 
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;
