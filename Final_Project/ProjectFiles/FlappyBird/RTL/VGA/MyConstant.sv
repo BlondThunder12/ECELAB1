@@ -4,10 +4,10 @@
 
 
 module	MyConstant	
-#(parameter int size = 8,  
-				unsigned	[size-1:0] MyValue= 0)
+#(parameter int size = 8,
+  parameter logic [size-1:0] MyValue = 0)
   
-( output unsigned	[size-1:0] value ) ;
+( output wire [size-1:0] value ) ;
 
 
 

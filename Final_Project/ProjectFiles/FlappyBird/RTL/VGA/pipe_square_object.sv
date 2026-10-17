@@ -21,14 +21,32 @@ module	pipe_square_object	(
 					output	logic	[7:0]	 RGBout //optional color output for mux 
 );
 
-parameter  int OBJECT_WIDTH_X = 100;
-parameter  int OBJECT_HEIGHT_Y = 100;
-parameter  logic [7:0] OBJECT_COLOR = 8'h03 ; 
-localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
+parameter  int OBJECT_WIDTH_X = 50;
+parameter  int OBJECT_HEIGHT_Y = 8;
+// Retained for compatibility with existing schematic symbols; the MIF now
+// supplies the body colors.
+parameter  logic [7:0] OBJECT_COLOR = 8'h03 ;
  
 int rightX ; //coordinates of the sides  
 int bottomY ;
 logic insideBracket ; 
+logic [10:0] relativeX;
+logic [10:0] relativeY;
+
+assign relativeX = pixelX - topLeftX;
+assign relativeY = pixelY - topLeftY;
+
+// Read the tile directly from the current pixel offsets. Feeding the registered
+// offset outputs into the ROM would add a clock relative to the pipe caps.
+pipeLongBitMap body_bitmap (
+    .clk(clk),
+    .resetN(resetN),
+    .offsetX(relativeX),
+    .offsetY(relativeY),
+    .InsideRectangle(insideBracket),
+    .drawingRequest(drawingRequest),
+    .RGBout(RGBout)
+);
 
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
@@ -43,21 +61,17 @@ assign	insideBracket  = 	 ( (pixelX  >= topLeftX) &&  (pixelX < rightX) // math 
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
-		RGBout			<=	8'b0;
-		drawingRequest	<=	1'b0;
+		offsetX <= 0;
+		offsetY <= 0;
 	end
 	else begin 
 		// DEFUALT outputs
-	      RGBout <= TRANSPARENT_ENCODING ; // so it will not be displayed 
-			drawingRequest <= 1'b0 ;// transparent color 
 			offsetX	<= 0; //no offset
 			offsetY	<= 0; //no offset
 	
  
 		if (insideBracket) // test if it is inside the rectangle 
 		begin 
-			RGBout  <= OBJECT_COLOR ;	// colors table 
-			drawingRequest <= 1'b1 ;
 			offsetX	<= (pixelX - topLeftX); //calculate relative offsets from top left corner allways a positive number 
 			offsetY	<= (pixelY - topLeftY);
 		end 
@@ -66,4 +80,4 @@ begin
 		
 	end
 end 
-endmodule 
+endmodule

@@ -103,12 +103,12 @@ agreement for further details.
 	)
 	(parameter
 		"OBJECT_WIDTH_X"
-		"100"
+		"50"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"OBJECT_HEIGHT_Y"
-		"100"
+		"8"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter

@@ -82,22 +82,22 @@ agreement for further details.
 	)
 	(parameter
 		"GAP_SIZE"
-		"88"
+		"128"
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
 		"WIDTH_OF_PIPE"
-		"64"
+		"50"
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
 		"WIDTH_OF_EDGE"
-		"80"
+		"64"
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
 		"HEIGHT_OF_EDGE"
-		"20"
+		"16"
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(parameter
