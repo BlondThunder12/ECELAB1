@@ -1,123 +1,139 @@
-//-- feb 2021 add all colors square 
-// (c) Technion IIT, Department of Electrical Engineering 2025
+module back_ground_draw #(
+    parameter int SCREEN_WIDTH  = 640,
+    parameter int SCREEN_HEIGHT = 480
+)(
+    input  logic        clk,
+    input  logic        resetN,
+    input  logic [10:0] pixelX,
+    input  logic [10:0] pixelY,
+    input  logic        night_mode,
+    input  logic [1:0]  game_state,   
 
-
-module	back_ground_draw	(	
-
-					input	logic	clk,
-					input	logic	resetN,
-					input 	logic	[10:0]	pixelX,
-					input 	logic	[10:0]	pixelY,
-					input 	logic	[18:0]	address,
-
-					output	logic	[7:0]	BG_RGB,
-					output	logic		boardersDrawReq, 
-					output	logic	[7:0] MIF_VGA
+    output logic [7:0]  bgRGB,
+    output logic        bgDrawingRequest,
+    output logic [7:0]  MIF_VGA,
+    output logic        out_night_mode
 );
 
-const int	xFrameSize	=	635;
-const int	yFrameSize	=	475;
-const int	bracketOffset =	32;
-//const int   COLOR_MARTIX_SIZE  = 16*8 ; // 128 
+    localparam int TWO_MIN_FRAMES = 72000;
+    localparam int BUILDING_SPEED_DIV = 64;   
 
-logic [2:0] redBits;
-logic [2:0] greenBits;
-logic [1:0] blueBits;
-logic [10:0] shift_pixelX;
+    logic [10:0] bg_X;
+    logic [15:0] building_frame_cnt;
+    logic [19:0] night_timer;
+    logic        internal_night;
+    logic        frame_flag;
 
+    always_ff @(posedge clk or negedge resetN) begin
+        if (!resetN) begin
+            bg_X               <= 11'd0;
+            building_frame_cnt <= 16'd0;
+            night_timer        <= 20'd0;
+            internal_night     <= 1'b0;
+            frame_flag         <= 1'b0;
+        end else begin
+            if (pixelX == 11'd0 && pixelY == 11'd0) begin
+                if (!frame_flag) begin
+                    frame_flag <= 1'b1;
+                    if (game_state == 2'b01) begin
+                        if (building_frame_cnt >= BUILDING_SPEED_DIV - 1) begin
+                            building_frame_cnt <= 16'd0;
+                            bg_X               <= bg_X + 1'b1;
+                        end else begin
+                            building_frame_cnt <= building_frame_cnt + 1'b1;
+                        end
 
-localparam logic [2:0] DARK_COLOR = 3'b111 ;// bitmap of a dark color
-localparam logic [2:0] LIGHT_COLOR = 3'b000 ;// bitmap of a light color
+                        if (night_timer >= TWO_MIN_FRAMES - 1) begin
+                            night_timer    <= 20'd0;
+                            internal_night <= ~internal_night;
+                        end else begin
+                            night_timer <= night_timer + 1'b1;
+                        end
+                    end
+                end
+            end else begin
+                frame_flag <= 1'b0;
+            end
+        end
+    end
 
- 
-localparam  int RED_TOP_Y  = 156 ;
-localparam  int RED_LEFT_X  = 256 ;
-localparam  int GREEN_RIGHT_X  = 32 ;
-localparam  int BLUE_BOTTOM_Y  = 300 ;
-localparam  int BLUE_RIGHT_X  = 200 ;
- 
-parameter  logic [10:0] COLOR_MATRIX_TOP_Y  = 100 ; 
-parameter  logic [10:0] COLOR_MATRIX_LEFT_X = 100 ;
+    logic [10:0] actual_x;
 
- lpm_rom #(
-    .LPM_WIDTH(8),
-    .LPM_WIDTHAD(19),
-	 .LPM_NUMWORDS(307200),
-    .LPM_FILE("RTL/background_flippy_bird.mif"),
-	   .LPM_TYPE               ("LPM_ROM"),
-      .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
-		.LPM_OUTDATA            ("UNREGISTERED"), 
-		.AUTO_CARRY_CHAINS      ("ON"),
-		.AUTO_CASCADE_BUFFERS   ("ON"),
-	   .INTENDED_DEVICE_FAMILY ("Cyclone V")  
-) rom_inst (
-    .address(address),
-	 .inclock(clk),
-	// .outclock(clk),
-    .q(MIF_VGA)
-);
+    always_comb begin
+        if (pixelY < 11'd128) begin
+            actual_x = pixelX;
+        end else begin
+            actual_x = pixelX + bg_X;
+        end
+    end
 
-// this is a block to generate the background 
-//it has four sub modules : 
+    logic [6:0] img_x;
+    logic [6:0] img_y;
 
-	// 1. draw the yellow borders
-	// 2. draw four lines with "bracketOffset" offset from the border 
-	// 3. draw a matrix of 256  rectangles with all the colors, each rectangle 16 *2 pixels    	
+    assign img_x = actual_x % 11'd128;
+    assign img_y = (pixelY < 11'd128) ? 7'd0 : ((pixelY >> 2) % 11'd128);
 
- 
- 
-always_ff@(posedge clk or negedge resetN)
-begin
-	if(!resetN) begin
-				redBits <= DARK_COLOR ;	
-				greenBits <= DARK_COLOR  ;	
-				blueBits <= DARK_COLOR[1:0] ;	 
-	end 
-	else begin
+    logic [13:0] rom_address;
+    assign rom_address = (img_y * 11'd128) + img_x;
 
-	// defaults 
-		greenBits <= 3'b111 ; 
-		redBits <= 3'b000 ;
-		blueBits <= 2'b11;//LIGHT_COLOR;
-		boardersDrawReq <= 	1'b0 ; 
-		
-		/*if (   
-		// 1. draw the yellow borders
-						((pixelX <= bracketOffset) && (pixelX >=(bracketOffset- bracketOffset/4))) ||
-						((pixelY <= bracketOffset) && (pixelY >= (bracketOffset- bracketOffset/4))) ||
-						
-		// 2. draw four lines with "bracketOffset" offset from the border 
-						((pixelX >= (xFrameSize-bracketOffset))&&(pixelX <= (xFrameSize-(bracketOffset- bracketOffset/4)))) || 
-						((pixelY >= (yFrameSize-bracketOffset))&&(pixelY <= (yFrameSize-(bracketOffset- bracketOffset/4))))) 
-			begin 
-					redBits <= LIGHT_COLOR ;	
-					greenBits <= DARK_COLOR  ;	
-					blueBits <= DARK_COLOR[1:0] ;
-					 boardersDrawReq <= 	1'b1;
-					//boardersDrawReq <= 	1'b1 ; // pulse if drawing the boarders 
-			end
-	
-				
+    logic [7:0] raw_bg_rgb1;
+    logic [7:0] raw_bg_rgb2;
 
-	// 3. draw a matrix of 16*16 rectangles with all the colors, each rectsangle 8*8 pixels  	
-   // ---------------------------------------------------------------------------------------
-		if (( pixelY > 4 ) && (pixelY < 20 ) && (pixelX >30 )&& (pixelX <542 ))
-		 begin
-		        shift_pixelX<= pixelX-11'd29;
+    lpm_rom #(
+        .LPM_WIDTH(8),
+        .LPM_WIDTHAD(14),
+        .LPM_NUMWORDS(16384),
+        .LPM_FILE("RTL/sky_buildings_bg.mif"),
+        .LPM_TYPE("LPM_ROM"),
+        .LPM_ADDRESS_CONTROL("REGISTERED"),
+        .LPM_OUTDATA("UNREGISTERED"),
+        .INTENDED_DEVICE_FAMILY("Cyclone V")
+    ) bg_rom_inst1 (
+        .address(rom_address),
+        .inclock(clk),
+        .q(raw_bg_rgb1)
+    );
 
-             blueBits <= shift_pixelX[8:7] ; 
-				 greenBits <= shift_pixelX[3:1] ; 
-				 redBits <= shift_pixelX[6:4];       
-				 boardersDrawReq <= 	1'b1;
-	
-				
-		 end 
-		
-		*/
-	BG_RGB <=  { blueBits, redBits, greenBits } ; //collect color nibbles to an 8 bit word		
+    lpm_rom #(
+        .LPM_WIDTH(8),
+        .LPM_WIDTHAD(14),
+        .LPM_NUMWORDS(16384),
+        .LPM_FILE("RTL/sky_buildings_bg2.mif"),
+        .LPM_TYPE("LPM_ROM"),
+        .LPM_ADDRESS_CONTROL("REGISTERED"),
+        .LPM_OUTDATA("UNREGISTERED"),
+        .INTENDED_DEVICE_FAMILY("Cyclone V")
+    ) bg_rom_inst2 (
+        .address(rom_address),
+        .inclock(clk),
+        .q(raw_bg_rgb2)
+    );
 
+    logic [7:0] final_rgb;
+    logic select_second_mif;
+    logic active_night;
 
-	end; 	
-end 
+    assign select_second_mif = (actual_x / 11'd128) % 2;
+    assign active_night      = night_mode || internal_night;
+    assign out_night_mode    = active_night;
+
+    always_comb begin
+        if (select_second_mif) begin
+            final_rgb = raw_bg_rgb2;
+        end else begin
+            final_rgb = raw_bg_rgb1;
+        end
+
+        bgDrawingRequest = 1'b1;
+        
+        if (active_night) begin
+            bgRGB   = final_rgb >> 2;
+            MIF_VGA = final_rgb >> 2;
+        end else begin
+            bgRGB   = final_rgb;
+            MIF_VGA = final_rgb;
+        end
+    end
+
 endmodule
 

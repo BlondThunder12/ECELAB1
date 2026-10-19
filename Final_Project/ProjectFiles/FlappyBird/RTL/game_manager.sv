@@ -84,16 +84,16 @@ assign game_state = current_state;
 // Combinational score-to-level table; preserve reset/start-screen behavior.
 always_comb begin
     if (!resetN || current_state == START_SCREEN) speed_level = 4'd0;
-    else if (score <= 10'd5)   speed_level = 4'd0;
-    else if (score <= 10'd15)  speed_level = 4'd1;
-    else if (score <= 10'd30)  speed_level = 4'd2;
-    else if (score <= 10'd40)  speed_level = 4'd3;
-    else if (score <= 10'd50)  speed_level = 4'd4;
-    else if (score <= 10'd60)  speed_level = 4'd5;
-    else if (score <= 10'd80)  speed_level = 4'd6;
-    else if (score <= 10'd120) speed_level = 4'd7;
-    else if (score <= 10'd180) speed_level = 4'd8;
-    else if (score <= 10'd255) speed_level = 4'd9;
+    else if (score < 10'd5)   speed_level = 4'd0;
+    else if (score < 10'd15)  speed_level = 4'd1;
+    else if (score < 10'd30)  speed_level = 4'd2;
+    else if (score < 10'd40)  speed_level = 4'd3;
+    else if (score < 10'd50)  speed_level = 4'd4;
+    else if (score < 10'd60)  speed_level = 4'd5;
+    else if (score < 10'd80)  speed_level = 4'd6;
+    else if (score < 10'd120) speed_level = 4'd7;
+    else if (score < 10'd180) speed_level = 4'd8;
+    else if (score < 10'd255) speed_level = 4'd9;
     else                     speed_level = 4'd10;
 end
 
