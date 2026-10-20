@@ -108,6 +108,13 @@ agreement for further details.
 		(text "godmode" (rect 21 171 121 183)(font "Arial" ))
 		(line (pt 0 176)(pt 16 176)(line_width 1))
 	)
+	(port
+		(pt 288 80)
+		(output)
+		(text "menuYOffset[5..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 172 75 267 87)(font "Arial" ))
+		(line (pt 288 80)(pt 272 80)(line_width 3))
+	)
 	(parameter
 		"initial_x"
 		"280"

@@ -5,6 +5,7 @@ Thumbs.db
 *.qarlog
 
 # Quartus Build Directories
+work/
 db/
 incremental_db/
 output_files/

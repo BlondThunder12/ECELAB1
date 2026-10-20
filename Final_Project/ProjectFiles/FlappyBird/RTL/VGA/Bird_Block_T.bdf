@@ -428,6 +428,13 @@ agreement for further details.
 		(text "godmode" (rect 21 123 121 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 1))
 	)
+	(port
+		(pt 264 80)
+		(output)
+		(text "menuYOffset[5..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 148 75 243 87)(font "Arial" ))
+		(line (pt 264 80)(pt 248 80)(line_width 3))
+	)
 	(parameter
 		"INITIAL_X"
 		"initial_x"
@@ -751,6 +758,34 @@ agreement for further details.
 (text "   " (rect 144 664 154 683)(font "Intel Clear" (font_size 8)))
 (text "            " (rect 504 608 546 627)(font "Intel Clear" (font_size 8)))
 (text "// (c) Technion IIT, Department of Electrical Engineering 2025" (rect 168 16 527 35)(font "Intel Clear" (font_size 8)))
+
+(pin
+	(output)
+	(rect 760 584 952 600)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "menuYOffset[5..0]" (rect 90 0 184 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+	)
+)
+(connector
+	(text "menuYOffset[5..0]" (rect 752 488 846 505)(font "Intel Clear" ))
+	(pt 744 504)
+	(pt 848 504)
+	(bus)
+)
+(connector
+	(text "menuYOffset[5..0]" (rect 648 576 742 593)(font "Intel Clear" ))
+	(pt 760 592)
+	(pt 648 592)
+	(bus)
+)
 
 (connector
 	(text "godmode" (rect 400 560 444 577)(font "Intel Clear" ))

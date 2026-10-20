@@ -12,7 +12,8 @@ module	bird_move	(
 					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
 					output logic signed	[10:0] topLeftY,  // can be negative , if the object is partliy outside
-					output logic 					 bird_hit_borders
+					output logic 					 bird_hit_borders,
+					output logic signed [5:0] menuYOffset // Shared with the start-screen logo
 					
 );
  int 	 topLeftX_tmp; // output the top left corner 
@@ -64,6 +65,42 @@ int Xposition ; //position
 int Yposition ;  
 
 logic Y_direction_key_D; // added an edge detector for the Y press
+
+// Menu animation: move one pixel every four frames, between -8 and +8.
+// This display offset is separate from the gameplay position and velocity.
+logic [1:0] menuFrameCounter;
+logic menuMovingDown;
+always_ff @(posedge clk or negedge resetN) begin
+	if (!resetN) begin
+		menuYOffset <= 6'sd0;
+		menuFrameCounter <= 2'd0;
+		menuMovingDown <= 1'b0;
+	end
+	else if (game_state != START_SCREEN) begin
+		menuYOffset <= 6'sd0;
+		menuFrameCounter <= 2'd0;
+		menuMovingDown <= 1'b0;
+	end
+	else if (startOfFrame) begin
+		menuFrameCounter <= menuFrameCounter + 2'd1;
+		if (menuFrameCounter == 2'd3) begin
+			if (menuMovingDown) begin
+				if (menuYOffset == 6'sd8) begin
+					menuYOffset <= 6'sd7;
+					menuMovingDown <= 1'b0;
+				end
+				else menuYOffset <= menuYOffset + 6'sd1;
+			end
+			else begin
+				if (menuYOffset == -6'sd8) begin
+					menuYOffset <= -6'sd7;
+					menuMovingDown <= 1'b1;
+				end
+				else menuYOffset <= menuYOffset - 6'sd1;
+			end
+		end
+	end
+end
  
 
   logic [4:0] hit_reg = 5'b00000;
@@ -209,7 +246,8 @@ end // end fsm_sync
 //return from FIXED point trunc back to prame size parameters 
   
 assign 	topLeftX_tmp = Xposition / FIXED_POINT_MULTIPLIER ;   // note it must be 2^n 
-assign 	topLeftY_tmp = Yposition / FIXED_POINT_MULTIPLIER ;    
+assign 	topLeftY_tmp = (game_state == START_SCREEN) ?
+						INITIAL_Y + int'(menuYOffset) : Yposition / FIXED_POINT_MULTIPLIER;
 
 assign 	topLeftX = {topLeftX_tmp[10:0]} ;   // note it must be 2^n 
 assign 	topLeftY = {topLeftY_tmp[10:0]} ;    	

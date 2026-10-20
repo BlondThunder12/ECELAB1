@@ -31,6 +31,12 @@ module objects_mux (
     input logic planeDrawingRequest,
     input logic [7:0] planeRGB,
 
+    input logic startDrawingRequest,
+    input logic [7:0] startRGB,
+
+    input logic rulebookDrawingRequest,
+    input logic [7:0] rulebookRGB,
+
     output logic [7:0] RGBOut
 );
 
@@ -38,7 +44,11 @@ always_ff @(posedge clk or negedge resetN) begin
     if (!resetN) begin
         RGBOut <= 8'b0;
     end else begin
-        if (birdDrawingRequest)
+        if (rulebookDrawingRequest)
+            RGBOut <= rulebookRGB;
+        else if (startDrawingRequest)
+            RGBOut <= startRGB;
+        else if (birdDrawingRequest)
             RGBOut <= birdRGB;
         else if (boxDrawingRequest)
             RGBOut <= boxRGB;
