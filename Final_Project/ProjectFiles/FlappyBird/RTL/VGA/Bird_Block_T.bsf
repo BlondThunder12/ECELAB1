@@ -1,140 +1,133 @@
-/*
-WARNING: Do NOT edit the input and output ports in this file in a text
-editor if you plan to continue editing the block that represents it in
-the Block Editor! File corruption is VERY likely to occur.
-*/
-/*
-Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
-Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
-agreement for further details.
-*/
-(header "symbol" (version "1.1"))
+(header "symbol" (version "1.2"))
 (symbol
-	(rect 16 16 288 224)
-	(text "Bird_Block_T" (rect 5 0 59 12)(font "Arial" ))
-	(text "inst" (rect 8 192 20 204)(font "Arial" ))
+	(rect 0 0 272 208)
+	(text "Bird_Block_T" (rect 5 0 68 12)(font "Arial" ))
+	(text "inst" (rect 8 192 37 204)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk" (rect 0 0 10 12)(font "Arial" ))
-		(text "clk" (rect 21 27 31 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
-	(port
+(port
 		(pt 0 48)
 		(input)
-		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
 	)
-	(port
+(port
 		(pt 0 64)
 		(input)
-		(text "startOfFrame" (rect 0 0 55 12)(font "Arial" ))
-		(text "startOfFrame" (rect 21 59 76 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 1))
+		(text "startOfFrame" (rect 0 0 67 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 59 88 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
 	)
-	(port
+(port
 		(pt 0 80)
 		(input)
-		(text "pixelX[10..0]" (rect 0 0 46 12)(font "Arial" ))
-		(text "pixelX[10..0]" (rect 21 75 67 87)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 21 75 81 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
-	(port
+(port
 		(pt 0 96)
 		(input)
-		(text "pixelY[10..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "pixelY[10..0]" (rect 21 91 68 103)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 0 0 62 12)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 21 91 83 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
-	(port
+(port
 		(pt 0 112)
 		(input)
-		(text "Y_direction_key" (rect 0 0 66 12)(font "Arial" ))
-		(text "Y_direction_key" (rect 21 107 87 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 1))
+		(text "Y_direction_key" (rect 0 0 80 12)(font "Arial" ))
+		(text "Y_direction_key" (rect 21 107 101 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
 	)
-	(port
+(port
 		(pt 0 128)
 		(input)
-		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 123 87 135)(font "Arial" ))
+		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 123 104 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
-	(port
+(port
 		(pt 0 144)
 		(input)
-		(text "reverse_gravity_switch" (rect 0 0 95 12)(font "Arial" ))
-		(text "reverse_gravity_switch" (rect 21 139 116 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 1))
+		(text "reverse_gravity_switch" (rect 0 0 115 12)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 21 139 136 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
 	)
-	(port
+(port
 		(pt 0 160)
 		(input)
-		(text "godmode" (rect 0 0 36 12)(font "Arial" ))
-		(text "godmode" (rect 21 155 57 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 1))
+		(text "godmode" (rect 0 0 44 12)(font "Arial" ))
+		(text "godmode" (rect 21 155 65 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160))
 	)
-	(port
+(port
 		(pt 0 176)
 		(input)
-		(text "damage_pulse" (rect 0 0 57 12)(font "Arial" ))
-		(text "damage_pulse" (rect 21 171 78 183)(font "Arial" ))
-		(line (pt 0 176)(pt 16 176)(line_width 1))
+		(text "damage_pulse" (rect 0 0 70 12)(font "Arial" ))
+		(text "damage_pulse" (rect 21 171 91 183)(font "Arial" ))
+		(line (pt 0 176)(pt 16 176))
 	)
-	(port
+(port
 		(pt 272 32)
 		(output)
-		(text "birdDR" (rect 0 0 29 12)(font "Arial" ))
-		(text "birdDR" (rect 222 27 251 39)(font "Arial" ))
-		(line (pt 272 32)(pt 256 32)(line_width 1))
+		(text "birdDR" (rect 0 0 34 12)(font "Arial" ))
+		(text "birdDR" (rect 222 27 256 39)(font "Arial" ))
+		(line (pt 272 32)(pt 256 32))
 	)
-	(port
+(port
 		(pt 272 48)
 		(output)
-		(text "birdRGB[7..0]" (rect 0 0 55 12)(font "Arial" ))
-		(text "birdRGB[7..0]" (rect 196 43 251 55)(font "Arial" ))
+		(text "birdRGB[7..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "birdRGB[7..0]" (rect 196 43 263 55)(font "Arial" ))
 		(line (pt 272 48)(pt 256 48)(line_width 3))
 	)
-	(port
+(port
 		(pt 272 64)
 		(output)
-		(text "bird_hit_borders" (rect 0 0 64 12)(font "Arial" ))
-		(text "bird_hit_borders" (rect 187 59 251 71)(font "Arial" ))
-		(line (pt 272 64)(pt 256 64)(line_width 1))
+		(text "bird_hit_borders" (rect 0 0 77 12)(font "Arial" ))
+		(text "bird_hit_borders" (rect 187 59 264 71)(font "Arial" ))
+		(line (pt 272 64)(pt 256 64))
 	)
-	(port
+(port
 		(pt 272 80)
 		(output)
-		(text "menuYOffset[5..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "menuYOffset[5..0]" (rect 176 75 251 87)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 176 75 270 87)(font "Arial" ))
 		(line (pt 272 80)(pt 256 80)(line_width 3))
 	)
-	(parameter
+(port
+    (pt 272 96)
+    (output)
+    (text "BirdTLX[10..0]" (rect 0 0 160 12)(font "Arial" ))
+    (text "BirdTLX[10..0]" (rect 112 91 272 103)(font "Arial" ))
+    (line (pt 272 96)(pt 256 96)(line_width 3))
+)
+(port
+    (pt 272 112)
+    (output)
+    (text "BirdTLY[10..0]" (rect 0 0 160 12)(font "Arial" ))
+    (text "BirdTLY[10..0]" (rect 112 107 272 119)(font "Arial" ))
+    (line (pt 272 112)(pt 256 112)(line_width 3))
+)
+(parameter
 		"initial_x"
-		"280"
+		"160"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"initial_y"
-		"185"
+		"240"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"initial_x_speed"
-		"60"
+		"0"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -142,8 +135,8 @@ agreement for further details.
 		"20"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 256 192)(line_width 1))
+(drawing
+		(rectangle (rect 16 16 256 192))
 	)
-	(annotation_block (parameter)(rect 288 -64 388 16))
+	(annotation_block (parameter)(rect 760 -8 860 72))
 )

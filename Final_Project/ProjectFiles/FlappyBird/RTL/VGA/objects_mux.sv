@@ -1,4 +1,6 @@
-module objects_mux (
+module objects_mux #(
+    parameter int LIGHT_RADIUS = 190 // Partner's circular night-visibility radius
+)(
     input logic clk,
     input logic resetN,
 
@@ -36,8 +38,31 @@ module objects_mux (
     input logic screenDrawingRequest,
     input logic [7:0] screenRGB,
 
+    input logic [10:0] pixelX,
+    input logic [10:0] pixelY,
+    input logic signed [10:0] birdX,
+    input logic signed [10:0] birdY,
+    input logic night_mode,
+    input logic [1:0] game_state,
+
     output logic [7:0] RGBOut
 );
+
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam int LIGHT_RADIUS_SQ = LIGHT_RADIUS * LIGHT_RADIUS;
+logic signed [12:0] diffX, diffY;
+logic [25:0] dist_sq;
+logic inside_spotlight;
+
+// birdX/Y are the visible 34x24 bird's top-left corner, including recoil.
+// Compare squared distances to draw a circle without calculating a square root.
+// Keep enough bits for the products and sum, including signed bird positions.
+always_comb begin
+    diffX = $signed({2'b00, pixelX}) - ($signed(birdX) + 13'sd17);
+    diffY = $signed({2'b00, pixelY}) - ($signed(birdY) + 13'sd12);
+    dist_sq = (diffX * diffX) + (diffY * diffY);
+    inside_spotlight = dist_sq <= LIGHT_RADIUS_SQ;
+end
 
 always_ff @(posedge clk or negedge resetN) begin
     if (!resetN) begin
@@ -47,10 +72,12 @@ always_ff @(posedge clk or negedge resetN) begin
             RGBOut <= screenRGB;
         else if (livesDrawingRequest)
             RGBOut <= heartRGB;
+        else if (boxDrawingRequest) // Score, lives and menus stay readable at night.
+            RGBOut <= boxRGB;
+        else if (night_mode && game_state != START_SCREEN && !inside_spotlight)
+            RGBOut <= 8'h00;
         else if (birdDrawingRequest && birdVisible)
             RGBOut <= birdRGB;
-        else if (boxDrawingRequest)
-            RGBOut <= boxRGB;
         else if (pipesDrawingRequest)
             RGBOut <= pipesRGB;
         else if (heartDrawingRequest)

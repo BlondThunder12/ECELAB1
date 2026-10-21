@@ -10,9 +10,9 @@ module sound_selector (
 );
 
     localparam logic [3:0] SOUND_SCORE_PIPE    = 4'd0;
-    localparam logic [3:0] SOUND_COLLISION     = 4'd1;
-    localparam logic [3:0] SOUND_AG_SCORE_PIPE = 4'd2;
-    localparam logic [3:0] SOUND_AG_COLLISION  = 4'd3;
+    localparam logic [3:0] SOUND_COLLISION     = 4'd4;
+    localparam logic [3:0] SOUND_AG_SCORE_PIPE = 4'd7;
+    localparam logic [3:0] SOUND_AG_COLLISION  = 4'd2;
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin
@@ -21,6 +21,8 @@ module sound_selector (
         end else begin
             startMelody <= 1'b0;
 
+            // AUDIO receives the accepted damage pulse from player_lives.
+            // Contacts during invulnerability or Godmode do not play a hit.
             if (SingleHitPulse) begin
                 melodySelect <= (anti_gravity) ? SOUND_AG_COLLISION : SOUND_COLLISION;
                 startMelody  <= 1'b1;

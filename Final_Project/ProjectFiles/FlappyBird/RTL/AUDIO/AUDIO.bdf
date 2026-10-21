@@ -5,18 +5,18 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
 agreement for further details.
 */
 //#pragma file_not_in_maxplusii_format
@@ -69,38 +69,8 @@ agreement for further details.
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(pin
-	(input)
-	(rect -144 464 24 480)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "keypadValid" (rect 5 0 65 12)(font "Arial" ))
-	(pt 168 8)
-	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
-	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-)
-(pin
-	(input)
-	(rect -144 480 24 496)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "keyPad[3..0]" (rect 5 0 65 17)(font "Intel Clear" ))
-	(pt 168 8)
-	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
-	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-)
+
+
 (pin
 	(input)
 	(rect 1376 704 1544 720)
@@ -683,3 +653,180 @@ agreement for further details.
 	(bus)
 )
 (text "// (c) Technion IIT, Department of Electrical Engineering 2021            \n// Written By Alex Grinshpun & David Bar-On  June 2018 \r            //Updated by Eyal Lev January 2021\n" (rect 352 -8 958 49)(font "Intel Clear" (font_size 8)))
+(pin
+	(input)
+	(rect -512 224 -336 240)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "SingleHitPulse" (rect 5 0 19 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "SingleHitPulse" (rect -336 216 -156 233)(font "Arial" ))
+	(pt -344 232)
+	(pt -288 232)
+)
+(pin
+	(input)
+	(rect -512 256 -336 272)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "updateScorePulse" (rect 5 0 19 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "updateScorePulse" (rect -336 248 -156 265)(font "Arial" ))
+	(pt -344 264)
+	(pt -288 264)
+)
+(pin
+	(input)
+	(rect -512 288 -336 304)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "anti_gravity" (rect 5 0 19 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "anti_gravity" (rect -336 280 -156 297)(font "Arial" ))
+	(pt -344 296)
+	(pt -288 296)
+)
+
+(symbol
+	(rect -144 104 104 248)
+	(text "sound_selector" (rect 5 0 65 12)(font "Arial" ))
+	(text "game_sounds" (rect 8 128 20 140)(font "Arial" ))
+	(port
+		(pt 0 32)
+		(input)
+		(text "clk" (rect 0 0 10 12)(font "Arial" ))
+		(text "clk" (rect 21 27 31 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
+	)
+	(port
+		(pt 0 48)
+		(input)
+		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
+	)
+	(port
+		(pt 0 64)
+		(input)
+		(text "SingleHitPulse" (rect 0 0 54 12)(font "Arial" ))
+		(text "SingleHitPulse" (rect 21 59 75 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64)(line_width 1))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "updateScorePulse" (rect 0 0 70 12)(font "Arial" ))
+		(text "updateScorePulse" (rect 21 75 91 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "anti_gravity" (rect 0 0 47 12)(font "Arial" ))
+		(text "anti_gravity" (rect 21 91 68 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 248 32)
+		(output)
+		(text "startMelody" (rect 0 0 47 12)(font "Arial" ))
+		(text "startMelody" (rect 180 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 1))
+	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "melodySelect[3..0]" (rect 0 0 73 12)(font "Arial" ))
+		(text "melodySelect[3..0]" (rect 154 43 227 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 3))
+	)
+	(drawing
+		(rectangle (rect 16 16 232 128)(line_width 1))
+	)
+)
+
+(connector
+	(text "clk" (rect -224 120 -44 137)(font "Arial" ))
+	(pt -144 136)
+	(pt -232 136)
+)
+
+(connector
+	(text "resetN" (rect -224 136 -44 153)(font "Arial" ))
+	(pt -144 152)
+	(pt -232 152)
+)
+
+(connector
+	(text "SingleHitPulse" (rect -224 152 -44 169)(font "Arial" ))
+	(pt -144 168)
+	(pt -232 168)
+)
+
+(connector
+	(text "updateScorePulse" (rect -224 168 -44 185)(font "Arial" ))
+	(pt -144 184)
+	(pt -232 184)
+)
+
+(connector
+	(text "anti_gravity" (rect -224 184 -44 201)(font "Arial" ))
+	(pt -144 200)
+	(pt -232 200)
+)
+
+(connector
+	(text "startMelody" (rect 112 120 292 137)(font "Arial" ))
+	(pt 104 136)
+	(pt 192 136)
+)
+
+(connector
+	(text "melodySelect[3..0]" (rect 112 136 292 153)(font "Arial" ))
+	(pt 104 152)
+	(pt 192 152)
+	(bus)
+)
+
+(connector
+	(text "startMelody" (rect -32 456 148 473)(font "Arial" ))
+	(pt 24 472)
+	(pt -40 472)
+)
+
+(connector
+	(text "melodySelect[3..0]" (rect -32 472 148 489)(font "Arial" ))
+	(pt 24 488)
+	(pt -40 488)
+	(bus)
+)
