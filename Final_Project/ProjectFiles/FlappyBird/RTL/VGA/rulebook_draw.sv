@@ -1,5 +1,5 @@
 // The supplied opaque 480x360 rulebook is displayed at native resolution.
-// Three RGB332 colors fit in a two-bit index; no full-color screen buffer is used.
+// Up to four RGB332 colors fit in a two-bit index; no full-color screen buffer is used.
 module rulebook_draw #(
     parameter int TOP_LEFT_X = 80,
     parameter int TOP_LEFT_Y = 60
