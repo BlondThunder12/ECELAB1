@@ -63,7 +63,9 @@ always_comb begin
 		end
         
       PLAYING: begin
-			if (!godmode_active && (collision || bird_hit_borders)) next_state = GAME_OVER;
+			// Winning ends the run even when Godmode suppresses ordinary hazards.
+			if (score >= 10'd999) next_state = GAME_OVER;
+			else if (!godmode_active && (collision || bird_hit_borders)) next_state = GAME_OVER;
 			else if(pause_key && !pause_key_D) next_state = PAUSED;
       end
         

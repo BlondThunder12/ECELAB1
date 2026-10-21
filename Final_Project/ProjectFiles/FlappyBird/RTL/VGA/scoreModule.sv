@@ -1,9 +1,9 @@
 module scoreModule #(
-	parameter logic [7:0] NUMBERS_COLOR = 8'b11100000,
-	parameter logic [10:0] HUNDREDS_X = 11'd560,
-   parameter logic [10:0] TENS_X  = 11'd580,
-	parameter logic [10:0] UNITS_X = 11'd600,
-	parameter logic [10:0] SCORE_Y = 11'd20 
+	parameter logic [7:0] NUMBERS_COLOR = 8'hE3, // Bright magenta: visible against day and night skies
+	parameter logic [10:0] HUNDREDS_X = 11'd496,
+    parameter logic [10:0] TENS_X = 11'd536,
+	parameter logic [10:0] UNITS_X = 11'd576,
+	parameter logic [10:0] SCORE_Y = 11'd0
 )(
 	input logic   clk,
 	input logic   resetN,
@@ -11,10 +11,14 @@ module scoreModule #(
 	input logic [10:0] pixelX,
 	input logic [10:0] pixelY,
 	input logic [1:0]  game_state,
+	input logic        godmode_active,
 
 	output logic [7:0] RGBNum,
 	output logic       DrawingRequest,
-	output logic [9:0] score             // Binary view of the same BCD score (0..999)
+	output logic [9:0] score,            // Binary view of the same BCD score (0..999)
+	output logic [11:0] final_score_bcd, // {hundreds, tens, units}, captured at game over
+	output logic [11:0] best_score_bcd,  // Cleared only by resetN, retained between runs
+	output logic        new_best
 );
 
 logic trigger_d;
@@ -25,6 +29,7 @@ wire trigger_pulse = trigger && !trigger_d;
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;
 localparam logic [1:0] GAME_OVER    = 2'b10;
+localparam logic [1:0] PAUSED       = 2'b11;
 
 always_ff @(posedge clk or negedge resetN) begin
         if (!resetN)
@@ -36,9 +41,44 @@ always_ff @(posedge clk or negedge resetN) begin
 logic [3:0] units;
 logic [3:0] tens;
 logic [3:0] hundreds;
+logic [11:0] current_score_bcd;
+logic [1:0] previous_state;
+logic run_used_godmode;
 
 // Export the existing score; do not introduce a second score counter.
 assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
+assign current_score_bcd = {hundreds, tens, units};
+
+// Observe the first clock spent in GAME_OVER. The final PLAYING clock has
+// already updated the BCD counter, including a point coincident with death.
+// Valid packed BCD values have the same ordering as their decimal scores.
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) begin
+        previous_state <= START_SCREEN;
+        final_score_bcd <= 12'h000;
+        best_score_bcd <= 12'h000;
+        new_best <= 1'b0;
+        run_used_godmode <= 1'b0;
+    end else begin
+        previous_state <= game_state;
+        if (game_state == START_SCREEN) begin
+            run_used_godmode <= godmode_active;
+            new_best <= 1'b0;
+        end else if (game_state == PLAYING || game_state == PAUSED) begin
+            // Sticky for this run, including switches changed while paused.
+            run_used_godmode <= run_used_godmode || godmode_active;
+        end
+        if (game_state == GAME_OVER && previous_state != GAME_OVER) begin
+            final_score_bcd <= current_score_bcd;
+            new_best <= 1'b0;
+            if (!run_used_godmode && !godmode_active &&
+                current_score_bcd > best_score_bcd) begin
+                best_score_bcd <= current_score_bcd;
+                new_best <= 1'b1;
+            end
+        end
+    end
+end
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin
@@ -50,16 +90,12 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
             tens  <= 4'd0;	
 				hundreds <= 4'd0;
 		
-	end else if (trigger_pulse) begin
+	end else if (game_state == PLAYING && trigger_pulse && current_score_bcd != 12'h999) begin
             if (units == 4'd9) begin
                 units <= 4'd0;
                 if (tens == 4'd9) begin
                     tens <= 4'd0;
-                    if (hundreds == 4'd9) begin
-                        hundreds <= 4'd0; 
-                    end else begin
-                        hundreds <= hundreds + 1'b1; 
-                    end
+                    hundreds <= hundreds + 1'b1;
                 end else begin
                     tens <= tens + 1'b1;
                 end
@@ -76,8 +112,8 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
     logic        hundreds_bmp_draw;
 
     square_object #(
-        .OBJECT_WIDTH_X(16),
-        .OBJECT_HEIGHT_Y(32)
+        .OBJECT_WIDTH_X(32),
+        .OBJECT_HEIGHT_Y(64)
     ) hundreds_sq (
         .clk(clk),
         .resetN(resetN),
@@ -91,7 +127,7 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
         .RGBout(hundreds_sq_rgb)
     );
 
-    NumbersBitMap hundreds_bmp (
+    NumbersBitMap #(.SCALE_2X(1'b1)) hundreds_bmp (
         .clk(clk),
         .resetN(resetN),
         .offsetX(hundreds_offsetX),
@@ -110,8 +146,8 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
     logic        tens_bmp_draw;
 
     square_object #(
-        .OBJECT_WIDTH_X(16),
-        .OBJECT_HEIGHT_Y(32)
+        .OBJECT_WIDTH_X(32),
+        .OBJECT_HEIGHT_Y(64)
     ) tens_sq (
         .clk(clk),
         .resetN(resetN),
@@ -125,7 +161,7 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
         .RGBout(tens_sq_rgb)
     );
 
-    NumbersBitMap tens_bmp (
+    NumbersBitMap #(.SCALE_2X(1'b1)) tens_bmp (
         .clk(clk),
         .resetN(resetN),
         .offsetX(tens_offsetX),
@@ -144,8 +180,8 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
     logic        units_bmp_draw;
 
     square_object #(
-        .OBJECT_WIDTH_X(16),
-        .OBJECT_HEIGHT_Y(32)
+        .OBJECT_WIDTH_X(32),
+        .OBJECT_HEIGHT_Y(64)
     ) units_sq (
         .clk(clk),
         .resetN(resetN),
@@ -159,7 +195,7 @@ assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
         .RGBout(units_sq_rgb)
     );
 
-    NumbersBitMap units_bmp (
+    NumbersBitMap #(.SCALE_2X(1'b1)) units_bmp (
         .clk(clk),
         .resetN(resetN),
         .offsetX(units_offsetX),

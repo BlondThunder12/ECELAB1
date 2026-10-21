@@ -1,72 +1,44 @@
-//
-// coding convention dudy December 2018
-// (c) Technion IIT, Department of Electrical Engineering 2025
-// generating a number bitmap 
-
-
-
-module NumbersBitMap	(	
-					input		logic	clk,
-					input		logic	resetN,
-					input 	logic	[10:0] offsetX,// offset from top left  position 
-					input 	logic	[10:0] offsetY,
-					input		logic	InsideRectangle, //input that the pixel is within a bracket 
-					input 	logic	[3:0] digit, // digit to display
-					
-					output	logic				drawingRequest, //output that the pixel should be dispalyed 
-					output	logic	[7:0]		RGBout
+// One-bit 16x32 digit mask, optionally displayed at 2x without a larger ROM.
+// The PNG's color is replaced by digit_color.
+module NumbersBitMap #(
+    parameter logic [7:0] digit_color = 8'hFF,
+    parameter bit SCALE_2X = 1'b0
+)(
+    input  logic        clk,
+    input  logic        resetN,
+    input  logic [10:0] offsetX,
+    input  logic [10:0] offsetY,
+    input  logic        InsideRectangle,
+    input  logic [3:0]  digit,
+    output logic        drawingRequest,
+    output logic [7:0]  RGBout
 );
 
-
-localparam logic[12:0] OBJECT_WIDTH_X = 6'd16;
-localparam logic[12:0] OBJECT_WIDTH_Y = 6'd32;
-localparam logic[12:0] digit_location_MIF = OBJECT_WIDTH_X*OBJECT_WIDTH_Y;
-
-// generating a number bitmap from a MIF file
-logic [12:0] address  ;
-logic  color  ;
- 
-//assign address = ((digit_location_MIF*digit)+((offsetY>>1)*OBJECT_WIDTH_X + (offsetX>>1))); //***Double size
-assign address = ((digit_location_MIF*digit)+((offsetY)*OBJECT_WIDTH_X + (offsetX))); //Origimal size of digit
-	//***comment the previous line and adjust the square object to double size as the size of a double bitmap
-
-parameter  logic	[7:0] digit_color = 8'hff ; //set the color of the digit 
+logic [12:0] address;
+logic [3:0] sourceX;
+logic [4:0] sourceY;
+logic color, insideDigit, insideDigit_d;
+assign insideDigit = InsideRectangle && offsetX < (SCALE_2X ? 32 : 16) &&
+                     offsetY < (SCALE_2X ? 64 : 32) && digit < 10;
+assign sourceX = SCALE_2X ? offsetX[4:1] : offsetX[3:0];
+assign sourceY = SCALE_2X ? offsetY[5:1] : offsetY[4:0];
+// Each glyph occupies 512 words: digit*512 + y*16 + x.
+assign address = insideDigit ? {digit, sourceY, sourceX} : 13'd0;
 
 lpm_rom #(
-    .LPM_WIDTH(1),
-    .LPM_WIDTHAD(13),
-	 .LPM_NUMWORDS(8192),
-    .LPM_FILE("RTL/numbers.mif"),
-	   .LPM_TYPE               ("LPM_ROM"),
-      .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
-		.LPM_OUTDATA            ("UNREGISTERED"), 
-		.AUTO_CARRY_CHAINS      ("ON"),
-		.AUTO_CASCADE_BUFFERS   ("ON"),
-	   .INTENDED_DEVICE_FAMILY ("Cyclone V")  
+    .lpm_width(1), .lpm_widthad(13), .lpm_numwords(8192),
+    .lpm_file("RTL/numbers.mif"), .lpm_type("LPM_ROM"),
+    .lpm_address_control("REGISTERED"), .lpm_outdata("UNREGISTERED"),
+    .intended_device_family("Cyclone V")
 ) rom_inst (
-    .address(address),
-	 .inclock(clk),
-	// .outclock(clk),
-    .q(color)
+    .address(address), .inclock(clk), .outclock(), .memenab(1'b1), .q(color)
 );
 
-// pipeline (ff) to get the pixel color from the array 	 
-
-always_ff@(posedge clk or negedge resetN)
-begin
-	if(!resetN) begin
-		drawingRequest <=	1'b0;
-		
-	end
-	
-	else begin
-		drawingRequest <=	1'b0;
-	  	if (InsideRectangle == 1'b1 )
-			drawingRequest <= (color == 1'b1) ? 1'b1 : 1'b0;
- 	end 
+// Match the ROM address register; avoid mixing the next rectangle with color.
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) insideDigit_d <= 1'b0;
+    else insideDigit_d <= insideDigit;
 end
-
-assign RGBout = digit_color ; // this is a fixed color 
-
-
+assign drawingRequest = insideDigit_d && color;
+assign RGBout = digit_color;
 endmodule

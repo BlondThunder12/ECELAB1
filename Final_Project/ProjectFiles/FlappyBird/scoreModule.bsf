@@ -5,25 +5,25 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
 agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 248 160)
+	(rect 16 16 272 192)
 	(text "scoreModule" (rect 5 0 55 12)(font "Arial" ))
-	(text "inst" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst" (rect 8 160 20 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -67,53 +67,81 @@ agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
-		(pt 232 32)
+		(pt 0 128)
+		(input)
+		(text "godmode_active" (rect 0 0 66 12)(font "Arial" ))
+		(text "godmode_active" (rect 21 123 87 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 256 32)
 		(output)
 		(text "RGBNum[7..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "RGBNum[7..0]" (rect 150 27 211 39)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32)(line_width 3))
+		(text "RGBNum[7..0]" (rect 174 27 235 39)(font "Arial" ))
+		(line (pt 256 32)(pt 240 32)(line_width 3))
 	)
 	(port
-		(pt 232 48)
+		(pt 256 48)
 		(output)
 		(text "DrawingRequest" (rect 0 0 66 12)(font "Arial" ))
-		(text "DrawingRequest" (rect 145 43 211 55)(font "Arial" ))
-		(line (pt 232 48)(pt 216 48)(line_width 1))
+		(text "DrawingRequest" (rect 169 43 235 55)(font "Arial" ))
+		(line (pt 256 48)(pt 240 48)(line_width 1))
 	)
 	(port
-		(pt 232 64)
+		(pt 256 64)
 		(output)
-		(text "score[9..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "score[9..0]" (rect 116 59 216 71)(font "Arial" ))
-		(line (pt 232 64)(pt 216 64)(line_width 3))
+		(text "score[9..0]" (rect 0 0 42 12)(font "Arial" ))
+		(text "score[9..0]" (rect 193 59 235 71)(font "Arial" ))
+		(line (pt 256 64)(pt 240 64)(line_width 3))
+	)
+	(port
+		(pt 256 80)
+		(output)
+		(text "final_score_bcd[11..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "final_score_bcd[11..0]" (rect 149 75 235 87)(font "Arial" ))
+		(line (pt 256 80)(pt 240 80)(line_width 3))
+	)
+	(port
+		(pt 256 96)
+		(output)
+		(text "best_score_bcd[11..0]" (rect 0 0 87 12)(font "Arial" ))
+		(text "best_score_bcd[11..0]" (rect 148 91 235 103)(font "Arial" ))
+		(line (pt 256 96)(pt 240 96)(line_width 3))
+	)
+	(port
+		(pt 256 112)
+		(output)
+		(text "new_best" (rect 0 0 37 12)(font "Arial" ))
+		(text "new_best" (rect 198 107 235 119)(font "Arial" ))
+		(line (pt 256 112)(pt 240 112)(line_width 1))
 	)
 	(parameter
 		"NUMBERS_COLOR"
-		"11100000"
+		"11100011"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"HUNDREDS_X"
-		"01000110000"
+		"00111110000"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"TENS_X"
-		"01001000100"
+		"01000011000"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"UNITS_X"
-		"01001011000"
+		"01001000000"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"SCORE_Y"
-		"00000010100"
+		"00000000000"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 216 128)(line_width 1))
+		(rectangle (rect 16 16 240 160)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 248 -64 348 16))
+	(annotation_block (parameter)(rect 272 -64 372 16))
 )
