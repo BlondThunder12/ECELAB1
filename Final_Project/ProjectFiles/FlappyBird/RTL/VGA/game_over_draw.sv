@@ -155,15 +155,14 @@ assign replaceHeader = insidePanel && final_score_bcd == 12'h999 &&
                        layoutX >= 2 && layoutX < 254 &&
                        layoutY >= 2 && layoutY < 54;
 // >>1 maps layout coordinates back to source-PNG coordinates for the 5x7 font.
-// 4,12,20 are the three text lines' top Y positions in that source coordinate
-// system; 9,13,8 are their character counts (including spaces).
+// 6 and 16 are the two text lines' top Y positions in that source coordinate
+// system; 13 and 8 are their character counts (including spaces).
 // message is always 104 bits = 13 ASCII characters. Pad shorter messages with
-// 32'd0 (4 unused character slots) or 40'd0 (5 unused character slots).
-// OR the three line pixels: a 1 draws purple ink, a 0 leaves yellow background
+// 40'd0 (5 unused character slots) for THE GAME.
+// OR the two line pixels: a 1 draws purple ink, a 0 leaves yellow background
 // when replaceHeader is active. No additional victory image is read.
-assign headerPixel = text_pixel(layoutX >> 1, (layoutY >> 1) - 4, {"CONGRATS!",32'd0}, 9) ||
-                     text_pixel(layoutX >> 1, (layoutY >> 1) - 12, "YOU HAVE BEAT", 13) ||
-                     text_pixel(layoutX >> 1, (layoutY >> 1) - 20, {"THE GAME",40'd0}, 8);
+assign headerPixel = text_pixel(layoutX >> 1, (layoutY >> 1) - 6, "YOU HAVE BEAT", 13) ||
+                     text_pixel(layoutX >> 1, (layoutY >> 1) - 16, {"THE GAME",40'd0}, 8);
 
 // Delay every selection flag with both ROM addresses, keeping one clock of
 // latency like the start, pause and rulebook renderers.
