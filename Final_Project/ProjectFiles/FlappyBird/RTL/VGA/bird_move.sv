@@ -34,15 +34,22 @@ const logic signed 	[10:0]	FIXED_POINT_MULTIPLIER = 64; // note it must be 2^n
 // we devide at the end by FIXED_POINT_MULTIPLIER which must be 2^n, to return to the initial proportions
 
 
-// movement limits 
-const int   OBJECT_WIDTH_X = 64;
-const int   OBJECT_HIGHT_Y = 32;
-const int	SafetyMargin   =	2;
+// birdPic.mif is cropped to 17x12 without resampling, displayed at 2x.
+localparam int OBJECT_WIDTH_X = 34;
+localparam int OBJECT_HEIGHT_Y = 24;
+// Preserve the visible position from the former padded 64x64 drawing box.
+// INITIAL_X/Y and the physics registers retain their original reference point.
+localparam int DRAW_OFFSET_X = 14; // 7 cropped source columns * 2x display scale.
+localparam int DRAW_OFFSET_Y = 20; // 10 cropped source rows * 2x display scale.
+// These offsets preserve the bird's visible location; they add no blank pixels.
+// No SafetyMargin: the visible bird now touches the ceiling/ground at contact.
+localparam int PLAY_AREA_TOP = 0;
+localparam int PLAY_AREA_BOTTOM = 480 - 32; // First ground row, like ground_draw.
 
-const int	x_FRAME_LEFT	=	(SafetyMargin)* FIXED_POINT_MULTIPLIER; 
-const int	x_FRAME_RIGHT	=	(639 - SafetyMargin - OBJECT_WIDTH_X)* FIXED_POINT_MULTIPLIER; 
-const int	y_FRAME_TOP		=	(SafetyMargin) * FIXED_POINT_MULTIPLIER;
-const int	y_FRAME_BOTTOM	=	(479 -SafetyMargin - OBJECT_HIGHT_Y ) * FIXED_POINT_MULTIPLIER; //- OBJECT_HIGHT_Y
+const int x_FRAME_LEFT = -DRAW_OFFSET_X * FIXED_POINT_MULTIPLIER;
+const int x_FRAME_RIGHT = (640 - DRAW_OFFSET_X - OBJECT_WIDTH_X) * FIXED_POINT_MULTIPLIER;
+const int y_FRAME_TOP = (PLAY_AREA_TOP - DRAW_OFFSET_Y) * FIXED_POINT_MULTIPLIER;
+const int y_FRAME_BOTTOM = (PLAY_AREA_BOTTOM - DRAW_OFFSET_Y - OBJECT_HEIGHT_Y) * FIXED_POINT_MULTIPLIER;
 
 
 // Global game states needed to update the bird movement
@@ -176,12 +183,7 @@ begin : fsm_sync_proc
 			START_OF_FRAME_ST:  begin      //check if any colisin was detected 
 		//------------
 	
-			// Check if the bird hit the border
-			if (!godmode && (Yposition <= y_FRAME_TOP || Yposition >= y_FRAME_BOTTOM)) begin
-				bird_hit_borders <= 1'b1;
-			end
-			
-			else if(!reverse_gravity_switch && Yspeed > MAX_Y_SPEED) begin
+			if(!reverse_gravity_switch && Yspeed > MAX_Y_SPEED) begin
 				Yspeed <= MAX_Y_SPEED;
 			end
 			else if(reverse_gravity_switch && Yspeed < -MAX_Y_SPEED) begin
@@ -220,12 +222,16 @@ begin : fsm_sync_proc
 			if (Xposition > x_FRAME_RIGHT)
 							Xposition <= x_FRAME_RIGHT ; 
 			
-			// make sure bird Y coordinates are in screen
-			if (Yposition <= y_FRAME_TOP) 
-							Yposition <= y_FRAME_TOP ;
-			
-			if (Yposition >= y_FRAME_BOTTOM) 
-							Yposition <= y_FRAME_BOTTOM ; 
+			// Check the updated position, then clamp at visible contact. Latch the
+			// hit here so reaching an edge does not wait for another frame.
+			if (Yposition <= y_FRAME_TOP) begin
+				Yposition <= y_FRAME_TOP;
+				if (!godmode) bird_hit_borders <= 1'b1;
+			end
+			if (Yposition >= y_FRAME_BOTTOM) begin
+				Yposition <= y_FRAME_BOTTOM;
+				if (!godmode) bird_hit_borders <= 1'b1;
+			end
 			SM_Motion <= MOVE_ST ; 
 			
 			end
@@ -245,9 +251,10 @@ end // end fsm_sync
 
 //return from FIXED point trunc back to prame size parameters 
   
-assign 	topLeftX_tmp = Xposition / FIXED_POINT_MULTIPLIER ;   // note it must be 2^n 
+assign 	topLeftX_tmp = Xposition / FIXED_POINT_MULTIPLIER + DRAW_OFFSET_X;
 assign 	topLeftY_tmp = (game_state == START_SCREEN) ?
-						INITIAL_Y + int'(menuYOffset) : Yposition / FIXED_POINT_MULTIPLIER;
+						INITIAL_Y + DRAW_OFFSET_Y + int'(menuYOffset) :
+						Yposition / FIXED_POINT_MULTIPLIER + DRAW_OFFSET_Y;
 
 assign 	topLeftX = {topLeftX_tmp[10:0]} ;   // note it must be 2^n 
 assign 	topLeftY = {topLeftY_tmp[10:0]} ;    	

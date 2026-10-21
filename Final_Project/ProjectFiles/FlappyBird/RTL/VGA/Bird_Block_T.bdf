@@ -336,12 +336,12 @@ agreement for further details.
 	)
 	(parameter
 		"OBJECT_WIDTH_X"
-		"64"
+		"34"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"OBJECT_HEIGHT_Y"
-		"64"
+		"24"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
