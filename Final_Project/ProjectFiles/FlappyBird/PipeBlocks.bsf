@@ -5,25 +5,25 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
 agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 208)
+	(rect 16 16 328 256)
 	(text "PipeBlocks" (rect 5 0 47 12)(font "Arial" ))
-	(text "inst" (rect 8 176 20 188)(font "Arial" ))
+	(text "inst" (rect 8 224 20 236)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -46,67 +46,116 @@ agreement for further details.
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
-		(pt 0 96)
+		(pt 0 80)
 		(input)
 		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 91 87 103)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 75 87 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "speed_level[3..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "speed_level[3..0]" (rect 21 91 88 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
 		(pt 0 112)
 		(input)
-		(text "pixelX[10..0]" (rect 0 0 46 12)(font "Arial" ))
-		(text "pixelX[10..0]" (rect 21 107 67 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
+		(text "turbo" (rect 0 0 20 12)(font "Arial" ))
+		(text "turbo" (rect 21 107 41 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
 	)
 	(port
 		(pt 0 128)
 		(input)
-		(text "pixelY[10..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "pixelY[10..0]" (rect 21 123 68 135)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 0 0 46 12)(font "Arial" ))
+		(text "pixelX[10..0]" (rect 21 123 67 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "pipeDR" (rect 0 0 30 12)(font "Arial" ))
-		(text "pipeDR" (rect 189 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 1))
-	)
-	(port
-		(pt 240 48)
-		(output)
-		(text "pipeRGB[7..0]" (rect 0 0 56 12)(font "Arial" ))
-		(text "pipeRGB[7..0]" (rect 163 43 219 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48)(line_width 3))
-	)
-	(port
-		(pt 240 64)
-		(output)
-		(text "updateScorePulse" (rect 0 0 70 12)(font "Arial" ))
-		(text "updateScorePulse" (rect 149 59 219 71)(font "Arial" ))
-		(line (pt 240 64)(pt 224 64)(line_width 1))
-	)
-	(port
-		(pt 240 80)
-		(output)
-		(text "debug_led" (rect 0 0 40 12)(font "Arial" ))
-		(text "debug_led" (rect 179 75 219 87)(font "Arial" ))
-		(line (pt 240 80)(pt 224 80)(line_width 1))
 	)
 	(port
 		(pt 0 144)
 		(input)
-		(text "speed_level[3..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "speed_level[3..0]" (rect 21 139 121 151)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 0 0 47 12)(font "Arial" ))
+		(text "pixelY[10..0]" (rect 21 139 68 151)(font "Arial" ))
 		(line (pt 0 144)(pt 16 144)(line_width 3))
 	)
 	(port
-		(pt 0 160)
-		(input)
-		(text "turbo" (rect 0 0 100 12)(font "Arial" ))
-		(text "turbo" (rect 21 155 121 167)(font "Arial" ))
-		(line (pt 0 160)(pt 16 160)(line_width 1))
+		(pt 312 32)
+		(output)
+		(text "pipeDR" (rect 0 0 30 12)(font "Arial" ))
+		(text "pipeDR" (rect 261 27 291 39)(font "Arial" ))
+		(line (pt 312 32)(pt 296 32)(line_width 1))
+	)
+	(port
+		(pt 312 48)
+		(output)
+		(text "pipeRGB[7..0]" (rect 0 0 56 12)(font "Arial" ))
+		(text "pipeRGB[7..0]" (rect 235 43 291 55)(font "Arial" ))
+		(line (pt 312 48)(pt 296 48)(line_width 3))
+	)
+	(port
+		(pt 312 64)
+		(output)
+		(text "updateScorePulse" (rect 0 0 70 12)(font "Arial" ))
+		(text "updateScorePulse" (rect 221 59 291 71)(font "Arial" ))
+		(line (pt 312 64)(pt 296 64)(line_width 1))
+	)
+	(port
+		(pt 312 80)
+		(output)
+		(text "debug_led" (rect 0 0 40 12)(font "Arial" ))
+		(text "debug_led" (rect 251 75 291 87)(font "Arial" ))
+		(line (pt 312 80)(pt 296 80)(line_width 1))
+	)
+	(port
+		(pt 312 96)
+		(output)
+		(text "pipeXPositions[32..0]" (rect 0 0 139 12)(font "Arial" ))
+		(text "pipeXPositions[32..0]" (rect 152 91 291 103)(font "Arial" ))
+		(line (pt 312 96)(pt 296 96)(line_width 3))
+	)
+	(port
+		(pt 312 112)
+		(output)
+		(text "pipeHeights[17..0]" (rect 0 0 126 12)(font "Arial" ))
+		(text "pipeHeights[17..0]" (rect 165 107 291 119)(font "Arial" ))
+		(line (pt 312 112)(pt 296 112)(line_width 3))
+	)
+	(port
+		(pt 312 128)
+		(output)
+		(text "pipeReady[2..0]" (rect 0 0 120 12)(font "Arial" ))
+		(text "pipeReady[2..0]" (rect 171 123 291 135)(font "Arial" ))
+		(line (pt 312 128)(pt 296 128)(line_width 3))
+	)
+	(port
+		(pt 312 144)
+		(output)
+		(text "pipeRecycle[2..0]" (rect 0 0 126 12)(font "Arial" ))
+		(text "pipeRecycle[2..0]" (rect 165 139 291 151)(font "Arial" ))
+		(line (pt 312 144)(pt 296 144)(line_width 3))
+	)
+	(port
+		(pt 312 160)
+		(output)
+		(text "scrollStep[10..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "scrollStep[10..0]" (rect 230 155 291 167)(font "Arial" ))
+		(line (pt 312 160)(pt 296 160)(line_width 3))
+	)
+	(port
+		(pt 312 176)
+		(output)
+		(text "scrollUpdate" (rect 0 0 48 12)(font "Arial" ))
+		(text "scrollUpdate" (rect 243 171 291 183)(font "Arial" ))
+		(line (pt 312 176)(pt 296 176)(line_width 1))
+	)
+	(port
+		(pt 312 192)
+		(output)
+		(text "pipeSpacing[10..0]" (rect 0 0 69 12)(font "Arial" ))
+		(text "pipeSpacing[10..0]" (rect 222 187 291 199)(font "Arial" ))
+		(line (pt 312 192)(pt 296 192)(line_width 3))
 	)
 	(parameter
 		"NUM_PIPES"
@@ -120,7 +169,7 @@ agreement for further details.
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
 		"Max_Random_Number"
-		"35"
+		"32"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
@@ -134,7 +183,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 224 176)(line_width 1))
+		(rectangle (rect 16 16 296 224)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 256 -64 356 16))
+	(annotation_block (parameter)(rect 328 -64 428 16))
 )

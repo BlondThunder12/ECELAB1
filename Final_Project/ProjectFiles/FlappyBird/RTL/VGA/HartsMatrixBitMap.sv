@@ -1,140 +1,136 @@
-// HartsMatrixBitMap File 
-// A two level bitmap. dosplaying harts on the screen Feb 2025 
-//(c) Technion IIT, Department of Electrical Engineering 2025 
-
-
-
-module	HartsMatrixBitMap	(	
-					input	logic	clk,
-					input	logic	resetN,
-					input logic	[10:0] offsetX,// offset from top left  position 
-					input logic	[10:0] offsetY,
-					input	logic	InsideRectangle, //input that the pixel is within a bracket 
-					input logic random_hart,
-					input logic collision_Smiley_Hart,
-
-					output	logic	drawingRequest, //output that the pixel should be dispalyed 
-					output	logic	[7:0] RGBout  //rgb value from the bitmap 
- ) ;
- 
-
-localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// RGB value in the bitmap representing a transparent pixel 
-
-
-localparam  logic [9:0] TILE_NUMBER_OF_X_BITS = 5;  // 2^5 = 32  everu object 
-localparam  logic [9:0] TILE_NUMBER_OF_Y_BITS = 5;  // 2^5 = 32 
-
-localparam  int MAZE_NUMBER_OF__X_BITS = 4;  // 2^4 = 16 / /the maze of the objects 
-localparam  int MAZE_NUMBER_OF__Y_BITS = 3;  // 2^3 = 8 
-
-//-----
-
-localparam  logic [9:0] TILE_WIDTH_X = 10'b1 << TILE_NUMBER_OF_X_BITS ;
-localparam  logic [9:0] TILE_HEIGHT_Y = 1'b1 <<  TILE_NUMBER_OF_Y_BITS ;
-localparam  logic [10:0] MAZE_WIDTH_X = 11'b1 << MAZE_NUMBER_OF__X_BITS ;
-localparam  logic [10:0] MAZE_HEIGHT_Y = 11'b1 << MAZE_NUMBER_OF__Y_BITS ;
-
-
- logic [9:0] offsetX_LSB  ;
- logic [9:0] offsetY_LSB  ; 
- logic [10:0] offsetX_MSB ;
- logic [10:0] offsetY_MSB  ;
- logic [9:0] address  ;
- logic [0:1][7:0] color  ;
-
- assign offsetX_LSB  = offsetX[(TILE_NUMBER_OF_X_BITS-1):0] ; // get lower bits 
- assign offsetY_LSB  = offsetY[(TILE_NUMBER_OF_Y_BITS-1):0] ; // get lower bits 
- assign offsetX_MSB  = offsetX[(TILE_NUMBER_OF_X_BITS + MAZE_NUMBER_OF__X_BITS -1 ):TILE_NUMBER_OF_X_BITS] ; // get higher bits 
- assign offsetY_MSB  = offsetY[(TILE_NUMBER_OF_Y_BITS + MAZE_NUMBER_OF__Y_BITS -1 ):TILE_NUMBER_OF_Y_BITS] ; // get higher bits 
- assign address = (offsetY_LSB*TILE_WIDTH_X + offsetX_LSB);
-
-
-
- 
-// the screen is 640*480  or  20 * 15 squares of 32*32  bits ,  we wiil round up to 8 *16 
-// this is the bitmap  of the maze , if there is a specific value  the  whole 32*32 rectange will be drawn on the screen
-// there are  16 options of differents kinds of 32*32 squares 
-// all numbers here are hard coded to simplify the understanding 
-
-
-logic [0:(MAZE_HEIGHT_Y-1)][0:(MAZE_WIDTH_X-1)] [3:0]  MazeBitMapMask ;  
-
-logic [0:(MAZE_HEIGHT_Y-1)][0:(MAZE_WIDTH_X-1)] [3:0]   MazeDefaultBitMapMask= // defult table to load on reset 
-{{64'h1001110000011100},
- {64'h0010001101100010},
- {64'h0001000010000100},
- {64'h0020100000001200},
- {64'h0000010000010000},
- {64'h0000001000100000},
- {64'h0000000101000000},
- {64'h0000000010000000}};
-
-lpm_rom #(
-    .LPM_WIDTH(8),
-    .LPM_WIDTHAD(10),
-	 .LPM_NUMWORDS(1024),
-    .LPM_FILE("RTL/heart1.mif"),
-	   .LPM_TYPE               ("LPM_ROM"),
-      .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
-		.LPM_OUTDATA            ("UNREGISTERED"), 
-		.AUTO_CARRY_CHAINS      ("ON"),
-		.AUTO_CASCADE_BUFFERS   ("ON"),
-	   .INTENDED_DEVICE_FAMILY ("Cyclone V")  
-) rom_inst (
-    .address(address),
-	 .inclock(clk),
-	// .outclock(clk),
-    .q(color[0])
+// HartsMatrixBitMap: the existing heart renderer now shares one indexed ROM
+// between moving pickups and the three remaining-life icons in the HUD.
+module HartsMatrixBitMap (
+    input  logic        clk,
+    input  logic        resetN,
+    input  logic [10:0] pixelX,
+    input  logic [10:0] pixelY,
+    input  logic [1:0]  game_state,
+    input  logic [1:0]  lives,
+    input  logic [32:0] itemXPositions,
+    input  logic [26:0] itemYPositions,
+    input  logic [2:0]  itemActive,
+    input  logic [5:0]  itemTypes,
+    output logic        drawingRequest,       // World pickup only, for collection/mux
+    output logic        livesDrawingRequest,  // HUD only, drawn above pipes
+    output logic [7:0]  RGBout,
+    output logic [1:0]  pickupIndex
 );
 
- 
-lpm_rom #(
-    .LPM_WIDTH(8),
-    .LPM_WIDTHAD(10),
-	 .LPM_NUMWORDS(1024),
-    .LPM_FILE("RTL/heart2.mif"),
-	   .LPM_TYPE               ("LPM_ROM"),
-      .LPM_ADDRESS_CONTROL    ("REGISTERED"), 
-		.LPM_OUTDATA            ("UNREGISTERED"), 
-		.AUTO_CARRY_CHAINS      ("ON"),
-		.AUTO_CASCADE_BUFFERS   ("ON"),
-	   .INTENDED_DEVICE_FAMILY ("Cyclone V")  
-) rom_inst2 (
-    .address(address),
-	 .inclock(clk),
-	// .outclock(clk),
-    .q(color[1])
-); 
+localparam logic [1:0] START_SCREEN = 2'b00;
+localparam logic [1:0] HEART_TILE = 2'd1; // icons.png order: coin, heart, TNT
+int sourceX, sourceY, pickupX, pickupY, relativeX, relativeY;
+logic worldInside, hudInside;
+logic [1:0] selectedPickup;
+logic [1:0] selectedType;
+logic [11:0] address;
+logic [3:0] colorIndex;
+logic [7:0] pixelRGB, pixelRGB_d;
+logic world_d, hud_d, world_dd, hud_dd;
+logic [1:0] pickup_d, pickup_dd;
 
- 
-
-//==----------------------------------------------------------------------------------------------------------------=
-always_ff@(posedge clk or negedge resetN)
-begin
-	if(!resetN) begin
-		RGBout <=	8'h00;
-		MazeBitMapMask  <=  MazeDefaultBitMapMask ;  //  copy default tabel 
-	end
-	else begin
-		RGBout <= TRANSPARENT_ENCODING ; // default 
-		if (collision_Smiley_Hart)
-			MazeBitMapMask[offsetY_MSB][offsetX_MSB] <= 4'h00;  // clear entry 
-		
-		if (InsideRectangle == 1'b1 )	
-			begin 
-		   	case (MazeBitMapMask[offsetY_MSB][offsetX_MSB])
-					 4'h0 : RGBout <= TRANSPARENT_ENCODING ;
-			   	 4'h1 : RGBout <= color[random_hart]; 
-					 4'h2 : RGBout <= color[1] ; 
-					 default:  RGBout <= TRANSPARENT_ENCODING ; 
-				endcase
-			end 
-
-	end 
+always_comb begin
+    sourceX = 0;
+    sourceY = 0;
+    pickupX = 0;
+    pickupY = 0;
+    relativeX = 0;
+    relativeY = 0;
+    worldInside = 1'b0;
+    hudInside = 1'b0;
+    selectedPickup = 2'd0;
+    selectedType = HEART_TILE;
+    if (game_state != START_SCREEN) begin
+        for (int j = 0; j < 3; j++) begin
+            pickupX = int'($signed(itemXPositions[j*11 +: 11]));
+            pickupY = int'(itemYPositions[j*9 +: 9]);
+            relativeX = int'(pixelX) - pickupX;
+            relativeY = int'(pixelY) - pickupY;
+            if (itemActive[j] && relativeX >= 0 && relativeX < 32 &&
+                relativeY >= 0 && relativeY < 32) begin
+                sourceX = relativeX;
+                sourceY = relativeY;
+                worldInside = 1'b1;
+                selectedPickup = 2'(j);
+                selectedType = itemTypes[j*2 +: 2];
+            end
+        end
+        // Native 32x32 HUD cells at X=16,56,96 and Y=16. One ROM port is
+        // sufficient because the VGA requests just one screen pixel at a time.
+        if (pixelY >= 16 && pixelY < 48) begin
+            if (lives >= 1 && pixelX >= 16 && pixelX < 48) begin
+                sourceX = int'(pixelX) - 16;
+                hudInside = 1'b1;
+            end else if (lives >= 2 && pixelX >= 56 && pixelX < 88) begin
+                sourceX = int'(pixelX) - 56;
+                hudInside = 1'b1;
+            end else if (lives >= 3 && pixelX >= 96 && pixelX < 128) begin
+                sourceX = int'(pixelX) - 96;
+                hudInside = 1'b1;
+            end
+            if (hudInside) begin
+                sourceY = int'(pixelY) - 16;
+                selectedType = HEART_TILE;
+                worldInside = 1'b0; // A HUD heart can never be collected.
+            end
+        end
+    end
+    address = (worldInside || hudInside) ? {selectedType,sourceY[4:0],sourceX[4:0]} : 12'd0;
 end
 
-//==----------------------------------------------------------------------------------------------------------------=
-// decide if to draw the pixel or not 
-assign drawingRequest = (RGBout != TRANSPARENT_ENCODING ) ? 1'b1 : 1'b0 ; // get optional transparent command from the bitmpap   
-endmodule
+lpm_rom #(
+    .lpm_width(4), .lpm_widthad(12), .lpm_numwords(3072),
+    .lpm_file("RTL/pickups.mif"), .lpm_type("LPM_ROM"),
+    .lpm_address_control("REGISTERED"), .lpm_outdata("UNREGISTERED"),
+    .intended_device_family("Cyclone V")
+) pickups_rom (
+    .address(address), .inclock(clk), .outclock(), .memenab(1'b1), .q(colorIndex)
+);
 
+// BEGIN GENERATED PALETTE
+always_comb begin
+    case (colorIndex)
+        4'd1: pixelRGB = 8'h00;
+        4'd2: pixelRGB = 8'h40;
+        4'd3: pixelRGB = 8'h80;
+        4'd4: pixelRGB = 8'h81;
+        4'd5: pixelRGB = 8'hC1;
+        4'd6: pixelRGB = 8'hE8;
+        4'd7: pixelRGB = 8'hF2;
+        4'd8: pixelRGB = 8'hF4;
+        4'd9: pixelRGB = 8'hFF;
+        default: pixelRGB = 8'h00;
+    endcase
+end
+// END GENERATED PALETTE
+
+// Three clocks, matching square_object + birdBitMap. Keep the pickup ID
+// beside its ROM pixel so an overlap always removes the correct pickup slot.
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) begin
+        world_d <= 1'b0;
+        hud_d <= 1'b0;
+        world_dd <= 1'b0;
+        hud_dd <= 1'b0;
+        pickup_d <= 2'd0;
+        pickup_dd <= 2'd0;
+        pickupIndex <= 2'd0;
+        pixelRGB_d <= 8'h00;
+        RGBout <= 8'h00;
+        drawingRequest <= 1'b0;
+        livesDrawingRequest <= 1'b0;
+    end else begin
+        world_d <= worldInside;
+        hud_d <= hudInside;
+        pickup_d <= selectedPickup;
+        world_dd <= world_d && colorIndex != 0;
+        hud_dd <= hud_d && colorIndex != 0;
+        pickup_dd <= pickup_d;
+        pixelRGB_d <= pixelRGB;
+        drawingRequest <= world_dd;
+        livesDrawingRequest <= hud_dd;
+        pickupIndex <= pickup_dd;
+        RGBout <= (world_dd || hud_dd) ? pixelRGB_d : 8'h00;
+    end
+end
+endmodule

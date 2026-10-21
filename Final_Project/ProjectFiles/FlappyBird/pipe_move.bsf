@@ -5,23 +5,23 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
 agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 256 192)
+	(rect 16 16 264 192)
 	(text "pipe_move" (rect 5 0 49 12)(font "Arial" ))
 	(text "inst" (rect 8 160 20 172)(font "Arial" ))
 	(port
@@ -46,25 +46,60 @@ agreement for further details.
 		(line (pt 0 64)(pt 16 64)(line_width 1))
 	)
 	(port
-		(pt 0 96)
+		(pt 0 80)
 		(input)
 		(text "trigger_move" (rect 0 0 54 12)(font "Arial" ))
-		(text "trigger_move" (rect 21 91 75 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
+		(text "trigger_move" (rect 21 75 75 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 1))
 	)
 	(port
-		(pt 240 32)
+		(pt 0 96)
+		(input)
+		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 91 87 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 3))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "speed_level[3..0]" (rect 0 0 67 12)(font "Arial" ))
+		(text "speed_level[3..0]" (rect 21 107 88 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "turbo" (rect 0 0 20 12)(font "Arial" ))
+		(text "turbo" (rect 21 123 41 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
+		(pt 248 32)
 		(output)
 		(text "topLeftX[10..0]" (rect 0 0 57 12)(font "Arial" ))
-		(text "topLeftX[10..0]" (rect 162 27 219 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
+		(text "topLeftX[10..0]" (rect 170 27 227 39)(font "Arial" ))
+		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
 	(port
-		(pt 240 48)
+		(pt 248 48)
 		(output)
 		(text "generateNewChunks" (rect 0 0 82 12)(font "Arial" ))
-		(text "generateNewChunks" (rect 137 43 219 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48)(line_width 1))
+		(text "generateNewChunks" (rect 145 43 227 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 1))
+	)
+	(port
+		(pt 248 64)
+		(output)
+		(text "scrollStep[10..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "scrollStep[10..0]" (rect 166 59 227 71)(font "Arial" ))
+		(line (pt 248 64)(pt 232 64)(line_width 3))
+	)
+	(port
+		(pt 248 80)
+		(output)
+		(text "scrollUpdate" (rect 0 0 48 12)(font "Arial" ))
+		(text "scrollUpdate" (rect 179 75 227 87)(font "Arial" ))
+		(line (pt 248 80)(pt 232 80)(line_width 1))
 	)
 	(parameter
 		"INITIAL_X"
@@ -96,29 +131,8 @@ agreement for further details.
 		"720"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "game_state[1..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 107 121 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 3))
-	)
-	(port
-		(pt 0 128)
-		(input)
-		(text "speed_level[3..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "speed_level[3..0]" (rect 21 123 121 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 3))
-	)
-	(port
-		(pt 0 144)
-		(input)
-		(text "turbo" (rect 0 0 100 12)(font "Arial" ))
-		(text "turbo" (rect 21 139 121 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 1))
-	)
 	(drawing
-		(rectangle (rect 16 16 224 160)(line_width 1))
+		(rectangle (rect 16 16 232 160)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 256 -64 356 16))
+	(annotation_block (parameter)(rect 264 -64 364 16))
 )

@@ -10,7 +10,9 @@ module pipe_move (
     input   logic turbo,                 // Active-high temporary 2x movement
     
     output  logic signed [10:0] topLeftX,// Output target X coordinate
-    output  logic               generateNewChunks // Pulses when pipe wraps around to pick a new height
+    output  logic               generateNewChunks, // Pulses when pipe wraps around to pick a new height
+    output  logic [10:0]         scrollStep,        // Shared step, in 1/64 pixel units
+    output  logic               scrollUpdate       // Same edge that advances Xposition
 );
 
 int topLeftX_tmp;
@@ -68,6 +70,11 @@ end
 assign normal_Xspeed = INITIAL_X_SPEED +
                        (INITIAL_X_SPEED * 3 * ((speed_level > 4'd10) ? 4'd10 : speed_level)) / 10;
 assign effective_Xspeed = turbo_sync ? (normal_Xspeed * 2) : normal_Xspeed;
+// Report the actual subtraction made in POSITION_CHANGE_ST. PipeBlocks uses
+// pipe 0's copy because all pipe instances move by the same amount and cycle.
+// These outputs describe normal scrolling; wrapping a pipe does not move items.
+assign scrollStep = 11'(Xspeed);
+assign scrollUpdate = (game_state == PLAYING) && (SM_Motion == POSITION_CHANGE_ST);
 
 always_ff @(posedge clk or negedge resetN) begin : fsm_sync_proc
     if (!resetN) begin

@@ -4,8 +4,7 @@ module game_manager(
 	input		logic       start_key,     // Key to start the game
 	input		logic       restart_key,   // Key to Restart the game from Game Over screen
 	input		logic			pause_key, 		// Key to pause the game and can be continued with the same key
-	input		logic       collision,     // to know to move to the end screen
-	input		logic 		bird_hit_borders,
+    input       logic [1:0] lives,       // Damage and pickup effects belong to player_lives.
 	input       logic [9:0] score,       // Binary value of the existing displayed score
 	input       logic godmode_switch,   // Active-high SW[8], asynchronous to clk
 
@@ -65,7 +64,7 @@ always_comb begin
       PLAYING: begin
 			// Winning ends the run even when Godmode suppresses ordinary hazards.
 			if (score >= 10'd999) next_state = GAME_OVER;
-			else if (!godmode_active && (collision || bird_hit_borders)) next_state = GAME_OVER;
+			else if (lives == 0) next_state = GAME_OVER;
 			else if(pause_key && !pause_key_D) next_state = PAUSED;
       end
         

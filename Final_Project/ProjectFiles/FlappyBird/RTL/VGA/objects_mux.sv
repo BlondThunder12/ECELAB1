@@ -10,6 +10,8 @@ module objects_mux (
 
     input logic heartDrawingRequest,
     input logic [7:0] heartRGB,
+    input logic livesDrawingRequest, // HUD and pickups share the heart ROM's RGB.
+    input logic birdVisible,         // Blinking affects drawing, not collision masks.
 
     input logic [7:0] backGroundRGB,
     input logic BGDrawingRequest,
@@ -43,7 +45,9 @@ always_ff @(posedge clk or negedge resetN) begin
     end else begin
         if (screenDrawingRequest)
             RGBOut <= screenRGB;
-        else if (birdDrawingRequest)
+        else if (livesDrawingRequest)
+            RGBOut <= heartRGB;
+        else if (birdDrawingRequest && birdVisible)
             RGBOut <= birdRGB;
         else if (boxDrawingRequest)
             RGBOut <= boxRGB;

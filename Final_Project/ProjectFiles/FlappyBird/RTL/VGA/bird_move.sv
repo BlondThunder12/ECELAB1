@@ -4,11 +4,12 @@ module	bird_move	(
  
 					input	 logic clk,
 					input	 logic resetN,
-					input	 logic startOfFrame,      			//short pulse every start of frame 30Hz 
+					input	 logic startOfFrame,      			// One pulse per VGA frame
 					input	 logic Y_direction_key,   			//move Y Up   
 					input  logic reverse_gravity_switch, 	//to check if we need to reverse the gravity of ther bird
 					input	 logic [1:0] game_state,
-					input  logic godmode, // Synchronized mode; suppress latched boundary hits
+					input  logic godmode,
+					input  logic damage_pulse, // One clock for an accepted hit, from player_lives
 					
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
 					output logic signed	[10:0] topLeftY,  // can be negative , if the object is partliy outside
@@ -72,6 +73,7 @@ int Xposition ; //position
 int Yposition ;  
 
 logic Y_direction_key_D; // added an edge detector for the Y press
+logic [3:0] recoilOffset; // Brief 8-pixel movement away from a pipe, then return.
 
 // Menu animation: move one pixel every four frames, between -8 and +8.
 // This display offset is separate from the gameplay position and velocity.
@@ -110,9 +112,6 @@ always_ff @(posedge clk or negedge resetN) begin
 end
  
 
-  logic [4:0] hit_reg = 5'b00000;
- //---------
- 
 always_ff @(posedge clk or negedge resetN)
 begin : fsm_sync_proc
 
@@ -124,6 +123,7 @@ begin : fsm_sync_proc
 		Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
 		Y_direction_key_D <= 0 ;
 		bird_hit_borders <= 0;	
+		recoilOffset <= 4'd0;
 	end 	
 	else if(game_state == START_SCREEN) begin
 		SM_Motion <= IDLE_ST ; 
@@ -133,18 +133,45 @@ begin : fsm_sync_proc
 		Yposition <= INITIAL_Y*FIXED_POINT_MULTIPLIER   ; 
 		Y_direction_key_D <= 0 ;
 		bird_hit_borders <= 0;
+		recoilOffset <= 4'd0;
 	end
 	
 	else if (game_state == GAME_OVER) begin
-		Yspeed    <= 0;
+		bird_hit_borders <= 1'b0;
 		SM_Motion <= DEAD_ST;
+		// Show the panel immediately. Only the bird keeps moving, falling down
+		// to the ground even if reverse gravity was selected during the run.
+		if (SM_Motion != DEAD_ST)
+			Yspeed <= 0;
+		else if (startOfFrame) begin
+			if (Yposition + Yspeed >= y_FRAME_BOTTOM) begin
+				Yposition <= y_FRAME_BOTTOM;
+				Yspeed <= 0;
+			end else begin
+				Yposition <= Yposition + Yspeed;
+				if (Yspeed < MAX_Y_SPEED) Yspeed <= Yspeed - Y_ACCEL;
+			end
+		end
 	end
 	else if (game_state == PAUSED) begin
-		//do nothing :)
+		bird_hit_borders <= 1'b0; // Hold the position, velocity and recoil.
+	end
+	else if (damage_pulse) begin
+		bird_hit_borders <= 1'b0;
+		recoilOffset <= 4'd8;
+		Y_direction_key_D <= Y_direction_key;
+		// Rebound inward at a border; otherwise give the same lift as a flap.
+		if (Yposition <= y_FRAME_TOP) Yspeed <= MAX_Y_SPEED / 2;
+		else if (Yposition >= y_FRAME_BOTTOM) Yspeed <= -MAX_Y_SPEED / 2;
+		else if (!reverse_gravity_switch) Yspeed <= -MAX_Y_SPEED / 2;
+		else Yspeed <= MAX_Y_SPEED / 2;
+		SM_Motion <= MOVE_ST;
 	end
 	else begin
-		// Discard hits during Godmode, including while paused, so they cannot stay latched.
-	if (godmode) bird_hit_borders <= 1'b0;
+		// A contact is a pulse, not a latched hit. Ignored contacts during the
+		// cooldown must not become damage when that cooldown finishes.
+		bird_hit_borders <= 1'b0;
+		if (startOfFrame && recoilOffset != 0) recoilOffset <= recoilOffset - 1'b1;
 	
 		Y_direction_key_D <= Y_direction_key;
 	
@@ -222,14 +249,16 @@ begin : fsm_sync_proc
 			if (Xposition > x_FRAME_RIGHT)
 							Xposition <= x_FRAME_RIGHT ; 
 			
-			// Check the updated position, then clamp at visible contact. Latch the
-			// hit here so reaching an edge does not wait for another frame.
+			// Clamp at the visible edge and rebound inward, including during the
+			// damage cooldown. A border contact costs a life only when accepted.
 			if (Yposition <= y_FRAME_TOP) begin
 				Yposition <= y_FRAME_TOP;
+				Yspeed <= MAX_Y_SPEED / 2;
 				if (!godmode) bird_hit_borders <= 1'b1;
 			end
 			if (Yposition >= y_FRAME_BOTTOM) begin
 				Yposition <= y_FRAME_BOTTOM;
+				Yspeed <= -MAX_Y_SPEED / 2;
 				if (!godmode) bird_hit_borders <= 1'b1;
 			end
 			SM_Motion <= MOVE_ST ; 
@@ -251,7 +280,7 @@ end // end fsm_sync
 
 //return from FIXED point trunc back to prame size parameters 
   
-assign 	topLeftX_tmp = Xposition / FIXED_POINT_MULTIPLIER + DRAW_OFFSET_X;
+assign 	topLeftX_tmp = Xposition / FIXED_POINT_MULTIPLIER + DRAW_OFFSET_X - int'(recoilOffset);
 assign 	topLeftY_tmp = (game_state == START_SCREEN) ?
 						INITIAL_Y + DRAW_OFFSET_Y + int'(menuYOffset) :
 						Yposition / FIXED_POINT_MULTIPLIER + DRAW_OFFSET_Y;

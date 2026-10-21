@@ -6,12 +6,13 @@
 module	game_controller	(	
 			input	logic	clk,
 			input	logic	resetN,
-			input	logic	startOfFrame,  // short pulse every start of frame 30Hz 
+			input	logic	startOfFrame,  // One pulse per VGA frame
 			input	logic	drawing_request_bird,
 			input	logic	bird_OOB_collision,
 			input logic drawing_request_pipe,
 			input logic [1:0] game_state,
 			input logic godmode, // Synchronized game_manager.godmode_active
+            input logic invulnerable,
 			
 			output logic collision, // active in case of collision between two objects
 			
@@ -25,9 +26,23 @@ module	game_controller	(
 
 logic flag ; // a semaphore to set the output only once per frame regardless of number of collisions 
 logic collision_bird_pipe; 
+logic pipe_d, pipe_dd;
 
-assign collision_bird_pipe = (drawing_request_bird && drawing_request_pipe); 
-assign collision = !godmode && (bird_OOB_collision || collision_bird_pipe);
+// Pipe pixels have one clock of latency; square_object + birdBitMap have
+// three. Delay the pipe mask twice so both collision inputs refer to one pixel.
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) begin
+        pipe_d <= 1'b0;
+        pipe_dd <= 1'b0;
+    end else begin
+        pipe_d <= drawing_request_pipe;
+        pipe_dd <= pipe_d;
+    end
+end
+
+assign collision_bird_pipe = (drawing_request_bird && pipe_dd);
+assign collision = (game_state == 2'b01) && !godmode && !invulnerable &&
+                   (bird_OOB_collision || collision_bird_pipe);
 
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;

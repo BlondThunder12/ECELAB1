@@ -13,8 +13,7 @@ module	birdBitMap	(
 					input logic reverse_gravity_switch,
 
 					output	logic	drawingRequest, //output that the pixel should be dispalyed 
-					output	logic	[7:0] RGBout,  //rgb value from the bitmap 
-				   output   logic	[2:0] HitEdgeCode 
+					output	logic	[7:0] RGBout  //rgb value from the bitmap
  ) ;
 
 // Transparent margins were cropped from the original 32x32 ROM; every
@@ -26,18 +25,7 @@ logic [4:0] sourceX; // Source column 0..16 needs 5 bits.
 logic [3:0] sourceY; // Source row 0..11 needs 4 bits.
 logic insideBird;   // Current pixel is inside the cropped drawing rectangle.
 logic insideBird_d; // That flag delayed one clock to follow the ROM address.
-
- logic	[10:0] HitCodeX ;// offset of Hitcode 
- logic	[10:0] HitCodeY ; 
-
-// Map back to the original 16x16 hit-code grid after removing its padding.
-// First >>1: displayed pixel -> source pixel (the bird is enlarged 2x).
-// 7 = source columns removed from the LEFT of the original 32x32 image.
-// 10 = source rows removed from its TOP. Adding these restores the old
-// source coordinates for the legacy hit_colors table; it adds no image padding.
-// Final >>1: original 32x32 source coordinate -> 16x16 hit-code grid cell.
-assign HitCodeX = ((offsetX >> 1) + 11'd7) >> 1;
-assign HitCodeY = ((offsetY >> 1) + 11'd10) >> 1;
+logic validBirdPixel; // Follows RGBout; keep drawingRequest low during reset.
 
 
 assign insideBird = InsideRectangle && (offsetX < 34) && (offsetY < 24);
@@ -67,24 +55,6 @@ lpm_rom #(
     .q(color)
 );
 
- logic [0:15] [0:15] [2:0] hit_colors = 
-		  {48'o4433333333333344,     
-			48'o4443333333333444,    
-			48'o1444333333334442, 
-			48'o1144433333344422,
-			48'o1114443333444222,
-			48'o1111444334442222,
-			48'o1111144444422222,
-			48'o1111114444222222,
-			48'o1111114444222222,
-			48'o1111144444422222,
-			48'o1111444004442222,
-			48'o1114440000444222,
-			48'o1144400000044422,
-			48'o1444000000004442,
-			48'o4440000000000444,
-			48'o4400000000000044};
- 
 // pipeline (ff) to get the pixel color from the array 	 
 
 //////////--------------------------------------------------------------------------------------------------------------=
@@ -92,14 +62,14 @@ always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
 		RGBout <=	8'h00;
-		HitEdgeCode <= 3'h0;
+		validBirdPixel <= 1'b0;
 		insideBird_d <= 1'b0;
 
 	end
 
 	else begin
 		RGBout <= TRANSPARENT_ENCODING ; // default  
-		HitEdgeCode <= 3'h0;
+		validBirdPixel <= insideBird_d;
 		// Delay the bracket alongside the ROM address before using its color.
 		insideBird_d <= insideBird;
 
@@ -107,7 +77,6 @@ begin
 		begin // inside an external bracket 
 			 
 			RGBout <= color;
-			HitEdgeCode <= hit_colors[HitCodeY][HitCodeX];	//get hit edge code from the colors table  
 		
 		end  	
 	end
@@ -116,6 +85,6 @@ end
 
 //////////--------------------------------------------------------------------------------------------------------------=
 // decide if to draw the pixel or not 
-assign drawingRequest = (RGBout != TRANSPARENT_ENCODING ) ? 1'b1 : 1'b0 ; // get optional transparent command from the bitmpap   
+assign drawingRequest = validBirdPixel && (RGBout != TRANSPARENT_ENCODING);
 
 endmodule

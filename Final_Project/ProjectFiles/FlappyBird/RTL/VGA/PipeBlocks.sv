@@ -17,7 +17,14 @@ module PipeBlocks #(
 	output logic               pipeDR,
 	output logic         [7:0] pipeRGB,
 	output logic					updateScorePulse,
-	output logic					debug_led
+	output logic					debug_led,
+    output logic [NUM_PIPES*11-1:0] pipeXPositions,
+    output logic [NUM_PIPES*6-1:0] pipeHeights,
+    output logic [NUM_PIPES-1:0] pipeReady,
+    output logic [NUM_PIPES-1:0] pipeRecycle,
+    output logic [10:0] scrollStep, // Common movement amount, in 1/64 pixel units
+    output logic scrollUpdate,     // High on the clock cycle that moves all pipes
+    output logic [10:0] pipeSpacing // Horizontal distance between pipe positions
 );
 
 //-----------------------------------------------------------------------------
@@ -37,8 +44,21 @@ logic               dr_array       [NUM_PIPES];
 logic        [7:0]  rgb_array      [NUM_PIPES];
 logic        [5:0]  pipe_chunks    [NUM_PIPES]; // Stores the height for each pipe
 logic               pipe_active_D  [NUM_PIPES]; // Edge detectors for the latched triggers
+// Each pipe has its own X position. These arrays collect its movement report:
+// step_array[i] is how far pipe i moves; update_array[i] says when it moves.
+logic [10:0] step_array [NUM_PIPES];
+logic update_array [NUM_PIPES];
 logic	signed [10:0] topLeftX_prev  [NUM_PIPES]; // remembers where each pipe was 
-localparam int PIPE_ACTIVATE_X = 640 + 80; // Sample height before entering the visible area
+localparam int PIPE_ACTIVATE_X = 640 + 160; // Sample height while the pipe is still offscreen.
+// Every pipe_move receives the same clock, frame pulse, speed, turbo and game
+// state, so all pipes report the same step and update cycle. Forward pipe 0's
+// copy to the pickups; [0] does not select which pipes move. All pipes still
+// move their own positions. For example, a step of 192 moves every pipe and
+// active pickup left by 192/64 = 3 pixels on the same update.
+assign scrollStep = step_array[0];
+assign scrollUpdate = update_array[0];
+// Export the existing horizontal spacing as an 11-bit value for gap checks.
+assign pipeSpacing = 11'(PIPE_SPACING);
 
 
 //-----------------------------------------------------------------------------
@@ -99,7 +119,14 @@ always_ff @(posedge clk or negedge resetN) begin
             pipe_active_D[j] <= 1'b0;
         end
     end
-    else begin
+    else if (game_state == START_SCREEN) begin
+        for (int j = 0; j < NUM_PIPES; j++) begin
+            pipe_chunks[j] <= 6'd15;
+            pipe_active_D[j] <= 1'b0;
+        end
+    end
+    // Holding the sampler during pause also handles pausing on the wrap pulse.
+    else if (game_state == PLAYING) begin
         for (int j = 0; j < NUM_PIPES; j++) begin
             pipe_active_D[j] <= pipe_active[j]; // Update edge detector
 
@@ -117,6 +144,10 @@ end
 genvar i;
 generate
     for (i = 0; i < NUM_PIPES; i++) begin : gen_pipes
+        assign pipeXPositions[i*11 +: 11] = topLeftX[i];
+        assign pipeHeights[i*6 +: 6] = pipe_chunks[i];
+        assign pipeReady[i] = pipe_active_D[i]; // Height has already been sampled.
+        assign pipeRecycle[i] = newPipeGen[i];
     
         pipe_move #(
             .INITIAL_X_OFFSET   (i * PIPE_SPACING),
@@ -131,7 +162,9 @@ generate
 				.game_state			  (game_state),
             
             .topLeftX           (topLeftX[i]),
-            .generateNewChunks  (newPipeGen[i])
+            .generateNewChunks  (newPipeGen[i]),
+            .scrollStep         (step_array[i]),
+            .scrollUpdate       (update_array[i])
         );
 
         Pipe_Object obj_inst (
