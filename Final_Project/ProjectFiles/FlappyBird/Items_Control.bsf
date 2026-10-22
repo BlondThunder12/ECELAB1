@@ -213,6 +213,13 @@ agreement for further details.
 		(text "tntCollected[2..0]" (rect 211 171 275 183)(font "Arial" ))
 		(line (pt 296 176)(pt 280 176)(line_width 3))
 	)
+	(port
+		(pt 296 192)
+		(output)
+		(text "itemCollected" (rect 0 0 51 12)(font "Arial" ))
+		(text "itemCollected" (rect 224 187 275 199)(font "Arial" ))
+		(line (pt 296 192)(pt 280 192)(line_width 1))
+	)
 	(drawing
 		(rectangle (rect 16 16 280 320)(line_width 1))
 	)

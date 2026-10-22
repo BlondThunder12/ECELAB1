@@ -21,9 +21,9 @@ agreement for further details.
 */
 (header "symbol" (version "1.1"))
 (symbol
-	(rect 16 16 272 576)
+	(rect 16 16 272 608)
 	(text "objects_mux" (rect 5 0 55 12)(font "Arial" ))
-	(text "inst" (rect 8 544 20 556)(font "Arial" ))
+	(text "inst" (rect 8 576 20 588)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -249,6 +249,13 @@ agreement for further details.
 		(line (pt 0 528)(pt 16 528)(line_width 1))
 	)
 	(port
+		(pt 0 544)
+		(input)
+		(text "startOfFrame" (rect 0 0 55 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 539 76 551)(font "Arial" ))
+		(line (pt 0 544)(pt 16 544)(line_width 1))
+	)
+	(port
 		(pt 256 32)
 		(output)
 		(text "RGBOut[7..0]" (rect 0 0 55 12)(font "Arial" ))
@@ -260,8 +267,18 @@ agreement for further details.
 		"190"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"INITIAL_RADIUS"
+		"800"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"SHRINK_STEP"
+		"4"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 240 544)(line_width 1))
+		(rectangle (rect 16 16 240 576)(line_width 1))
 	)
 	(annotation_block (parameter)(rect 272 -64 372 16))
 )

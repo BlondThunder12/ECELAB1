@@ -60,6 +60,13 @@ agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 1))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "itemCollected" (rect 0 0 51 12)(font "Arial" ))
+		(text "itemCollected" (rect 21 107 72 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
 		(pt 248 32)
 		(output)
 		(text "startMelody" (rect 0 0 47 12)(font "Arial" ))
@@ -73,7 +80,13 @@ agreement for further details.
 		(text "melodySelect[3..0]" (rect 154 43 227 55)(font "Arial" ))
 		(line (pt 248 48)(pt 232 48)(line_width 3))
 	)
+	(parameter
+		"SCORE_COOLDOWN_CYCLES"
+		"00000000001111010000100100000000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
 		(rectangle (rect 16 16 232 128)(line_width 1))
 	)
+	(annotation_block (parameter)(rect 264 -64 364 16))
 )
