@@ -1,3 +1,10 @@
 # Local planning notes and pickup asset conversion script
 /TODO.md
 /images/Generate-PickupAssets.ps1
+
+# Keep notes, asset-generation helpers, and simulation tests local.
+*.md
+*.ps1
+*.do
+*_tb.sv
+/ProjectFiles/FlappyBird/tests/
