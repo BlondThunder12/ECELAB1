@@ -1,9 +1,12 @@
 module back_ground_draw #(
     parameter int SCREEN_WIDTH  = 640,
-    parameter int SCREEN_HEIGHT = 480
+    parameter int SCREEN_HEIGHT = 480,
+    // 60 seconds at 31.5 MHz / (833 pixels * 521 lines) per VGA frame.
+    parameter int DAY_NIGHT_FRAMES = 4355
 )(
     input  logic        clk,
     input  logic        resetN,
+    input  logic        startOfFrame,
     input  logic [10:0] pixelX,
     input  logic [10:0] pixelY,
     input  logic        night_mode,
@@ -15,44 +18,42 @@ module back_ground_draw #(
     output logic        out_night_mode
 );
 
-    localparam int TWO_MIN_FRAMES = 72000;
+    localparam logic [1:0] START_SCREEN = 2'b00;
+    localparam logic [1:0] PLAYING = 2'b01;
     localparam int BUILDING_SPEED_DIV = 64;   
+    localparam int TIMER_WIDTH = (DAY_NIGHT_FRAMES > 1) ? $clog2(DAY_NIGHT_FRAMES) : 1;
 
     logic [10:0] bg_X;
     logic [15:0] building_frame_cnt;
-    logic [19:0] night_timer;
+    logic [TIMER_WIDTH-1:0] night_timer;
     logic        internal_night;
-    logic        frame_flag;
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin
             bg_X               <= 11'd0;
             building_frame_cnt <= 16'd0;
-            night_timer        <= 20'd0;
+            night_timer        <= '0;
             internal_night     <= 1'b0;
-            frame_flag         <= 1'b0;
-        end else begin
-            if (pixelX == 11'd0 && pixelY == 11'd0) begin
-                if (!frame_flag) begin
-                    frame_flag <= 1'b1;
-                    if (game_state == 2'b01) begin
-                        if (building_frame_cnt >= BUILDING_SPEED_DIV - 1) begin
-                            building_frame_cnt <= 16'd0;
-                            bg_X               <= bg_X + 1'b1;
-                        end else begin
-                            building_frame_cnt <= building_frame_cnt + 1'b1;
-                        end
-
-                        if (night_timer >= TWO_MIN_FRAMES - 1) begin
-                            night_timer    <= 20'd0;
-                            internal_night <= ~internal_night;
-                        end else begin
-                            night_timer <= night_timer + 1'b1;
-                        end
-                    end
-                end
+        end else if (game_state == START_SCREEN) begin
+            // Enter returns through the menu without asserting the board reset.
+            bg_X               <= 11'd0;
+            building_frame_cnt <= 16'd0;
+            night_timer        <= '0;
+            internal_night     <= 1'b0;
+        end else if (game_state == PLAYING && startOfFrame) begin
+            // Pixel (0,0) repeats during vertical blanking; it is not a frame pulse.
+            if (building_frame_cnt >= BUILDING_SPEED_DIV - 1) begin
+                building_frame_cnt <= 16'd0;
+                bg_X               <= bg_X + 1'b1;
             end else begin
-                frame_flag <= 1'b0;
+                building_frame_cnt <= building_frame_cnt + 1'b1;
+            end
+
+            if (night_timer >= DAY_NIGHT_FRAMES - 1) begin
+                night_timer    <= '0;
+                internal_night <= ~internal_night;
+            end else begin
+                night_timer <= night_timer + 1'b1;
             end
         end
     end
@@ -80,32 +81,32 @@ module back_ground_draw #(
     logic [7:0] raw_bg_rgb2;
 
     lpm_rom #(
-        .LPM_WIDTH(8),
-        .LPM_WIDTHAD(14),
-        .LPM_NUMWORDS(16384),
-        .LPM_FILE("RTL/sky_buildings_bg.mif"),
-        .LPM_TYPE("LPM_ROM"),
-        .LPM_ADDRESS_CONTROL("REGISTERED"),
-        .LPM_OUTDATA("UNREGISTERED"),
-        .INTENDED_DEVICE_FAMILY("Cyclone V")
+        .lpm_width(8),
+        .lpm_widthad(14),
+        .lpm_numwords(16384),
+        .lpm_file("RTL/sky_buildings_bg.mif"),
+        .lpm_type("LPM_ROM"),
+        .lpm_address_control("REGISTERED"),
+        .lpm_outdata("UNREGISTERED"),
+        .intended_device_family("Cyclone V")
     ) bg_rom_inst1 (
         .address(rom_address),
-        .inclock(clk),
+        .inclock(clk), .outclock(), .memenab(1'b1),
         .q(raw_bg_rgb1)
     );
 
     lpm_rom #(
-        .LPM_WIDTH(8),
-        .LPM_WIDTHAD(14),
-        .LPM_NUMWORDS(16384),
-        .LPM_FILE("RTL/sky_buildings_bg2.mif"),
-        .LPM_TYPE("LPM_ROM"),
-        .LPM_ADDRESS_CONTROL("REGISTERED"),
-        .LPM_OUTDATA("UNREGISTERED"),
-        .INTENDED_DEVICE_FAMILY("Cyclone V")
+        .lpm_width(8),
+        .lpm_widthad(14),
+        .lpm_numwords(16384),
+        .lpm_file("RTL/sky_buildings_bg2.mif"),
+        .lpm_type("LPM_ROM"),
+        .lpm_address_control("REGISTERED"),
+        .lpm_outdata("UNREGISTERED"),
+        .intended_device_family("Cyclone V")
     ) bg_rom_inst2 (
         .address(rom_address),
-        .inclock(clk),
+        .inclock(clk), .outclock(), .memenab(1'b1),
         .q(raw_bg_rgb2)
     );
 

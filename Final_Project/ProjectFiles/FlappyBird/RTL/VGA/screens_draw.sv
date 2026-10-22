@@ -3,9 +3,11 @@
 module screens_draw (
     input  logic        clk,
     input  logic        resetN,
+    input  logic        startOfFrame,
     input  logic [10:0] pixelX,
     input  logic [10:0] pixelY,
     input  logic [1:0]  game_state,
+    input  logic [3:0]  speed_level,
     input  logic signed [5:0] menuYOffset,
     input  logic        rules_key,
     input  logic [11:0] final_score_bcd,
@@ -15,8 +17,14 @@ module screens_draw (
     output logic [7:0]  screenRGB
 );
 
-logic startDR, rulebookDR, pauseDR, gameOverDR;
-logic [7:0] startRGB, rulebookRGB, pauseRGB, gameOverRGB;
+logic startDR, rulebookDR, pauseDR, gameOverDR, speedUpDR;
+logic [7:0] startRGB, rulebookRGB, pauseRGB, gameOverRGB, speedUpRGB;
+
+speed_up_draw speed_notification (
+    .clk(clk), .resetN(resetN), .startOfFrame(startOfFrame),
+    .pixelX(pixelX), .pixelY(pixelY), .game_state(game_state), .speed_level(speed_level),
+    .speedUpDrawingRequest(speedUpDR), .speedUpRGB(speedUpRGB)
+);
 
 start_screen_draw start_screen (
     .clk(clk), .resetN(resetN), .pixelX(pixelX), .pixelY(pixelY),
@@ -62,6 +70,10 @@ always_comb begin
     else if (startDR) begin
         screenDrawingRequest = 1'b1;
         screenRGB = startRGB;
+    end
+    else if (speedUpDR) begin
+        screenDrawingRequest = 1'b1;
+        screenRGB = speedUpRGB;
     end
 end
 endmodule

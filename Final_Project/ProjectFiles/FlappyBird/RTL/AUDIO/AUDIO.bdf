@@ -544,9 +544,9 @@ agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "start_audio_out" (rect 0 0 61 12)(font "Arial" ))
-		(text "start_audio_out" (rect 21 43 82 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "start_audio_out[15..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "start_audio_out[15..0]" (rect 21 43 131 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
 		(pt 0 64)
@@ -608,9 +608,9 @@ agreement for further details.
 	(port
 		(pt 208 32)
 		(output)
-		(text "audio_out" (rect 0 0 37 12)(font "Arial" ))
-		(text "audio_out" (rect 150 27 187 39)(font "Arial" ))
-		(line (pt 208 32)(pt 192 32)(line_width 1))
+		(text "audio_out[15..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "audio_out[15..0]" (rect 112 27 192 39)(font "Arial" ))
+		(line (pt 208 32)(pt 192 32)(line_width 3))
 	)
 	(parameter
 		"CLK_FREQ"
@@ -1053,26 +1053,31 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "start_audio_out" (rect -264 408 -190 425)(font "Intel Clear" ))
+	(text "start_audio_out[15..0]" (rect -264 408 -158 425)(font "Intel Clear" ))
 	(pt -144 424)
 	(pt -264 424)
+	(bus)
 )
 (connector
 	(pt -144 544)
 	(pt -144 424)
+	(bus)
 )
 (connector
 	(pt -528 544)
 	(pt -144 544)
+	(bus)
 )
 (connector
 	(pt -528 544)
 	(pt -528 600)
+	(bus)
 )
 (connector
-	(text "start_audio_out" (rect -456 584 -382 601)(font "Intel Clear" ))
+	(text "start_audio_out[15..0]" (rect -456 584 -350 601)(font "Intel Clear" ))
 	(pt -528 600)
 	(pt -448 600)
+	(bus)
 )
 (connector
 	(text "dac_audio_out[15..0]" (rect 1654 192 1753 209)(font "Intel Clear" ))

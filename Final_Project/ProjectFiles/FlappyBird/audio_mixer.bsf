@@ -34,9 +34,9 @@ agreement for further details.
 	(port
 		(pt 0 48)
 		(input)
-		(text "start_audio_out" (rect 0 0 61 12)(font "Arial" ))
-		(text "start_audio_out" (rect 21 43 82 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "start_audio_out[15..0]" (rect 0 0 110 12)(font "Arial" ))
+		(text "start_audio_out[15..0]" (rect 21 43 131 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 3))
 	)
 	(port
 		(pt 0 64)

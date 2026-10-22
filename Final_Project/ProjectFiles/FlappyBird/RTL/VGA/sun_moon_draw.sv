@@ -1,9 +1,11 @@
 module sun_moon_draw #(
     parameter int OBJECT_WIDTH  = 64,
-    parameter int OBJECT_HEIGHT = 32
+    parameter int OBJECT_HEIGHT = 32,
+    parameter int SPEED_Q8 = 64 // 64/256 = one quarter pixel per VGA frame.
 )(
     input  logic        clk,
     input  logic        resetN,
+    input  logic        startOfFrame,
     input  logic [10:0] pixelX,
     input  logic [10:0] pixelY,
     input  logic        night_mode,
@@ -14,36 +16,29 @@ module sun_moon_draw #(
 );
 
     localparam signed [11:0] LEFT_BOUND = -OBJECT_WIDTH;
-    localparam int SPEED_DIV = 600;
+    localparam int FRACTION_BITS = 8;
+    localparam int PIXEL_SCALE = 1 << FRACTION_BITS;
+    localparam logic [1:0] START_SCREEN = 2'b00;
+    localparam logic [1:0] PLAYING = 2'b01;
 
     logic signed [11:0] object_X;
-    logic [15:0] frame_count;
-    logic        frame_flag;
+    logic signed [19:0] object_X_fp;
+
+    // Signed Q12.8 keeps fractional movement across frames and through pauses.
+    // Round upward so moving left advances a whole pixel after four frames.
+    assign object_X = 12'(($signed(object_X_fp) + PIXEL_SCALE - 1) >>> FRACTION_BITS);
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin
-            object_X    <= 12'sd550;
-            frame_count <= 16'd0;
-            frame_flag  <= 1'b0;
-        end else begin
-            if (pixelX == 11'd0 && pixelY == 11'd0) begin
-                if (!frame_flag) begin
-                    frame_flag <= 1'b1;
-                    if (game_state == 2'b01) begin
-                        if (frame_count >= SPEED_DIV - 1) begin
-                            frame_count <= 16'd0;
-                            if (object_X <= LEFT_BOUND)
-                                object_X <= 12'sd640;
-                            else
-                                object_X <= object_X - 1'b1;
-                        end else begin
-                            frame_count <= frame_count + 1'b1;
-                        end
-                    end
-                end
-            end else begin
-                frame_flag <= 1'b0;
-            end
+            object_X_fp <= 20'(550 * PIXEL_SCALE);
+        end else if (game_state == START_SCREEN) begin
+            object_X_fp <= 20'(550 * PIXEL_SCALE);
+        end else if (game_state == PLAYING && startOfFrame) begin
+            // Update only in vertical blanking. Wrap after the full sprite exits.
+            if ($signed(object_X_fp) - SPEED_Q8 < LEFT_BOUND * PIXEL_SCALE)
+                object_X_fp <= 20'(640 * PIXEL_SCALE);
+            else
+                object_X_fp <= object_X_fp - 20'(SPEED_Q8);
         end
     end
 
@@ -61,40 +56,52 @@ module sun_moon_draw #(
     assign rom_addr = 11'((s_pixelY - OBJECT_Y) * OBJECT_WIDTH + (s_pixelX - object_X));
 
     logic [7:0] rgb_sun, rgb_moon;
+    logic inside_object_d, night_mode_d;
+
+    // The ROM registers its address. Keep its mask and sprite selection aligned.
+    always_ff @(posedge clk or negedge resetN) begin
+        if (!resetN) begin
+            inside_object_d <= 1'b0;
+            night_mode_d <= 1'b0;
+        end else begin
+            inside_object_d <= inside_object;
+            night_mode_d <= night_mode;
+        end
+    end
 
     lpm_rom #(
-        .LPM_WIDTH(8),
-        .LPM_WIDTHAD(11),
-        .LPM_NUMWORDS(2048),
-        .LPM_FILE("RTL/sun.mif"),
-        .LPM_TYPE("LPM_ROM"),
-        .LPM_ADDRESS_CONTROL("REGISTERED"),
-        .LPM_OUTDATA("UNREGISTERED"),
-        .INTENDED_DEVICE_FAMILY("Cyclone V")
+        .lpm_width(8),
+        .lpm_widthad(11),
+        .lpm_numwords(2048),
+        .lpm_file("RTL/sun.mif"),
+        .lpm_type("LPM_ROM"),
+        .lpm_address_control("REGISTERED"),
+        .lpm_outdata("UNREGISTERED"),
+        .intended_device_family("Cyclone V")
     ) sun_rom (
         .address(rom_addr),
-        .inclock(clk),
+        .inclock(clk), .outclock(), .memenab(1'b1),
         .q(rgb_sun)
     );
 
     lpm_rom #(
-        .LPM_WIDTH(8),
-        .LPM_WIDTHAD(11),
-        .LPM_NUMWORDS(2048),
-        .LPM_FILE("RTL/moon.mif"),
-        .LPM_TYPE("LPM_ROM"),
-        .LPM_ADDRESS_CONTROL("REGISTERED"),
-        .LPM_OUTDATA("UNREGISTERED"),
-        .INTENDED_DEVICE_FAMILY("Cyclone V")
+        .lpm_width(8),
+        .lpm_widthad(11),
+        .lpm_numwords(2048),
+        .lpm_file("RTL/moon.mif"),
+        .lpm_type("LPM_ROM"),
+        .lpm_address_control("REGISTERED"),
+        .lpm_outdata("UNREGISTERED"),
+        .intended_device_family("Cyclone V")
     ) moon_rom (
         .address(rom_addr),
-        .inclock(clk),
+        .inclock(clk), .outclock(), .memenab(1'b1),
         .q(rgb_moon)
     );
 
     always_comb begin
-        if (inside_object) begin
-            if (night_mode) begin
+        if (inside_object_d) begin
+            if (night_mode_d) begin
                 if (rgb_moon > 8'h05) begin
                     sunMoonDrawingRequest = 1'b1;
                     sunMoonRGB            = rgb_moon;

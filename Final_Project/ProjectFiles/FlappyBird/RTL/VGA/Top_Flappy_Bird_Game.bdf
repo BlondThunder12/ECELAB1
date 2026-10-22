@@ -1681,9 +1681,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect 1368 1016 1592 1096))
 )
 (symbol
-	(rect -264 520 -24 664)
+	(rect -264 520 -24 680)
 	(text "back_ground_draw" (rect 5 0 95 12)(font "Arial" ))
-	(text "inst4" (rect 8 128 31 140)(font "Arial" ))
+	(text "inst4" (rect 8 144 31 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1725,6 +1725,13 @@ agreement for further details.
 		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
 		(text "game_state[1..0]" (rect 21 107 104 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "startOfFrame" (rect 0 0 67 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 123 88 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
 	)
 	(port
 		(pt 240 32)
@@ -1774,8 +1781,13 @@ agreement for further details.
 		"30"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"DAY_NIGHT_FRAMES"
+		"4355"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 224 128))
+		(rectangle (rect 16 16 224 144))
 	)
 	(annotation_block (parameter)(rect 0 408 240 504))
 )
@@ -1855,9 +1867,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect -736 448 -536 512))
 )
 (symbol
-	(rect -248 728 24 872)
+	(rect -248 728 24 888)
 	(text "sun_moon_draw" (rect 5 0 84 12)(font "Arial" ))
-	(text "inst6" (rect 8 128 31 140)(font "Arial" ))
+	(text "inst6" (rect 8 144 31 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1901,6 +1913,13 @@ agreement for further details.
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "startOfFrame" (rect 0 0 67 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 123 88 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
+	)
+	(port
 		(pt 272 32)
 		(output)
 		(text "sunMoonDrawingRequest" (rect 0 0 123 12)(font "Arial" ))
@@ -1924,8 +1943,13 @@ agreement for further details.
 		"32"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"SPEED_Q8"
+		"64"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 256 128))
+		(rectangle (rect 16 16 256 144))
 	)
 	(annotation_block (parameter)(rect 24 664 232 728))
 )
@@ -2342,9 +2366,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect -528 664 -318 702))
 )
 (symbol
-	(rect 1024 1496 1304 1704)
+	(rect 1024 1496 1304 1736)
 	(text "screens_draw" (rect 5 0 72 12)(font "Arial" ))
-	(text "inst14" (rect 8 192 37 204)(font "Arial" ))
+	(text "inst14" (rect 8 224 37 236)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -2416,6 +2440,20 @@ agreement for further details.
 		(line (pt 0 176)(pt 16 176))
 	)
 	(port
+		(pt 0 192)
+		(input)
+		(text "startOfFrame" (rect 0 0 86 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 187 107 199)(font "Arial" ))
+		(line (pt 0 192)(pt 16 192))
+	)
+	(port
+		(pt 0 208)
+		(input)
+		(text "speed_level[3..0]" (rect 0 0 86 12)(font "Arial" ))
+		(text "speed_level[3..0]" (rect 21 203 107 215)(font "Arial" ))
+		(line (pt 0 208)(pt 16 208)(line_width 3))
+	)
+	(port
 		(pt 280 32)
 		(output)
 		(text "screenDrawingRequest" (rect 0 0 113 12)(font "Arial" ))
@@ -2430,7 +2468,7 @@ agreement for further details.
 		(line (pt 280 48)(pt 264 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 264 192))
+		(rectangle (rect 16 16 264 224))
 	)
 )
 (connector
@@ -3838,4 +3876,27 @@ agreement for further details.
 	(text "startOfFrame" (rect 312 984 492 1001)(font "Arial" ))
 	(pt 392 1000)
 	(pt 304 1000)
+)
+
+(connector
+	(text "startOfFrame" (rect -360 632 -293 644)(font "Arial" ))
+	(pt -264 648)
+	(pt -360 648)
+)
+(connector
+	(text "startOfFrame" (rect -336 840 -269 852)(font "Arial" ))
+	(pt -248 856)
+	(pt -344 856)
+)
+
+(connector
+	(text "startOfFrame" (rect 872 1672 939 1684)(font "Arial" ))
+	(pt 1024 1688)
+	(pt 864 1688)
+)
+(connector
+	(text "speed_level[3..0]" (rect 872 1688 956 1700)(font "Arial" ))
+	(pt 1024 1704)
+	(pt 864 1704)
+	(bus)
 )

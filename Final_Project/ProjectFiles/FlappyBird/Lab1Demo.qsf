@@ -284,6 +284,10 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/sound_selector.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/start_screen_audio.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/audio_mixer.sv
 set_global_assignment -name MIF_FILE RTL/AUDIO/songs.mif
+set_global_assignment -name MIF_FILE RTL/AUDIO/menu_score.mif
+set_global_assignment -name MIF_FILE RTL/AUDIO/menu_pitch.mif
+set_global_assignment -name MIF_FILE RTL/AUDIO/menu_wave.mif
+set_global_assignment -name MIF_FILE RTL/AUDIO/menu_fade.mif
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/ground_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/cloud_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/sun_moon_draw.sv
@@ -346,6 +350,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/start_screen_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/rulebook_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pause_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/screens_draw.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/speed_up_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/game_over_draw.sv
 set_global_assignment -name MIF_FILE RTL/numbers.mif
 set_global_assignment -name MIF_FILE RTL/game_over_screen.mif
@@ -360,6 +365,8 @@ set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name SIGNALTAP_FILE Incorrect_item_spawning.stp
 
 set_global_assignment -name ENABLE_LOGIC_ANALYZER_INTERFACE ON
+
+
 
 
 
