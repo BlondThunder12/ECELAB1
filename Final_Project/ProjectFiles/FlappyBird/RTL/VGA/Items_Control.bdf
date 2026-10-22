@@ -388,6 +388,22 @@ agreement for further details.
 		(line (pt 78 12)(pt 82 8))
 	)
 )
+(pin
+	(output)
+	(rect 1880 1008 2056 1024)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "ghost_active" (rect 90 0 154 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
 (symbol
 	(rect 560 80 776 192)
 	(text "random" (rect 5 0 41 12)(font "Arial" ))
@@ -605,6 +621,13 @@ agreement for further details.
 		(text "coinCollected" (rect 201 155 267 167)(font "Arial" ))
 		(line (pt 272 160)(pt 256 160))
 	)
+	(port
+		(pt 272 176)
+		(output)
+		(text "ghostCollected" (rect 0 0 56 12)(font "Arial" ))
+		(text "ghostCollected" (rect 195 171 251 183)(font "Arial" ))
+		(line (pt 272 176)(pt 256 176)(line_width 1))
+	)
 	(parameter
 		"ENABLE_HEARTS"
 		"1"
@@ -612,6 +635,11 @@ agreement for further details.
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"ENABLE_COINS"
+		"1"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"ENABLE_GHOSTS"
 		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
@@ -727,9 +755,9 @@ agreement for further details.
 	)
 )
 (symbol
-	(rect 1320 400 1544 544)
+	(rect 1320 400 1544 576)
 	(text "player_lives" (rect 5 0 65 12)(font "Arial" ))
-	(text "health" (rect 8 128 37 140)(font "Arial" ))
+	(text "health" (rect 8 160 37 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -773,6 +801,13 @@ agreement for further details.
 		(line (pt 0 112)(pt 16 112))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "ghostCollected" (rect 0 0 56 12)(font "Arial" ))
+		(text "ghostCollected" (rect 21 123 77 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 1))
+	)
+	(port
 		(pt 224 32)
 		(output)
 		(text "lives[1..0]" (rect 0 0 49 12)(font "Arial" ))
@@ -800,15 +835,27 @@ agreement for further details.
 		(text "birdVisible" (rect 163 75 212 87)(font "Arial" ))
 		(line (pt 224 80)(pt 208 80))
 	)
+	(port
+		(pt 224 96)
+		(output)
+		(text "ghost_active" (rect 0 0 50 12)(font "Arial" ))
+		(text "ghost_active" (rect 153 91 203 103)(font "Arial" ))
+		(line (pt 224 96)(pt 208 96)(line_width 1))
+	)
 	(parameter
 		"INVULNERABLE_CLOCKS"
 		"31500000"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"GHOST_CLOCKS"
+		"94500000"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 208 128))
+		(rectangle (rect 16 16 208 160))
 	)
-	(annotation_block (parameter)(rect 1136 560 1336 624))
+	(annotation_block (parameter)(rect 1136 592 1376 688))
 )
 (symbol
 	(rect 256 160 288 176)
@@ -935,6 +982,11 @@ agreement for further details.
 	(pt 1824 984)
 )
 (connector
+	(text "ghost_active" (rect 1832 1000 1898 1012)(font "Arial" ))
+	(pt 1880 1016)
+	(pt 1824 1016)
+)
+(connector
 	(text "clk" (rect 376 96 390 108)(font "Arial" ))
 	(pt 560 112)
 	(pt 368 112)
@@ -987,6 +1039,11 @@ agreement for further details.
 	(pt 1128 512)
 )
 (connector
+	(text "ghostCollected" (rect 1136 512 1216 524)(font "Arial" ))
+	(pt 1320 528)
+	(pt 1128 528)
+)
+(connector
 	(text "lives[1..0]" (rect 1552 416 1601 428)(font "Arial" ))
 	(pt 1544 432)
 	(pt 1736 432)
@@ -1006,6 +1063,11 @@ agreement for further details.
 	(text "birdVisible" (rect 1552 464 1601 476)(font "Arial" ))
 	(pt 1544 480)
 	(pt 1736 480)
+)
+(connector
+	(text "ghost_active" (rect 1552 480 1622 492)(font "Arial" ))
+	(pt 1544 496)
+	(pt 1736 496)
 )
 (connector
 	(text "VCC" (rect 280 160 303 172)(font "Arial" ))
@@ -1143,6 +1205,11 @@ agreement for further details.
 	(pt 920 500)
 )
 (connector
+	(text "ghostCollected" (rect 840 500 920 512)(font "Arial" ))
+	(pt 832 516)
+	(pt 920 516)
+)
+(connector
 	(text "clk" (rect 1240 96 1254 108)(font "Arial" ))
 	(pt 1320 112)
 	(pt 1232 112)
@@ -1239,4 +1306,4 @@ agreement for further details.
 	(pt 288 1224)
 	(bus)
 )
-(text "Heart/coin pickups, remaining lives and damage cooldown" (rect 480 -120 956 -102)(font "Arial" (font_size 12)))
+(text "Heart/coin/ghost pickups, lives and damage protection" (rect 480 -120 956 -102)(font "Arial" (font_size 12)))

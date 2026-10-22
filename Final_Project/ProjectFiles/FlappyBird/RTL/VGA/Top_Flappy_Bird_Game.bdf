@@ -791,6 +791,13 @@ agreement for further details.
 		(text "coinCollected" (rect 193 139 243 151)(font "Arial" ))
 		(line (pt 264 144)(pt 248 144)(line_width 1))
 	)
+	(port
+		(pt 264 160)
+		(output)
+		(text "ghost_active" (rect 0 0 50 12)(font "Arial" ))
+		(text "ghost_active" (rect 193 155 243 167)(font "Arial" ))
+		(line (pt 264 160)(pt 248 160)(line_width 1))
+	)
 	(drawing
 		(rectangle (rect 16 16 248 288))
 	)
@@ -2135,6 +2142,13 @@ agreement for further details.
 		(line (pt 0 512)(pt 16 512)(line_width 3))
 	)
 	(port
+		(pt 0 528)
+		(input)
+		(text "ghost_active" (rect 0 0 50 12)(font "Arial" ))
+		(text "ghost_active" (rect 21 523 71 535)(font "Arial" ))
+		(line (pt 0 528)(pt 16 528)(line_width 1))
+	)
+	(port
 		(pt 256 32)
 		(output)
 		(text "RGBOut[7..0]" (rect 0 0 67 12)(font "Arial" ))
@@ -3276,6 +3290,11 @@ agreement for further details.
 	(pt 80 1400)
 )
 (connector
+	(text "ghost_active" (rect 0 1400 180 1417)(font "Arial" ))
+	(pt -8 1416)
+	(pt 80 1416)
+)
+(connector
 	(text "birdX[10..0]" (rect 872 200 927 212)(font "Arial" ))
 	(pt 864 216)
 	(pt 952 216)
@@ -3589,6 +3608,11 @@ agreement for further details.
 	(pt 392 968)
 	(pt 304 968)
 	(bus)
+)
+(connector
+	(text "ghost_active" (rect 312 968 382 980)(font "Arial" ))
+	(pt 392 984)
+	(pt 304 984)
 )
 (connector
 	(text "RGB[7..0]" (rect 656 472 705 484)(font "Arial" ))

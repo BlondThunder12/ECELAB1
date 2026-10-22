@@ -185,6 +185,13 @@ agreement for further details.
 		(text "coinCollected" (rect 201 155 251 167)(font "Arial" ))
 		(line (pt 272 160)(pt 256 160)(line_width 1))
 	)
+	(port
+		(pt 272 176)
+		(output)
+		(text "ghostCollected" (rect 0 0 56 12)(font "Arial" ))
+		(text "ghostCollected" (rect 195 171 251 183)(font "Arial" ))
+		(line (pt 272 176)(pt 256 176)(line_width 1))
+	)
 	(parameter
 		"ENABLE_HEARTS"
 		"1"
@@ -192,6 +199,11 @@ agreement for further details.
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"ENABLE_COINS"
+		"1"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(parameter
+		"ENABLE_GHOSTS"
 		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)

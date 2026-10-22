@@ -44,6 +44,7 @@ module objects_mux #(
     input logic signed [10:0] birdY,
     input logic night_mode,
     input logic [1:0] game_state,
+    input logic ghost_active,
 
     output logic [7:0] RGBOut
 );
@@ -53,6 +54,11 @@ localparam int LIGHT_RADIUS_SQ = LIGHT_RADIUS * LIGHT_RADIUS;
 logic signed [12:0] diffX, diffY;
 logic [25:0] dist_sq;
 logic inside_spotlight;
+logic bird_yellow_pixel;
+
+// Yellow body shades from birdPic.mif; retain the outline, eyes and red beak.
+assign bird_yellow_pixel = (birdRGB == 8'hF0) || (birdRGB == 8'hF8) ||
+                          (birdRGB == 8'hFC) || (birdRGB == 8'hFE);
 
 // birdX/Y are the visible 34x24 bird's top-left corner, including recoil.
 // Compare squared distances to draw a circle without calculating a square root.
@@ -77,7 +83,7 @@ always_ff @(posedge clk or negedge resetN) begin
         else if (night_mode && game_state != START_SCREEN && !inside_spotlight)
             RGBOut <= 8'h00;
         else if (birdDrawingRequest && birdVisible)
-            RGBOut <= birdRGB;
+            RGBOut <= (ghost_active && bird_yellow_pixel) ? 8'hFF : birdRGB;
         else if (pipesDrawingRequest)
             RGBOut <= pipesRGB;
         else if (heartDrawingRequest)

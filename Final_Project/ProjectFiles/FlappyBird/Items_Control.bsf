@@ -185,6 +185,13 @@ agreement for further details.
 		(text "coinCollected" (rect 193 139 243 151)(font "Arial" ))
 		(line (pt 264 144)(pt 248 144)(line_width 1))
 	)
+	(port
+		(pt 264 160)
+		(output)
+		(text "ghost_active" (rect 0 0 50 12)(font "Arial" ))
+		(text "ghost_active" (rect 193 155 243 167)(font "Arial" ))
+		(line (pt 264 160)(pt 248 160)(line_width 1))
+	)
 	(drawing
 		(rectangle (rect 16 16 248 288)(line_width 1))
 	)

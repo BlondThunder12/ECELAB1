@@ -242,6 +242,13 @@ agreement for further details.
 		(line (pt 0 512)(pt 16 512)(line_width 3))
 	)
 	(port
+		(pt 0 528)
+		(input)
+		(text "ghost_active" (rect 0 0 50 12)(font "Arial" ))
+		(text "ghost_active" (rect 21 523 71 535)(font "Arial" ))
+		(line (pt 0 528)(pt 16 528)(line_width 1))
+	)
+	(port
 		(pt 256 32)
 		(output)
 		(text "RGBOut[7..0]" (rect 0 0 55 12)(font "Arial" ))

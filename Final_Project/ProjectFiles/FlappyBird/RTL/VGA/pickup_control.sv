@@ -1,8 +1,9 @@
 // Shared pickup slots. Position belongs to the item, not to a recycled pipe.
-// Hearts and coins share the same spawn/move/collect path.
+// Hearts, coins and ghosts share the same spawn/move/collect path.
 module pickup_control #(
     parameter bit ENABLE_HEARTS = 1'b1,
-    parameter bit ENABLE_COINS = 1'b1
+    parameter bit ENABLE_COINS = 1'b1,
+    parameter bit ENABLE_GHOSTS = 1'b1
 )(
     input  logic        clk,
     input  logic        resetN,
@@ -28,13 +29,15 @@ module pickup_control #(
     output logic        itemCollected,
     output logic [1:0]  collectedType,
     output logic        heartCollected,
-    output logic        coinCollected
+    output logic        coinCollected,
+    output logic        ghostCollected
 );
 
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING = 2'b01;
 localparam logic [1:0] COIN = 2'd0;
 localparam logic [1:0] HEART = 2'd1; // Same tile numbers as pickups.mif
+localparam logic [1:0] GHOST = 2'd3;
 localparam int FIXED_POINT_MULTIPLIER = 64;
 localparam int SPAWN_X = 672;       // Entire 32-pixel item begins offscreen.
 localparam int ITEM_WIDTH = 32;
@@ -74,9 +77,15 @@ assign collectItem = (game_state == PLAYING) && pickupIndex < 3 &&
                      itemActive[pickupIndex] && itemAge[pickupIndex] == 2'd3 &&
                      birdDrawingRequest && pickupDrawingRequest;
 assign coinCollected = collectItem && (itemType[pickupIndex] == COIN);
+assign ghostCollected = collectItem && (itemType[pickupIndex] == GHOST);
 
 always_comb begin
-    if (ENABLE_HEARTS && ENABLE_COINS)
+    // With all types enabled: 4/8 coins, 3/8 hearts, 1/8 ghosts.
+    // A ghost replaces one of the former heart selections.
+    if (ENABLE_GHOSTS && ((!ENABLE_HEARTS && !ENABLE_COINS) ||
+                         random_value[2:0] == 3'b111))
+        nextType = GHOST;
+    else if (ENABLE_HEARTS && ENABLE_COINS)
         nextType = random_value[0] ? HEART : COIN;
     else if (ENABLE_HEARTS)
         nextType = HEART;
@@ -149,7 +158,7 @@ always_ff @(posedge clk or negedge resetN) begin
                     gapHandled[j] <= 1'b0;
                     // Decide ONCE for the space behind this pipe. Recycling
                     // prepares a future gap; it never moves an existing item.
-                    gapEnabled[j] <= (ENABLE_HEARTS || ENABLE_COINS) && random_value[j+5];
+                    gapEnabled[j] <= (ENABLE_HEARTS || ENABLE_COINS || ENABLE_GHOSTS) && random_value[j+5];
                     gapType[j] <= nextType;
                     gapYOffset[j] <= random_value[7:4];
                     // Randomize where within the gap X=672 will fall. This
