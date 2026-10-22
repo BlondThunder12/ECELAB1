@@ -7,22 +7,25 @@
 
 
 module	sintable	 #( 
-					COUNT_SIZE = 8  // size of the table (in bits) 
+					COUNT_SIZE = 8,  // size of the table (in bits)
+                    parameter int DEBOUNCE_CYCLES = 315_000 // 10 ms at 31.5 MHz
 		)	
 		(	
 //		--////////////////////	Clock Input	 	////////////////////	
 					input		logic	clk,
 					input		logic	resetN,
 					input		logic [COUNT_SIZE-1:0]	ADDR,
-					input    logic volume,
+					input    logic volume, // Active-low board KEY[3].
+                    output logic [1:0] volume_level, // Shared with menu audio.
 					output	logic [15:0]	Q // table function output 
 			);
 
 localparam int table_size = (2**COUNT_SIZE)-1;
 
 logic [7:0] tmp8bit  ; 
-logic [1:0] volume_level;
-logic volume_d;
+localparam int DEBOUNCE_BITS = (DEBOUNCE_CYCLES > 1) ? $clog2(DEBOUNCE_CYCLES) : 1;
+logic volume_meta, volume_sync, volume_stable;
+logic [DEBOUNCE_BITS-1:0] debounce_count;
 const logic [0:table_size] [7:0] sin_table = {
 8'h0,
 8'h3,
@@ -291,17 +294,30 @@ begin
 	begin
 	  tmp8bit	<= 8'h00;
 	  volume_level <= 2'h3;
-	  volume_d <= 1'b1;
+      volume_meta <= 1'b1;
+      volume_sync <= 1'b1;
+      volume_stable <= 1'b1;
+      debounce_count <= '0;
 
 	  
 	end
 			
 	else 
 	begin
-	volume_d <= volume;
+    volume_meta <= volume;
+    volume_sync <= volume_meta;
 
-	if ((!volume) && (volume_d) )	  //&&  (volume_level > 2'h0 )
-	   volume_level <= volume_level - 2'h1;
+    // Accept only a stable press/release; holding KEY3 changes one level.
+    if (volume_sync == volume_stable) begin
+        debounce_count <= '0;
+    end else if (debounce_count == DEBOUNCE_BITS'(DEBOUNCE_CYCLES - 1)) begin
+        debounce_count <= '0;
+        volume_stable <= volume_sync;
+        if (!volume_sync)
+            volume_level <= volume_level - 2'd1; // High -> medium -> low -> mute -> high.
+    end else begin
+        debounce_count <= debounce_count + 1'b1;
+    end
 
 		tmp8bit	<= sin_table[ADDR]; //  get sine (or other function) value from the table  
 		

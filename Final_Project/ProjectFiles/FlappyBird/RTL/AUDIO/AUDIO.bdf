@@ -308,6 +308,13 @@ agreement for further details.
 		(text "Q[15..0]" (rect 194 27 234 39)(font "Arial" ))
 		(line (pt 248 32)(pt 232 32)(line_width 3))
 	)
+	(port
+		(pt 248 48)
+		(output)
+		(text "volume_level[1..0]" (rect 0 0 96 12)(font "Arial" ))
+		(text "volume_level[1..0]" (rect 136 43 232 55)(font "Arial" ))
+		(line (pt 248 48)(pt 232 48)(line_width 3))
+	)
 	(parameter
 		"COUNT_SIZE"
 		"8"
@@ -547,6 +554,13 @@ agreement for further details.
 		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
 		(text "game_state[1..0]" (rect 21 59 87 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
+	)
+	(port
+		(pt 0 80)
+		(input)
+		(text "volume_level[1..0]" (rect 0 0 96 12)(font "Arial" ))
+		(text "volume_level[1..0]" (rect 21 75 117 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
 		(pt 248 32)
@@ -1018,6 +1032,18 @@ agreement for further details.
 	(text "game_state[1..0]" (rect -527 600 -447 617)(font "Intel Clear" ))
 	(pt -448 616)
 	(pt -496 616)
+	(bus)
+)
+(connector
+	(text "volume_level[1..0]" (rect 792 136 888 148)(font "Arial" ))
+	(pt 784 152)
+	(pt 904 152)
+	(bus)
+)
+(connector
+	(text "volume_level[1..0]" (rect -552 616 -456 628)(font "Arial" ))
+	(pt -448 632)
+	(pt -560 632)
 	(bus)
 )
 (connector
