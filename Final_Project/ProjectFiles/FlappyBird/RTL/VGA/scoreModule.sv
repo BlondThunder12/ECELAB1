@@ -12,6 +12,8 @@ module scoreModule #(
 	input logic [10:0] pixelY,
 	input logic [1:0]  game_state,
 	input logic        godmode_active,
+	input logic        coinCollected, // One collection strobe; consecutive coins may be back-to-back
+	input logic [3:0]  speed_level,
 
 	output logic [7:0] RGBNum,
 	output logic       DrawingRequest,
@@ -44,10 +46,56 @@ logic [3:0] hundreds;
 logic [11:0] current_score_bcd;
 logic [1:0] previous_state;
 logic run_used_godmode;
+logic [3:0] coin_value;
+logic [4:0] points_to_add;
+logic [5:0] units_sum;
+logic [4:0] tens_sum, hundreds_sum;
+logic [11:0] next_score_bcd;
 
 // Export the existing score; do not introduce a second score counter.
 assign score = (10'd100 * hundreds) + (10'd10 * tens) + {6'd0, units};
 assign current_score_bcd = {hundreds, tens, units};
+
+// Reward uses the current level before this collection changes the score.
+// Keep the table here so the coin values are easy to change in one place.
+always_comb begin
+    case (speed_level)
+        4'd0: coin_value = 4'd2;
+        4'd1: coin_value = 4'd3;
+        4'd2: coin_value = 4'd4;
+        4'd3: coin_value = 4'd5;
+        4'd4: coin_value = 4'd6;
+        4'd5: coin_value = 4'd7;
+        4'd6: coin_value = 4'd8;
+        4'd7: coin_value = 4'd9;
+        4'd8: coin_value = 4'd10;
+        4'd9: coin_value = 4'd12;
+        default: coin_value = 4'd15; // Level 10 and any out-of-range input
+    endcase
+end
+
+// Add both events together. At most 16 points are added in one clock, so
+// the units digit needs at most two carries; keep the existing BCD counter.
+always_comb begin
+    points_to_add = (coinCollected ? {1'b0, coin_value} : 5'd0) +
+                    (trigger_pulse ? 5'd1 : 5'd0);
+    units_sum = {2'b00, units} + {1'b0, points_to_add};
+    tens_sum = {1'b0, tens};
+    hundreds_sum = {1'b0, hundreds};
+    if (units_sum >= 6'd20) begin
+        units_sum = units_sum - 6'd20;
+        tens_sum = tens_sum + 5'd2;
+    end else if (units_sum >= 6'd10) begin
+        units_sum = units_sum - 6'd10;
+        tens_sum = tens_sum + 5'd1;
+    end
+    if (tens_sum >= 5'd10) begin
+        tens_sum = tens_sum - 5'd10;
+        hundreds_sum = hundreds_sum + 5'd1;
+    end
+    next_score_bcd = (hundreds_sum >= 5'd10) ? 12'h999 :
+                     {hundreds_sum[3:0], tens_sum[3:0], units_sum[3:0]};
+end
 
 // Observe the first clock spent in GAME_OVER. The final PLAYING clock has
 // already updated the BCD counter, including a point coincident with death.
@@ -90,18 +138,8 @@ end
             tens  <= 4'd0;	
 				hundreds <= 4'd0;
 		
-	end else if (game_state == PLAYING && trigger_pulse && current_score_bcd != 12'h999) begin
-            if (units == 4'd9) begin
-                units <= 4'd0;
-                if (tens == 4'd9) begin
-                    tens <= 4'd0;
-                    hundreds <= hundreds + 1'b1;
-                end else begin
-                    tens <= tens + 1'b1;
-                end
-            end else begin
-                units <= units + 1'b1;
-            end
+	end else if (game_state == PLAYING && points_to_add != 0) begin
+            {hundreds, tens, units} <= next_score_bcd;
         end
     end
 // HUNDREDS ASSIGNMENTS

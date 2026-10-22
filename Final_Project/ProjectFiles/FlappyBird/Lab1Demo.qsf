@@ -307,7 +307,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/HartsMatrixBitMap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pickup_control.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/player_lives.sv
 set_global_assignment -name MIF_FILE RTL/pickups.mif
-set_global_assignment -name BDF_FILE RTL/VGA/HART_DISPLAY.bdf
+set_global_assignment -name BDF_FILE RTL/VGA/Items_Control.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/objects_mux.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/VGA_Controller.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/NumbersBitMap.sv

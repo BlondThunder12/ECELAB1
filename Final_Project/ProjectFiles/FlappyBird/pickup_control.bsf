@@ -178,6 +178,13 @@ agreement for further details.
 		(text "heartCollected" (rect 196 139 251 151)(font "Arial" ))
 		(line (pt 272 144)(pt 256 144)(line_width 1))
 	)
+	(port
+		(pt 272 160)
+		(output)
+		(text "coinCollected" (rect 0 0 50 12)(font "Arial" ))
+		(text "coinCollected" (rect 201 155 251 167)(font "Arial" ))
+		(line (pt 272 160)(pt 256 160)(line_width 1))
+	)
 	(parameter
 		"ENABLE_HEARTS"
 		"1"
@@ -185,7 +192,7 @@ agreement for further details.
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(parameter
 		"ENABLE_COINS"
-		"0"
+		"1"
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing

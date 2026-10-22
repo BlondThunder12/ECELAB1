@@ -18,7 +18,7 @@ module HartsMatrixBitMap (
 );
 
 localparam logic [1:0] START_SCREEN = 2'b00;
-localparam logic [1:0] HEART_TILE = 2'd1; // icons.png order: coin, heart, TNT
+localparam logic [1:0] HEART_TILE = 2'd1; // icons.png order: coin, heart, TNT, ghost
 int sourceX, sourceY, pickupX, pickupY, relativeX, relativeY;
 logic worldInside, hudInside;
 logic [1:0] selectedPickup;
@@ -79,7 +79,7 @@ always_comb begin
 end
 
 lpm_rom #(
-    .lpm_width(4), .lpm_widthad(12), .lpm_numwords(3072),
+    .lpm_width(4), .lpm_widthad(12), .lpm_numwords(4096),
     .lpm_file("RTL/pickups.mif"), .lpm_type("LPM_ROM"),
     .lpm_address_control("REGISTERED"), .lpm_outdata("UNREGISTERED"),
     .intended_device_family("Cyclone V")
@@ -91,14 +91,17 @@ lpm_rom #(
 always_comb begin
     case (colorIndex)
         4'd1: pixelRGB = 8'h00;
-        4'd2: pixelRGB = 8'h40;
-        4'd3: pixelRGB = 8'h80;
-        4'd4: pixelRGB = 8'h81;
-        4'd5: pixelRGB = 8'hC1;
-        4'd6: pixelRGB = 8'hE8;
-        4'd7: pixelRGB = 8'hF2;
-        4'd8: pixelRGB = 8'hF4;
-        4'd9: pixelRGB = 8'hFF;
+        4'd2: pixelRGB = 8'h24;
+        4'd3: pixelRGB = 8'h40;
+        4'd4: pixelRGB = 8'h80;
+        4'd5: pixelRGB = 8'h81;
+        4'd6: pixelRGB = 8'hC1;
+        4'd7: pixelRGB = 8'hDB;
+        4'd8: pixelRGB = 8'hE8;
+        4'd9: pixelRGB = 8'hF2;
+        4'd10: pixelRGB = 8'hF4;
+        4'd11: pixelRGB = 8'hFB;
+        4'd12: pixelRGB = 8'hFF;
         default: pixelRGB = 8'h00;
     endcase
 end

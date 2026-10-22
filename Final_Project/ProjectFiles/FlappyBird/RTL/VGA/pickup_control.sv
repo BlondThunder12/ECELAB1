@@ -1,8 +1,8 @@
 // Shared pickup slots. Position belongs to the item, not to a recycled pipe.
-// Hearts are enabled first; coins use the same spawn/move/collect path later.
+// Hearts and coins share the same spawn/move/collect path.
 module pickup_control #(
     parameter bit ENABLE_HEARTS = 1'b1,
-    parameter bit ENABLE_COINS = 1'b0
+    parameter bit ENABLE_COINS = 1'b1
 )(
     input  logic        clk,
     input  logic        resetN,
@@ -27,7 +27,8 @@ module pickup_control #(
     output logic [2:0]  itemSpawn,        // One clock per birth, for Signal Tap
     output logic        itemCollected,
     output logic [1:0]  collectedType,
-    output logic        heartCollected
+    output logic        heartCollected,
+    output logic        coinCollected
 );
 
 localparam logic [1:0] START_SCREEN = 2'b00;
@@ -54,6 +55,7 @@ logic [1:0] gapType [0:2];
 logic [1:0] nextType;
 int freeSlot, gapIndex, pipeX, gapLeft, gapRight, stepPixels;
 logic gapClear;
+logic collectItem;
 
 genvar i;
 generate
@@ -66,6 +68,12 @@ generate
 endgenerate
 
 assign heartCollected = itemCollected && (collectedType == HEART);
+// Score on the collection edge, including the last PLAYING clock before
+// pause/game over. Removing the active item prevents a second award.
+assign collectItem = (game_state == PLAYING) && pickupIndex < 3 &&
+                     itemActive[pickupIndex] && itemAge[pickupIndex] == 2'd3 &&
+                     birdDrawingRequest && pickupDrawingRequest;
+assign coinCollected = collectItem && (itemType[pickupIndex] == COIN);
 
 always_comb begin
     if (ENABLE_HEARTS && ENABLE_COINS)
@@ -159,8 +167,7 @@ always_ff @(posedge clk or negedge resetN) begin
                 end
             end
 
-            if (pickupIndex < 3 && itemActive[pickupIndex] && itemAge[pickupIndex] == 2'd3 &&
-                birdDrawingRequest && pickupDrawingRequest) begin
+            if (collectItem) begin
                 itemActive[pickupIndex] <= 1'b0;
                 itemCollected <= 1'b1;
                 collectedType <= itemType[pickupIndex];
