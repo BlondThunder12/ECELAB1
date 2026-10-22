@@ -2183,9 +2183,9 @@ agreement for further details.
 	(annotation_block (parameter)(rect 272 -64 372 16))
 )
 (symbol
-	(rect -792 720 -528 864)
+	(rect -792 720 -528 896)
 	(text "ground_draw" (rect 5 0 66 12)(font "Arial" ))
-	(text "inst2" (rect 8 128 31 140)(font "Arial" ))
+	(text "inst2" (rect 8 160 31 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -2222,6 +2222,20 @@ agreement for further details.
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
+		(pt 0 112)
+		(input)
+		(text "scrollUpdate" (rect 0 0 48 12)(font "Arial" ))
+		(text "scrollUpdate" (rect 21 107 69 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
+		(pt 0 128)
+		(input)
+		(text "scrollStep[10..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "scrollStep[10..0]" (rect 21 123 82 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
 		(pt 264 32)
 		(output)
 		(text "groundDrawingRequest" (rect 0 0 113 12)(font "Arial" ))
@@ -2241,7 +2255,7 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 248 128))
+		(rectangle (rect 16 16 248 160))
 	)
 	(annotation_block (parameter)(rect -528 664 -318 702))
 )
@@ -2740,6 +2754,17 @@ agreement for further details.
 	(text "game_state[1..0]" (rect -840 800 -760 817)(font "Intel Clear" ))
 	(pt -792 816)
 	(pt -848 816)
+	(bus)
+)
+(connector
+	(text "scrollUpdate" (rect -912 816 -812 833)(font "Arial" ))
+	(pt -792 832)
+	(pt -920 832)
+)
+(connector
+	(text "scrollStep[10..0]" (rect -912 832 -802 849)(font "Arial" ))
+	(pt -792 848)
+	(pt -920 848)
 	(bus)
 )
 (connector
