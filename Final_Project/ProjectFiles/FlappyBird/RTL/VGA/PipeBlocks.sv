@@ -54,6 +54,7 @@ logic [10:0] step_array [NUM_PIPES];
 logic update_array [NUM_PIPES];
 logic [NUM_PIPES-1:0] bossPipe, bossOpen, explosionActive;
 logic [NUM_PIPES*2-1:0] explosionFrames;
+logic [NUM_PIPES*9-1:0] bossOpeningProgress;
 logic explosionDR;
 logic [7:0] explosionRGB;
 logic [NUM_PIPES*9-1:0] explosionYPositions;
@@ -93,7 +94,7 @@ boss_control #(.NUM_PIPES(NUM_PIPES), .PIPE_SPACING(PIPE_SPACING)) bosses (
     .randomBoss(fast_random_chunks[0]), .tntCollected(tntCollected),
     .bossPipe(bossPipe), .bossOpen(bossOpen), .bossUpcoming(bossUpcoming),
     .bossTargetXPositions(bossTargetXPositions), .explosionActive(explosionActive),
-    .explosionFrames(explosionFrames)
+    .explosionFrames(explosionFrames), .bossOpeningProgress(bossOpeningProgress)
 );
 
 explosion_draw #(.NUM_PIPES(NUM_PIPES)) explosion (
@@ -201,9 +202,10 @@ generate
             .pixelX             (pixelX),
             .pixelY             (pixelY),
             .wantedXCoord       (topLeftX[i]),
-            .SizeOfUpPipe       (bossOpen[i] ? 6'd0 : pipe_chunks[i]),
+            .SizeOfUpPipe       (pipe_chunks[i]),
             .bossPipe           (bossPipe[i]),
             .bossOpen           (bossOpen[i]),
+            .bossOpeningProgress(bossOpeningProgress[i*9 +: 9]),
             
             .PipeDR             (dr_array[i]),
             .pipeRGB            (rgb_array[i])

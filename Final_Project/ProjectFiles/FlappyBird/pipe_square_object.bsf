@@ -112,6 +112,11 @@ agreement for further details.
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
+		"GROUND_PIXEL_BOTTOM"
+		"448"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"OBJECT_COLOR"
 		"00000011"
 		""

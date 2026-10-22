@@ -23,6 +23,7 @@ module	pipe_square_object	(
 
 parameter  int OBJECT_WIDTH_X = 50;
 parameter  int OBJECT_HEIGHT_Y = 8;
+parameter  int GROUND_PIXEL_BOTTOM = 480 - 32;
 // Retained for compatibility with existing schematic symbols; the MIF now
 // supplies the body colors.
 parameter  logic [7:0] OBJECT_COLOR = 8'h03 ;
@@ -51,9 +52,11 @@ pipeLongBitMap body_bitmap (
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
 assign rightX	= (topLeftX + OBJECT_WIDTH_X);
-assign bottomY	= (topLeftY + (numberOfChunks * OBJECT_HEIGHT_Y) );
+// Keep the addition signed as the upper boss body slides above Y=0.
+assign bottomY = int'($signed(topLeftY)) + int'(numberOfChunks) * OBJECT_HEIGHT_Y;
 assign	insideBracket  = 	 ( (pixelX  >= topLeftX) &&  (pixelX < rightX) // math is made with SIGNED variables  
-						   && (pixelY  >= topLeftY) &&  (pixelY < bottomY) )  ; // as the top left position can be negative
+						   && (pixelY  >= topLeftY) &&  (pixelY < bottomY)
+                           && (pixelY < GROUND_PIXEL_BOTTOM) ) ;
 		
 
 

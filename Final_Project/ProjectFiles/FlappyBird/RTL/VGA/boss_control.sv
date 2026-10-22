@@ -4,7 +4,7 @@ module boss_control #(
     parameter int NUM_PIPES = 3,
     parameter int PIPE_SPACING = 240,
     parameter int MIN_NORMAL_PIPES = 5,
-    parameter int EXPLOSION_FRAMES = 22 // About 0.3 seconds at this VGA's ~72 Hz
+    parameter int EXPLOSION_FRAMES = 33 // About 0.45 seconds at this VGA's ~72 Hz.
 )(
     input  logic clk, resetN, startOfFrame,
     input  logic [1:0] game_state,
@@ -15,7 +15,8 @@ module boss_control #(
     output logic [NUM_PIPES-1:0] bossPipe, bossOpen, bossUpcoming,
     output logic [NUM_PIPES*11-1:0] bossTargetXPositions,
     output logic [NUM_PIPES-1:0] explosionActive,
-    output logic [NUM_PIPES*2-1:0] explosionFrames
+    output logic [NUM_PIPES*2-1:0] explosionFrames,
+    output logic [NUM_PIPES*9-1:0] bossOpeningProgress // 0 = closed, 256 = fully open.
 );
 localparam logic [1:0] START_SCREEN = 2'd0, PLAYING = 2'd1;
 localparam int WRAP_DISTANCE = NUM_PIPES * PIPE_SPACING;
@@ -63,6 +64,10 @@ for (i = 0; i < NUM_PIPES; i++) begin : targets
     assign bossTargetXPositions[i*11 +: 11] =
         (targetX > 1023) ? 11'd1023 : 11'(targetX);
     assign bossUpcoming[i] = nextPlanned[i] ? nextBoss[i] : bossPipe[i];
+    // The gap and burst share one timer, including pause/restart/recycle.
+    assign bossOpeningProgress[i*9 +: 9] = !bossOpen[i] ? 9'd0 :
+        !explosionActive[i] ? 9'd256 :
+        9'((int'(explosionAge[i]) * 256) / EXPLOSION_FRAMES);
     assign explosionFrames[i*2 +: 2] =
         (int'(explosionAge[i])*4 < EXPLOSION_FRAMES) ? 2'd0 :
         (int'(explosionAge[i])*4 < EXPLOSION_FRAMES*2) ? 2'd1 :
@@ -106,7 +111,7 @@ always_ff @(posedge clk or negedge resetN) begin
                 else explosionAge[j] <= explosionAge[j] + 1'b1;
             end
             if (tntCollected[j] && bossPipe[j] && !bossOpen[j]) begin
-                bossOpen[j] <= 1'b1; // Open on the first burst.
+                bossOpen[j] <= 1'b1; // Start opening on the first burst.
                 explosionActive[j] <= 1'b1;
                 explosionAge[j] <= '0;
             end

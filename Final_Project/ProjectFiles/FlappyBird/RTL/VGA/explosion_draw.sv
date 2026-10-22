@@ -1,4 +1,5 @@
-// Four native 32x32 frames. One shared indexed ROM serves every boss.
+// Four 32x32 source frames, displayed at 2x scale (64x64 pixels).
+// One shared indexed ROM serves every boss.
 // Its one-clock pixel latency matches the existing pipe body/cap ROMs.
 module explosion_draw #(
     parameter int NUM_PIPES = 3
@@ -25,12 +26,13 @@ always_comb begin
     relativeY = 0;
     for (int j = 0; j < NUM_PIPES; j++) begin
         relativeX = int'($signed(pixelX)) -
-                    (int'($signed(pipeXPositions[j*11 +: 11])) + 9);
-        relativeY = int'($signed(pixelY)) - int'(explosionYPositions[j*9 +: 9]);
-        if (explosionActive[j] && relativeX >= 0 && relativeX < 32 &&
-            relativeY >= 0 && relativeY < 32) begin
+                    (int'($signed(pipeXPositions[j*11 +: 11])) - 7);
+        relativeY = int'($signed(pixelY)) -
+                    (int'(explosionYPositions[j*9 +: 9]) - 16);
+        if (explosionActive[j] && relativeX >= 0 && relativeX < 64 &&
+            relativeY >= 0 && relativeY < 64) begin
             insideExplosion = 1'b1;
-            address = {explosionFrames[j*2 +: 2], relativeY[4:0], relativeX[4:0]};
+            address = {explosionFrames[j*2 +: 2], relativeY[5:1], relativeX[5:1]};
         end
     end
 end
