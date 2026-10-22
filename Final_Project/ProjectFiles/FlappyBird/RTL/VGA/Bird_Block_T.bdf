@@ -448,6 +448,13 @@
 		(text "menuYOffset[5..0]" (rect 176 75 251 87)(font "Arial" ))
 		(line (pt 272 80)(pt 256 80)(line_width 3))
 	)
+	(port
+		(pt 272 96)
+		(output)
+		(text "bird_tilt[5..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 191 91 251 103)(font "Arial" ))
+		(line (pt 272 96)(pt 256 96)(line_width 3))
+	)
 	(parameter
 		"INITIAL_X"
 		"initial_x"
@@ -554,6 +561,12 @@
 	(pt 960 480)
 	(bus)
 )
+(connector
+	(text "bird_tilt[5..0]" (rect 840 480 1020 497)(font "Arial" ))
+	(pt 832 496)
+	(pt 960 496)
+	(bus)
+)
 (symbol
 	(rect 1120 320 1344 464)
 	(text "square_object" (rect 5 0 73 12)(font "Arial" ))
@@ -639,6 +652,16 @@
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(parameter
+		"PADDING_X"
+		"4"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"PADDING_Y"
+		"9"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
 		"OBJECT_COLOR"
 		"00"
 		""
@@ -709,9 +732,9 @@
 	(pt 1472 384)
 )
 (symbol
-	(rect 1680 320 1944 464)
+	(rect 1680 320 1944 480)
 	(text "birdBitMap" (rect 5 0 46 12)(font "Arial" ))
-	(text "inst2" (rect 8 128 20 140)(font "Arial" ))
+	(text "inst2" (rect 8 144 20 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -755,6 +778,13 @@
 		(line (pt 0 112)(pt 16 112)(line_width 1))
 	)
 	(port
+		(pt 0 128)
+		(input)
+		(text "bird_tilt[5..0]" (rect 0 0 60 12)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 21 123 81 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128)(line_width 3))
+	)
+	(port
 		(pt 264 32)
 		(output)
 		(text "drawingRequest" (rect 0 0 63 12)(font "Arial" ))
@@ -769,7 +799,7 @@
 		(line (pt 264 48)(pt 248 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 248 128)(line_width 1))
+		(rectangle (rect 16 16 248 144)(line_width 1))
 	)
 )
 
@@ -809,6 +839,12 @@
 	(text "reverse_gravity_switch" (rect 1560 416 1740 433)(font "Arial" ))
 	(pt 1680 432)
 	(pt 1552 432)
+)
+(connector
+	(text "bird_tilt[5..0]" (rect 1560 432 1740 449)(font "Arial" ))
+	(pt 1680 448)
+	(pt 1552 448)
+	(bus)
 )
 
 (connector

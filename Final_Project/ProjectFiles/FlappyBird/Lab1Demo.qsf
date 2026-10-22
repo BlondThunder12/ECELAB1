@@ -334,6 +334,9 @@ set_global_assignment -name MIF_FILE RTL/pipeEdge.mif
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pipe_coordinate_calc.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/pipe_move.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/PipeBlocks.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/boss_control.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/explosion_draw.sv
+set_global_assignment -name MIF_FILE RTL/explosion.mif
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/birdBitMap.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/game_manager.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/start_screen_draw.sv
@@ -354,6 +357,7 @@ set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name SIGNALTAP_FILE Incorrect_item_spawning.stp
 
 set_global_assignment -name ENABLE_LOGIC_ANALYZER_INTERFACE ON
+
 
 
 

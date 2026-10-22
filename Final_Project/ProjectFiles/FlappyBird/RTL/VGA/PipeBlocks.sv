@@ -13,8 +13,10 @@ module PipeBlocks #(
 	input  logic               turbo,     // Active-high board switch
 	input  logic signed [10:0] pixelX,
 	input  logic signed [10:0] pixelY,
+    input  logic [NUM_PIPES-1:0] tntCollected,
 
 	output logic               pipeDR,
+    output logic               pipeVisualDR, // Includes the harmless explosion.
 	output logic         [7:0] pipeRGB,
 	output logic					updateScorePulse,
 	output logic					debug_led,
@@ -24,7 +26,9 @@ module PipeBlocks #(
     output logic [NUM_PIPES-1:0] pipeRecycle,
     output logic [10:0] scrollStep, // Common movement amount, in 1/64 pixel units
     output logic scrollUpdate,     // High on the clock cycle that moves all pipes
-    output logic [10:0] pipeSpacing // Horizontal distance between pipe positions
+    output logic [10:0] pipeSpacing, // Horizontal distance between pipe positions
+    output logic [NUM_PIPES-1:0] bossUpcoming,
+    output logic [NUM_PIPES*11-1:0] bossTargetXPositions
 );
 
 //-----------------------------------------------------------------------------
@@ -48,6 +52,11 @@ logic               pipe_active_D  [NUM_PIPES]; // Edge detectors for the latche
 // step_array[i] is how far pipe i moves; update_array[i] says when it moves.
 logic [10:0] step_array [NUM_PIPES];
 logic update_array [NUM_PIPES];
+logic [NUM_PIPES-1:0] bossPipe, bossOpen, explosionActive;
+logic [NUM_PIPES*2-1:0] explosionFrames;
+logic explosionDR;
+logic [7:0] explosionRGB;
+logic [NUM_PIPES*9-1:0] explosionYPositions;
 logic	signed [10:0] topLeftX_prev  [NUM_PIPES]; // remembers where each pipe was 
 localparam int PIPE_ACTIVATE_X = 640 + 160; // Sample height while the pipe is still offscreen.
 // Every pipe_move receives the same clock, frame pulse, speed, turbo and game
@@ -76,6 +85,22 @@ random #(
     .resetN (resetN),
     .enable (1'b1),               // Hardwired to 1 so it spins continuously at 50MHz
     .dout   (fast_random_chunks)  // Connects to your fast_random_chunks wire
+);
+
+boss_control #(.NUM_PIPES(NUM_PIPES), .PIPE_SPACING(PIPE_SPACING)) bosses (
+    .clk(clk), .resetN(resetN), .startOfFrame(startOfFrame), .game_state(game_state),
+    .pipeXPositions(pipeXPositions), .pipeReady(pipeReady), .pipeRecycle(pipeRecycle),
+    .randomBoss(fast_random_chunks[0]), .tntCollected(tntCollected),
+    .bossPipe(bossPipe), .bossOpen(bossOpen), .bossUpcoming(bossUpcoming),
+    .bossTargetXPositions(bossTargetXPositions), .explosionActive(explosionActive),
+    .explosionFrames(explosionFrames)
+);
+
+explosion_draw #(.NUM_PIPES(NUM_PIPES)) explosion (
+    .clk(clk), .resetN(resetN), .pixelX(pixelX), .pixelY(pixelY),
+    .pipeXPositions(pipeXPositions), .explosionYPositions(explosionYPositions),
+    .explosionActive(explosionActive), .explosionFrames(explosionFrames),
+    .drawingRequest(explosionDR), .RGBout(explosionRGB)
 );
 
 //-----------------------------------------------------------------------------
@@ -148,6 +173,9 @@ generate
         assign pipeHeights[i*6 +: 6] = pipe_chunks[i];
         assign pipeReady[i] = pipe_active_D[i]; // Height has already been sampled.
         assign pipeRecycle[i] = newPipeGen[i];
+        // Center the burst on the closed pipe's touching caps; retain this
+        // height after opening so the animation does not jump to the top.
+        assign explosionYPositions[i*9 +: 9] = {pipe_chunks[i], 3'b000};
     
         pipe_move #(
             .INITIAL_X_OFFSET   (i * PIPE_SPACING),
@@ -173,9 +201,11 @@ generate
             .pixelX             (pixelX),
             .pixelY             (pixelY),
             .wantedXCoord       (topLeftX[i]),
-            .SizeOfUpPipe       (pipe_chunks[i]), // Fed by the sampler above
+            .SizeOfUpPipe       (bossOpen[i] ? 6'd0 : pipe_chunks[i]),
+            .bossPipe           (bossPipe[i]),
+            .bossOpen           (bossOpen[i]),
             
-            .pipeDR             (dr_array[i]),
+            .PipeDR             (dr_array[i]),
             .pipeRGB            (rgb_array[i])
         );
           
@@ -222,9 +252,13 @@ always_comb begin
     for (int j = 0; j < NUM_PIPES; j++) begin
         if (dr_array[j]) begin
             pipeDR  = 1'b1;
-            pipeRGB = rgb_array[j];
+            // RRRGGGBB: swap the equally sized red/green channels. This
+            // preserves the existing tile's shading, outline and highlights.
+            pipeRGB = bossPipe[j] ? {rgb_array[j][4:2], rgb_array[j][7:5], rgb_array[j][1:0]} : rgb_array[j];
         end
     end
+    pipeVisualDR = pipeDR || explosionDR;
+    if (explosionDR) pipeRGB = explosionRGB;
 end
 //-----------------------------------------------------------------------------
 // Debug Toggle for Red LED

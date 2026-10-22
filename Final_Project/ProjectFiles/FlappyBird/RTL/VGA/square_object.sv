@@ -21,6 +21,9 @@ module	square_object	(
 
 parameter  int OBJECT_WIDTH_X = 100;
 parameter  int OBJECT_HEIGHT_Y = 100;
+// Optional transparent room around a rotating sprite; existing users keep 0.
+parameter  int PADDING_X = 0;
+parameter  int PADDING_Y = 0;
 parameter  logic [7:0] OBJECT_COLOR = 8'h03 ; 
 localparam logic [7:0] TRANSPARENT_ENCODING = 8'hFF ;// bitmap  representation for a transparent pixel 
  
@@ -30,10 +33,10 @@ logic insideBracket ;
 
 //////////--------------------------------------------------------------------------------------------------------------=
 // Calculate object right  & bottom  boundaries
-assign rightX	= (topLeftX + OBJECT_WIDTH_X);
-assign bottomY	= (topLeftY + OBJECT_HEIGHT_Y);
-assign	insideBracket  = 	 ( (pixelX  >= topLeftX) &&  (pixelX < rightX) // math is made with SIGNED variables  
-						   && (pixelY  >= topLeftY) &&  (pixelY < bottomY) )  ; // as the top left position can be negative
+assign rightX	= (topLeftX + OBJECT_WIDTH_X + PADDING_X);
+assign bottomY	= (topLeftY + OBJECT_HEIGHT_Y + PADDING_Y);
+assign	insideBracket  = 	 ( (pixelX >= topLeftX - PADDING_X) && (pixelX < rightX)
+						   && (pixelY >= topLeftY - PADDING_Y) && (pixelY < bottomY) );
 		
 
 
@@ -56,12 +59,12 @@ begin
 		begin 
 			RGBout  <= OBJECT_COLOR ;	// colors table 
 			drawingRequest <= 1'b1 ;
-			offsetX	<= (pixelX - topLeftX); //calculate relative offsets from top left corner allways a positive number 
-			offsetY	<= (pixelY - topLeftY);
+			offsetX	<= (pixelX - topLeftX + PADDING_X);
+			offsetY	<= (pixelY - topLeftY + PADDING_Y);
 		end 
 		
 
 		
 	end
 end 
-endmodule 
+endmodule

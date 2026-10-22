@@ -53,6 +53,20 @@ agreement for further details.
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
+		(pt 0 96)
+		(input)
+		(text "bossPipe" (rect 0 0 35 12)(font "Arial" ))
+		(text "bossPipe" (rect 21 91 56 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "bossOpen" (rect 0 0 40 12)(font "Arial" ))
+		(text "bossOpen" (rect 21 107 61 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
+	)
+	(port
 		(pt 328 32)
 		(output)
 		(text "topLeftX_Pipe[10..0]" (rect 0 0 80 12)(font "Arial" ))

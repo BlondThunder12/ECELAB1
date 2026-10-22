@@ -2,15 +2,17 @@
 //-- Dudy Nov 13 2017
 // System-Verilog Alex Grinshpun May 2018
 // New coding convention dudy December 2018
-// (c) Technion IIT, Department of Electrical Engineering 2025 
+// (c) Technion IIT, Department of Electrical Engineering 2025
 
 
-module	pipe_coordinate_calc	(	
+module	pipe_coordinate_calc	(
 					input		logic	clk,
 					input		logic	resetN,
 					input 	logic signed	[10:0] wantedXCoordinate, // X coordinate wanted for the pipe
 					input 	logic	unsigned [5:0] numberOfChunks,   	  // amount of top pipe chunks
-					
+					input logic bossPipe,
+					input logic bossOpen,
+
 					output	logic	signed [10:0] topLeftX_Pipe, 		// topLeft X pixel of long pipes
 					output	logic	signed [10:0] topLeftX_Edge,		// topLeft X pixel of edges
 					output	logic signed [10:0] topLeftY_TopEdge, 	// topLeft y pixel of top edge
@@ -40,30 +42,34 @@ assign heightOfTopPipe = (numberOfChunks * height_of_pipe);
 assign XCoordinateOfPipe = wantedXCoordinate;
 assign XCoordinateOfEdge = XCoordinateOfPipe - ((width_of_edge - width_of_pipe) / 2);
 assign YCoordinateOfTopEdge =  heightOfTopPipe;
-assign YCoordinateOfBottomEdge = heightOfTopPipe + height_of_edge + gap_size;
+// Open bosses retain unscaled caps at Y=0 and immediately above the ground.
+// PipeBlocks supplies zero top-body chunks for an opened boss.
+assign YCoordinateOfBottomEdge = (bossPipe && bossOpen) ?
+    ground_pixel_bottom - height_of_edge :
+    heightOfTopPipe + height_of_edge + (bossPipe ? 0 : gap_size);
 assign YCoordinateOfBottomPipe = YCoordinateOfBottomEdge + height_of_edge;
 assign BottomNumberOfChunks = (ground_pixel_bottom - YCoordinateOfBottomPipe ) / height_of_pipe;
-		
+
 localparam int OFFSCREEN_X = 640 + width_of_edge;
 //////////--------------------------------------------------------------------------------------------------------------=
 always_ff@(posedge clk or negedge resetN)
 begin
 	if(!resetN) begin
-		topLeftX_Pipe <= OFFSCREEN_X; 		
-		topLeftX_Edge <= OFFSCREEN_X - ((width_of_edge - width_of_pipe) / 2);	
+		topLeftX_Pipe <= OFFSCREEN_X;
+		topLeftX_Edge <= OFFSCREEN_X - ((width_of_edge - width_of_pipe) / 2);
 		topLeftY_TopEdge <= 0;
 		topLeftY_BottomEdge <= 0;
 		topLeftY_BottomPipe <= 0;
 		bottomPipeNumOfChunks <= 0;
 	end
-	else begin 
-	
-		topLeftX_Pipe <= XCoordinateOfPipe; 		
+	else begin
+
+		topLeftX_Pipe <= XCoordinateOfPipe;
 		topLeftX_Edge <= XCoordinateOfEdge;
 		topLeftY_TopEdge <= YCoordinateOfTopEdge;
 		topLeftY_BottomEdge <= YCoordinateOfBottomEdge;
 		topLeftY_BottomPipe <= YCoordinateOfBottomPipe;
 		bottomPipeNumOfChunks <= BottomNumberOfChunks;
 	end
-end 
-endmodule 
+end
+endmodule

@@ -108,6 +108,13 @@ agreement for further details.
 		(text "menuYOffset[5..0]" (rect 176 75 251 87)(font "Arial" ))
 		(line (pt 272 80)(pt 256 80)(line_width 3))
 	)
+	(port
+		(pt 272 96)
+		(output)
+		(text "bird_tilt[5..0]" (rect 0 0 47 12)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 204 91 251 103)(font "Arial" ))
+		(line (pt 272 96)(pt 256 96)(line_width 3))
+	)
 	(parameter
 		"INITIAL_X"
 		"280"

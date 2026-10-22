@@ -14,7 +14,8 @@ module	bird_move	(
 					output logic signed 	[10:0] topLeftX, // output the top left corner 
 					output logic signed	[10:0] topLeftY,  // can be negative , if the object is partliy outside
 					output logic 					 bird_hit_borders,
-					output logic signed [5:0] menuYOffset // Shared with the start-screen logo
+					output logic signed [5:0] menuYOffset, // Shared with the start-screen logo
+					output logic signed [5:0] bird_tilt // Degrees: -30 nose up .. +30 nose down
 					
 );
  int 	 topLeftX_tmp; // output the top left corner 
@@ -51,6 +52,35 @@ const int x_FRAME_LEFT = -DRAW_OFFSET_X * FIXED_POINT_MULTIPLIER;
 const int x_FRAME_RIGHT = (640 - DRAW_OFFSET_X - OBJECT_WIDTH_X) * FIXED_POINT_MULTIPLIER;
 const int y_FRAME_TOP = (PLAY_AREA_TOP - DRAW_OFFSET_Y) * FIXED_POINT_MULTIPLIER;
 const int y_FRAME_BOTTOM = (PLAY_AREA_BOTTOM - DRAW_OFFSET_Y - OBJECT_HEIGHT_Y) * FIXED_POINT_MULTIPLIER;
+
+localparam logic signed [5:0] TILT_LEVEL = 6'sd0;
+localparam int MAX_TILT_DEGREES = 30;
+localparam logic signed [5:0] TILT_STEP_DEGREES = 6'sd10; // One table step per frame.
+localparam int TILT_SPEED_THRESHOLD = 64; // Level within +/-1 pixel per frame.
+localparam int TILT_BORDER_MARGIN = 9 * 64; // Match the renderer's vertical padding.
+
+// Ease toward the movement's target angle by 10 degrees per frame. The renderer
+// looks up sine/cosine for this angle. Borders force level to keep corners clear.
+function automatic logic signed [5:0] tilt_for_motion(
+    input int position, input int speed, input logic signed [5:0] current_tilt
+);
+    int target_tilt;
+    begin
+        if (speed < -TILT_SPEED_THRESHOLD) target_tilt = -MAX_TILT_DEGREES;
+        else if (speed > TILT_SPEED_THRESHOLD) target_tilt = MAX_TILT_DEGREES;
+        else target_tilt = 0;
+
+        if (position <= y_FRAME_TOP + TILT_BORDER_MARGIN ||
+            position >= y_FRAME_BOTTOM - TILT_BORDER_MARGIN)
+            tilt_for_motion = TILT_LEVEL;
+        else if (current_tilt < target_tilt)
+            tilt_for_motion = current_tilt + TILT_STEP_DEGREES;
+        else if (current_tilt > target_tilt)
+            tilt_for_motion = current_tilt - TILT_STEP_DEGREES;
+        else
+            tilt_for_motion = current_tilt;
+    end
+endfunction
 
 
 // Global game states needed to update the bird movement
@@ -124,6 +154,7 @@ begin : fsm_sync_proc
 		Y_direction_key_D <= 0 ;
 		bird_hit_borders <= 0;	
 		recoilOffset <= 4'd0;
+		bird_tilt <= TILT_LEVEL;
 	end 	
 	else if(game_state == START_SCREEN) begin
 		SM_Motion <= IDLE_ST ; 
@@ -134,6 +165,7 @@ begin : fsm_sync_proc
 		Y_direction_key_D <= 0 ;
 		bird_hit_borders <= 0;
 		recoilOffset <= 4'd0;
+		bird_tilt <= TILT_LEVEL;
 	end
 	
 	else if (game_state == GAME_OVER) begin
@@ -144,6 +176,7 @@ begin : fsm_sync_proc
 		if (SM_Motion != DEAD_ST)
 			Yspeed <= 0;
 		else if (startOfFrame) begin
+			bird_tilt <= tilt_for_motion(Yposition + Yspeed, Yspeed, bird_tilt);
 			if (Yposition + Yspeed >= y_FRAME_BOTTOM) begin
 				Yposition <= y_FRAME_BOTTOM;
 				Yspeed <= 0;
@@ -244,6 +277,8 @@ begin : fsm_sync_proc
 		//------------------------
 			
 			// make sure bird X coordinates are in screen
+			// Update the pose once per movement frame, alongside the new position.
+			bird_tilt <= tilt_for_motion(Yposition, Yspeed, bird_tilt);
 			if (Xposition < x_FRAME_LEFT) 
 							Xposition <= x_FRAME_LEFT ; 
 			if (Xposition > x_FRAME_RIGHT)

@@ -5,18 +5,18 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions 
-and other software and tools, and its AMPP partner logic 
-functions, and any output files from any of the foregoing 
-(including device programming or simulation files), and any 
-associated documentation or information are expressly subject 
-to the terms and conditions of the Intel Program License 
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other 
-applicable license agreement, including, without limitation, 
-that your use is for the sole purpose of programming logic 
-devices manufactured by Intel and sold by Intel or its 
-authorized distributors.  Please refer to the applicable 
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
 agreement for further details.
 */
 (header "graphic" (version "1.4"))
@@ -446,76 +446,90 @@ agreement for further details.
 )
 (symbol
 	(rect 480 400 808 544)
-	(text "pipe_coordinate_calc" (rect 5 0 107 12)(font "Arial" ))
-	(text "inst4" (rect 8 128 31 140)(font "Arial" ))
+	(text "pipe_coordinate_calc" (rect 5 0 87 12)(font "Arial" ))
+	(text "inst4" (rect 8 128 20 140)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
+		(text "clk" (rect 0 0 10 12)(font "Arial" ))
+		(text "clk" (rect 21 27 31 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32)(line_width 1))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
+		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48)(line_width 1))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "wantedXCoordinate[10..0]" (rect 0 0 125 12)(font "Arial" ))
-		(text "wantedXCoordinate[10..0]" (rect 21 59 146 71)(font "Arial" ))
+		(text "wantedXCoordinate[10..0]" (rect 0 0 99 12)(font "Arial" ))
+		(text "wantedXCoordinate[10..0]" (rect 21 59 120 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "numberOfChunks[5..0]" (rect 0 0 113 12)(font "Arial" ))
-		(text "numberOfChunks[5..0]" (rect 21 75 134 87)(font "Arial" ))
+		(text "numberOfChunks[5..0]" (rect 0 0 92 12)(font "Arial" ))
+		(text "numberOfChunks[5..0]" (rect 21 75 113 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 3))
+	)
+	(port
+		(pt 0 96)
+		(input)
+		(text "bossPipe" (rect 0 0 35 12)(font "Arial" ))
+		(text "bossPipe" (rect 21 91 56 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96)(line_width 1))
+	)
+	(port
+		(pt 0 112)
+		(input)
+		(text "bossOpen" (rect 0 0 40 12)(font "Arial" ))
+		(text "bossOpen" (rect 21 107 61 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112)(line_width 1))
 	)
 	(port
 		(pt 328 32)
 		(output)
-		(text "topLeftX_Pipe[10..0]" (rect 0 0 100 12)(font "Arial" ))
-		(text "topLeftX_Pipe[10..0]" (rect 223 27 323 39)(font "Arial" ))
+		(text "topLeftX_Pipe[10..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "topLeftX_Pipe[10..0]" (rect 227 27 307 39)(font "Arial" ))
 		(line (pt 328 32)(pt 312 32)(line_width 3))
 	)
 	(port
 		(pt 328 48)
 		(output)
-		(text "topLeftX_Edge[10..0]" (rect 0 0 103 12)(font "Arial" ))
-		(text "topLeftX_Edge[10..0]" (rect 220 43 323 55)(font "Arial" ))
+		(text "topLeftX_Edge[10..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "topLeftX_Edge[10..0]" (rect 223 43 307 55)(font "Arial" ))
 		(line (pt 328 48)(pt 312 48)(line_width 3))
 	)
 	(port
 		(pt 328 64)
 		(output)
-		(text "topLeftY_TopEdge[10..0]" (rect 0 0 123 12)(font "Arial" ))
-		(text "topLeftY_TopEdge[10..0]" (rect 203 59 326 71)(font "Arial" ))
+		(text "topLeftY_TopEdge[10..0]" (rect 0 0 101 12)(font "Arial" ))
+		(text "topLeftY_TopEdge[10..0]" (rect 206 59 307 71)(font "Arial" ))
 		(line (pt 328 64)(pt 312 64)(line_width 3))
 	)
 	(port
 		(pt 328 80)
 		(output)
-		(text "topLeftY_BottomEdge[10..0]" (rect 0 0 141 12)(font "Arial" ))
-		(text "topLeftY_BottomEdge[10..0]" (rect 188 75 329 87)(font "Arial" ))
+		(text "topLeftY_BottomEdge[10..0]" (rect 0 0 114 12)(font "Arial" ))
+		(text "topLeftY_BottomEdge[10..0]" (rect 193 75 307 87)(font "Arial" ))
 		(line (pt 328 80)(pt 312 80)(line_width 3))
 	)
 	(port
 		(pt 328 96)
 		(output)
-		(text "topLeftY_BottomPipe[10..0]" (rect 0 0 138 12)(font "Arial" ))
-		(text "topLeftY_BottomPipe[10..0]" (rect 191 91 329 103)(font "Arial" ))
+		(text "topLeftY_BottomPipe[10..0]" (rect 0 0 109 12)(font "Arial" ))
+		(text "topLeftY_BottomPipe[10..0]" (rect 198 91 307 103)(font "Arial" ))
 		(line (pt 328 96)(pt 312 96)(line_width 3))
 	)
 	(port
 		(pt 328 112)
 		(output)
-		(text "bottomPipeNumOfChunks[5..0]" (rect 0 0 155 12)(font "Arial" ))
-		(text "bottomPipeNumOfChunks[5..0]" (rect 176 107 331 119)(font "Arial" ))
+		(text "bottomPipeNumOfChunks[5..0]" (rect 0 0 125 12)(font "Arial" ))
+		(text "bottomPipeNumOfChunks[5..0]" (rect 182 107 307 119)(font "Arial" ))
 		(line (pt 328 112)(pt 312 112)(line_width 3))
 	)
 	(parameter
@@ -549,9 +563,9 @@ agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 312 128))
+		(rectangle (rect 16 16 312 128)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 512 264 861 397))
+	(annotation_block (parameter)(rect 344 -64 444 16))
 )
 (symbol
 	(rect 1104 104 1360 280)
@@ -1141,3 +1155,57 @@ agreement for further details.
 (rectangle (rect 32 592 616 872))
 (rectangle (rect 40 912 504 1256))
 (rectangle (rect 952 944 1640 1208))
+
+(connector
+	(text "bossPipe" (rect 296 480 476 497)(font "Arial" ))
+	(pt 480 496)
+	(pt 288 496)
+)
+
+(connector
+	(text "bossOpen" (rect 296 496 476 513)(font "Arial" ))
+	(pt 480 512)
+	(pt 288 512)
+)
+(pin
+	(input)
+	(rect 32 472 208 488)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "bossPipe" (rect 5 0 19 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "bossPipe" (rect 208 464 388 481)(font "Arial" ))
+	(pt 200 480)
+	(pt 256 480)
+)
+(pin
+	(input)
+	(rect 32 512 208 528)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "bossOpen" (rect 5 0 19 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "bossOpen" (rect 208 504 388 521)(font "Arial" ))
+	(pt 200 520)
+	(pt 256 520)
+)

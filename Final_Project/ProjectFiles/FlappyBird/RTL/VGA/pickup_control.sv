@@ -1,5 +1,5 @@
 // Shared pickup slots. Position belongs to the item, not to a recycled pipe.
-// Hearts, coins and ghosts share the same spawn/move/collect path.
+// Hearts, coins, ghosts and a boss's guaranteed TNT share the same slots.
 module pickup_control #(
     parameter bit ENABLE_HEARTS = 1'b1,
     parameter bit ENABLE_COINS = 1'b1,
@@ -17,6 +17,8 @@ module pickup_control #(
     input  logic [17:0] pipeHeights,
     input  logic [2:0]  pipeReady,
     input  logic [2:0]  pipeRecycle,
+    input  logic [2:0]  bossUpcoming,
+    input  logic [32:0] bossTargetXPositions,
     input  logic [7:0]  random_value,
     input  logic        birdDrawingRequest,
     input  logic        pickupDrawingRequest,
@@ -30,33 +32,39 @@ module pickup_control #(
     output logic [1:0]  collectedType,
     output logic        heartCollected,
     output logic        coinCollected,
-    output logic        ghostCollected
+    output logic        ghostCollected,
+    output logic [2:0]  tntCollected // One-hot owner; never opens another pipe.
 );
 
 localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING = 2'b01;
 localparam logic [1:0] COIN = 2'd0;
 localparam logic [1:0] HEART = 2'd1; // Same tile numbers as pickups.mif
+localparam logic [1:0] TNT = 2'd2;
 localparam logic [1:0] GHOST = 2'd3;
 localparam int FIXED_POINT_MULTIPLIER = 64;
 localparam int SPAWN_X = 672;       // Entire 32-pixel item begins offscreen.
 localparam int ITEM_WIDTH = 32;
 localparam int GAP_MARGIN = 16;
-// Pipe positions refer to the 64-pixel body; its 80-pixel cap extends 8 left
-// and 72 right. Use the caps when checking the free horizontal interval.
-localparam int CAP_LEFT = 8;
-localparam int CAP_RIGHT = 72;
+// Match Pipe_Object's native 50-pixel body and 64-pixel caps.
+localparam int CAP_LEFT = 7;
+localparam int CAP_RIGHT = 57;
+localparam int MIDPOINT_OFFSET = (50 - ITEM_WIDTH) / 2;
 
 int itemXFixed [0:2];
 logic [8:0] itemY [0:2];
 logic [1:0] itemType [0:2];
 logic [1:0] itemAge [0:2]; // Wait for the three-clock drawing pipeline after reuse.
+logic [1:0] itemBoss [0:2];
+logic [2:0] tntHandled;
 logic [2:0] pipeSeen, gapHandled, gapEnabled;
 int gapSpawnX [0:2];
 logic [3:0] gapYOffset [0:2];
 logic [1:0] gapType [0:2];
 logic [1:0] nextType;
 int freeSlot, gapIndex, pipeX, gapLeft, gapRight, stepPixels;
+int tntIndex, tntX, previousPipe, activeCount;
+logic reserveTnt;
 logic gapClear;
 logic collectItem;
 
@@ -80,6 +88,12 @@ assign coinCollected = collectItem && (itemType[pickupIndex] == COIN);
 assign ghostCollected = collectItem && (itemType[pickupIndex] == GHOST);
 
 always_comb begin
+    tntCollected = 3'b000;
+    if (collectItem && itemType[pickupIndex] == TNT)
+        tntCollected[itemBoss[pickupIndex]] = 1'b1;
+end
+
+always_comb begin
     // With all types enabled: 4/8 coins, 3/8 hearts, 1/8 ghosts.
     // A ghost replaces one of the former heart selections.
     if (ENABLE_GHOSTS && ((!ENABLE_HEARTS && !ENABLE_COINS) ||
@@ -98,13 +112,28 @@ always_comb begin
     gapLeft = 0;
     gapRight = 0;
     gapClear = 1'b0;
+    tntIndex = -1;
+    tntX = 0;
+    previousPipe = 0;
+    activeCount = 0;
+    reserveTnt = |(bossUpcoming & ~tntHandled);
     // Round the frame's movement up, so clearance also holds AFTER the step.
     stepPixels = (int'(scrollStep) + 63) >> 6;
     for (int j = 0; j < 3; j++) begin
+        if (itemActive[j]) activeCount++;
         if (!itemActive[j] && freeSlot == -1) freeSlot = j;
+        if (bossUpcoming[j] && !tntHandled[j] && tntIndex == -1 &&
+            int'($signed(bossTargetXPositions[j*11 +: 11])) -
+            int'(pipeSpacing)/2 + MIDPOINT_OFFSET <= SPAWN_X)
+            tntIndex = j;
         if (pipeSeen[j] && pipeReady[j] && !gapHandled[j] && gapIndex == -1 &&
             int'($signed(pipeXPositions[j*11 +: 11])) <= gapSpawnX[j])
             gapIndex = j;
+    end
+    if (tntIndex >= 0) begin
+        tntX = int'($signed(bossTargetXPositions[tntIndex*11 +: 11])) -
+               int'(pipeSpacing)/2 + MIDPOINT_OFFSET;
+        previousPipe = (tntIndex == 0) ? 2 : tntIndex - 1;
     end
     if (gapIndex >= 0) begin
         pipeX = int'($signed(pipeXPositions[gapIndex*11 +: 11]));
@@ -126,11 +155,13 @@ always_ff @(posedge clk or negedge resetN) begin
         itemSpawn <= 3'b000;
         itemCollected <= 1'b0;
         collectedType <= HEART;
+        tntHandled <= 3'b000;
         for (int j = 0; j < 3; j++) begin
             itemXFixed[j] <= SPAWN_X * FIXED_POINT_MULTIPLIER;
             itemY[j] <= 9'd160;
             itemType[j] <= HEART;
             itemAge[j] <= 2'd0;
+            itemBoss[j] <= 2'd0;
             gapSpawnX[j] <= SPAWN_X - CAP_RIGHT - GAP_MARGIN;
             gapYOffset[j] <= 4'd8;
             gapType[j] <= HEART;
@@ -143,14 +174,17 @@ always_ff @(posedge clk or negedge resetN) begin
             gapHandled <= 3'b000;
             gapEnabled <= 3'b000;
             itemActive <= 3'b000;
+            tntHandled <= 3'b000;
             for (int j = 0; j < 3; j++) begin
                 itemXFixed[j] <= SPAWN_X * FIXED_POINT_MULTIPLIER;
                 itemY[j] <= 9'd160;
                 itemType[j] <= HEART;
                 itemAge[j] <= 2'd0;
+                itemBoss[j] <= 2'd0;
             end
         end else if (game_state == PLAYING) begin
             for (int j = 0; j < 3; j++) begin
+                if (!bossUpcoming[j]) tntHandled[j] <= 1'b0;
                 if (itemActive[j] && itemAge[j] != 2'd3)
                     itemAge[j] <= itemAge[j] + 1'b1;
                 if (pipeReady[j] && (!pipeSeen[j] || pipeRecycle[j])) begin
@@ -182,9 +216,24 @@ always_ff @(posedge clk or negedge resetN) begin
                 collectedType <= itemType[pickupIndex];
             end
 
-            if (scrollUpdate && gapIndex >= 0) begin
+            // TNT uses the midpoint between the preceding and boss pipe
+            // centers. Subtract this edge's movement, just like its owner.
+            // Reserving a slot before it is due prevents ordinary pickups
+            // from blocking a mandatory TNT spawn.
+            if (scrollUpdate && tntIndex >= 0 && freeSlot >= 0) begin
+                itemActive[freeSlot] <= 1'b1;
+                itemXFixed[freeSlot] <= tntX * FIXED_POINT_MULTIPLIER - int'(scrollStep);
+                itemY[freeSlot] <= 9'(int'(pipeHeights[previousPipe*6 +: 6])*8 + 64);
+                itemType[freeSlot] <= TNT;
+                itemBoss[freeSlot] <= 2'(tntIndex);
+                itemAge[freeSlot] <= 2'd0;
+                itemSpawn[freeSlot] <= 1'b1;
+                tntHandled[tntIndex] <= 1'b1;
+            end else if (scrollUpdate && gapIndex >= 0) begin
                 gapHandled[gapIndex] <= 1'b1; // One opportunity per gap.
-                if (gapEnabled[gapIndex] && gapClear && freeSlot >= 0) begin
+                if (gapEnabled[gapIndex] && gapClear && freeSlot >= 0 &&
+                    !bossUpcoming[(gapIndex == 2) ? 0 : gapIndex+1] &&
+                    (!reserveTnt || activeCount < 2)) begin
                     itemActive[freeSlot] <= 1'b1;
                     itemXFixed[freeSlot] <= SPAWN_X * FIXED_POINT_MULTIPLIER;
                     // Follow the opening of the pipe just passed. Latch Y so
