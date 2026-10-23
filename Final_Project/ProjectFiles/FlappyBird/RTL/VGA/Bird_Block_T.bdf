@@ -1,6 +1,27 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
+agreement for further details.
+*/
 (header "graphic" (version "1.4"))
 (global
-	(rect 568 16 856 56)
+	(rect 40 -16 328 24)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
@@ -12,7 +33,7 @@
 	)
 )
 (global
-	(rect 568 56 856 96)
+	(rect 40 24 328 64)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
@@ -24,7 +45,7 @@
 	)
 )
 (global
-	(rect 568 104 856 144)
+	(rect 40 72 328 112)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
@@ -36,7 +57,7 @@
 	)
 )
 (global
-	(rect 568 152 856 192)
+	(rect 40 120 328 160)
 	(parameter)
 	(text "PARAM" (rect 3 -1 46 13)(font "Arial" (font_size 8)))
 	(text "DEFAULT VALUE" (rect 141 0 229 12)(font "Arial" ))
@@ -63,17 +84,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "clk" (rect 240 304 420 321)(font "Arial" ))
-	(pt 232 320)
-	(pt 288 320)
-)
-
 (pin
 	(input)
 	(rect 64 344 240 360)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "resetN" (rect 5 0 19 12)(font "Arial" ))
+	(text "resetN" (rect 5 0 38 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -85,17 +100,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "resetN" (rect 240 336 420 353)(font "Arial" ))
-	(pt 232 352)
-	(pt 288 352)
-)
-
 (pin
 	(input)
 	(rect 64 376 240 392)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "startOfFrame" (rect 5 0 19 12)(font "Arial" ))
+	(text "startOfFrame" (rect 5 0 72 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -107,17 +116,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "startOfFrame" (rect 240 368 420 385)(font "Arial" ))
-	(pt 232 384)
-	(pt 288 384)
-)
-
 (pin
 	(input)
 	(rect 64 408 240 424)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "pixelX[10..0]" (rect 5 0 19 12)(font "Arial" ))
+	(text "pixelX[10..0]" (rect 5 0 65 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -129,18 +132,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "pixelX[10..0]" (rect 240 400 420 417)(font "Arial" ))
-	(pt 232 416)
-	(pt 288 416)
-	(bus)
-)
-
 (pin
 	(input)
 	(rect 64 440 240 456)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "pixelY[10..0]" (rect 5 0 19 12)(font "Arial" ))
+	(text "pixelY[10..0]" (rect 5 0 67 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -152,18 +148,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "pixelY[10..0]" (rect 240 432 420 449)(font "Arial" ))
-	(pt 232 448)
-	(pt 288 448)
-	(bus)
-)
-
 (pin
 	(input)
 	(rect 64 472 240 488)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "Y_direction_key" (rect 5 0 19 12)(font "Arial" ))
+	(text "Y_direction_key" (rect 5 0 85 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -175,17 +164,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "Y_direction_key" (rect 240 464 420 481)(font "Arial" ))
-	(pt 232 480)
-	(pt 288 480)
-)
-
 (pin
 	(input)
 	(rect 64 504 240 520)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "game_state[1..0]" (rect 5 0 19 12)(font "Arial" ))
+	(text "game_state[1..0]" (rect 5 0 88 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -197,18 +180,11 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "game_state[1..0]" (rect 240 496 420 513)(font "Arial" ))
-	(pt 232 512)
-	(pt 288 512)
-	(bus)
-)
-
 (pin
 	(input)
 	(rect 64 536 240 552)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "reverse_gravity_switch" (rect 5 0 19 12)(font "Arial" ))
+	(text "reverse_gravity_switch" (rect 5 0 120 12)(font "Arial" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -220,15 +196,41 @@
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "reverse_gravity_switch" (rect 240 528 420 545)(font "Arial" ))
-	(pt 232 544)
-	(pt 288 544)
+(pin
+	(input)
+	(rect 64 568 240 584)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "godmode" (rect 5 0 49 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-
+(pin
+	(input)
+	(rect 64 600 240 616)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "damage_pulse" (rect 5 0 75 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
 (pin
 	(output)
-	(rect 2240 312 2416 328)
+	(rect 1880 336 2056 352)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "birdDR" (rect 90 0 121 17)(font "Intel Clear" ))
 	(pt 0 8)
@@ -242,17 +244,11 @@
 		(line (pt 78 12)(pt 82 8))
 	)
 )
-(connector
-	(text "birdDR" (rect 2192 304 2372 321)(font "Arial" ))
-	(pt 2240 320)
-	(pt 2184 320)
-)
-
 (pin
 	(output)
-	(rect 2240 344 2416 360)
+	(rect 1880 368 2056 384)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "birdRGB[7..0]" (rect 90 0 121 17)(font "Intel Clear" ))
+	(text "birdRGB[7..0]" (rect 90 0 152 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -264,18 +260,11 @@
 		(line (pt 78 12)(pt 82 8))
 	)
 )
-(connector
-	(text "birdRGB[7..0]" (rect 2192 336 2372 353)(font "Arial" ))
-	(pt 2240 352)
-	(pt 2184 352)
-	(bus)
-)
-
 (pin
 	(output)
-	(rect 2240 376 2416 392)
+	(rect 1880 400 2056 416)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "bird_hit_borders" (rect 90 0 121 17)(font "Intel Clear" ))
+	(text "bird_hit_borders" (rect 90 0 166 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -287,39 +276,11 @@
 		(line (pt 78 12)(pt 82 8))
 	)
 )
-(connector
-	(text "bird_hit_borders" (rect 2192 368 2372 385)(font "Arial" ))
-	(pt 2240 384)
-	(pt 2184 384)
-)
-
-(pin
-	(input)
-	(rect 64 568 240 584)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "godmode" (rect 5 0 19 12)(font "Arial" ))
-	(pt 168 8)
-	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
-	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-)
-(connector
-	(text "godmode" (rect 240 560 420 577)(font "Arial" ))
-	(pt 232 576)
-	(pt 288 576)
-)
-
 (pin
 	(output)
-	(rect 2240 408 2416 424)
+	(rect 1880 432 2056 448)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "menuYOffset[5..0]" (rect 90 0 121 17)(font "Intel Clear" ))
+	(text "menuYOffset[5..0]" (rect 90 0 177 17)(font "Intel Clear" ))
 	(pt 0 8)
 	(drawing
 		(line (pt 0 8)(pt 52 8))
@@ -331,128 +292,131 @@
 		(line (pt 78 12)(pt 82 8))
 	)
 )
-(connector
-	(text "menuYOffset[5..0]" (rect 2192 400 2372 417)(font "Arial" ))
-	(pt 2240 416)
-	(pt 2184 416)
-	(bus)
-)
-
 (pin
-	(input)
-	(rect 64 600 240 616)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "damage_pulse" (rect 5 0 19 12)(font "Arial" ))
-	(pt 168 8)
+	(output)
+	(rect 1880 464 2056 480)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "BirdTLX[10..0]" (rect 90 0 157 17)(font "Intel Clear" ))
+	(pt 0 8)
 	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
 	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
-(connector
-	(text "damage_pulse" (rect 240 592 420 609)(font "Arial" ))
-	(pt 232 608)
-	(pt 288 608)
+(pin
+	(output)
+	(rect 1880 496 2056 512)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "BirdTLY[10..0]" (rect 90 0 157 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
 )
-
 (symbol
 	(rect 560 400 832 576)
-	(text "bird_move" (rect 5 0 48 12)(font "Arial" ))
-	(text "inst" (rect 8 160 20 172)(font "Arial" ))
+	(text "bird_move" (rect 5 0 56 12)(font "Arial" ))
+	(text "inst" (rect 8 160 25 172)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk" (rect 0 0 10 12)(font "Arial" ))
-		(text "clk" (rect 21 27 31 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "startOfFrame" (rect 0 0 55 12)(font "Arial" ))
-		(text "startOfFrame" (rect 21 59 76 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 1))
+		(text "startOfFrame" (rect 0 0 67 12)(font "Arial" ))
+		(text "startOfFrame" (rect 21 59 88 71)(font "Arial" ))
+		(line (pt 0 64)(pt 16 64))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "Y_direction_key" (rect 0 0 66 12)(font "Arial" ))
-		(text "Y_direction_key" (rect 21 75 87 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 1))
+		(text "Y_direction_key" (rect 0 0 80 12)(font "Arial" ))
+		(text "Y_direction_key" (rect 21 75 101 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
 	)
 	(port
 		(pt 0 96)
 		(input)
-		(text "reverse_gravity_switch" (rect 0 0 95 12)(font "Arial" ))
-		(text "reverse_gravity_switch" (rect 21 91 116 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
+		(text "reverse_gravity_switch" (rect 0 0 115 12)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 21 91 136 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
 	)
 	(port
 		(pt 0 112)
 		(input)
-		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 107 87 119)(font "Arial" ))
+		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 107 104 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
 		(pt 0 128)
 		(input)
-		(text "godmode" (rect 0 0 36 12)(font "Arial" ))
-		(text "godmode" (rect 21 123 57 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 1))
+		(text "godmode" (rect 0 0 44 12)(font "Arial" ))
+		(text "godmode" (rect 21 123 65 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
 	)
 	(port
 		(pt 0 144)
 		(input)
-		(text "damage_pulse" (rect 0 0 57 12)(font "Arial" ))
-		(text "damage_pulse" (rect 21 139 78 151)(font "Arial" ))
-		(line (pt 0 144)(pt 16 144)(line_width 1))
+		(text "damage_pulse" (rect 0 0 70 12)(font "Arial" ))
+		(text "damage_pulse" (rect 21 139 91 151)(font "Arial" ))
+		(line (pt 0 144)(pt 16 144))
 	)
 	(port
 		(pt 272 32)
 		(output)
-		(text "topLeftX[10..0]" (rect 0 0 57 12)(font "Arial" ))
-		(text "topLeftX[10..0]" (rect 194 27 251 39)(font "Arial" ))
+		(text "topLeftX[10..0]" (rect 0 0 73 12)(font "Arial" ))
+		(text "topLeftX[10..0]" (rect 194 27 267 39)(font "Arial" ))
 		(line (pt 272 32)(pt 256 32)(line_width 3))
 	)
 	(port
 		(pt 272 48)
 		(output)
-		(text "topLeftY[10..0]" (rect 0 0 59 12)(font "Arial" ))
-		(text "topLeftY[10..0]" (rect 192 43 251 55)(font "Arial" ))
+		(text "topLeftY[10..0]" (rect 0 0 75 12)(font "Arial" ))
+		(text "topLeftY[10..0]" (rect 192 43 267 55)(font "Arial" ))
 		(line (pt 272 48)(pt 256 48)(line_width 3))
 	)
 	(port
 		(pt 272 64)
 		(output)
-		(text "bird_hit_borders" (rect 0 0 64 12)(font "Arial" ))
-		(text "bird_hit_borders" (rect 187 59 251 71)(font "Arial" ))
-		(line (pt 272 64)(pt 256 64)(line_width 1))
+		(text "bird_hit_borders" (rect 0 0 77 12)(font "Arial" ))
+		(text "bird_hit_borders" (rect 187 59 264 71)(font "Arial" ))
+		(line (pt 272 64)(pt 256 64))
 	)
 	(port
 		(pt 272 80)
 		(output)
-		(text "menuYOffset[5..0]" (rect 0 0 75 12)(font "Arial" ))
-		(text "menuYOffset[5..0]" (rect 176 75 251 87)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "menuYOffset[5..0]" (rect 176 75 270 87)(font "Arial" ))
 		(line (pt 272 80)(pt 256 80)(line_width 3))
 	)
 	(port
 		(pt 272 96)
 		(output)
-		(text "bird_tilt[5..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "bird_tilt[5..0]" (rect 191 91 251 103)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 191 91 252 103)(font "Arial" ))
 		(line (pt 272 96)(pt 256 96)(line_width 3))
 	)
 	(parameter
@@ -481,94 +445,12 @@
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
-		(rectangle (rect 16 16 256 160)(line_width 1))
+		(rectangle (rect 16 16 256 160))
 	)
-	(annotation_block (parameter)(rect 288 -64 388 16))
-)
-
-(connector
-	(text "clk" (rect 440 416 620 433)(font "Arial" ))
-	(pt 560 432)
-	(pt 432 432)
-)
-
-(connector
-	(text "resetN" (rect 440 432 620 449)(font "Arial" ))
-	(pt 560 448)
-	(pt 432 448)
-)
-
-(connector
-	(text "startOfFrame" (rect 440 448 620 465)(font "Arial" ))
-	(pt 560 464)
-	(pt 432 464)
-)
-
-(connector
-	(text "Y_direction_key" (rect 440 464 620 481)(font "Arial" ))
-	(pt 560 480)
-	(pt 432 480)
-)
-
-(connector
-	(text "reverse_gravity_switch" (rect 440 480 620 497)(font "Arial" ))
-	(pt 560 496)
-	(pt 432 496)
-)
-
-(connector
-	(text "game_state[1..0]" (rect 440 496 620 513)(font "Arial" ))
-	(pt 560 512)
-	(pt 432 512)
-	(bus)
-)
-
-(connector
-	(text "godmode" (rect 440 512 620 529)(font "Arial" ))
-	(pt 560 528)
-	(pt 432 528)
-)
-
-(connector
-	(text "damage_pulse" (rect 440 528 620 545)(font "Arial" ))
-	(pt 560 544)
-	(pt 432 544)
-)
-
-(connector
-	(text "BirdTLX[10..0]" (rect 840 416 1020 433)(font "Arial" ))
-	(pt 832 432)
-	(pt 960 432)
-	(bus)
-)
-
-(connector
-	(text "BirdTLY[10..0]" (rect 840 432 1020 449)(font "Arial" ))
-	(pt 832 448)
-	(pt 960 448)
-	(bus)
-)
-
-(connector
-	(text "bird_hit_borders" (rect 840 448 1020 465)(font "Arial" ))
-	(pt 832 464)
-	(pt 960 464)
-)
-
-(connector
-	(text "menuYOffset[5..0]" (rect 840 464 1020 481)(font "Arial" ))
-	(pt 832 480)
-	(pt 960 480)
-	(bus)
-)
-(connector
-	(text "bird_tilt[5..0]" (rect 840 480 1020 497)(font "Arial" ))
-	(pt 832 496)
-	(pt 960 496)
-	(bus)
+	(annotation_block (parameter)(rect 440 240 728 368))
 )
 (symbol
-	(rect 1120 320 1344 464)
+	(rect 1000 224 1224 368)
 	(text "square_object" (rect 5 0 73 12)(font "Arial" ))
 	(text "inst6" (rect 8 128 31 140)(font "Arial" ))
 	(port
@@ -669,237 +551,333 @@
 	(drawing
 		(rectangle (rect 16 16 208 128))
 	)
-	(annotation_block (parameter)(rect 928 520 1156 596))
-)
-
-(connector
-	(text "clk" (rect 1000 336 1180 353)(font "Arial" ))
-	(pt 1120 352)
-	(pt 992 352)
-)
-
-(connector
-	(text "resetN" (rect 1000 352 1180 369)(font "Arial" ))
-	(pt 1120 368)
-	(pt 992 368)
-)
-
-(connector
-	(text "pixelX[10..0]" (rect 1000 368 1180 385)(font "Arial" ))
-	(pt 1120 384)
-	(pt 992 384)
-	(bus)
-)
-
-(connector
-	(text "pixelY[10..0]" (rect 1000 384 1180 401)(font "Arial" ))
-	(pt 1120 400)
-	(pt 992 400)
-	(bus)
-)
-
-(connector
-	(text "BirdTLX[10..0]" (rect 1000 400 1180 417)(font "Arial" ))
-	(pt 1120 416)
-	(pt 992 416)
-	(bus)
-)
-
-(connector
-	(text "BirdTLY[10..0]" (rect 1000 416 1180 433)(font "Arial" ))
-	(pt 1120 432)
-	(pt 992 432)
-	(bus)
-)
-
-(connector
-	(text "birdOffsetX[10..0]" (rect 1352 336 1532 353)(font "Arial" ))
-	(pt 1344 352)
-	(pt 1472 352)
-	(bus)
-)
-
-(connector
-	(text "birdOffsetY[10..0]" (rect 1352 352 1532 369)(font "Arial" ))
-	(pt 1344 368)
-	(pt 1472 368)
-	(bus)
-)
-
-(connector
-	(text "birdRectangle" (rect 1352 368 1532 385)(font "Arial" ))
-	(pt 1344 384)
-	(pt 1472 384)
+	(annotation_block (parameter)(rect 880 112 1108 188))
 )
 (symbol
-	(rect 1680 320 1944 480)
-	(text "birdBitMap" (rect 5 0 46 12)(font "Arial" ))
-	(text "inst2" (rect 8 144 20 156)(font "Arial" ))
+	(rect 1288 400 1552 560)
+	(text "birdBitMap" (rect 5 0 55 12)(font "Arial" ))
+	(text "inst2" (rect 8 144 31 156)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk" (rect 0 0 10 12)(font "Arial" ))
-		(text "clk" (rect 21 27 31 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "offsetX[10..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "offsetX[10..0]" (rect 21 59 74 71)(font "Arial" ))
+		(text "offsetX[10..0]" (rect 0 0 68 12)(font "Arial" ))
+		(text "offsetX[10..0]" (rect 21 59 89 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "offsetY[10..0]" (rect 0 0 54 12)(font "Arial" ))
-		(text "offsetY[10..0]" (rect 21 75 75 87)(font "Arial" ))
+		(text "offsetY[10..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "offsetY[10..0]" (rect 21 75 91 87)(font "Arial" ))
 		(line (pt 0 80)(pt 16 80)(line_width 3))
 	)
 	(port
 		(pt 0 96)
 		(input)
-		(text "InsideRectangle" (rect 0 0 62 12)(font "Arial" ))
-		(text "InsideRectangle" (rect 21 91 83 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
+		(text "InsideRectangle" (rect 0 0 79 12)(font "Arial" ))
+		(text "InsideRectangle" (rect 21 91 100 103)(font "Arial" ))
+		(line (pt 0 96)(pt 16 96))
 	)
 	(port
 		(pt 0 112)
 		(input)
-		(text "reverse_gravity_switch" (rect 0 0 95 12)(font "Arial" ))
-		(text "reverse_gravity_switch" (rect 21 107 116 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 1))
+		(text "reverse_gravity_switch" (rect 0 0 115 12)(font "Arial" ))
+		(text "reverse_gravity_switch" (rect 21 107 136 119)(font "Arial" ))
+		(line (pt 0 112)(pt 16 112))
 	)
 	(port
 		(pt 0 128)
 		(input)
-		(text "bird_tilt[5..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "bird_tilt[5..0]" (rect 21 123 81 135)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 0 0 61 12)(font "Arial" ))
+		(text "bird_tilt[5..0]" (rect 21 123 82 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
 		(pt 264 32)
 		(output)
-		(text "drawingRequest" (rect 0 0 63 12)(font "Arial" ))
-		(text "drawingRequest" (rect 180 27 243 39)(font "Arial" ))
-		(line (pt 264 32)(pt 248 32)(line_width 1))
+		(text "drawingRequest" (rect 0 0 77 12)(font "Arial" ))
+		(text "drawingRequest" (rect 180 27 257 39)(font "Arial" ))
+		(line (pt 264 32)(pt 248 32))
 	)
 	(port
 		(pt 264 48)
 		(output)
-		(text "RGBout[7..0]" (rect 0 0 53 12)(font "Arial" ))
-		(text "RGBout[7..0]" (rect 190 43 243 55)(font "Arial" ))
+		(text "RGBout[7..0]" (rect 0 0 64 12)(font "Arial" ))
+		(text "RGBout[7..0]" (rect 190 43 254 55)(font "Arial" ))
 		(line (pt 264 48)(pt 248 48)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 248 144)(line_width 1))
+		(rectangle (rect 16 16 248 144))
 	)
 )
-
 (connector
-	(text "clk" (rect 1560 336 1740 353)(font "Arial" ))
-	(pt 1680 352)
-	(pt 1552 352)
+	(text "clk" (rect 240 304 254 316)(font "Arial" ))
+	(pt 232 320)
+	(pt 288 320)
 )
-
 (connector
-	(text "resetN" (rect 1560 352 1740 369)(font "Arial" ))
-	(pt 1680 368)
-	(pt 1552 368)
+	(text "resetN" (rect 240 336 273 348)(font "Arial" ))
+	(pt 232 352)
+	(pt 288 352)
 )
-
 (connector
-	(text "birdOffsetX[10..0]" (rect 1560 368 1740 385)(font "Arial" ))
-	(pt 1680 384)
-	(pt 1552 384)
+	(text "startOfFrame" (rect 240 368 307 380)(font "Arial" ))
+	(pt 232 384)
+	(pt 288 384)
+)
+(connector
+	(text "pixelX[10..0]" (rect 240 400 300 412)(font "Arial" ))
+	(pt 232 416)
+	(pt 288 416)
 	(bus)
 )
-
 (connector
-	(text "birdOffsetY[10..0]" (rect 1560 384 1740 401)(font "Arial" ))
-	(pt 1680 400)
-	(pt 1552 400)
+	(text "pixelY[10..0]" (rect 240 432 302 444)(font "Arial" ))
+	(pt 232 448)
+	(pt 288 448)
 	(bus)
 )
-
 (connector
-	(text "birdRectangle" (rect 1560 400 1740 417)(font "Arial" ))
-	(pt 1680 416)
-	(pt 1552 416)
+	(text "Y_direction_key" (rect 240 464 320 476)(font "Arial" ))
+	(pt 232 480)
+	(pt 288 480)
 )
-
 (connector
-	(text "reverse_gravity_switch" (rect 1560 416 1740 433)(font "Arial" ))
-	(pt 1680 432)
+	(text "game_state[1..0]" (rect 240 496 323 508)(font "Arial" ))
+	(pt 232 512)
+	(pt 288 512)
+	(bus)
+)
+(connector
+	(text "reverse_gravity_switch" (rect 240 528 355 540)(font "Arial" ))
+	(pt 232 544)
+	(pt 288 544)
+)
+(connector
+	(text "godmode" (rect 240 560 284 572)(font "Arial" ))
+	(pt 232 576)
+	(pt 288 576)
+)
+(connector
+	(text "damage_pulse" (rect 240 592 310 604)(font "Arial" ))
+	(pt 232 608)
+	(pt 288 608)
+)
+(connector
+	(text "clk" (rect 440 416 454 428)(font "Arial" ))
+	(pt 560 432)
+	(pt 432 432)
+)
+(connector
+	(text "resetN" (rect 440 432 473 444)(font "Arial" ))
+	(pt 560 448)
+	(pt 432 448)
+)
+(connector
+	(text "startOfFrame" (rect 440 448 507 460)(font "Arial" ))
+	(pt 560 464)
+	(pt 432 464)
+)
+(connector
+	(text "Y_direction_key" (rect 440 464 520 476)(font "Arial" ))
+	(pt 560 480)
+	(pt 432 480)
+)
+(connector
+	(text "reverse_gravity_switch" (rect 440 480 555 492)(font "Arial" ))
+	(pt 560 496)
+	(pt 432 496)
+)
+(connector
+	(text "game_state[1..0]" (rect 440 496 523 508)(font "Arial" ))
+	(pt 560 512)
+	(pt 432 512)
+	(bus)
+)
+(connector
+	(text "godmode" (rect 440 512 484 524)(font "Arial" ))
+	(pt 560 528)
+	(pt 432 528)
+)
+(connector
+	(text "damage_pulse" (rect 440 528 510 540)(font "Arial" ))
+	(pt 560 544)
+	(pt 432 544)
+)
+(connector
+	(text "BirdTLX[10..0]" (rect 840 416 908 428)(font "Arial" ))
+	(pt 832 432)
+	(pt 960 432)
+	(bus)
+)
+(connector
+	(text "BirdTLY[10..0]" (rect 840 432 910 444)(font "Arial" ))
+	(pt 832 448)
+	(pt 960 448)
+	(bus)
+)
+(connector
+	(text "bird_hit_borders" (rect 840 448 917 460)(font "Arial" ))
+	(pt 832 464)
+	(pt 960 464)
+)
+(connector
+	(text "menuYOffset[5..0]" (rect 840 464 934 476)(font "Arial" ))
+	(pt 832 480)
+	(pt 960 480)
+	(bus)
+)
+(connector
+	(text "bird_tilt[5..0]" (rect 840 480 901 492)(font "Arial" ))
+	(pt 832 496)
+	(pt 960 496)
+	(bus)
+)
+(connector
+	(text "BirdTLX[10..0]" (rect 880 304 948 316)(font "Arial" ))
+	(pt 1000 320)
+	(pt 872 320)
+	(bus)
+)
+(connector
+	(text "BirdTLY[10..0]" (rect 880 320 950 332)(font "Arial" ))
+	(pt 1000 336)
+	(pt 872 336)
+	(bus)
+)
+(connector
+	(text "birdOffsetX[10..0]" (rect 1232 240 1320 252)(font "Arial" ))
+	(pt 1224 256)
+	(pt 1352 256)
+	(bus)
+)
+(connector
+	(text "birdOffsetY[10..0]" (rect 1232 256 1322 268)(font "Arial" ))
+	(pt 1224 272)
+	(pt 1352 272)
+	(bus)
+)
+(connector
+	(text "birdRectangle" (rect 1232 272 1299 284)(font "Arial" ))
+	(pt 1224 288)
+	(pt 1352 288)
+)
+(connector
+	(text "clk" (rect 880 240 894 252)(font "Arial" ))
+	(pt 872 256)
+	(pt 1000 256)
+)
+(connector
+	(text "resetN" (rect 880 256 913 268)(font "Arial" ))
+	(pt 872 272)
+	(pt 1000 272)
+)
+(connector
+	(text "pixelX[10..0]" (rect 880 272 940 284)(font "Arial" ))
+	(pt 872 288)
+	(pt 1000 288)
+	(bus)
+)
+(connector
+	(text "pixelY[10..0]" (rect 880 288 942 300)(font "Arial" ))
+	(pt 872 304)
+	(pt 1000 304)
+	(bus)
+)
+(connector
+	(text "clk" (rect 1168 416 1182 428)(font "Arial" ))
+	(pt 1288 432)
+	(pt 1160 432)
+)
+(connector
+	(text "resetN" (rect 1168 432 1201 444)(font "Arial" ))
+	(pt 1288 448)
+	(pt 1160 448)
+)
+(connector
+	(text "birdOffsetX[10..0]" (rect 1168 448 1256 460)(font "Arial" ))
+	(pt 1288 464)
+	(pt 1160 464)
+	(bus)
+)
+(connector
+	(text "birdOffsetY[10..0]" (rect 1168 464 1258 476)(font "Arial" ))
+	(pt 1288 480)
+	(pt 1160 480)
+	(bus)
+)
+(connector
+	(text "birdRectangle" (rect 1168 480 1235 492)(font "Arial" ))
+	(pt 1288 496)
+	(pt 1160 496)
+)
+(connector
+	(text "reverse_gravity_switch" (rect 1168 496 1283 508)(font "Arial" ))
+	(pt 1288 512)
+	(pt 1160 512)
+)
+(connector
+	(text "bird_tilt[5..0]" (rect 1168 512 1229 524)(font "Arial" ))
+	(pt 1288 528)
+	(pt 1160 528)
+	(bus)
+)
+(connector
+	(text "birdDR" (rect 1560 416 1594 428)(font "Arial" ))
 	(pt 1552 432)
+	(pt 1680 432)
 )
 (connector
-	(text "bird_tilt[5..0]" (rect 1560 432 1740 449)(font "Arial" ))
-	(pt 1680 448)
+	(text "birdRGB[7..0]" (rect 1560 432 1627 444)(font "Arial" ))
 	(pt 1552 448)
+	(pt 1680 448)
 	(bus)
 )
-
 (connector
-	(text "birdDR" (rect 1952 336 2132 353)(font "Arial" ))
-	(pt 1944 352)
-	(pt 2072 352)
+	(text "birdDR" (rect 1832 328 1866 340)(font "Arial" ))
+	(pt 1880 344)
+	(pt 1824 344)
 )
-
 (connector
-	(text "birdRGB[7..0]" (rect 1952 352 2132 369)(font "Arial" ))
-	(pt 1944 368)
-	(pt 2072 368)
+	(text "birdRGB[7..0]" (rect 1832 360 1899 372)(font "Arial" ))
+	(pt 1880 376)
+	(pt 1824 376)
 	(bus)
 )
-(pin
-	(output)
-	(rect 2240 440 2416 456)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "BirdTLX[10..0]" (rect 90 0 121 17)(font "Intel Clear" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
+(connector
+	(text "bird_hit_borders" (rect 1832 392 1909 404)(font "Arial" ))
+	(pt 1880 408)
+	(pt 1824 408)
 )
 (connector
-	(text "BirdTLX[10..0]" (rect 2192 432 2372 449)(font "Arial" ))
-	(pt 2240 448)
-	(pt 2184 448)
+	(text "menuYOffset[5..0]" (rect 1832 424 1926 436)(font "Arial" ))
+	(pt 1880 440)
+	(pt 1824 440)
 	(bus)
 )
-(pin
-	(output)
-	(rect 2240 472 2416 488)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "BirdTLY[10..0]" (rect 90 0 121 17)(font "Intel Clear" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
+(connector
+	(text "BirdTLX[10..0]" (rect 1832 456 1900 468)(font "Arial" ))
+	(pt 1880 472)
+	(pt 1824 472)
+	(bus)
 )
 (connector
-	(text "BirdTLY[10..0]" (rect 2192 464 2372 481)(font "Arial" ))
-	(pt 2240 480)
-	(pt 2184 480)
+	(text "BirdTLY[10..0]" (rect 1832 488 1902 500)(font "Arial" ))
+	(pt 1880 504)
+	(pt 1824 504)
 	(bus)
 )

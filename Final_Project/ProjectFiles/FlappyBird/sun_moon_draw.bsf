@@ -102,8 +102,13 @@ agreement for further details.
 		"64"
 		""
 		(type "PARAMETER_SIGNED_DEC")	)
+	(parameter
+		"CROSSING_FRAMES"
+		"4355"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
 	(drawing
 		(rectangle (rect 16 16 256 144)(line_width 1))
 	)
-	(annotation_block (parameter)(rect 288 -64 388 16))
+	(annotation_block (parameter)(rect 288 -80 520 16))
 )

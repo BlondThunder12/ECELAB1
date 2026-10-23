@@ -11,6 +11,7 @@ module	addr_counter	 #(
 					input		logic	resetN,
 					input		logic	en, //two enables one for a "slow clock" 
 					input		logic	en1, // one for external disable 
+					input       logic restart, // Restart oscillator phase for a new effect.
 					output	logic [COUNT_SIZE-1:0]	addr // sin table index 
 
 		);
@@ -25,6 +26,9 @@ begin
 	begin
 		addr	<= 0;
 	end
+	else if (restart) begin
+        addr <= '0;
+    end
 	else if (en == 1'b1 && en1 == 1'b1) begin
 				if (addr >= count_limit)  // overflow 
 					addr <= COUNT_SIZE'(0);

@@ -237,6 +237,7 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[4]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[5]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to HEX5[6]
+set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[2]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to KEY[3]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to OVGA[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to OVGA[1]
@@ -280,6 +281,8 @@ set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tdo
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to altera_reserved_tms
 
 
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/game_sfx_data.sv
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/game_sfx_voice.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/sound_selector.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/start_screen_audio.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/AUDIO/audio_mixer.sv
@@ -293,6 +296,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/cloud_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/sun_moon_draw.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/plane_draw.sv
 set_global_assignment -name BDF_FILE RTL/VGA/Top_Flappy_Bird_Game.bdf
+set_global_assignment -name BDF_FILE RTL/VGA/BackgroundModule.bdf
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/scoreModule.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/VGA/bird_move.sv
 set_global_assignment -name BDF_FILE RTL/VGA/Bird_Block_T.bdf
@@ -325,6 +329,7 @@ set_global_assignment -name SYSTEMVERILOG_FILE RTL/KEYBOARDX/simple_up_counter.s
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/KEYBOARDX/random.sv
 set_global_assignment -name CDF_FILE output_files/Chain1.cdf
 set_global_assignment -name SDC_FILE DE10_Standard_Audio.sdc
+set_global_assignment -name SYSTEMVERILOG_FILE RTL/Seg7/speed_level_digits.sv
 set_global_assignment -name SYSTEMVERILOG_FILE RTL/Seg7/SEG7.SV
 set_global_assignment -name QIP_FILE CLK_31P5.qip
 set_global_assignment -name SIP_FILE CLK_31P5.sip
@@ -365,6 +370,7 @@ set_global_assignment -name ENABLE_SIGNALTAP OFF
 set_global_assignment -name SIGNALTAP_FILE Incorrect_item_spawning.stp
 
 set_global_assignment -name ENABLE_LOGIC_ANALYZER_INTERFACE ON
+
 
 
 

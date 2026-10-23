@@ -3,7 +3,8 @@ module scoreModule #(
 	parameter logic [10:0] HUNDREDS_X = 11'd496,
     parameter logic [10:0] TENS_X = 11'd536,
 	parameter logic [10:0] UNITS_X = 11'd576,
-	parameter logic [10:0] SCORE_Y = 11'd0
+	parameter logic [10:0] SCORE_Y = 11'd0,
+    parameter int DEMO_DEBOUNCE_CYCLES = 315_000 // 10 ms at 31.5 MHz
 )(
 	input logic   clk,
 	input logic   resetN,
@@ -14,6 +15,7 @@ module scoreModule #(
 	input logic        godmode_active,
 	input logic        coinCollected, // One collection strobe; consecutive coins may be back-to-back
 	input logic [3:0]  speed_level,
+    input logic        demo_score_key, // Active-low board KEY[2]: +500 once per press.
 
 	output logic [7:0] RGBNum,
 	output logic       DrawingRequest,
@@ -32,6 +34,36 @@ localparam logic [1:0] START_SCREEN = 2'b00;
 localparam logic [1:0] PLAYING      = 2'b01;
 localparam logic [1:0] GAME_OVER    = 2'b10;
 localparam logic [1:0] PAUSED       = 2'b11;
+
+localparam int DEMO_DEBOUNCE_BITS = (DEMO_DEBOUNCE_CYCLES > 1) ?
+                                  $clog2(DEMO_DEBOUNCE_CYCLES) : 1;
+logic demo_key_meta, demo_key_sync, demo_key_stable, demo_score_pulse;
+logic [DEMO_DEBOUNCE_BITS-1:0] demo_debounce_count;
+
+// Synchronize KEY2, reject contact bounce and rearm only after a stable release.
+// Track it in every game state so holding it cannot repeatedly add points.
+always_ff @(posedge clk or negedge resetN) begin
+    if (!resetN) begin
+        demo_key_meta <= 1'b1;
+        demo_key_sync <= 1'b1;
+        demo_key_stable <= 1'b1;
+        demo_debounce_count <= '0;
+        demo_score_pulse <= 1'b0;
+    end else begin
+        demo_key_meta <= demo_score_key;
+        demo_key_sync <= demo_key_meta;
+        demo_score_pulse <= 1'b0;
+        if (demo_key_sync == demo_key_stable) begin
+            demo_debounce_count <= '0;
+        end else if (demo_debounce_count == DEMO_DEBOUNCE_BITS'(DEMO_DEBOUNCE_CYCLES - 1)) begin
+            demo_debounce_count <= '0;
+            demo_key_stable <= demo_key_sync;
+            demo_score_pulse <= !demo_key_sync;
+        end else begin
+            demo_debounce_count <= demo_debounce_count + 1'b1;
+        end
+    end
+end
 
 always_ff @(posedge clk or negedge resetN) begin
         if (!resetN)
@@ -74,14 +106,14 @@ always_comb begin
     endcase
 end
 
-// Add both events together. At most 16 points are added in one clock, so
-// the units digit needs at most two carries; keep the existing BCD counter.
+// Combine normal points with KEY2's five hundreds, then saturate at 999.
+// Pipe/coin events add at most 16 to the units digit, requiring two carries.
 always_comb begin
     points_to_add = (coinCollected ? {1'b0, coin_value} : 5'd0) +
                     (trigger_pulse ? 5'd1 : 5'd0);
     units_sum = {2'b00, units} + {1'b0, points_to_add};
     tens_sum = {1'b0, tens};
-    hundreds_sum = {1'b0, hundreds};
+    hundreds_sum = {1'b0, hundreds} + (demo_score_pulse ? 5'd5 : 5'd0);
     if (units_sum >= 6'd20) begin
         units_sum = units_sum - 6'd20;
         tens_sum = tens_sum + 5'd2;
@@ -119,6 +151,7 @@ always_ff @(posedge clk or negedge resetN) begin
         if (game_state == GAME_OVER && previous_state != GAME_OVER) begin
             final_score_bcd <= current_score_bcd;
             new_best <= 1'b0;
+            // KEY2 points are eligible; Godmode still disqualifies the whole run.
             if (!run_used_godmode && !godmode_active &&
                 current_score_bcd > best_score_bcd) begin
                 best_score_bcd <= current_score_bcd;
@@ -138,7 +171,7 @@ end
             tens  <= 4'd0;	
 				hundreds <= 4'd0;
 		
-	end else if (game_state == PLAYING && points_to_add != 0) begin
+	end else if (game_state == PLAYING && (points_to_add != 0 || demo_score_pulse)) begin
             {hundreds, tens, units} <= next_score_bcd;
         end
     end

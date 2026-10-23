@@ -5,18 +5,18 @@ the Block Editor! File corruption is VERY likely to occur.
 */
 /*
 Copyright (C) 2017  Intel Corporation. All rights reserved.
-Your use of Intel Corporation's design tools, logic functions
-and other software and tools, and its AMPP partner logic
-functions, and any output files from any of the foregoing
-(including device programming or simulation files), and any
-associated documentation or information are expressly subject
-to the terms and conditions of the Intel Program License
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and its AMPP partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
 Subscription Agreement, the Intel Quartus Prime License Agreement,
-the Intel MegaCore Function License Agreement, or other
-applicable license agreement, including, without limitation,
-that your use is for the sole purpose of programming logic
-devices manufactured by Intel and sold by Intel or its
-authorized distributors.  Please refer to the applicable
+the Intel MegaCore Function License Agreement, or other 
+applicable license agreement, including, without limitation, 
+that your use is for the sole purpose of programming logic 
+devices manufactured by Intel and sold by Intel or its 
+authorized distributors.  Please refer to the applicable 
 agreement for further details.
 */
 (header "graphic" (version "1.4"))
@@ -261,6 +261,38 @@ agreement for further details.
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
 )
 (pin
+	(input)
+	(rect 64 1272 240 1288)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "bossUpcoming[2..0]" (rect 5 0 104 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
+	(input)
+	(rect 64 1312 240 1328)
+	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
+	(text "bossTargetXPositions[32..0]" (rect 5 0 141 12)(font "Arial" ))
+	(pt 168 8)
+	(drawing
+		(line (pt 84 12)(pt 109 12))
+		(line (pt 84 4)(pt 109 4))
+		(line (pt 113 8)(pt 168 8))
+		(line (pt 84 12)(pt 84 4))
+		(line (pt 109 4)(pt 113 8))
+		(line (pt 109 12)(pt 113 8))
+	)
+	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
+)
+(pin
 	(output)
 	(rect 1880 752 2056 768)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
@@ -404,6 +436,38 @@ agreement for further details.
 		(line (pt 78 12)(pt 82 8))
 	)
 )
+(pin
+	(output)
+	(rect 1880 1048 2056 1064)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "tntCollected[2..0]" (rect 90 0 172 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
+(pin
+	(output)
+	(rect 1880 1088 2056 1104)
+	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
+	(text "itemCollected" (rect 90 0 157 17)(font "Intel Clear" ))
+	(pt 0 8)
+	(drawing
+		(line (pt 0 8)(pt 52 8))
+		(line (pt 52 4)(pt 78 4))
+		(line (pt 52 12)(pt 78 12))
+		(line (pt 52 12)(pt 52 4))
+		(line (pt 78 4)(pt 82 8))
+		(line (pt 82 8)(pt 78 12))
+		(line (pt 78 12)(pt 82 8))
+	)
+)
 (symbol
 	(rect 560 80 776 192)
 	(text "random" (rect 5 0 41 12)(font "Arial" ))
@@ -458,195 +522,195 @@ agreement for further details.
 )
 (symbol
 	(rect 560 340 856 644)
-	(text "pickup_control" (rect 5 0 61 12)(font "Arial" ))
-	(text "pickup_control" (rect 8 288 20 300)(font "Arial" ))
+	(text "pickup_control" (rect 5 0 75 12)(font "Arial" ))
+	(text "pickup_control" (rect 8 288 78 300)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
-		(text "clk" (rect 0 0 10 12)(font "Arial" ))
-		(text "clk" (rect 21 27 31 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
+		(text "clk" (rect 0 0 14 12)(font "Arial" ))
+		(text "clk" (rect 21 27 35 39)(font "Arial" ))
+		(line (pt 0 32)(pt 16 32))
 	)
 	(port
 		(pt 0 48)
 		(input)
-		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
+		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+		(line (pt 0 48)(pt 16 48))
 	)
 	(port
 		(pt 0 64)
 		(input)
-		(text "game_state[1..0]" (rect 0 0 66 12)(font "Arial" ))
-		(text "game_state[1..0]" (rect 21 59 87 71)(font "Arial" ))
+		(text "game_state[1..0]" (rect 0 0 83 12)(font "Arial" ))
+		(text "game_state[1..0]" (rect 21 59 104 71)(font "Arial" ))
 		(line (pt 0 64)(pt 16 64)(line_width 3))
 	)
 	(port
 		(pt 0 80)
 		(input)
-		(text "scrollUpdate" (rect 0 0 48 12)(font "Arial" ))
-		(text "scrollUpdate" (rect 21 75 69 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 1))
+		(text "scrollUpdate" (rect 0 0 61 12)(font "Arial" ))
+		(text "scrollUpdate" (rect 21 75 82 87)(font "Arial" ))
+		(line (pt 0 80)(pt 16 80))
 	)
 	(port
 		(pt 0 96)
 		(input)
-		(text "scrollStep[10..0]" (rect 0 0 61 12)(font "Arial" ))
-		(text "scrollStep[10..0]" (rect 21 91 82 103)(font "Arial" ))
+		(text "scrollStep[10..0]" (rect 0 0 80 12)(font "Arial" ))
+		(text "scrollStep[10..0]" (rect 21 91 101 103)(font "Arial" ))
 		(line (pt 0 96)(pt 16 96)(line_width 3))
 	)
 	(port
 		(pt 0 112)
 		(input)
-		(text "pipeSpacing[10..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "pipeSpacing[10..0]" (rect 21 107 90 119)(font "Arial" ))
+		(text "pipeSpacing[10..0]" (rect 0 0 90 12)(font "Arial" ))
+		(text "pipeSpacing[10..0]" (rect 21 107 111 119)(font "Arial" ))
 		(line (pt 0 112)(pt 16 112)(line_width 3))
 	)
 	(port
 		(pt 0 128)
 		(input)
-		(text "pipeXPositions[32..0]" (rect 0 0 80 12)(font "Arial" ))
-		(text "pipeXPositions[32..0]" (rect 21 123 101 135)(font "Arial" ))
+		(text "pipeXPositions[32..0]" (rect 0 0 102 12)(font "Arial" ))
+		(text "pipeXPositions[32..0]" (rect 21 123 123 135)(font "Arial" ))
 		(line (pt 0 128)(pt 16 128)(line_width 3))
 	)
 	(port
 		(pt 0 144)
 		(input)
-		(text "pipeHeights[17..0]" (rect 0 0 68 12)(font "Arial" ))
-		(text "pipeHeights[17..0]" (rect 21 139 89 151)(font "Arial" ))
+		(text "pipeHeights[17..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "pipeHeights[17..0]" (rect 21 139 110 151)(font "Arial" ))
 		(line (pt 0 144)(pt 16 144)(line_width 3))
 	)
 	(port
 		(pt 0 160)
 		(input)
-		(text "pipeReady[2..0]" (rect 0 0 63 12)(font "Arial" ))
-		(text "pipeReady[2..0]" (rect 21 155 84 167)(font "Arial" ))
+		(text "pipeReady[2..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "pipeReady[2..0]" (rect 21 155 100 167)(font "Arial" ))
 		(line (pt 0 160)(pt 16 160)(line_width 3))
 	)
 	(port
 		(pt 0 176)
 		(input)
-		(text "pipeRecycle[2..0]" (rect 0 0 69 12)(font "Arial" ))
-		(text "pipeRecycle[2..0]" (rect 21 171 90 183)(font "Arial" ))
+		(text "pipeRecycle[2..0]" (rect 0 0 87 12)(font "Arial" ))
+		(text "pipeRecycle[2..0]" (rect 21 171 108 183)(font "Arial" ))
 		(line (pt 0 176)(pt 16 176)(line_width 3))
 	)
 	(port
 		(pt 0 192)
 		(input)
-		(text "bossUpcoming[2..0]" (rect 0 0 79 12)(font "Arial" ))
-		(text "bossUpcoming[2..0]" (rect 21 187 100 199)(font "Arial" ))
+		(text "bossUpcoming[2..0]" (rect 0 0 99 12)(font "Arial" ))
+		(text "bossUpcoming[2..0]" (rect 21 187 120 199)(font "Arial" ))
 		(line (pt 0 192)(pt 16 192)(line_width 3))
 	)
 	(port
 		(pt 0 208)
 		(input)
-		(text "bossTargetXPositions[32..0]" (rect 0 0 109 12)(font "Arial" ))
-		(text "bossTargetXPositions[32..0]" (rect 21 203 130 215)(font "Arial" ))
+		(text "bossTargetXPositions[32..0]" (rect 0 0 136 12)(font "Arial" ))
+		(text "bossTargetXPositions[32..0]" (rect 21 203 157 215)(font "Arial" ))
 		(line (pt 0 208)(pt 16 208)(line_width 3))
 	)
 	(port
 		(pt 0 224)
 		(input)
-		(text "random_value[7..0]" (rect 0 0 77 12)(font "Arial" ))
-		(text "random_value[7..0]" (rect 21 219 98 231)(font "Arial" ))
+		(text "random_value[7..0]" (rect 0 0 95 12)(font "Arial" ))
+		(text "random_value[7..0]" (rect 21 219 116 231)(font "Arial" ))
 		(line (pt 0 224)(pt 16 224)(line_width 3))
 	)
 	(port
 		(pt 0 240)
 		(input)
-		(text "birdDrawingRequest" (rect 0 0 80 12)(font "Arial" ))
-		(text "birdDrawingRequest" (rect 21 235 101 247)(font "Arial" ))
-		(line (pt 0 240)(pt 16 240)(line_width 1))
+		(text "birdDrawingRequest" (rect 0 0 97 12)(font "Arial" ))
+		(text "birdDrawingRequest" (rect 21 235 118 247)(font "Arial" ))
+		(line (pt 0 240)(pt 16 240))
 	)
 	(port
 		(pt 0 256)
 		(input)
-		(text "pickupDrawingRequest" (rect 0 0 90 12)(font "Arial" ))
-		(text "pickupDrawingRequest" (rect 21 251 111 263)(font "Arial" ))
-		(line (pt 0 256)(pt 16 256)(line_width 1))
+		(text "pickupDrawingRequest" (rect 0 0 112 12)(font "Arial" ))
+		(text "pickupDrawingRequest" (rect 21 251 133 263)(font "Arial" ))
+		(line (pt 0 256)(pt 16 256))
 	)
 	(port
 		(pt 0 272)
 		(input)
-		(text "pickupIndex[1..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "pickupIndex[1..0]" (rect 21 267 85 279)(font "Arial" ))
+		(text "pickupIndex[1..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "pickupIndex[1..0]" (rect 21 267 105 279)(font "Arial" ))
 		(line (pt 0 272)(pt 16 272)(line_width 3))
 	)
 	(port
 		(pt 296 32)
 		(output)
-		(text "itemActive[2..0]" (rect 0 0 63 12)(font "Arial" ))
-		(text "itemActive[2..0]" (rect 212 27 275 39)(font "Arial" ))
+		(text "itemActive[2..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "itemActive[2..0]" (rect 212 27 291 39)(font "Arial" ))
 		(line (pt 296 32)(pt 280 32)(line_width 3))
 	)
 	(port
 		(pt 296 48)
 		(output)
-		(text "itemXPositions[32..0]" (rect 0 0 81 12)(font "Arial" ))
-		(text "itemXPositions[32..0]" (rect 194 43 275 55)(font "Arial" ))
+		(text "itemXPositions[32..0]" (rect 0 0 103 12)(font "Arial" ))
+		(text "itemXPositions[32..0]" (rect 194 43 297 55)(font "Arial" ))
 		(line (pt 296 48)(pt 280 48)(line_width 3))
 	)
 	(port
 		(pt 296 64)
 		(output)
-		(text "itemYPositions[26..0]" (rect 0 0 82 12)(font "Arial" ))
-		(text "itemYPositions[26..0]" (rect 193 59 275 71)(font "Arial" ))
+		(text "itemYPositions[26..0]" (rect 0 0 106 12)(font "Arial" ))
+		(text "itemYPositions[26..0]" (rect 193 59 299 71)(font "Arial" ))
 		(line (pt 296 64)(pt 280 64)(line_width 3))
 	)
 	(port
 		(pt 296 80)
 		(output)
-		(text "itemTypes[5..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "itemTypes[5..0]" (rect 213 75 275 87)(font "Arial" ))
+		(text "itemTypes[5..0]" (rect 0 0 77 12)(font "Arial" ))
+		(text "itemTypes[5..0]" (rect 213 75 290 87)(font "Arial" ))
 		(line (pt 296 80)(pt 280 80)(line_width 3))
 	)
 	(port
 		(pt 296 96)
 		(output)
-		(text "itemSpawn[2..0]" (rect 0 0 62 12)(font "Arial" ))
-		(text "itemSpawn[2..0]" (rect 213 91 275 103)(font "Arial" ))
+		(text "itemSpawn[2..0]" (rect 0 0 79 12)(font "Arial" ))
+		(text "itemSpawn[2..0]" (rect 213 91 292 103)(font "Arial" ))
 		(line (pt 296 96)(pt 280 96)(line_width 3))
 	)
 	(port
 		(pt 296 112)
 		(output)
-		(text "itemCollected" (rect 0 0 51 12)(font "Arial" ))
-		(text "itemCollected" (rect 224 107 275 119)(font "Arial" ))
-		(line (pt 296 112)(pt 280 112)(line_width 1))
+		(text "itemCollected" (rect 0 0 67 12)(font "Arial" ))
+		(text "itemCollected" (rect 224 107 291 119)(font "Arial" ))
+		(line (pt 296 112)(pt 280 112))
 	)
 	(port
 		(pt 296 128)
 		(output)
-		(text "collectedType[1..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "collectedType[1..0]" (rect 202 123 275 135)(font "Arial" ))
+		(text "collectedType[1..0]" (rect 0 0 94 12)(font "Arial" ))
+		(text "collectedType[1..0]" (rect 202 123 296 135)(font "Arial" ))
 		(line (pt 296 128)(pt 280 128)(line_width 3))
 	)
 	(port
 		(pt 296 144)
 		(output)
-		(text "heartCollected" (rect 0 0 55 12)(font "Arial" ))
-		(text "heartCollected" (rect 220 139 275 151)(font "Arial" ))
-		(line (pt 296 144)(pt 280 144)(line_width 1))
+		(text "heartCollected" (rect 0 0 70 12)(font "Arial" ))
+		(text "heartCollected" (rect 220 139 290 151)(font "Arial" ))
+		(line (pt 296 144)(pt 280 144))
 	)
 	(port
 		(pt 296 160)
 		(output)
-		(text "coinCollected" (rect 0 0 50 12)(font "Arial" ))
-		(text "coinCollected" (rect 225 155 275 167)(font "Arial" ))
-		(line (pt 296 160)(pt 280 160)(line_width 1))
+		(text "coinCollected" (rect 0 0 66 12)(font "Arial" ))
+		(text "coinCollected" (rect 225 155 291 167)(font "Arial" ))
+		(line (pt 296 160)(pt 280 160))
 	)
 	(port
 		(pt 296 176)
 		(output)
-		(text "ghostCollected" (rect 0 0 56 12)(font "Arial" ))
-		(text "ghostCollected" (rect 219 171 275 183)(font "Arial" ))
-		(line (pt 296 176)(pt 280 176)(line_width 1))
+		(text "ghostCollected" (rect 0 0 73 12)(font "Arial" ))
+		(text "ghostCollected" (rect 219 171 292 183)(font "Arial" ))
+		(line (pt 296 176)(pt 280 176))
 	)
 	(port
 		(pt 296 192)
 		(output)
-		(text "tntCollected[2..0]" (rect 0 0 64 12)(font "Arial" ))
-		(text "tntCollected[2..0]" (rect 211 187 275 199)(font "Arial" ))
+		(text "tntCollected[2..0]" (rect 0 0 84 12)(font "Arial" ))
+		(text "tntCollected[2..0]" (rect 211 187 295 199)(font "Arial" ))
 		(line (pt 296 192)(pt 280 192)(line_width 3))
 	)
 	(parameter
@@ -665,9 +729,9 @@ agreement for further details.
 		""
 		(type "PARAMETER_UNSIGNED_BIN")	)
 	(drawing
-		(rectangle (rect 16 16 280 288)(line_width 1))
+		(rectangle (rect 16 16 280 288))
 	)
-	(annotation_block (parameter)(rect 312 -64 412 16))
+	(annotation_block (parameter)(rect 416 240 696 328))
 )
 (symbol
 	(rect 1320 80 1584 288)
@@ -1095,30 +1159,6 @@ agreement for further details.
 	(pt 272 176)
 	(pt 336 176)
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 (connector
 	(text "clk" (rect 1240 96 1254 108)(font "Arial" ))
 	(pt 1320 112)
@@ -1216,271 +1256,180 @@ agreement for further details.
 	(pt 288 1224)
 	(bus)
 )
-(text "Heart/coin/ghost pickups, lives and damage protection" (rect 480 -120 923 -102)(font "Arial" (font_size 12)))
-
 (connector
-	(text "clk" (rect 480 356 660 373)(font "Arial" ))
+	(text "clk" (rect 480 356 494 368)(font "Arial" ))
 	(pt 560 372)
 	(pt 472 372)
 )
-
 (connector
-	(text "resetN" (rect 480 372 660 389)(font "Arial" ))
+	(text "resetN" (rect 480 372 513 384)(font "Arial" ))
 	(pt 560 388)
 	(pt 472 388)
 )
-
 (connector
-	(text "game_state[1..0]" (rect 480 388 660 405)(font "Arial" ))
+	(text "game_state[1..0]" (rect 480 388 563 400)(font "Arial" ))
 	(pt 560 404)
 	(pt 472 404)
 	(bus)
 )
-
 (connector
-	(text "scrollUpdate" (rect 480 404 660 421)(font "Arial" ))
+	(text "scrollUpdate" (rect 480 404 541 416)(font "Arial" ))
 	(pt 560 420)
 	(pt 472 420)
 )
-
 (connector
-	(text "scrollStep[10..0]" (rect 480 420 660 437)(font "Arial" ))
+	(text "scrollStep[10..0]" (rect 480 420 560 432)(font "Arial" ))
 	(pt 560 436)
 	(pt 472 436)
 	(bus)
 )
-
 (connector
-	(text "pipeSpacing[10..0]" (rect 480 436 660 453)(font "Arial" ))
+	(text "pipeSpacing[10..0]" (rect 480 436 570 448)(font "Arial" ))
 	(pt 560 452)
 	(pt 472 452)
 	(bus)
 )
-
 (connector
-	(text "pipeXPositions[32..0]" (rect 480 452 660 469)(font "Arial" ))
+	(text "pipeXPositions[32..0]" (rect 480 452 582 464)(font "Arial" ))
 	(pt 560 468)
 	(pt 472 468)
 	(bus)
 )
-
 (connector
-	(text "pipeHeights[17..0]" (rect 480 468 660 485)(font "Arial" ))
+	(text "pipeHeights[17..0]" (rect 480 468 569 480)(font "Arial" ))
 	(pt 560 484)
 	(pt 472 484)
 	(bus)
 )
-
 (connector
-	(text "pipeReady[2..0]" (rect 480 484 660 501)(font "Arial" ))
+	(text "pipeReady[2..0]" (rect 480 484 559 496)(font "Arial" ))
 	(pt 560 500)
 	(pt 472 500)
 	(bus)
 )
-
 (connector
-	(text "pipeRecycle[2..0]" (rect 480 500 660 517)(font "Arial" ))
+	(text "pipeRecycle[2..0]" (rect 480 500 567 512)(font "Arial" ))
 	(pt 560 516)
 	(pt 472 516)
 	(bus)
 )
-
 (connector
-	(text "bossUpcoming[2..0]" (rect 480 516 660 533)(font "Arial" ))
+	(text "bossUpcoming[2..0]" (rect 480 516 579 528)(font "Arial" ))
 	(pt 560 532)
 	(pt 472 532)
 	(bus)
 )
-
 (connector
-	(text "bossTargetXPositions[32..0]" (rect 480 532 660 549)(font "Arial" ))
+	(text "bossTargetXPositions[32..0]" (rect 480 532 616 544)(font "Arial" ))
 	(pt 560 548)
 	(pt 472 548)
 	(bus)
 )
-
 (connector
-	(text "random_value[7..0]" (rect 480 548 660 565)(font "Arial" ))
+	(text "random_value[7..0]" (rect 480 548 575 560)(font "Arial" ))
 	(pt 560 564)
 	(pt 472 564)
 	(bus)
 )
-
 (connector
-	(text "birdDrawingRequest" (rect 480 564 660 581)(font "Arial" ))
+	(text "birdDrawingRequest" (rect 480 564 577 576)(font "Arial" ))
 	(pt 560 580)
 	(pt 472 580)
 )
-
 (connector
-	(text "HartDrawingRequest" (rect 480 580 660 597)(font "Arial" ))
+	(text "HartDrawingRequest" (rect 480 580 581 592)(font "Arial" ))
 	(pt 560 596)
 	(pt 472 596)
 )
-
 (connector
-	(text "pickupIndex[1..0]" (rect 480 596 660 613)(font "Arial" ))
+	(text "pickupIndex[1..0]" (rect 480 596 564 608)(font "Arial" ))
 	(pt 560 612)
 	(pt 472 612)
 	(bus)
 )
-
 (connector
-	(text "itemActive[2..0]" (rect 864 356 1044 373)(font "Arial" ))
+	(text "itemActive[2..0]" (rect 864 356 943 368)(font "Arial" ))
 	(pt 856 372)
 	(pt 944 372)
 	(bus)
 )
-
 (connector
-	(text "itemXPositions[32..0]" (rect 864 372 1044 389)(font "Arial" ))
+	(text "itemXPositions[32..0]" (rect 864 372 967 384)(font "Arial" ))
 	(pt 856 388)
 	(pt 944 388)
 	(bus)
 )
-
 (connector
-	(text "itemYPositions[26..0]" (rect 864 388 1044 405)(font "Arial" ))
+	(text "itemYPositions[26..0]" (rect 864 388 970 400)(font "Arial" ))
 	(pt 856 404)
 	(pt 944 404)
 	(bus)
 )
-
 (connector
-	(text "itemTypes[5..0]" (rect 864 404 1044 421)(font "Arial" ))
+	(text "itemTypes[5..0]" (rect 864 404 941 416)(font "Arial" ))
 	(pt 856 420)
 	(pt 944 420)
 	(bus)
 )
-
 (connector
-	(text "itemSpawn[2..0]" (rect 864 420 1044 437)(font "Arial" ))
+	(text "itemSpawn[2..0]" (rect 864 420 943 432)(font "Arial" ))
 	(pt 856 436)
 	(pt 944 436)
 	(bus)
 )
-
 (connector
-	(text "itemCollected" (rect 864 436 1044 453)(font "Arial" ))
+	(text "itemCollected" (rect 864 436 931 448)(font "Arial" ))
 	(pt 856 452)
 	(pt 944 452)
 )
-
 (connector
-	(text "collectedType[1..0]" (rect 864 452 1044 469)(font "Arial" ))
+	(text "collectedType[1..0]" (rect 864 452 958 464)(font "Arial" ))
 	(pt 856 468)
 	(pt 944 468)
 	(bus)
 )
-
 (connector
-	(text "heartCollected" (rect 864 468 1044 485)(font "Arial" ))
+	(text "heartCollected" (rect 864 468 934 480)(font "Arial" ))
 	(pt 856 484)
 	(pt 944 484)
 )
-
 (connector
-	(text "coinCollected" (rect 864 484 1044 501)(font "Arial" ))
+	(text "coinCollected" (rect 864 484 930 496)(font "Arial" ))
 	(pt 856 500)
 	(pt 944 500)
 )
-
 (connector
-	(text "ghostCollected" (rect 864 500 1044 517)(font "Arial" ))
+	(text "ghostCollected" (rect 864 500 937 512)(font "Arial" ))
 	(pt 856 516)
 	(pt 944 516)
 )
-
 (connector
-	(text "tntCollected[2..0]" (rect 864 516 1044 533)(font "Arial" ))
+	(text "tntCollected[2..0]" (rect 864 516 948 528)(font "Arial" ))
 	(pt 856 532)
 	(pt 944 532)
 	(bus)
 )
-(pin
-	(input)
-	(rect 64 1272 240 1288)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "bossUpcoming[2..0]" (rect 5 0 19 12)(font "Arial" ))
-	(pt 168 8)
-	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
-	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-)
 (connector
-	(text "bossUpcoming[2..0]" (rect 240 1264 420 1281)(font "Arial" ))
+	(text "bossUpcoming[2..0]" (rect 240 1264 339 1276)(font "Arial" ))
 	(pt 232 1280)
 	(pt 288 1280)
 	(bus)
 )
-(pin
-	(input)
-	(rect 64 1312 240 1328)
-	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "bossTargetXPositions[32..0]" (rect 5 0 19 12)(font "Arial" ))
-	(pt 168 8)
-	(drawing
-		(line (pt 84 12)(pt 109 12))
-		(line (pt 84 4)(pt 109 4))
-		(line (pt 113 8)(pt 168 8))
-		(line (pt 84 12)(pt 84 4))
-		(line (pt 109 4)(pt 113 8))
-		(line (pt 109 12)(pt 113 8))
-	)
-	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-)
 (connector
-	(text "bossTargetXPositions[32..0]" (rect 240 1304 420 1321)(font "Arial" ))
+	(text "bossTargetXPositions[32..0]" (rect 240 1304 376 1316)(font "Arial" ))
 	(pt 232 1320)
 	(pt 288 1320)
 	(bus)
 )
-(pin
-	(output)
-	(rect 1880 1048 2056 1064)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "tntCollected[2..0]" (rect 90 0 121 17)(font "Intel Clear" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-)
 (connector
-	(text "tntCollected[2..0]" (rect 1832 1040 2012 1057)(font "Arial" ))
+	(text "tntCollected[2..0]" (rect 1832 1040 1916 1052)(font "Arial" ))
 	(pt 1880 1056)
 	(pt 1824 1056)
 	(bus)
 )
-(pin
-	(output)
-	(rect 1880 1088 2056 1104)
-	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
-	(text "itemCollected" (rect 90 0 121 17)(font "Intel Clear" ))
-	(pt 0 8)
-	(drawing
-		(line (pt 0 8)(pt 52 8))
-		(line (pt 52 4)(pt 78 4))
-		(line (pt 52 12)(pt 78 12))
-		(line (pt 52 12)(pt 52 4))
-		(line (pt 78 4)(pt 82 8))
-		(line (pt 82 8)(pt 78 12))
-		(line (pt 78 12)(pt 82 8))
-	)
-)
 (connector
-	(text "itemCollected" (rect 1832 1080 2012 1097)(font "Arial" ))
+	(text "itemCollected" (rect 1832 1080 1899 1092)(font "Arial" ))
 	(pt 1880 1096)
 	(pt 1824 1096)
 )
+(text "Heart/coin/ghost pickups, lives and damage protection" (rect 480 -120 923 -102)(font "Arial" (font_size 12)))

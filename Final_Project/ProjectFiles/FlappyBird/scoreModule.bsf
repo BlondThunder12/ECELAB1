@@ -88,6 +88,13 @@ agreement for further details.
 		(line (pt 0 160)(pt 16 160)(line_width 3))
 	)
 	(port
+	(pt 0 176)
+	(input)
+	(text "demo_score_key" (rect 0 0 77 12)(font "Arial" ))
+	(text "demo_score_key" (rect 21 171 98 183)(font "Arial" ))
+	(line (pt 0 176)(pt 16 176))
+)
+	(port
 		(pt 256 32)
 		(output)
 		(text "RGBNum[7..0]" (rect 0 0 61 12)(font "Arial" ))

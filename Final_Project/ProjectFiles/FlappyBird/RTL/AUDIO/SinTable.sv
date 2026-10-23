@@ -324,16 +324,9 @@ begin
    end
 end
 
- always_comb begin
-        case (volume_level)
-
-				2'h0: Q = 16'b00;
-				2'h1: Q = {{3{tmp8bit[7]}},tmp8bit[7:0], {5{tmp8bit[7]}} };
-				2'h2: Q = {{2{tmp8bit[7]}},tmp8bit[7:0], {6{tmp8bit[7]}} };
-				2'h3: Q = {tmp8bit[7],tmp8bit[7:0], {7{tmp8bit[7]}} };
-            default: Q  = {tmp8bit[7],tmp8bit[7:0], {7{tmp8bit[7]}} };
-        endcase
-
+// Full-level signed oscillator. KEY3 is applied once, after the tone and TNT
+// noise have been shaped, in audio_mixer. Zero-fill the fractional bits.
+always_comb begin
+    Q = {tmp8bit[7], tmp8bit, 7'b0};
 end
 endmodule
-

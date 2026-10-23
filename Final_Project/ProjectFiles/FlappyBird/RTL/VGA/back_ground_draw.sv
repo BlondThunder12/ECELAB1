@@ -115,7 +115,8 @@ module back_ground_draw #(
     logic active_night;
 
     assign select_second_mif = (actual_x / 11'd128) % 2;
-    assign active_night      = night_mode || internal_night;
+    // SW[1] inverts the automatic phase, so either switch edge changes mode.
+    assign active_night      = night_mode ^ internal_night;
     assign out_night_mode    = active_night;
 
     always_comb begin

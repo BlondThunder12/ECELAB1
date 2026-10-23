@@ -56,7 +56,7 @@ agreement for further details.
 	(input)
 	(rect 528 304 696 320)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
-	(text "keyPad[3..0]" (rect 5 0 65 17)(font "Intel Clear" ))
+	(text "speed_level[3..0]" (rect 5 0 65 17)(font "Intel Clear" ))
 	(pt 168 8)
 	(drawing
 		(line (pt 84 12)(pt 109 12))
@@ -543,10 +543,7 @@ agreement for further details.
 	(pt 1056 832)
 	(bus)
 )
-(connector
-	(pt 792 432)
-	(pt 800 432)
-)
+
 (connector
 	(pt 968 240)
 	(pt 968 232)
@@ -557,11 +554,7 @@ agreement for further details.
 	(pt 960 232)
 	(bus)
 )
-(connector
-	(pt 736 264)
-	(pt 776 264)
-	(bus)
-)
+
 (connector
 	(pt 760 280)
 	(pt 776 280)
@@ -586,27 +579,14 @@ agreement for further details.
 	(pt 448 240)
 	(pt 392 240)
 )
-(connector
-	(pt 736 264)
-	(pt 736 312)
-	(bus)
-)
+
 (connector
 	(pt 832 880)
 	(pt 832 888)
 )
-(connector
-	(pt 792 456)
-	(pt 792 432)
-)
-(connector
-	(pt 800 432)
-	(pt 800 392)
-)
-(connector
-	(pt 800 392)
-	(pt 832 392)
-)
+
+
+
 (connector
 	(text "clk" (rect 792 328 806 345)(font "Intel Clear" ))
 	(pt 784 344)
@@ -622,20 +602,15 @@ agreement for further details.
 	(pt 1048 344)
 	(bus)
 )
+
 (connector
-	(text "keyPad[3..0]" (rect 696 296 756 313)(font "Intel Clear" ))
-	(pt 736 312)
-	(pt 696 312)
-	(bus)
-)
-(connector
-	(text "keyPad[3..0]" (rect 706 616 766 633)(font "Intel Clear" ))
+	(text "speed_level[3..0]" (rect 706 616 766 633)(font "Intel Clear" ))
 	(pt 696 632)
 	(pt 824 632)
 	(bus)
 )
 (connector
-	(text "keyPad[3..0]" (rect 714 728 774 745)(font "Intel Clear" ))
+	(text "speed_level[3..0]" (rect 714 728 774 745)(font "Intel Clear" ))
 	(pt 712 744)
 	(pt 832 744)
 	(bus)
@@ -649,13 +624,13 @@ agreement for further details.
 	(pt 672 888)
 )
 (connector
-	(text "keyPad[3..0]" (rect 722 848 782 865)(font "Intel Clear" ))
+	(text "speed_level[3..0]" (rect 722 848 782 865)(font "Intel Clear" ))
 	(pt 712 864)
 	(pt 840 864)
 	(bus)
 )
 (connector
-	(text "keyPad[3..0]" (rect 730 504 790 521)(font "Intel Clear" ))
+	(text "speed_level[3..0]" (rect 730 504 790 521)(font "Intel Clear" ))
 	(pt 736 520)
 	(pt 824 520)
 	(bus)
@@ -692,13 +667,10 @@ agreement for further details.
 	(pt 624 456)
 	(pt 664 456)
 )
+
 (connector
-	(pt 664 456)
-	(pt 792 456)
-)
-(connector
-	(text "keyPad[3..0]" (rect 770 360 830 377)(font "Intel Clear" ))
-	(pt 776 376)
+	(text "tens[3..0]" (rect 712 360 767 377)(font "Intel Clear" ))
+	(pt 704 376)
 	(pt 832 376)
 	(bus)
 )
@@ -716,3 +688,82 @@ agreement for further details.
 (junction (pt 664 456))
 (text "Output to 7Seg" (rect 808 296 898 315)(font "Intel Clear" (font_size 8)))
 (text "clk" (rect 416 184 430 201)(font "Intel Clear" ))
+
+(symbol
+	(rect 232 568 552 680)
+	(text "speed_level_digits" (rect 5 0 113 12)(font "Arial" ))
+	(text "speed_digits" (rect 8 96 80 108)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "speed_level[3..0]" (rect 0 0 94 12)(font "Arial" ))
+	(text "speed_level[3..0]" (rect 21 27 115 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32)(line_width 3))
+)
+(port
+	(pt 320 32)
+	(output)
+	(text "units[3..0]" (rect 0 0 61 12)(font "Arial" ))
+	(text "units[3..0]" (rect 238 27 299 39)(font "Arial" ))
+	(line (pt 320 32)(pt 304 32)(line_width 3))
+)
+(port
+	(pt 320 48)
+	(output)
+	(text "tens[3..0]" (rect 0 0 55 12)(font "Arial" ))
+	(text "tens[3..0]" (rect 244 43 299 55)(font "Arial" ))
+	(line (pt 320 48)(pt 304 48)(line_width 3))
+)
+(port
+	(pt 320 64)
+	(output)
+	(text "tens_enable" (rect 0 0 61 12)(font "Arial" ))
+	(text "tens_enable" (rect 238 59 299 71)(font "Arial" ))
+	(line (pt 320 64)(pt 304 64))
+)
+
+	(drawing
+		(rectangle (rect 16 16 304 96))
+	)
+)
+(connector
+	(text "speed_level[3..0]" (rect 704 296 798 313)(font "Intel Clear" ))
+	(pt 696 312)
+	(pt 736 312)
+	(bus)
+)
+(connector
+	(text "units[3..0]" (rect 712 248 773 265)(font "Intel Clear" ))
+	(pt 704 264)
+	(pt 776 264)
+	(bus)
+)
+(connector
+	(text "tens_enable" (rect 712 376 773 393)(font "Intel Clear" ))
+	(pt 704 392)
+	(pt 832 392)
+)
+(connector
+	(text "speed_level[3..0]" (rect 120 584 214 601)(font "Intel Clear" ))
+	(pt 112 600)
+	(pt 232 600)
+	(bus)
+)
+(connector
+	(text "units[3..0]" (rect 560 584 621 601)(font "Intel Clear" ))
+	(pt 552 600)
+	(pt 640 600)
+	(bus)
+)
+(connector
+	(text "tens[3..0]" (rect 560 600 615 617)(font "Intel Clear" ))
+	(pt 552 616)
+	(pt 640 616)
+	(bus)
+)
+(connector
+	(text "tens_enable" (rect 560 616 621 633)(font "Intel Clear" ))
+	(pt 552 632)
+	(pt 640 632)
+)
+(text "Current speed level (decimal 0..10)" (rect 232 536 460 553)(font "Intel Clear" ))

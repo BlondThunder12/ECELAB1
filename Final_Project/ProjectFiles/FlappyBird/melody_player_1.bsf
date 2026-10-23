@@ -1,0 +1,150 @@
+/*
+WARNING: Do NOT edit the input and output ports in this file in a text
+editor if you plan to continue editing the block that represents it in
+the Block Editor! File corruption is VERY likely to occur.
+*/
+/*
+Copyright (C) 2017  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions
+and other software and tools, and its AMPP partner logic
+functions, and any output files from any of the foregoing
+(including device programming or simulation files), and any
+associated documentation or information are expressly subject
+to the terms and conditions of the Intel Program License
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel MegaCore Function License Agreement, or other
+applicable license agreement, including, without limitation,
+that your use is for the sole purpose of programming logic
+devices manufactured by Intel and sold by Intel or its
+authorized distributors.  Please refer to the applicable
+agreement for further details.
+*/
+(header "symbol" (version "1.1"))
+(symbol
+	(rect 16 16 376 272)
+	(text "melody_player_1" (rect 5 0 95 12)(font "Arial" ))
+	(text "inst5" (rect 8 240 38 252)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+	(text "resetN" (rect 21 27 54 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32))
+)
+(port
+	(pt 0 48)
+	(input)
+	(text "CLOCK_31p5" (rect 0 0 55 12)(font "Arial" ))
+	(text "CLOCK_31p5" (rect 21 43 76 55)(font "Arial" ))
+	(line (pt 0 48)(pt 16 48))
+)
+(port
+	(pt 0 64)
+	(input)
+	(text "startMelody" (rect 0 0 61 12)(font "Arial" ))
+	(text "startMelody" (rect 21 59 82 71)(font "Arial" ))
+	(line (pt 0 64)(pt 16 64))
+)
+(port
+	(pt 0 80)
+	(input)
+	(text "melodySelect[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "melodySelect[3..0]" (rect 21 75 120 87)(font "Arial" ))
+	(line (pt 0 80)(pt 16 80)(line_width 3))
+)
+(port
+	(pt 0 112)
+	(input)
+	(text "game_state[1..0]" (rect 0 0 88 12)(font "Arial" ))
+	(text "game_state[1..0]" (rect 21 107 109 119)(font "Arial" ))
+	(line (pt 0 112)(pt 16 112)(line_width 3))
+)
+(port
+	(pt 360 32)
+	(output)
+	(text "tone[3..0]" (rect 0 0 55 12)(font "Arial" ))
+	(text "tone[3..0]" (rect 284 27 339 39)(font "Arial" ))
+	(line (pt 360 32)(pt 344 32)(line_width 3))
+)
+(port
+	(pt 360 48)
+	(output)
+	(text "octave[2..0]" (rect 0 0 66 12)(font "Arial" ))
+	(text "octave[2..0]" (rect 273 43 339 55)(font "Arial" ))
+	(line (pt 360 48)(pt 344 48)(line_width 3))
+)
+(port
+	(pt 360 64)
+	(output)
+	(text "EnableSoundOut" (rect 0 0 77 12)(font "Arial" ))
+	(text "EnableSoundOut" (rect 262 59 339 71)(font "Arial" ))
+	(line (pt 360 64)(pt 344 64))
+)
+(port
+	(pt 360 80)
+	(output)
+	(text "melodyEnded" (rect 0 0 61 12)(font "Arial" ))
+	(text "melodyEnded" (rect 278 75 339 87)(font "Arial" ))
+	(line (pt 360 80)(pt 344 80))
+)
+(port
+	(pt 360 112)
+	(output)
+	(text "melodyBusy" (rect 0 0 55 12)(font "Arial" ))
+	(text "melodyBusy" (rect 284 107 339 119)(font "Arial" ))
+	(line (pt 360 112)(pt 344 112))
+)
+(port
+	(pt 360 128)
+	(output)
+	(text "sampleTick" (rect 0 0 55 12)(font "Arial" ))
+	(text "sampleTick" (rect 284 123 339 135)(font "Arial" ))
+	(line (pt 360 128)(pt 344 128))
+)
+(port
+	(pt 360 144)
+	(output)
+	(text "effectStart" (rect 0 0 61 12)(font "Arial" ))
+	(text "effectStart" (rect 278 139 339 151)(font "Arial" ))
+	(line (pt 360 144)(pt 344 144))
+)
+(port
+	(pt 360 160)
+	(output)
+	(text "noteStart" (rect 0 0 50 12)(font "Arial" ))
+	(text "noteStart" (rect 289 155 339 167)(font "Arial" ))
+	(line (pt 360 160)(pt 344 160))
+)
+(port
+	(pt 360 176)
+	(output)
+	(text "activeMelody[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "activeMelody[3..0]" (rect 240 171 339 183)(font "Arial" ))
+	(line (pt 360 176)(pt 344 176)(line_width 3))
+)
+(port
+	(pt 360 192)
+	(output)
+	(text "noteVelocity[7..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteVelocity[7..0]" (rect 240 187 339 199)(font "Arial" ))
+	(line (pt 360 192)(pt 344 192)(line_width 3))
+)
+(port
+	(pt 360 208)
+	(output)
+	(text "noteAge[15..0]" (rect 0 0 77 12)(font "Arial" ))
+	(text "noteAge[15..0]" (rect 262 203 339 215)(font "Arial" ))
+	(line (pt 360 208)(pt 344 208)(line_width 3))
+)
+(port
+	(pt 360 224)
+	(output)
+	(text "noteSamples[15..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteSamples[15..0]" (rect 240 219 339 231)(font "Arial" ))
+	(line (pt 360 224)(pt 344 224)(line_width 3))
+)
+
+	(drawing
+		(rectangle (rect 16 16 344 240))
+	)
+)

@@ -325,55 +325,7 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 136 64 320 104))
 )
-(symbol
-	(rect 968 448 1200 560)
-	(text "addr_counter" (rect 5 0 68 12)(font "Arial" ))
-	(text "inst9" (rect 8 96 31 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 14 12)(font "Arial" ))
-		(text "clk" (rect 21 27 35 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 54 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "en" (rect 0 0 11 12)(font "Arial" ))
-		(text "en" (rect 21 59 32 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "en1" (rect 0 0 17 12)(font "Arial" ))
-		(text "en1" (rect 21 75 38 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80))
-	)
-	(port
-		(pt 232 32)
-		(output)
-		(text "addr[COUNT_SIZE-1..0]" (rect 0 0 120 12)(font "Arial" ))
-		(text "addr[COUNT_SIZE-1..0]" (rect 110 27 230 39)(font "Arial" ))
-		(line (pt 232 32)(pt 216 32)(line_width 3))
-	)
-	(parameter
-		"COUNT_SIZE"
-		"8"
-		""
-		(type "PARAMETER_SIGNED_DEC")	)
-	(drawing
-		(rectangle (rect 16 16 216 96))
-	)
-	(annotation_block (parameter)(rect 712 400 896 440))
-)
+
 (symbol
 	(rect 1760 96 2016 240)
 	(text "audio_codec_controller" (rect 5 0 117 12)(font "Arial" ))
@@ -466,70 +418,7 @@ agreement for further details.
 		(rectangle (rect 16 16 240 128))
 	)
 )
-(symbol
-	(rect 24 408 264 520)
-	(text "melody_player_1" (rect 5 0 89 12)(font "Arial" ))
-	(text "inst5" (rect 8 96 31 108)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "resetN" (rect 0 0 33 12)(font "Arial" ))
-		(text "resetN" (rect 21 27 54 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "CLOCK_31p5" (rect 0 0 67 12)(font "Arial" ))
-		(text "CLOCK_31p5" (rect 21 43 88 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "startMelody" (rect 0 0 57 12)(font "Arial" ))
-		(text "startMelody" (rect 21 59 78 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "melodySelect[3..0]" (rect 0 0 93 12)(font "Arial" ))
-		(text "melodySelect[3..0]" (rect 21 75 114 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 3))
-	)
-	(port
-		(pt 240 32)
-		(output)
-		(text "tone[3..0]" (rect 0 0 47 12)(font "Arial" ))
-		(text "tone[3..0]" (rect 180 27 227 39)(font "Arial" ))
-		(line (pt 240 32)(pt 224 32)(line_width 3))
-	)
-	(port
-		(pt 240 48)
-		(output)
-		(text "octave[2..0]" (rect 0 0 60 12)(font "Arial" ))
-		(text "octave[2..0]" (rect 169 43 229 55)(font "Arial" ))
-		(line (pt 240 48)(pt 224 48)(line_width 3))
-	)
-	(port
-		(pt 240 64)
-		(output)
-		(text "EnableSoundOut" (rect 0 0 81 12)(font "Arial" ))
-		(text "EnableSoundOut" (rect 151 59 232 71)(font "Arial" ))
-		(line (pt 240 64)(pt 224 64))
-	)
-	(port
-		(pt 240 80)
-		(output)
-		(text "melodyEnded" (rect 0 0 67 12)(font "Arial" ))
-		(text "melodyEnded" (rect 163 75 230 87)(font "Arial" ))
-		(line (pt 240 80)(pt 224 80))
-	)
-	(drawing
-		(rectangle (rect 16 16 224 96))
-	)
-)
+
 (symbol
 	(rect -448 552 -200 664)
 	(text "audio_mixer" (rect 5 0 53 12)(font "Arial" ))
@@ -622,76 +511,7 @@ agreement for further details.
 	)
 	(annotation_block (parameter)(rect 224 -64 324 16))
 )
-(symbol
-	(rect -144 104 104 248)
-	(text "sound_selector" (rect 5 0 65 12)(font "Arial" ))
-	(text "game_sounds" (rect 8 128 20 140)(font "Arial" ))
-	(port
-		(pt 0 32)
-		(input)
-		(text "clk" (rect 0 0 10 12)(font "Arial" ))
-		(text "clk" (rect 21 27 31 39)(font "Arial" ))
-		(line (pt 0 32)(pt 16 32)(line_width 1))
-	)
-	(port
-		(pt 0 48)
-		(input)
-		(text "resetN" (rect 0 0 27 12)(font "Arial" ))
-		(text "resetN" (rect 21 43 48 55)(font "Arial" ))
-		(line (pt 0 48)(pt 16 48)(line_width 1))
-	)
-	(port
-		(pt 0 64)
-		(input)
-		(text "SingleHitPulse" (rect 0 0 54 12)(font "Arial" ))
-		(text "SingleHitPulse" (rect 21 59 75 71)(font "Arial" ))
-		(line (pt 0 64)(pt 16 64)(line_width 1))
-	)
-	(port
-		(pt 0 80)
-		(input)
-		(text "updateScorePulse" (rect 0 0 70 12)(font "Arial" ))
-		(text "updateScorePulse" (rect 21 75 91 87)(font "Arial" ))
-		(line (pt 0 80)(pt 16 80)(line_width 1))
-	)
-	(port
-		(pt 0 96)
-		(input)
-		(text "anti_gravity" (rect 0 0 47 12)(font "Arial" ))
-		(text "anti_gravity" (rect 21 91 68 103)(font "Arial" ))
-		(line (pt 0 96)(pt 16 96)(line_width 1))
-	)
-	(port
-		(pt 0 112)
-		(input)
-		(text "itemCollected" (rect 0 0 51 12)(font "Arial" ))
-		(text "itemCollected" (rect 21 107 72 119)(font "Arial" ))
-		(line (pt 0 112)(pt 16 112)(line_width 1))
-	)
-	(port
-		(pt 248 32)
-		(output)
-		(text "startMelody" (rect 0 0 47 12)(font "Arial" ))
-		(text "startMelody" (rect 180 27 227 39)(font "Arial" ))
-		(line (pt 248 32)(pt 232 32)(line_width 1))
-	)
-	(port
-		(pt 248 48)
-		(output)
-		(text "melodySelect[3..0]" (rect 0 0 73 12)(font "Arial" ))
-		(text "melodySelect[3..0]" (rect 154 43 227 55)(font "Arial" ))
-		(line (pt 248 48)(pt 232 48)(line_width 3))
-	)
-	(parameter
-		"SCORE_COOLDOWN_CYCLES"
-		"00000000001111010000100100000000"
-		""
-		(type "PARAMETER_UNSIGNED_BIN")	)
-	(drawing
-		(rectangle (rect 16 16 232 128)(line_width 1))
-	)
-	(annotation_block (parameter)(rect 264 -64 364 16))
-)
+
 (connector
 	(pt 960 376)
 	(pt 960 480)
@@ -700,10 +520,7 @@ agreement for further details.
 	(pt 952 392)
 	(pt 952 496)
 )
-(connector
-	(pt 944 512)
-	(pt 968 512)
-)
+
 (connector
 	(pt 1216 480)
 	(pt 1216 432)
@@ -780,43 +597,14 @@ agreement for further details.
 	(pt 344 184)
 	(pt 536 184)
 )
-(connector
-	(pt 320 576)
-	(pt 312 576)
-	(bus)
-)
-(connector
-	(text "resetN" (rect -32 424 -2 441)(font "Intel Clear" ))
-	(pt 24 440)
-	(pt -40 440)
-)
-(connector
-	(text "clk" (rect -32 440 -18 457)(font "Intel Clear" ))
-	(pt 24 456)
-	(pt -40 456)
-)
-(connector
-	(pt 320 560)
-	(pt 320 440)
-	(bus)
-)
-(connector
-	(pt 312 576)
-	(pt 312 456)
-	(bus)
-)
-(connector
-	(pt 944 512)
-	(pt 944 632)
-)
-(connector
-	(pt 304 472)
-	(pt 304 632)
-)
-(connector
-	(pt 304 632)
-	(pt 944 632)
-)
+
+
+
+
+
+
+
+
 (connector
 	(text "en" (rect 904 512 915 529)(font "Intel Clear" ))
 	(pt 968 528)
@@ -843,20 +631,9 @@ agreement for further details.
 	(pt 1432 440)
 	(bus)
 )
-(connector
-	(pt 264 440)
-	(pt 320 440)
-	(bus)
-)
-(connector
-	(pt 264 456)
-	(pt 312 456)
-	(bus)
-)
-(connector
-	(pt 264 472)
-	(pt 304 472)
-)
+
+
+
 (connector
 	(text "clk" (rect 1715 112 1729 129)(font "Intel Clear" ))
 	(pt 1688 128)
@@ -954,17 +731,8 @@ agreement for further details.
 	(pt 192 152)
 	(bus)
 )
-(connector
-	(text "startMelody" (rect -32 456 25 468)(font "Arial" ))
-	(pt 24 472)
-	(pt -40 472)
-)
-(connector
-	(text "melodySelect[3..0]" (rect -32 472 61 484)(font "Arial" ))
-	(pt 24 488)
-	(pt -40 488)
-	(bus)
-)
+
+
 (connector
 	(pt -168 80)
 	(pt -152 80)
@@ -1023,7 +791,7 @@ agreement for further details.
 	(bus)
 )
 (connector
-	(text "sinVal[15..0]" (rect -463 568 -404 585)(font "Intel Clear" ))
+	(text "sfx_audio_out[15..0]" (rect -463 568 -404 585)(font "Intel Clear" ))
 	(pt -448 584)
 	(pt -496 584)
 	(bus)
@@ -1096,3 +864,650 @@ agreement for further details.
 	(pt -496 472)
 )
 (text "// (c) Technion IIT, Department of Electrical Engineering 2021            \n// Written By Alex Grinshpun & David Bar-On  June 2018 \r            //Updated by Eyal Lev January 2021\n" (rect 352 -8 958 49)(font "Intel Clear" (font_size 8)))
+
+(symbol
+	(rect -144 104 104 328)
+	(text "sound_selector" (rect 5 0 89 12)(font "Arial" ))
+	(text "game_sounds" (rect 8 208 74 220)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "clk" (rect 0 0 17 12)(font "Arial" ))
+	(text "clk" (rect 21 27 38 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32))
+)
+(port
+	(pt 0 48)
+	(input)
+	(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+	(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+	(line (pt 0 48)(pt 16 48))
+)
+(port
+	(pt 0 64)
+	(input)
+	(text "SingleHitPulse" (rect 0 0 77 12)(font "Arial" ))
+	(text "SingleHitPulse" (rect 21 59 98 71)(font "Arial" ))
+	(line (pt 0 64)(pt 16 64))
+)
+(port
+	(pt 0 80)
+	(input)
+	(text "updateScorePulse" (rect 0 0 88 12)(font "Arial" ))
+	(text "updateScorePulse" (rect 21 75 109 87)(font "Arial" ))
+	(line (pt 0 80)(pt 16 80))
+)
+(port
+	(pt 0 96)
+	(input)
+	(text "anti_gravity" (rect 0 0 66 12)(font "Arial" ))
+	(text "anti_gravity" (rect 21 91 87 103)(font "Arial" ))
+	(line (pt 0 96)(pt 16 96))
+)
+(port
+	(pt 0 112)
+	(input)
+	(text "itemCollected" (rect 0 0 72 12)(font "Arial" ))
+	(text "itemCollected" (rect 21 107 93 119)(font "Arial" ))
+	(line (pt 0 112)(pt 16 112))
+)
+(port
+	(pt 0 128)
+	(input)
+	(text "tntCollected[2..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "tntCollected[2..0]" (rect 21 123 120 135)(font "Arial" ))
+	(line (pt 0 128)(pt 16 128)(line_width 3))
+)
+(port
+	(pt 0 144)
+	(input)
+	(text "game_state[1..0]" (rect 0 0 88 12)(font "Arial" ))
+	(text "game_state[1..0]" (rect 21 139 109 151)(font "Arial" ))
+	(line (pt 0 144)(pt 16 144)(line_width 3))
+)
+(port
+	(pt 0 160)
+	(input)
+	(text "score[9..0]" (rect 0 0 61 12)(font "Arial" ))
+	(text "score[9..0]" (rect 21 155 82 167)(font "Arial" ))
+	(line (pt 0 160)(pt 16 160)(line_width 3))
+)
+(port
+	(pt 0 176)
+	(input)
+	(text "melodyBusy" (rect 0 0 55 12)(font "Arial" ))
+	(text "melodyBusy" (rect 21 171 76 183)(font "Arial" ))
+	(line (pt 0 176)(pt 16 176))
+)
+(port
+	(pt 0 192)
+	(input)
+	(text "melodyEnded" (rect 0 0 61 12)(font "Arial" ))
+	(text "melodyEnded" (rect 21 187 82 199)(font "Arial" ))
+	(line (pt 0 192)(pt 16 192))
+)
+(port
+	(pt 248 32)
+	(output)
+	(text "startMelody" (rect 0 0 61 12)(font "Arial" ))
+	(text "startMelody" (rect 166 27 227 39)(font "Arial" ))
+	(line (pt 248 32)(pt 232 32))
+)
+(port
+	(pt 248 48)
+	(output)
+	(text "melodySelect[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "melodySelect[3..0]" (rect 128 43 227 55)(font "Arial" ))
+	(line (pt 248 48)(pt 232 48)(line_width 3))
+)
+(parameter
+		"SCORE_COOLDOWN_CYCLES"
+		"00000000001111010000100100000000"
+		""
+		(type "PARAMETER_UNSIGNED_BIN")	)
+	(drawing
+		(rectangle (rect 16 16 232 208))
+	)
+)
+(symbol
+	(rect 32 736 392 992)
+	(text "melody_player_1" (rect 5 0 95 12)(font "Arial" ))
+	(text "inst5" (rect 8 240 38 252)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+	(text "resetN" (rect 21 27 54 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32))
+)
+(port
+	(pt 0 48)
+	(input)
+	(text "CLOCK_31p5" (rect 0 0 55 12)(font "Arial" ))
+	(text "CLOCK_31p5" (rect 21 43 76 55)(font "Arial" ))
+	(line (pt 0 48)(pt 16 48))
+)
+(port
+	(pt 0 64)
+	(input)
+	(text "startMelody" (rect 0 0 61 12)(font "Arial" ))
+	(text "startMelody" (rect 21 59 82 71)(font "Arial" ))
+	(line (pt 0 64)(pt 16 64))
+)
+(port
+	(pt 0 80)
+	(input)
+	(text "melodySelect[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "melodySelect[3..0]" (rect 21 75 120 87)(font "Arial" ))
+	(line (pt 0 80)(pt 16 80)(line_width 3))
+)
+(port
+	(pt 0 112)
+	(input)
+	(text "game_state[1..0]" (rect 0 0 88 12)(font "Arial" ))
+	(text "game_state[1..0]" (rect 21 107 109 119)(font "Arial" ))
+	(line (pt 0 112)(pt 16 112)(line_width 3))
+)
+(port
+	(pt 360 32)
+	(output)
+	(text "tone[3..0]" (rect 0 0 55 12)(font "Arial" ))
+	(text "tone[3..0]" (rect 284 27 339 39)(font "Arial" ))
+	(line (pt 360 32)(pt 344 32)(line_width 3))
+)
+(port
+	(pt 360 48)
+	(output)
+	(text "octave[2..0]" (rect 0 0 66 12)(font "Arial" ))
+	(text "octave[2..0]" (rect 273 43 339 55)(font "Arial" ))
+	(line (pt 360 48)(pt 344 48)(line_width 3))
+)
+(port
+	(pt 360 64)
+	(output)
+	(text "EnableSoundOut" (rect 0 0 77 12)(font "Arial" ))
+	(text "EnableSoundOut" (rect 262 59 339 71)(font "Arial" ))
+	(line (pt 360 64)(pt 344 64))
+)
+(port
+	(pt 360 80)
+	(output)
+	(text "melodyEnded" (rect 0 0 61 12)(font "Arial" ))
+	(text "melodyEnded" (rect 278 75 339 87)(font "Arial" ))
+	(line (pt 360 80)(pt 344 80))
+)
+(port
+	(pt 360 112)
+	(output)
+	(text "melodyBusy" (rect 0 0 55 12)(font "Arial" ))
+	(text "melodyBusy" (rect 284 107 339 119)(font "Arial" ))
+	(line (pt 360 112)(pt 344 112))
+)
+(port
+	(pt 360 128)
+	(output)
+	(text "sampleTick" (rect 0 0 55 12)(font "Arial" ))
+	(text "sampleTick" (rect 284 123 339 135)(font "Arial" ))
+	(line (pt 360 128)(pt 344 128))
+)
+(port
+	(pt 360 144)
+	(output)
+	(text "effectStart" (rect 0 0 61 12)(font "Arial" ))
+	(text "effectStart" (rect 278 139 339 151)(font "Arial" ))
+	(line (pt 360 144)(pt 344 144))
+)
+(port
+	(pt 360 160)
+	(output)
+	(text "noteStart" (rect 0 0 50 12)(font "Arial" ))
+	(text "noteStart" (rect 289 155 339 167)(font "Arial" ))
+	(line (pt 360 160)(pt 344 160))
+)
+(port
+	(pt 360 176)
+	(output)
+	(text "activeMelody[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "activeMelody[3..0]" (rect 240 171 339 183)(font "Arial" ))
+	(line (pt 360 176)(pt 344 176)(line_width 3))
+)
+(port
+	(pt 360 192)
+	(output)
+	(text "noteVelocity[7..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteVelocity[7..0]" (rect 240 187 339 199)(font "Arial" ))
+	(line (pt 360 192)(pt 344 192)(line_width 3))
+)
+(port
+	(pt 360 208)
+	(output)
+	(text "noteAge[15..0]" (rect 0 0 77 12)(font "Arial" ))
+	(text "noteAge[15..0]" (rect 262 203 339 215)(font "Arial" ))
+	(line (pt 360 208)(pt 344 208)(line_width 3))
+)
+(port
+	(pt 360 224)
+	(output)
+	(text "noteSamples[15..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteSamples[15..0]" (rect 240 219 339 231)(font "Arial" ))
+	(line (pt 360 224)(pt 344 224)(line_width 3))
+)
+
+	(drawing
+		(rectangle (rect 16 16 344 240))
+	)
+)
+(symbol
+	(rect 800 736 1200 992)
+	(text "game_sfx_voice" (rect 5 0 89 12)(font "Arial" ))
+	(text "game_fx_voice" (rect 8 240 86 252)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "clk" (rect 0 0 17 12)(font "Arial" ))
+	(text "clk" (rect 21 27 38 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32))
+)
+(port
+	(pt 0 48)
+	(input)
+	(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+	(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+	(line (pt 0 48)(pt 16 48))
+)
+(port
+	(pt 0 64)
+	(input)
+	(text "sampleTick" (rect 0 0 55 12)(font "Arial" ))
+	(text "sampleTick" (rect 21 59 76 71)(font "Arial" ))
+	(line (pt 0 64)(pt 16 64))
+)
+(port
+	(pt 0 80)
+	(input)
+	(text "melodyBusy" (rect 0 0 55 12)(font "Arial" ))
+	(text "melodyBusy" (rect 21 75 76 87)(font "Arial" ))
+	(line (pt 0 80)(pt 16 80))
+)
+(port
+	(pt 0 96)
+	(input)
+	(text "EnableSoundOut" (rect 0 0 77 12)(font "Arial" ))
+	(text "EnableSoundOut" (rect 21 91 98 103)(font "Arial" ))
+	(line (pt 0 96)(pt 16 96))
+)
+(port
+	(pt 0 112)
+	(input)
+	(text "effectStart" (rect 0 0 61 12)(font "Arial" ))
+	(text "effectStart" (rect 21 107 82 119)(font "Arial" ))
+	(line (pt 0 112)(pt 16 112))
+)
+(port
+	(pt 0 128)
+	(input)
+	(text "noteStart" (rect 0 0 50 12)(font "Arial" ))
+	(text "noteStart" (rect 21 123 71 135)(font "Arial" ))
+	(line (pt 0 128)(pt 16 128))
+)
+(port
+	(pt 0 144)
+	(input)
+	(text "activeMelody[3..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "activeMelody[3..0]" (rect 21 139 120 151)(font "Arial" ))
+	(line (pt 0 144)(pt 16 144)(line_width 3))
+)
+(port
+	(pt 0 160)
+	(input)
+	(text "noteVelocity[7..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteVelocity[7..0]" (rect 21 155 120 167)(font "Arial" ))
+	(line (pt 0 160)(pt 16 160)(line_width 3))
+)
+(port
+	(pt 0 176)
+	(input)
+	(text "noteAge[15..0]" (rect 0 0 77 12)(font "Arial" ))
+	(text "noteAge[15..0]" (rect 21 171 98 183)(font "Arial" ))
+	(line (pt 0 176)(pt 16 176)(line_width 3))
+)
+(port
+	(pt 0 192)
+	(input)
+	(text "noteSamples[15..0]" (rect 0 0 99 12)(font "Arial" ))
+	(text "noteSamples[15..0]" (rect 21 187 120 199)(font "Arial" ))
+	(line (pt 0 192)(pt 16 192)(line_width 3))
+)
+(port
+	(pt 0 208)
+	(input)
+	(text "sinVal[15..0]" (rect 0 0 72 12)(font "Arial" ))
+	(text "sinVal[15..0]" (rect 21 203 93 215)(font "Arial" ))
+	(line (pt 0 208)(pt 16 208)(line_width 3))
+)
+(port
+	(pt 400 32)
+	(output)
+	(text "audio_out[15..0]" (rect 0 0 88 12)(font "Arial" ))
+	(text "audio_out[15..0]" (rect 291 27 379 39)(font "Arial" ))
+	(line (pt 400 32)(pt 384 32)(line_width 3))
+)
+
+	(drawing
+		(rectangle (rect 16 16 384 240))
+	)
+)
+(symbol
+	(rect 968 448 1200 576)
+	(text "addr_counter" (rect 5 0 77 12)(font "Arial" ))
+	(text "inst9" (rect 8 112 38 124)(font "Arial" ))
+(port
+	(pt 0 32)
+	(input)
+	(text "clk" (rect 0 0 17 12)(font "Arial" ))
+	(text "clk" (rect 21 27 38 39)(font "Arial" ))
+	(line (pt 0 32)(pt 16 32))
+)
+(port
+	(pt 0 48)
+	(input)
+	(text "resetN" (rect 0 0 33 12)(font "Arial" ))
+	(text "resetN" (rect 21 43 54 55)(font "Arial" ))
+	(line (pt 0 48)(pt 16 48))
+)
+(port
+	(pt 0 64)
+	(input)
+	(text "en" (rect 0 0 11 12)(font "Arial" ))
+	(text "en" (rect 21 59 32 71)(font "Arial" ))
+	(line (pt 0 64)(pt 16 64))
+)
+(port
+	(pt 0 80)
+	(input)
+	(text "en1" (rect 0 0 17 12)(font "Arial" ))
+	(text "en1" (rect 21 75 38 87)(font "Arial" ))
+	(line (pt 0 80)(pt 16 80))
+)
+(port
+	(pt 0 96)
+	(input)
+	(text "restart" (rect 0 0 39 12)(font "Arial" ))
+	(text "restart" (rect 21 91 60 103)(font "Arial" ))
+	(line (pt 0 96)(pt 16 96))
+)
+(port
+	(pt 232 32)
+	(output)
+	(text "addr[COUNT_SIZE-1..0]" (rect 0 0 116 12)(font "Arial" ))
+	(text "addr[COUNT_SIZE-1..0]" (rect 95 27 211 39)(font "Arial" ))
+	(line (pt 232 32)(pt 216 32)(line_width 3))
+)
+(parameter
+		"COUNT_SIZE"
+		"8"
+		""
+		(type "PARAMETER_SIGNED_DEC")	)
+	(drawing
+		(rectangle (rect 16 16 216 112))
+	)
+)
+(connector
+	(text "tntCollected[2..0]" (rect -264 216 -165 233)(font "Intel Clear" ))
+	(pt -272 232)
+	(pt -144 232)
+	(bus)
+)
+(connector
+	(text "game_state[1..0]" (rect -264 232 -176 249)(font "Intel Clear" ))
+	(pt -272 248)
+	(pt -144 248)
+	(bus)
+)
+(connector
+	(text "score[9..0]" (rect -264 248 -203 265)(font "Intel Clear" ))
+	(pt -272 264)
+	(pt -144 264)
+	(bus)
+)
+(connector
+	(text "melodyBusy" (rect -264 264 -209 281)(font "Intel Clear" ))
+	(pt -272 280)
+	(pt -144 280)
+)
+(connector
+	(text "melodyEnded" (rect -264 280 -203 297)(font "Intel Clear" ))
+	(pt -272 296)
+	(pt -144 296)
+)
+(connector
+	(text "resetN" (rect -136 752 -103 769)(font "Intel Clear" ))
+	(pt -144 768)
+	(pt 32 768)
+)
+(connector
+	(text "clk" (rect -136 768 -119 785)(font "Intel Clear" ))
+	(pt -144 784)
+	(pt 32 784)
+)
+(connector
+	(text "startMelody" (rect -136 784 -75 801)(font "Intel Clear" ))
+	(pt -144 800)
+	(pt 32 800)
+)
+(connector
+	(text "melodySelect[3..0]" (rect -136 800 -37 817)(font "Intel Clear" ))
+	(pt -144 816)
+	(pt 32 816)
+	(bus)
+)
+(connector
+	(text "game_state[1..0]" (rect -136 832 -48 849)(font "Intel Clear" ))
+	(pt -144 848)
+	(pt 32 848)
+	(bus)
+)
+(connector
+	(text "tone[3..0]" (rect 400 752 455 769)(font "Intel Clear" ))
+	(pt 392 768)
+	(pt 568 768)
+	(bus)
+)
+(connector
+	(text "octave[2..0]" (rect 400 768 466 785)(font "Intel Clear" ))
+	(pt 392 784)
+	(pt 568 784)
+	(bus)
+)
+(connector
+	(text "EnableSoundOut" (rect 400 784 477 801)(font "Intel Clear" ))
+	(pt 392 800)
+	(pt 568 800)
+)
+(connector
+	(text "melodyEnded" (rect 400 800 461 817)(font "Intel Clear" ))
+	(pt 392 816)
+	(pt 568 816)
+)
+(connector
+	(text "melodyBusy" (rect 400 832 455 849)(font "Intel Clear" ))
+	(pt 392 848)
+	(pt 568 848)
+)
+(connector
+	(text "sampleTick" (rect 400 848 455 865)(font "Intel Clear" ))
+	(pt 392 864)
+	(pt 568 864)
+)
+(connector
+	(text "effectStart" (rect 400 864 461 881)(font "Intel Clear" ))
+	(pt 392 880)
+	(pt 568 880)
+)
+(connector
+	(text "noteStart" (rect 400 880 450 897)(font "Intel Clear" ))
+	(pt 392 896)
+	(pt 568 896)
+)
+(connector
+	(text "activeMelody[3..0]" (rect 400 896 499 913)(font "Intel Clear" ))
+	(pt 392 912)
+	(pt 568 912)
+	(bus)
+)
+(connector
+	(text "noteVelocity[7..0]" (rect 400 912 499 929)(font "Intel Clear" ))
+	(pt 392 928)
+	(pt 568 928)
+	(bus)
+)
+(connector
+	(text "noteAge[15..0]" (rect 400 928 477 945)(font "Intel Clear" ))
+	(pt 392 944)
+	(pt 568 944)
+	(bus)
+)
+(connector
+	(text "noteSamples[15..0]" (rect 400 944 499 961)(font "Intel Clear" ))
+	(pt 392 960)
+	(pt 568 960)
+	(bus)
+)
+(connector
+	(text "clk" (rect 632 752 649 769)(font "Intel Clear" ))
+	(pt 624 768)
+	(pt 800 768)
+)
+(connector
+	(text "resetN" (rect 632 768 665 785)(font "Intel Clear" ))
+	(pt 624 784)
+	(pt 800 784)
+)
+(connector
+	(text "sampleTick" (rect 632 784 687 801)(font "Intel Clear" ))
+	(pt 624 800)
+	(pt 800 800)
+)
+(connector
+	(text "melodyBusy" (rect 632 800 687 817)(font "Intel Clear" ))
+	(pt 624 816)
+	(pt 800 816)
+)
+(connector
+	(text "EnableSoundOut" (rect 632 816 709 833)(font "Intel Clear" ))
+	(pt 624 832)
+	(pt 800 832)
+)
+(connector
+	(text "effectStart" (rect 632 832 693 849)(font "Intel Clear" ))
+	(pt 624 848)
+	(pt 800 848)
+)
+(connector
+	(text "noteStart" (rect 632 848 682 865)(font "Intel Clear" ))
+	(pt 624 864)
+	(pt 800 864)
+)
+(connector
+	(text "activeMelody[3..0]" (rect 632 864 731 881)(font "Intel Clear" ))
+	(pt 624 880)
+	(pt 800 880)
+	(bus)
+)
+(connector
+	(text "noteVelocity[7..0]" (rect 632 880 731 897)(font "Intel Clear" ))
+	(pt 624 896)
+	(pt 800 896)
+	(bus)
+)
+(connector
+	(text "noteAge[15..0]" (rect 632 896 709 913)(font "Intel Clear" ))
+	(pt 624 912)
+	(pt 800 912)
+	(bus)
+)
+(connector
+	(text "noteSamples[15..0]" (rect 632 912 731 929)(font "Intel Clear" ))
+	(pt 624 928)
+	(pt 800 928)
+	(bus)
+)
+(connector
+	(text "sinVal[15..0]" (rect 632 928 704 945)(font "Intel Clear" ))
+	(pt 624 944)
+	(pt 800 944)
+	(bus)
+)
+(connector
+	(text "sfx_audio_out[15..0]" (rect 1208 752 1318 769)(font "Intel Clear" ))
+	(pt 1200 768)
+	(pt 1376 768)
+	(bus)
+)
+(connector
+	(text "tone[3..0]" (rect 216 544 271 561)(font "Intel Clear" ))
+	(pt 208 560)
+	(pt 320 560)
+	(bus)
+)
+(connector
+	(text "octave[2..0]" (rect 216 560 282 577)(font "Intel Clear" ))
+	(pt 208 576)
+	(pt 320 576)
+	(bus)
+)
+(connector
+	(text "EnableSoundOut" (rect 912 496 989 513)(font "Intel Clear" (font_size 8)))
+	(pt 904 512)
+	(pt 968 512)
+)
+(connector
+	(text "effectStart" (rect 912 528 973 545)(font "Intel Clear" ))
+	(pt 904 544)
+	(pt 968 544)
+)
+(pin
+	(input)
+	(rect -744 152 -568 168)
+	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
+	(text "score[9..0]" (rect 9 0 70 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 92 12)(pt 117 12))
+		(line (pt 92 4)(pt 117 4))
+		(line (pt 121 8)(pt 176 8))
+		(line (pt 92 12)(pt 92 4))
+		(line (pt 117 4)(pt 121 8))
+		(line (pt 117 12)(pt 121 8))
+	)
+	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "score[9..0]" (rect -560 144 -499 161)(font "Intel Clear" ))
+	(pt -568 160)
+	(pt -456 160)
+	(bus)
+)
+(pin
+	(input)
+	(rect -744 184 -568 200)
+	(text "INPUT" (rect 133 0 161 10)(font "Arial" (font_size 6)))
+	(text "tntCollected[2..0]" (rect 9 0 108 12)(font "Arial" ))
+	(pt 176 8)
+	(drawing
+		(line (pt 92 12)(pt 117 12))
+		(line (pt 92 4)(pt 117 4))
+		(line (pt 121 8)(pt 176 8))
+		(line (pt 92 12)(pt 92 4))
+		(line (pt 117 4)(pt 121 8))
+		(line (pt 117 12)(pt 121 8))
+	)
+	(text "VCC" (rect 136 7 156 17)(font "Arial" (font_size 6)))
+)
+(connector
+	(text "tntCollected[2..0]" (rect -560 176 -461 193)(font "Intel Clear" ))
+	(pt -568 192)
+	(pt -456 192)
+	(bus)
+)
+(text "Approved game effects: note timing / envelopes / gentle TNT" (rect 32 704 520 721)(font "Intel Clear" ))
