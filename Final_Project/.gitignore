@@ -8,3 +8,8 @@
 *.do
 *_tb.sv
 /ProjectFiles/FlappyBird/tests/
+
+# Local simulation projects and annotated screenshots.
+/ProjectFiles/Background_Simulation/
+/ProjectFiles/PipeBlocks_Simulation/
+/ProjectFiles/simulationPicturesWithAnnotations/
