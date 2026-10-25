@@ -13,13 +13,14 @@ module plane_draw #(
 );
 
     localparam signed [11:0] LEFT_BOUND = -PLANE_WIDTH;
-    localparam int WAIT_30_SEC_FRAMES = 18000;
+    // Origin visits, giving approximately 5.9 seconds of wait between flights.
+    localparam int WAIT_6_SEC_TICKS = 18000;
 
     logic signed [11:0] plane_X;
     logic [15:0] move_divider;
     logic [15:0] wait_counter;
     logic        is_waiting;
-    logic        frame_flag;
+    logic        origin_held;
 
     always_ff @(posedge clk or negedge resetN) begin
         if (!resetN) begin
@@ -27,14 +28,14 @@ module plane_draw #(
             move_divider <= 16'd0;
             wait_counter <= 16'd0;
             is_waiting   <= 1'b0;
-            frame_flag   <= 1'b0;
+            origin_held  <= 1'b0;
         end else begin
             if (pixelX == 11'd0 && pixelY == 11'd0) begin
-                if (!frame_flag) begin
-                    frame_flag <= 1'b1;
+                if (!origin_held) begin
+                    origin_held <= 1'b1;
                     if (game_state == 2'b01) begin
                         if (is_waiting) begin
-                            if (wait_counter >= WAIT_30_SEC_FRAMES - 1) begin
+                            if (wait_counter >= WAIT_6_SEC_TICKS - 1) begin
                                 wait_counter <= 16'd0;
                                 is_waiting   <= 1'b0;
                                 plane_X      <= 12'sd640;
@@ -58,7 +59,7 @@ module plane_draw #(
                     end
                 end
             end else begin
-                frame_flag <= 1'b0;
+                origin_held <= 1'b0;
             end
         end
     end
